@@ -39,6 +39,9 @@ import {
   Users2,
   Building,
   TrophyIcon,
+  FolderOpen,
+  FileSpreadsheet,
+  UserCog,
 } from "lucide-react";
 
 const allIcons = [
@@ -82,6 +85,9 @@ const allIcons = [
   Users2,
   Building,
   TrophyIcon,
+  FolderOpen,
+  FileSpreadsheet,
+  UserCog,
 ];
 
 let usedIconIndex = 0;
@@ -94,8 +100,10 @@ export const SidebarData = {
     avatar: "/avatars/shadcn.jpg",
   },
   sections: [
+    // Platform Desk
     {
       title: "Platform",
+      icon: getNextIcon(),
       isHeading: true,
       items: [
         {
@@ -109,97 +117,11 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
-          title: "Leads",
+          title: "Sessions",
           icon: getNextIcon(),
           url: "#",
           isCollapsible: true,
           items: [
-            {
-              title: "Explorers",
-              url: "/desk/platform/leads/explorers",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Coaches",
-              url: "/desk/platform/leads/coaches",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Organisations",
-              url: "/desk/platform/leads/organisations",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Channel Partner",
-              url: "/desk/platform/leads/channels",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Partnerships Request",
-              url: "/desk/platform/leads/requests",
-              icon: getNextIcon(),
-            },
-          ],
-        },
-        {
-          title: "Cases",
-          icon: getNextIcon(),
-          url: "#",
-          isCollapsible: true,
-          items: [
-            {
-              title: "Problems",
-              url: "/desk/platform/cases/problems",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Bugs",
-              url: "/desk/platform/cases/bugs",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Abuses",
-              url: "/desk/platform/cases/abuses",
-              icon: getNextIcon(),
-            },
-          ],
-        },
-        {
-          title: "Feedback",
-          url: "/desk/platform/feedback",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Review",
-          url: "/desk/platform/review",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Explorers",
-          url: "/desk/platform/explorers",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Coaches",
-          url: "/desk/platform/coaches",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Organisations",
-          url: "/desk/platform/organisations",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Products",
-          icon: getNextIcon(),
-          url: "#",
-          isCollapsible: true,
-          items: [
-            {
-              title: "Assessments",
-              url: "/desk/platform/products/assessments",
-              icon: getNextIcon(),
-            },
             {
               title: "Sessions",
               url: "/desk/platform/products/sessions",
@@ -215,30 +137,45 @@ export const SidebarData = {
               url: "/desk/platform/products/masterclasses",
               icon: getNextIcon(),
             },
+          ],
+        },
+        {
+          title: "Engage",
+          url: "/desk/platform/engage",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Prepare",
+          url: "/desk/platform/prepare",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Contribute",
+          url: "/desk/platform/contribute",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Plans",
+          icon: getNextIcon(),
+          url: "#",
+          isCollapsible: true,
+          items: [
             {
-              title: "Courses",
-              url: "/desk/platform/products/courses",
+              title: "Access Code",
+              url: "/desk/platform/plans/access-code",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Consultants Premium",
+              url: "/desk/platform/plans/consultants-premium",
               icon: getNextIcon(),
             },
           ],
         },
         {
-          title: "Plans",
-          url: "#",
+          title: "Forms",
+          url: "/desk/platform/forms",
           icon: getNextIcon(),
-          isCollapsible: true,
-          items: [
-            {
-              title: "Access Codes",
-              url: "/desk/platform/plans/access-codes",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Consultant Premium",
-              url: "/desk/platform/plans/consultant-premium",
-              icon: getNextIcon(),
-            },
-          ]
         },
         {
           title: "Desk IAM",
@@ -247,49 +184,20 @@ export const SidebarData = {
         },
       ],
     },
+    // Review Desk
     {
-      title: "Relation Desk",
+      title: "Review",
+      icon: getNextIcon(),
       isHeading: true,
       items: [
         {
-          title: "Relations Desk",
-          url: "/desk/relation/desk",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Pipeline",
-          url: "/desk/relation/pipeline",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Pool",
-          url: "/desk/relation/pool",
-          icon: getNextIcon(),
-        },
-        {
-          title: "My Accounts",
-          url: "/desk/relation/my-accounts",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Leaderboard",
-          url: "/desk/relation/leaderboard",
-          icon: getNextIcon(),
-        },
-      ],
-    },
-    {
-      title: "Review ",
-      isHeading: true,
-      items: [
-        {
-          title: "Review",
+          title: "Review Desk",
           url: "/desk/review/desk",
           icon: getNextIcon(),
         },
         {
-          title: "Coach Profiles",
-          url: "/desk/review/coach-profiles",
+          title: "Coaches",
+          url: "/desk/review/coaches",
           icon: getNextIcon(),
         },
         {
@@ -303,21 +211,6 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
-          title: "Partners",
-          url: "/desk/review/partners",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Current Openings",
-          url: "/desk/review/current-openings",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Job Applications",
-          url: "/desk/review/job-applications",
-          icon: getNextIcon(),
-        },
-        {
           title: "Libraries",
           url: "/desk/review/libraries",
           icon: getNextIcon(),
@@ -328,14 +221,153 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
-          title: "Forms",
-          url: "/desk/review/forms",
+          title: "Custom Inputs",
+          url: "/desk/review/custom-inputs",
           icon: getNextIcon(),
         },
       ],
     },
+    // Relations Desk
+    {
+      title: "Relations",
+      icon: getNextIcon(),
+      isHeading: true,
+      items: [
+        {
+          title: "Relations Desk",
+          url: "/desk/relation/desk",
+          icon: getNextIcon(),
+        },
+        {
+          title: "My Pipeline",
+          url: "/desk/relation/pipeline",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Pool",
+          url: "/desk/relation/pool",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Leads",
+          icon: getNextIcon(),
+          url: "#",
+          isCollapsible: true,
+          items: [
+            {
+              title: "Explorers",
+              url: "/desk/relation/leads/explorers",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Coaches",
+              url: "/desk/relation/leads/coaches",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Organisations",
+              url: "/desk/relation/leads/organisations",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Channel Partner",
+              url: "/desk/relation/leads/channel-partner",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Partnerships Requests",
+              url: "/desk/relation/leads/partnerships-requests",
+              icon: getNextIcon(),
+            },
+          ],
+        },
+        {
+          title: "Cases",
+          icon: getNextIcon(),
+          url: "#",
+          isCollapsible: true,
+          items: [
+            {
+              title: "Problems",
+              url: "/desk/relation/cases/problems",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Bugs",
+              url: "/desk/relation/cases/bugs",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Abuses",
+              url: "/desk/relation/cases/abuses",
+              icon: getNextIcon(),
+            },
+          ],
+        },
+        {
+          title: "Explorers",
+          url: "/desk/relation/explorers",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Coaches",
+          url: "/desk/relation/coaches",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Organisations",
+          icon: getNextIcon(),
+          url: "#",
+          isCollapsible: true,
+          items: [
+            {
+              title: "Institutes",
+              url: "/desk/relation/organisations/institutes",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Schools",
+              url: "/desk/relation/organisations/schools",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Colleges",
+              url: "/desk/relation/organisations/colleges",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Companies",
+              url: "/desk/relation/organisations/companies",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Universities",
+              url: "/desk/relation/organisations/universities",
+              icon: getNextIcon(),
+            },
+            {
+              title: "NGO's",
+              url: "/desk/relation/organisations/ngos",
+              icon: getNextIcon(),
+            },
+          ],
+        },
+        {
+          title: "My Accounts",
+          url: "/desk/relation/my-accounts",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Leaderboard",
+          url: "/desk/relation/leaderboard",
+          icon: getNextIcon(),
+        },
+      ],
+    },
+    // Digital Desk
     {
       title: "Digital",
+      icon: getNextIcon(),
       isHeading: true,
       items: [
         {
@@ -349,69 +381,49 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
-          title: "Comments",
-          url: "/desk/digital/comments",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Insights",
-          url: "/desk/digital/insights",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Video",
-          url: "/desk/digital/videolibraries",
-          icon: getNextIcon(),
-        },
-        {
-          title: "In the News",
-          url: "/desk/digital/in-the-news",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Testimonials",
-          url: "/desk/digital/testimonials",
-          icon: getNextIcon(),
-        },
-        {
           title: "Surveys",
           url: "/desk/digital/surveys",
           icon: getNextIcon(),
         },
         {
-          title: "Organisations",
+          title: "CMS",
           icon: getNextIcon(),
           url: "#",
           isCollapsible: true,
           items: [
             {
-              title: "Institutes",
-              url: "/desk/digital/organisation/institutes",
+              title: "Insights",
+              url: "/desk/digital/cms/insights",
               icon: getNextIcon(),
             },
             {
-              title: "Schools",
-              url: "/desk/digital/organisation/schools",
+              title: "Video",
+              url: "/desk/digital/cms/video",
               icon: getNextIcon(),
             },
             {
-              title: "Colleges",
-              url: "/desk/digital/organisation/colleges",
+              title: "FAQs",
+              url: "/desk/digital/cms/faqs",
               icon: getNextIcon(),
             },
             {
-              title: "Companies",
-              url: "/desk/digital/organisation/companies",
+              title: "Help Articles",
+              url: "/desk/digital/cms/help-articles",
               icon: getNextIcon(),
             },
             {
-              title: "University",
-              url: "/desk/digital/organisation/university",
+              title: "In the News",
+              url: "/desk/digital/cms/in-the-news",
               icon: getNextIcon(),
             },
             {
-              title: "NGO's",
-              url: "/desk/digital/organisation/ngos",
+              title: "Testimonials",
+              url: "/desk/digital/cms/testimonials",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Teams Directory",
+              url: "/desk/digital/cms/teams-directory",
               icon: getNextIcon(),
             },
           ],
@@ -424,70 +436,133 @@ export const SidebarData = {
           items: [
             {
               title: "Exams",
-              url: "/desk/digital/library/exams",
+              url: "/desk/digital/libraries/exams",
               icon: getNextIcon(),
             },
             {
               title: "Careers",
-              url: "/desk/digital/library/careers",
+              url: "/desk/digital/libraries/careers",
               icon: getNextIcon(),
             },
             {
               title: "Degrees",
-              url: "/desk/digital/library/degrees",
+              url: "/desk/digital/libraries/degrees",
               icon: getNextIcon(),
             },
             {
               title: "Courses",
-              url: "/desk/digital/library/courses",
+              url: "/desk/digital/libraries/courses",
               icon: getNextIcon(),
             },
             {
               title: "Scholarships",
-              url: "/desk/digital/library/scholarships",
+              url: "/desk/digital/libraries/scholarships",
               icon: getNextIcon(),
             },
             {
               title: "Skills",
-              url: "/desk/digital/library/skills",
+              url: "/desk/digital/libraries/skills",
               icon: getNextIcon(),
             },
           ],
         },
         {
-          title: "Help Articles",
-          url: "/desk/digital/help-articles",
+          title: "Engage",
+          icon: getNextIcon(),
+          url: "#",
+          isCollapsible: true,
+          items: [
+            {
+              title: "Review",
+              url: "/desk/digital/engage/review",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Comments",
+              url: "/desk/digital/engage/comments",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Feedback",
+              url: "/desk/digital/engage/feedback",
+              icon: getNextIcon(),
+            },
+            {
+              title: "Helpful",
+              url: "/desk/digital/engage/helpful",
+              icon: getNextIcon(),
+            },
+          ],
+        },
+        {
+          title: "File Manager",
+          url: "/desk/digital/file-manager",
           icon: getNextIcon(),
         },
         {
-          title: "FAQs",
-          url: "/desk/digital/faqs",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Helpful",
-          url: "/desk/digital/helpful",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Teams Directory",
-          url: "/desk/digital/teams",
+          title: "Meta Information",
+          url: "/desk/digital/meta-information",
           icon: getNextIcon(),
         },
       ],
     },
+    // Finance Desk
     {
-      title: "DevOps",
+      title: "Finance",
+      icon: getNextIcon(),
       isHeading: true,
       items: [
         {
-          title: "DevOps Desk",
+          title: "Finance Desk",
+          url: "/desk/finance/desk",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Payments",
+          url: "/desk/finance/payments",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Commissions",
+          url: "/desk/finance/commissions",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Payouts",
+          url: "/desk/finance/payouts",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Platform",
+          url: "/desk/finance/platform",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Earnings",
+          url: "/desk/finance/earnings",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Reports",
+          url: "/desk/finance/reports",
+          icon: getNextIcon(),
+        },
+      ],
+    },
+    // DevOps Desk
+    {
+      title: "DevOps",
+      icon: getNextIcon(),
+      isHeading: true,
+      items: [
+        {
+          title: "Devops Desk",
           url: "/desk/devops/desk",
           icon: getNextIcon(),
         },
         {
-          title: "Pipeline",
-          url: "/desk/devops/pipeline",
+          title: "My Cases",
+          url: "/desk/devops/my-cases",
           icon: getNextIcon(),
         },
         {
@@ -502,43 +577,30 @@ export const SidebarData = {
         },
       ],
     },
+    // HR Desk
     {
-      title: "Finance",
+      title: "HRMS",
+      icon: getNextIcon(),
       isHeading: true,
       items: [
         {
-          title: "Finance Desk",
-          url: "/desk/finance/desk",
+          title: "HR Desk",
+          url: "/desk/hr/desk",
           icon: getNextIcon(),
         },
         {
-          title: "Payments",
-          url: "/desk/finance/payments",
+          title: "Follow Ups",
+          url: "/desk/hr/follow-ups",
           icon: getNextIcon(),
         },
         {
-          title: "Platform Fees",
-          url: "/desk/finance/platform",
+          title: "Applications",
+          url: "/desk/hr/applications",
           icon: getNextIcon(),
         },
         {
-          title: "Commissions",
-          url: "/desk/finance/commission",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Payouts",
-          url: "/desk/finance/payouts",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Earnings",
-          url: "/desk/finance/earnings",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Reports",
-          url: "/desk/finance/reports",
+          title: "Opening",
+          url: "/desk/hr/opening",
           icon: getNextIcon(),
         },
       ],

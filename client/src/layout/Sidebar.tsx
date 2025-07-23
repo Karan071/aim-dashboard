@@ -15,6 +15,7 @@ import {
   SidebarMenuSubItem,
   SidebarMenuSubButton,
   SidebarGroupLabel,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -22,6 +23,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import { SidebarData } from "@/constants/sidebarContents";
 import { Link } from "react-router-dom";
 
@@ -45,15 +51,27 @@ export default function SidebarLayout() {
 }
 
 function AppSidebar(props: React.ComponentProps<typeof SidebarRoot>) {
+  // Initialize with "Platform" section open
+  const [openSection, setOpenSection] = React.useState<string | null>(
+    "Platform"
+  );
+
   return (
     <SidebarRoot
       collapsible="icon"
       {...props}
-      className="fixed top-15 h-[calc(100vh-60px)]"
+      className="fixed top-16 h-[calc(100vh-60px)]"
     >
-      <SidebarContent className="bg-[var(--background)]">
+      <SidebarContent className="bg-[var(--background)] space-y-0">
         {SidebarData.sections.map((section) => (
-          <NavSection key={section.title} section={section} />
+          <NavSection
+            key={section.title}
+            section={section}
+            isOpen={openSection === section.title}
+            onOpenChange={(isOpen) =>
+              setOpenSection(isOpen ? section.title : null)
+            }
+          />
         ))}
       </SidebarContent>
       <SidebarRail />
@@ -63,10 +81,13 @@ function AppSidebar(props: React.ComponentProps<typeof SidebarRoot>) {
 
 function NavSection({
   section,
+  isOpen,
+  onOpenChange,
 }: {
   section: {
     title: string;
     isHeading: boolean;
+    icon?: LucideIcon;
     items: {
       title: string;
       url: string;
@@ -80,29 +101,55 @@ function NavSection({
       }[];
     }[];
   };
+  isOpen: boolean;
+  onOpenChange: (isOpen: boolean) => void;
 }) {
   const [openItem, setOpenItem] = React.useState<string | null>(null);
+  const { state } = useSidebar();
+
+  // Close open item when section closes
+  React.useEffect(() => {
+    if (!isOpen) {
+      setOpenItem(null);
+    }
+  }, [isOpen]);
 
   return (
-    <Collapsible defaultOpen>
-      <SidebarGroup className="">
-        <CollapsibleTrigger asChild>
-          <SidebarGroupLabel className="text-[var(--text)] font-semibold text-sm uppercase tracking-wide cursor-pointer">
+    <Collapsible open={isOpen} onOpenChange={onOpenChange}>
+      <SidebarGroup className="py-0">
+        <Tooltip delayDuration={0}>
+          <TooltipTrigger asChild>
+            <CollapsibleTrigger asChild>
+              <SidebarGroupLabel className="text-[var(--text)] font-semibold text-sm uppercase tracking-wide cursor-pointer flex items-center gap-2 group-data-[collapsible=icon]:opacity-100 group-data-[collapsible=icon]:mt-0 group-data-[collapsible=icon]:justify-center">
+                {section.icon && (
+                  <section.icon className="size-4 text-[var(--text)]" />
+                )}
+                <span className="group-data-[collapsible=icon]:hidden">
+                  {section.title}
+                </span>
+                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 text-[var(--text)] group-data-[collapsible=icon]:hidden" />
+              </SidebarGroupLabel>
+            </CollapsibleTrigger>
+          </TooltipTrigger>
+          <TooltipContent
+            side="right"
+            align="center"
+            hidden={state !== "collapsed"}
+          >
             {section.title}
-            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 text-[var(--text)]" />
-          </SidebarGroupLabel>
-        </CollapsibleTrigger>
+          </TooltipContent>
+        </Tooltip>
         <CollapsibleContent>
-          <SidebarMenu className="space-y-1">
+          <SidebarMenu className="space-y-0.5">
             {section.items.map((item) =>
               item.isCollapsible && item.items ? (
                 <Collapsible
                   key={item.title}
                   asChild
                   open={openItem === item.title}
-                  onOpenChange={(isOpen) =>
-                    setOpenItem(isOpen ? item.title : null)
-                  }
+                  onOpenChange={(isOpen) => {
+                    setOpenItem(isOpen ? item.title : null);
+                  }}
                   className="group/collapsible text-[var(--text)]"
                 >
                   <SidebarMenuItem>
