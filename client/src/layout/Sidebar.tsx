@@ -139,7 +139,7 @@ function NavSection({
             {section.title}
           </TooltipContent>
         </Tooltip>
-        <CollapsibleContent>
+        <CollapsibleContent className="transition-all duration-300 ease-in-out">
           <SidebarMenu className="space-y-0.5">
             {section.items.map((item) =>
               item.isCollapsible && item.items ? (
@@ -150,13 +150,13 @@ function NavSection({
                   onOpenChange={(isOpen) => {
                     setOpenItem(isOpen ? item.title : null);
                   }}
-                  className="group/collapsible text-[var(--text)]"
+                  className="group/collapsible text-[var(--text)] transition-all duration-300 ease-in-out"
                 >
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton
                         tooltip={item.title}
-                        className="text-[var(--text)]"
+                        className="text-[var(--text)] "
                       >
                         {item.icon && (
                           <item.icon className="size-4 text-[var(--text)]" />
@@ -165,7 +165,7 @@ function NavSection({
                         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 text-[var(--text)]" />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
-                    <CollapsibleContent>
+                    <CollapsibleContent className="transition-all duration-300 ease-in-out">
                       <SidebarMenuSub className="">
                         {item.items.map((subItem) => (
                           <SidebarMenuSubItem
@@ -175,7 +175,7 @@ function NavSection({
                             <SidebarMenuSubButton asChild>
                               <Link to={subItem.url}>
                                 {subItem.icon && (
-                                  <subItem.icon className="size-4 text-[var(--text)]" />
+                                  <subItem.icon className="size-4 text-[var(--text)] transition-all duration-300 ease-in-out" />
                                 )}
                                 <span className="text-[var(--text)]">
                                   {subItem.title}
@@ -193,7 +193,7 @@ function NavSection({
                   <SidebarMenuButton
                     tooltip={item.title}
                     asChild
-                    className="text-[var(--text)]"
+                    className="text-[var(--text)] transition-all duration-300 ease-in-out"
                   >
                     <Link to={item.url}>
                       {item.icon && (
