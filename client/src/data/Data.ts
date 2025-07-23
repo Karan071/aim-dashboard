@@ -8172,3 +8172,309 @@ export const LeadExplore=[
     "actions": ["📞 Call", "💬 Message"]
   }
 ]
+
+export const AdminFormTable=[
+  {
+    "id": "FRM0001",
+    "formName": "Explorer Interest Form",
+    "type": "Lead Capture",
+    "targetAudience": "Explorers",
+    "status": "Active",
+    "submissions": 1245,
+    "createdOn": "10 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0002",
+    "formName": "Mentor Signup Form",
+    "type": "Registration",
+    "targetAudience": "Mentors",
+    "status": "Active",
+    "submissions": 980,
+    "createdOn": "11 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0003",
+    "formName": "Campus Feedback Survey",
+    "type": "Survey",
+    "targetAudience": "Students",
+    "status": "Inactive",
+    "submissions": 732,
+    "createdOn": "12 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0004",
+    "formName": "Event Registration Form",
+    "type": "Event",
+    "targetAudience": "Participants",
+    "status": "Active",
+    "submissions": 1453,
+    "createdOn": "13 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0005",
+    "formName": "Internship Application",
+    "type": "Application",
+    "targetAudience": "UG Students",
+    "status": "Active",
+    "submissions": 867,
+    "createdOn": "14 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0006",
+    "formName": "Career Counseling Request",
+    "type": "Support",
+    "targetAudience": "Explorers",
+    "status": "Inactive",
+    "submissions": 410,
+    "createdOn": "15 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0007",
+    "formName": "Scholarship Eligibility Check",
+    "type": "Lead Capture",
+    "targetAudience": "PG Students",
+    "status": "Active",
+    "submissions": 689,
+    "createdOn": "16 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0008",
+    "formName": "Training Feedback",
+    "type": "Survey",
+    "targetAudience": "Trainees",
+    "status": "Active",
+    "submissions": 520,
+    "createdOn": "17 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0009",
+    "formName": "Workshop Sign-up",
+    "type": "Event",
+    "targetAudience": "Learners",
+    "status": "Active",
+    "submissions": 1184,
+    "createdOn": "18 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0010",
+    "formName": "Parent Feedback Form",
+    "type": "Survey",
+    "targetAudience": "Parents",
+    "status": "Inactive",
+    "submissions": 324,
+    "createdOn": "19 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0011",
+    "formName": "Alumni Contact Update",
+    "type": "Data Collection",
+    "targetAudience": "Alumni",
+    "status": "Active",
+    "submissions": 591,
+    "createdOn": "20 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0012",
+    "formName": "Course Feedback Form",
+    "type": "Survey",
+    "targetAudience": "Students",
+    "status": "Active",
+    "submissions": 703,
+    "createdOn": "21 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0013",
+    "formName": "Job Interest Form",
+    "type": "Lead Capture",
+    "targetAudience": "Job Seekers",
+    "status": "Active",
+    "submissions": 842,
+    "createdOn": "22 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0014",
+    "formName": "Newsletter Signup",
+    "type": "Subscription",
+    "targetAudience": "General",
+    "status": "Active",
+    "submissions": 1050,
+    "createdOn": "23 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  },
+  {
+    "id": "FRM0015",
+    "formName": "Volunteer Registration",
+    "type": "Registration",
+    "targetAudience": "Volunteers",
+    "status": "Inactive",
+    "submissions": 278,
+    "createdOn": "24 May 2025",
+    "actions": ["View", "Edit", "Export", "Deactivate"]
+  }
+]
+
+export const CustomInputTable=[
+  {
+    "id": "CIN0001",
+    "fieldName": "Degree",
+    "submittedValue": "B.Sc in Media Tech",
+    "formName": "Explorer Sign-Up",
+    "submittedBy": "Aayush Kapoor",
+    "date": "20 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  },
+  {
+    "id": "CIN0002",
+    "fieldName": "Language Proficiency",
+    "submittedValue": "Fluent in French",
+    "formName": "Language Skills Form",
+    "submittedBy": "Simran Dey",
+    "date": "19 Jul 2025",
+    "status": "Approved",
+    "actions": ["View", "Add to Profile", "Reject"]
+  },
+  {
+    "id": "CIN0003",
+    "fieldName": "Certification",
+    "submittedValue": "Google UX Design",
+    "formName": "Certification Upload",
+    "submittedBy": "Rahul Jain",
+    "date": "18 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Add to Certificates", "Reject"]
+  },
+  {
+    "id": "CIN0004",
+    "fieldName": "Work Experience",
+    "submittedValue": "2 years at Infosys",
+    "formName": "Career History Form",
+    "submittedBy": "Megha Shah",
+    "date": "17 Jul 2025",
+    "status": "Rejected",
+    "actions": ["View", "Review Details", "Reject"]
+  },
+  {
+    "id": "CIN0005",
+    "fieldName": "Degree",
+    "submittedValue": "B.Com (Hons)",
+    "formName": "Explorer Sign-Up",
+    "submittedBy": "Arjun Malhotra",
+    "date": "16 Jul 2025",
+    "status": "Approved",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  },
+  {
+    "id": "CIN0006",
+    "fieldName": "Portfolio Link",
+    "submittedValue": "behance.net/artistX",
+    "formName": "Design Portfolio Form",
+    "submittedBy": "Priya Iyer",
+    "date": "15 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Open Link", "Reject"]
+  },
+  {
+    "id": "CIN0007",
+    "fieldName": "Degree",
+    "submittedValue": "MBA in Marketing",
+    "formName": "PG Enrollment Form",
+    "submittedBy": "Dev Mishra",
+    "date": "14 Jul 2025",
+    "status": "Approved",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  },
+  {
+    "id": "CIN0008",
+    "fieldName": "LinkedIn Profile",
+    "submittedValue": "linkedin.com/in/rituchopra",
+    "formName": "Social Info Form",
+    "submittedBy": "Ritu Chopra",
+    "date": "13 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Verify Link", "Reject"]
+  },
+  {
+    "id": "CIN0009",
+    "fieldName": "Degree",
+    "submittedValue": "B.A. Psychology",
+    "formName": "Explorer Sign-Up",
+    "submittedBy": "Kabir Joshi",
+    "date": "12 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  },
+  {
+    "id": "CIN0010",
+    "fieldName": "Achievement",
+    "submittedValue": "National Science Olympiad Winner",
+    "formName": "Achievements Upload",
+    "submittedBy": "Niharika Yadav",
+    "date": "11 Jul 2025",
+    "status": "Approved",
+    "actions": ["View", "Add to Profile", "Reject"]
+  },
+  {
+    "id": "CIN0011",
+    "fieldName": "Degree",
+    "submittedValue": "B.Tech in Mechanical Engg",
+    "formName": "Explorer Sign-Up",
+    "submittedBy": "Manav Rathi",
+    "date": "10 Jul 2025",
+    "status": "Approved",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  },
+  {
+    "id": "CIN0012",
+    "fieldName": "Volunteer Experience",
+    "submittedValue": "Teach for India (6 months)",
+    "formName": "Experience Form",
+    "submittedBy": "Sneha Kulkarni",
+    "date": "09 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Review Details", "Reject"]
+  },
+  {
+    "id": "CIN0013",
+    "fieldName": "Degree",
+    "submittedValue": "B.Sc in Data Science",
+    "formName": "Explorer Sign-Up",
+    "submittedBy": "Aarav Nanda",
+    "date": "08 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  },
+  {
+    "id": "CIN0014",
+    "fieldName": "Certification",
+    "submittedValue": "AWS Certified Cloud Practitioner",
+    "formName": "Certification Upload",
+    "submittedBy": "Tanvi Mehta",
+    "date": "07 Jul 2025",
+    "status": "Approved",
+    "actions": ["View", "Add to Certificates", "Reject"]
+  },
+  {
+    "id": "CIN0015",
+    "fieldName": "Degree",
+    "submittedValue": "M.Sc in Biotechnology",
+    "formName": "PG Enrollment Form",
+    "submittedBy": "Raghav Khurana",
+    "date": "06 Jul 2025",
+    "status": "Pending",
+    "actions": ["View", "Add to Degree List", "Reject"]
+  }
+]
