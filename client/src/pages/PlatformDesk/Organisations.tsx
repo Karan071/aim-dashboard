@@ -1,4 +1,4 @@
-import { Building2, UserCheck, Globe, Clock, Link, MessageSquare, CircleArrowUp, CircleArrowDown, Search, Bell, Check, X, Flag } from "lucide-react";
+import { Building2, UserCheck, Globe, Clock, Link, CircleArrowUp, CircleArrowDown, Search, Bell, Check, X, Flag } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -52,17 +52,11 @@ const orgStats = [
     performance: Up,
   },
   {
-    title: "Coaches Linked to Orgs",
+    title: "Representative Assigned",
     value: "182",
     icon: Link,
     performance: Up,
   },
-  {
-    title: "Sessions via Orgs",
-    value: "720+",
-    icon: MessageSquare,
-    performance: Up,
-  }
 ];
 
 
@@ -71,7 +65,7 @@ export function Organisation() {
   const [showFilter, setShowFilter] = useState(false)
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold text-[var(--text-head)]">Organisation</h1>
       <OrgCard />
 
@@ -140,7 +134,7 @@ function OrgFilter({ onClose }: OrgFilterProps) {
 
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
           <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
@@ -311,9 +305,9 @@ function OrgFilter({ onClose }: OrgFilterProps) {
 
 function OrgCard() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-6">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
       {orgStats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -339,7 +333,7 @@ function OrgCard() {
 
 
 function OrganisationTable() {
-  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(5);
   const [sortConfig, setSortConfig] = useState<{
@@ -349,7 +343,7 @@ function OrganisationTable() {
   const [selectedStack, setSelectedStack] = useState<
     typeof orgTableData
   >(orgTableData[0] ? [orgTableData[0]] : []);
-  const [focusedId, setFocusedId] = useState<number | null>(orgTableData[0]?.id || null);
+  const [focusedId, setFocusedId] = useState<string | null>(orgTableData[0]?.id || null);
 
   // Sorting logic
   const sortedData = [...orgTableData];
@@ -397,7 +391,7 @@ function OrganisationTable() {
     }
   };
 
-  const bringToTop = (userId: number) => {
+  const bringToTop = (userId: string) => {
     const coach = selectedStack.find((c) => c.id === userId);
     if (coach) {
       setSelectedStack((prev) => [
@@ -412,7 +406,7 @@ function OrganisationTable() {
     const allRows = document.querySelectorAll("tr[data-id]");
 
     allRows.forEach((row) => {
-      const id = Number(row.getAttribute("data-id"));
+      const id = String(row.getAttribute("data-id"));
       const isInStack = selectedStack.some((coach) => coach.id === id);
       const isTop = focusedId === id;
 
@@ -453,7 +447,7 @@ function OrganisationTable() {
     }
   };
 
-  const toggleSelectUser = (userId: number) => {
+  const toggleSelectUser = (userId: string) => {
     if (selectedUsers.includes(userId)) {
       setSelectedUsers(selectedUsers.filter((id) => id !== userId));
     } else {
@@ -564,21 +558,14 @@ function OrganisationTable() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Coaches")}
+                  onClick={() => requestSort("representative")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Coaches{" "}
-                  {sortConfig?.key === "Coaches" &&
+                  Representative{" "}
+                  {sortConfig?.key === "representative" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead
-                  onClick={() => requestSort("Sessions")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Sessions{" "}
-                  {sortConfig?.key === "Sessions" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
+                
                 <TableHead
                   onClick={() => requestSort("lastActive")}
                   className="cursor-pointer text-[var(--text)]"
@@ -632,8 +619,9 @@ function OrganisationTable() {
                         />
                       </div>
                       <div>
-                        <div className="flex justify-start items-center">
+                        <div className="flex justify-start flex-col">
                           <div className="font-medium">{user.name}</div>
+                          <div className="text-xs">{user.id}</div>
                         </div>
                       </div>
                     </div>
@@ -656,9 +644,8 @@ function OrganisationTable() {
                     <div className="text-sm">{user.claimStatus}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-sm">{user.coaches}</div>
+                    <div className="text-sm">{user.representative}</div>
                   </TableCell>
-                  <TableCell>{user.sessions}</TableCell>
                   <TableCell>
                     <div className="text-low">{user.registered}</div>
                     <div className="text-xs text-[var(--text)]">{user.lastActive}</div>
