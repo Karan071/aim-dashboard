@@ -85,34 +85,32 @@ const stats = [
 
 export function Payments() {
   return (
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Payments</h1>
-        <StatsCards />
-        <Buttonbar/>
-        <Topbar />
-        <TableSection/>
-      </div>
+    <div className="flex flex-col gap-2">
+      <h1 className="text-2xl font-bold text-[var(--text-head)]">Payments</h1>
+      <StatsCards />
+      <Buttonbar />
+      <TableSection />
+    </div>
   );
 }
 
 function Buttonbar() {
+  const [showFilter, setShowFilter] = useState(false);
+  const [GST, setGST] = useState("Include GST");
+  const [status, setStatus] = useState("All");
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-        <div className="flex gap-4">
-      <Button variant="brand" size="new">
-        <RotateCcw className="h-3 w-3" />
-        <span className="">Retry Failed Payment</span>
-      </Button>
-      <Button variant="standard" size="new">
+      <div className="flex gap-4">
+        <Button variant="standard" size="new">
           <Tickets className="h-3 w-3" />
           <span className="">Initiate Refund</span>
         </Button>
-        </div>
-      <div className="flex gap-4">
-        <Button variant="standard" size="new">
+        <Button variant="brand" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Download Invoice</span>
         </Button>
+      </div>
+      <div className="flex gap-4 flex-wrap">
         <Button variant="standard" size="new">
           <DollarSign className="h-3 w-3" />
           <span className="">Tax Discrepancy</span>
@@ -121,19 +119,7 @@ function Buttonbar() {
           <User className="h-3 w-3" />
           <span className="">Visit User</span>
         </Button>
-      </div>
-    </div>
-  );
-}
-
-function Topbar() {
-  const [showFilter, setShowFilter] = useState(false);
-  const [GST, setGST] = useState("Include GST");
-  const [status, setStatus] = useState("All");
-  return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <div className="flex gap-4 align-middle">
-         <Button
+        <Button
           variant="standard" size="new"
           onClick={() => setShowFilter(true)}
         >
@@ -143,32 +129,33 @@ function Topbar() {
 
         {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
         <Select value={status} onValueChange={setStatus}>
-  <SelectTrigger className="w-[130px] min-h-[40px]">
-    <SelectValue placeholder="Select Status" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="All">All</SelectItem>
-    <SelectItem value="Success">Success</SelectItem>
-    <SelectItem value="Failed">Failed</SelectItem>
-    <SelectItem value="Pending">Pending</SelectItem>
-    <SelectItem value="Refunded">Refunded</SelectItem>
-  </SelectContent>
-</Select>
+          <SelectTrigger className="w-[130px] min-h-[40px]">
+            <SelectValue placeholder="Select Status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="All">All</SelectItem>
+            <SelectItem value="Success">Success</SelectItem>
+            <SelectItem value="Failed">Failed</SelectItem>
+            <SelectItem value="Pending">Pending</SelectItem>
+            <SelectItem value="Refunded">Refunded</SelectItem>
+          </SelectContent>
+        </Select>
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Export</span>
         </Button>
-       <Button
-  variant="standard"
-  size="new"
-  onClick={() => setGST(GST === "Include GST" ? "Exclude GST" : "Include GST")}
->
-  <span>{GST}</span>
-</Button>
+        <Button
+          variant="standard"
+          size="new"
+          onClick={() => setGST(GST === "Include GST" ? "Exclude GST" : "Include GST")}
+        >
+          <span>{GST}</span>
+        </Button>
       </div>
     </div>
   );
 }
+
 
 
 interface FilterProps {
@@ -248,7 +235,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
           {/* Tab Content */}
 
           <div className="p-6 overflow-y-auto relative w-full">
-            
+
             {activeTab === "Status" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
@@ -297,7 +284,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
               </>
             )}
 
-            
+
 
             {activeTab === "Date Range" && (
               <>
@@ -402,7 +389,7 @@ function TableSection() {
   };
 
 
-const toggleSelectAll = () => {
+  const toggleSelectAll = () => {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
@@ -460,7 +447,7 @@ const toggleSelectAll = () => {
           </div>
           <div className="flex justify-end items-center gap-4 ">
 
-            <div className="flex justify-around items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
+            <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
               <Input
                 placeholder="Search"
                 className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
@@ -566,7 +553,7 @@ const toggleSelectAll = () => {
                   data-id={user.id}
                   className={cn(
                     "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-                     )}
+                  )}
                   onClick={() => {
                     toggleSelectUser(user.id);
                   }}
@@ -574,7 +561,7 @@ const toggleSelectAll = () => {
                   <TableCell
                     className={cn(
                       "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
-                      )}
+                    )}
                   >
                     <Checkbox
                       checked={selectedUsers.includes(user.id)}
@@ -618,7 +605,7 @@ const toggleSelectAll = () => {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      
+
                       <Button
                         variant="noborder"
                         size="sm"
