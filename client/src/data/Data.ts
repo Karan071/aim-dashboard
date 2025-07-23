@@ -2,7 +2,7 @@ import picture1 from "@/assets/asset.jpg"
 import picture2 from "@/assets/asset.jpg"
 import picture3 from "@/assets/asset.jpg"
 import picture4 from "@/assets/asset.jpg"
-
+export const defaultLogo = picture1;
 export const mockUsers = [
   {
     id: "1",
@@ -1052,8 +1052,164 @@ export const VideoTableData: VideoTableItem[] = [
     videoUrl: "https://example.com/video2",
     status: "Published"
   },
-  // Add more mock data as needed...
+  {
+    id: "3",
+    title: "Resume Writing 101",
+    speaker: "Amit Verma",
+    mode: "Recorded",
+    category: "Career Guidance",
+    mapping: "Resume Skills",
+    for: "UG Students",
+    playCount: 670,
+    videoUrl: "https://example.com/video3",
+    status: "Published"
+  },
+  {
+    id: "4",
+    title: "Cracking Coding Interviews",
+    speaker: "Sneha Joshi",
+    mode: "Live",
+    category: "Skills",
+    mapping: "Coding Practice",
+    for: "Final Year",
+    playCount: 1560,
+    videoUrl: "https://example.com/video4",
+    status: "Published"
+  },
+  {
+    id: "5",
+    title: "Design Thinking for Innovation",
+    speaker: "Karan Mehta",
+    mode: "Recorded",
+    category: "Innovation",
+    mapping: "Creative Thinking",
+    for: "All Students",
+    playCount: 510,
+    videoUrl: "https://example.com/video5",
+    status: "Draft"
+  },
+  {
+    id: "6",
+    title: "How to Choose Your Career Path",
+    speaker: "Nidhi Kapoor",
+    mode: "Live",
+    category: "Career Guidance",
+    mapping: "Self Assessment",
+    for: "UG Students",
+    playCount: 1100,
+    videoUrl: "https://example.com/video6",
+    status: "Published"
+  },
+  {
+    id: "7",
+    title: "Effective Communication",
+    speaker: "Rohan Malhotra",
+    mode: "Recorded",
+    category: "Soft Skills",
+    mapping: "Communication",
+    for: "All Students",
+    playCount: 920,
+    videoUrl: "https://example.com/video7",
+    status: "Published"
+  },
+  {
+    id: "8",
+    title: "Time Management Hacks",
+    speaker: "Deepa Rao",
+    mode: "Recorded",
+    category: "Soft Skills",
+    mapping: "Productivity",
+    for: "All Students",
+    playCount: 580,
+    videoUrl: "https://example.com/video8",
+    status: "Draft"
+  },
+  {
+    id: "9",
+    title: "AI in Career Development",
+    speaker: "Vikram Sen",
+    mode: "Live",
+    category: "Technology",
+    mapping: "Emerging Tech",
+    for: "Final Year",
+    playCount: 780,
+    videoUrl: "https://example.com/video9",
+    status: "Published"
+  },
+  {
+    id: "10",
+    title: "How to Start Freelancing",
+    speaker: "Neha Bansal",
+    mode: "Recorded",
+    category: "Career Guidance",
+    mapping: "Freelance Skills",
+    for: "UG Students",
+    playCount: 640,
+    videoUrl: "https://example.com/video10",
+    status: "Published"
+  },
+  {
+    id: "11",
+    title: "Emotional Intelligence at Work",
+    speaker: "Ankur Jain",
+    mode: "Live",
+    category: "Soft Skills",
+    mapping: "Workplace Readiness",
+    for: "Final Year",
+    playCount: 740,
+    videoUrl: "https://example.com/video11",
+    status: "Published"
+  },
+  {
+    id: "12",
+    title: "Building a LinkedIn Profile",
+    speaker: "Ritika Khanna",
+    mode: "Recorded",
+    category: "Career Guidance",
+    mapping: "Personal Branding",
+    for: "UG Students",
+    playCount: 1020,
+    videoUrl: "https://example.com/video12",
+    status: "Published"
+  },
+  {
+    id: "13",
+    title: "Startups & Entrepreneurship",
+    speaker: "Aditya Rao",
+    mode: "Live",
+    category: "Innovation",
+    mapping: "Startup Skills",
+    for: "All Students",
+    playCount: 880,
+    videoUrl: "https://example.com/video13",
+    status: "Published"
+  },
+  {
+    id: "14",
+    title: "Networking for Job Search",
+    speaker: "Shruti Agarwal",
+    mode: "Recorded",
+    category: "Skills",
+    mapping: "Networking",
+    for: "Final Year",
+    playCount: 600,
+    videoUrl: "https://example.com/video14",
+    status: "Draft"
+  },
+  {
+    id: "15",
+    title: "Data Science: Career Scope",
+    speaker: "Manish Tiwari",
+    mode: "Live",
+    category: "Technology",
+    mapping: "Data Careers",
+    for: "Final Year",
+    playCount: 1350,
+    videoUrl: "https://example.com/video15",
+    status: "Published"
+  }
 ];
+
 export const NewsMentionsData = [
   {
     "id": "1",
@@ -1735,7 +1891,6 @@ export const FAQsTableData = [
     "actions": ["View FAQs →"]
   }
 ]
-
 export const PublishedTableData = [
   {
     "title": "Future-Proof Careers in 2030",
@@ -1838,7 +1993,7 @@ export const PublishedTableData = [
     "actions": ["View", "Edit", "Archive"]
   },
   {
-    "title": "Beginner’s Guide to Data Science",
+    "title": "Beginner's Guide to Data Science",
     "author": "Riya Malhotra",
     "category": "Careers",
     "tags": ["Data", "Python"],
@@ -1908,6 +2063,7 @@ export const PublishedTableData = [
     "actions": ["View", "Edit", "Archive"]
   }
 ]
+
 export const DraftsTableData = [
   {
     "title": "Interview Tips for Freshers",
@@ -2048,6 +2204,16 @@ export const PendingApprovalTableData = [
     "actions": ["Review", "Approve", "Reject"]
   }
 ]
+export const ArchivedTableData = [
+  {
+    "title": "Scholarships in 2023",
+    "author": "Team Aimshala",
+    "category": "Colleges",
+    "archivedOn": "02 Jan 2024",
+    "reason": "Outdated Deadlines",
+    "actions": ["Restore", "Delete"]
+  }
+];
 
 export const coachTableData = [
   {
@@ -6325,9 +6491,9 @@ export const AccountTable = [
     "actions": ["View", "Done", "Note"]
   }
 ]
-export const NewTable=[
+export const NewTable = [
   {
-    "Logo": "![Logo]",
+    "Logo": defaultLogo,
     "Title": "Aimshala Recognized by Economic Times",
     "Source": "Economic Times",
     "Link": "Read More",
@@ -6337,7 +6503,7 @@ export const NewTable=[
     "Actions": ["Edit", "Archive"]
   },
   {
-    "Logo": "![Logo]",
+    "Logo": defaultLogo,
     "Title": "Career Innovation Spotlight on NDTV",
     "Source": "NDTV",
     "Link": "Read More",
@@ -6347,17 +6513,136 @@ export const NewTable=[
     "Actions": ["Edit", "Archive"]
   },
   {
-    "Logo": "![Logo]",
+    "Logo": defaultLogo,
     "Title": "How Aimshala is Changing Education",
     "Source": "Hindustan Times",
     "Link": "Read More",
     "Clicks": 704,
     "Date": "09 May 2025",
     "Status": "Pending",
-    "Actions": ["Review", "Publish"]
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Aimshala's CEO Interviewed by Times Now",
+    "Source": "Times Now",
+    "Link": "Read More",
+    "Clicks": 632,
+    "Date": "01 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Aimshala's Free Workshop Goes Viral",
+    "Source": "India Today",
+    "Link": "Read More",
+    "Clicks": 950,
+    "Date": "28 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "EdTech Awards Nomination for Aimshala",
+    "Source": "The Hindu",
+    "Link": "Read More",
+    "Clicks": 543,
+    "Date": "22 Apr 2025",
+    "Status": "Pending",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "How Aimshala Supports Underprivileged Students",
+    "Source": "Outlook India",
+    "Link": "Read More",
+    "Clicks": 657,
+    "Date": "18 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Aimshala Collaboration with IIT Alumni",
+    "Source": "Business Standard",
+    "Link": "Read More",
+    "Clicks": 780,
+    "Date": "11 Apr 2025",
+    "Status": "Pending",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Success Stories from Aimshala Students",
+    "Source": "The Tribune",
+    "Link": "Read More",
+    "Clicks": 1023,
+    "Date": "06 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Women Leaders at Aimshala Featured",
+    "Source": "Femina",
+    "Link": "Read More",
+    "Clicks": 893,
+    "Date": "01 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Aimshala Expands to Rural Areas",
+    "Source": "LiveMint",
+    "Link": "Read More",
+    "Clicks": 764,
+    "Date": "25 Mar 2025",
+    "Status": "Pending",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Digital Learning Tools by Aimshala",
+    "Source": "Deccan Chronicle",
+    "Link": "Read More",
+    "Clicks": 689,
+    "Date": "20 Mar 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Aimshala in National Education Roundtable",
+    "Source": "The Print",
+    "Link": "Read More",
+    "Clicks": 524,
+    "Date": "15 Mar 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Internship Drive Powered by Aimshala",
+    "Source": "Education World",
+    "Link": "Read More",
+    "Clicks": 611,
+    "Date": "10 Mar 2025",
+    "Status": "Pending",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "Logo": defaultLogo,
+    "Title": "Aimshala's CSR Initiative Covered by Dainik Jagran",
+    "Source": "Dainik Jagran",
+    "Link": "Read More",
+    "Clicks": 736,
+    "Date": "05 Mar 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
   }
-]
-
+];
 export const HelpTable=[
   {
     "Title": "How to Book a Session",
@@ -6410,8 +6695,9 @@ export const HelpTable=[
     "Actions": ["Edit", "Publish"]
   }
 ]
-export const FaqsTableData=[
+export const FaqsTableData = [
   {
+    id: "1",
     "Page Title": "Student Onboarding",
     "For": "Students",
     "Questions": 15,
@@ -6420,6 +6706,7 @@ export const FaqsTableData=[
     "Actions": "[View FAQs →]"
   },
   {
+    id: "2",
     "Page Title": "Coach FAQs",
     "For": "Coaches",
     "Questions": 11,
@@ -6428,6 +6715,7 @@ export const FaqsTableData=[
     "Actions": "[View FAQs →]"
   },
   {
+    id: "3",
     "Page Title": "Parent Support & Guidance",
     "For": "Parents",
     "Questions": 9,
@@ -6436,6 +6724,7 @@ export const FaqsTableData=[
     "Actions": "[View FAQs →]"
   },
   {
+    id: "4",
     "Page Title": "Session & Booking Help",
     "For": "All Users",
     "Questions": 14,
@@ -6444,14 +6733,106 @@ export const FaqsTableData=[
     "Actions": "[View FAQs →]"
   },
   {
+    id: "5",
     "Page Title": "Technical Troubleshooting",
     "For": "All Users",
     "Questions": 12,
     "Last Updated": "13 May 2025",
     "Status": "Draft",
     "Actions": "[View FAQs →]"
+  },
+  {
+    id: "6",
+    "Page Title": "Platform Navigation",
+    "For": "Students",
+    "Questions": 10,
+    "Last Updated": "12 May 2025",
+    "Status": "Active",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "7",
+    "Page Title": "Assessment Guidelines",
+    "For": "Students",
+    "Questions": 8,
+    "Last Updated": "10 May 2025",
+    "Status": "Active",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "8",
+    "Page Title": "Coach Scheduling",
+    "For": "Coaches",
+    "Questions": 7,
+    "Last Updated": "09 May 2025",
+    "Status": "Draft",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "9",
+    "Page Title": "Payment & Refunds",
+    "For": "Parents",
+    "Questions": 6,
+    "Last Updated": "07 May 2025",
+    "Status": "Active",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "10",
+    "Page Title": "Certification Queries",
+    "For": "Students",
+    "Questions": 5,
+    "Last Updated": "05 May 2025",
+    "Status": "Draft",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "11",
+    "Page Title": "Privacy & Data Policy",
+    "For": "All Users",
+    "Questions": 7,
+    "Last Updated": "03 May 2025",
+    "Status": "Active",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "12",
+    "Page Title": "Mobile App Support",
+    "For": "Students",
+    "Questions": 9,
+    "Last Updated": "02 May 2025",
+    "Status": "Draft",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "13",
+    "Page Title": "Live Session Etiquette",
+    "For": "All Users",
+    "Questions": 8,
+    "Last Updated": "30 Apr 2025",
+    "Status": "Active",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "14",
+    "Page Title": "Learning Paths Explained",
+    "For": "Students",
+    "Questions": 6,
+    "Last Updated": "28 Apr 2025",
+    "Status": "Active",
+    "Actions": "[View FAQs →]"
+  },
+  {
+    id: "15",
+    "Page Title": "Feedback & Suggestions",
+    "For": "All Users",
+    "Questions": 4,
+    "Last Updated": "25 Apr 2025",
+    "Status": "Draft",
+    "Actions": "[View FAQs →]"
   }
-]
+];
+
 export const TestmonialsData=[
   {
     "Picture": "[placeholde]",
@@ -8468,3 +8849,361 @@ export const CustomInputTable=[
     "actions": ["View", "Add to Degree List", "Reject"]
   }
 ]
+export const CampaignTable = [
+  {
+    "id": "CAM1001",
+    "campaignName": "UG Masterclass Promo",
+    "channels": ["WhatsApp", "Email"],
+    "scheduledFor": "2025-07-12T10:00:00",
+    "audience": "Explorers",
+    "status": "Sent",
+    "actions": ["View", "Edit"]
+  },
+  {
+    "id": "CAM1002",
+    "campaignName": "Feedback Follow-up",
+    "channels": ["Web", "App"],
+    "scheduledFor": "2025-07-13T15:30:00",
+    "audience": "All Users",
+    "status": "Scheduled",
+    "actions": ["Edit", "Cancel"]
+  },
+  {
+    "id": "CAM1003",
+    "campaignName": "Partner Outreach Round 1",
+    "channels": ["Email"],
+    "scheduledFor": "2025-07-10T09:00:00",
+    "audience": "Organisations",
+    "status": "Failed",
+    "actions": ["Retry", "View"]
+  },
+  {
+    "id": "CAM1004",
+    "campaignName": "Welcome Drip Campaign",
+    "channels": ["Email"],
+    "scheduledFor": "2025-07-15T08:00:00",
+    "audience": "New Users",
+    "status": "Scheduled",
+    "actions": ["Edit", "Cancel"]
+  },
+  {
+    "id": "CAM1005",
+    "campaignName": "Course Completion Reminder",
+    "channels": ["SMS", "App"],
+    "scheduledFor": "2025-07-16T17:00:00",
+    "audience": "Learners",
+    "status": "Sent",
+    "actions": ["View"]
+  },
+  {
+    "id": "CAM1006",
+    "campaignName": "Event Invitation: Webinar July",
+    "channels": ["Email", "Web"],
+    "scheduledFor": "2025-07-18T13:30:00",
+    "audience": "Subscribers",
+    "status": "Scheduled",
+    "actions": ["Edit", "Cancel"]
+  },
+  {
+    "id": "CAM1007",
+    "campaignName": "Re-engagement Push",
+    "channels": ["App", "SMS"],
+    "scheduledFor": "2025-07-19T10:00:00",
+    "audience": "Dormant Users",
+    "status": "Scheduled",
+    "actions": ["Edit"]
+  },
+  {
+    "id": "CAM1008",
+    "campaignName": "Offer: Premium Upgrade",
+    "channels": ["Email", "App"],
+    "scheduledFor": "2025-07-20T12:00:00",
+    "audience": "Free Users",
+    "status": "Sent",
+    "actions": ["View", "Duplicate"]
+  },
+  {
+    "id": "CAM1009",
+    "campaignName": "Survey Participation Request",
+    "channels": ["Email"],
+    "scheduledFor": "2025-07-21T11:00:00",
+    "audience": "Active Users",
+    "status": "Scheduled",
+    "actions": ["Edit", "Cancel"]
+  },
+  {
+    "id": "CAM1010",
+    "campaignName": "Batch Start Notification",
+    "channels": ["SMS"],
+    "scheduledFor": "2025-07-22T09:00:00",
+    "audience": "Students",
+    "status": "Sent",
+    "actions": ["View"]
+  },
+  {
+    "id": "CAM1011",
+    "campaignName": "Upsell: Certification Add-on",
+    "channels": ["Email", "App"],
+    "scheduledFor": "2025-07-23T14:00:00",
+    "audience": "Enrolled Users",
+    "status": "Scheduled",
+    "actions": ["Edit", "Duplicate"]
+  },
+  {
+    "id": "CAM1012",
+    "campaignName": "Instructor Introduction",
+    "channels": ["App"],
+    "scheduledFor": "2025-07-24T16:00:00",
+    "audience": "New Students",
+    "status": "Scheduled",
+    "actions": ["Edit"]
+  },
+  {
+    "id": "CAM1013",
+    "campaignName": "Promo Code Expiry Reminder",
+    "channels": ["SMS", "Email"],
+    "scheduledFor": "2025-07-25T18:00:00",
+    "audience": "Deal Seekers",
+    "status": "Scheduled",
+    "actions": ["Edit", "Cancel"]
+  },
+  {
+    "id": "CAM1014",
+    "campaignName": "Alumni Community Drive",
+    "channels": ["Web", "Email"],
+    "scheduledFor": "2025-07-26T15:30:00",
+    "audience": "Past Students",
+    "status": "Sent",
+    "actions": ["View", "Duplicate"]
+  },
+  {
+    "id": "CAM1015",
+    "campaignName": "Monthly Digest July",
+    "channels": ["Email"],
+    "scheduledFor": "2025-07-27T10:30:00",
+    "audience": "All Users",
+    "status": "Scheduled",
+    "actions": ["Edit"]
+  },
+  {
+    "id": "CAM1016",
+    "campaignName": "Nudging Abandoned Carts",
+    "channels": ["App", "Email"],
+    "scheduledFor": "2025-07-28T09:45:00",
+    "audience": "Interested Users",
+    "status": "Scheduled",
+    "actions": ["Edit", "Retry"]
+  },
+  {
+    "id": "CAM1017",
+    "campaignName": "Beta Program Launch",
+    "channels": ["Web", "Email"],
+    "scheduledFor": "2025-07-29T13:00:00",
+    "audience": "Power Users",
+    "status": "Scheduled",
+    "actions": ["Edit"]
+  },
+  {
+    "id": "CAM1018",
+    "campaignName": "Support Satisfaction Survey",
+    "channels": ["Email"],
+    "scheduledFor": "2025-07-30T11:30:00",
+    "audience": "Helpdesk Users",
+    "status": "Scheduled",
+    "actions": ["Edit", "Cancel"]
+  }
+];
+export const SurveysTable=[
+  {
+    "id": "SUR1001",
+    "title": "Career Preferences Survey",
+    "createdBy": "Riya Malhotra",
+    "for": ["11–12", "UG"],
+    "questions": 10,
+    "responses": 4120,
+    "status": "Active",
+    "lastUpdated": "16 May 2025",
+    "actions": ["Edit", "Results", "Close"]
+  },
+  {
+    "id": "SUR1002",
+    "title": "Online Learning Feedback",
+    "createdBy": "Team Aimshala",
+    "for": ["UG", "PG"],
+    "questions": 8,
+    "responses": 2630,
+    "status": "Active",
+    "lastUpdated": "14 May 2025",
+    "actions": ["Edit", "Results", "Close"]
+  },
+  {
+    "id": "SUR1003",
+    "title": "Skill Awareness Check",
+    "createdBy": "Rahul Sen",
+    "for": ["PG"],
+    "questions": 6,
+    "responses": 1020,
+    "status": "Draft",
+    "lastUpdated": "12 May 2025",
+    "actions": ["Edit", "Activate", "Delete"]
+  },
+  {
+    "id": "SUR1004",
+    "title": "Internship Readiness Survey",
+    "createdBy": "Sonal Aggarwal",
+    "for": ["UG"],
+    "questions": 12,
+    "responses": 1875,
+    "status": "Active",
+    "lastUpdated": "10 May 2025",
+    "actions": ["Edit", "Results", "Close"]
+  },
+  {
+    "id": "SUR1005",
+    "title": "Exam Preparation Patterns",
+    "createdBy": "Team Aimshala",
+    "for": ["11–12"],
+    "questions": 9,
+    "responses": 3390,
+    "status": "Draft",
+    "lastUpdated": "09 May 2025",
+    "actions": ["Edit", "Activate", "Delete"]
+  },
+  {
+    "id": "SUR1006",
+    "title": "Study Abroad Interest Form",
+    "createdBy": "Amit Verma",
+    "for": ["UG", "PG"],
+    "questions": 7,
+    "responses": 2010,
+    "status": "Active",
+    "lastUpdated": "08 May 2025",
+    "actions": ["Edit", "Results", "Close"]
+  },
+  {
+    "id": "SUR1007",
+    "title": "Technology Usage in Study",
+    "createdBy": "Nikita Roy",
+    "for": ["9–10", "11–12"],
+    "questions": 11,
+    "responses": 1420,
+    "status": "Pending",
+    "lastUpdated": "06 May 2025",
+    "actions": ["Edit", "Activate", "Delete"]
+  },
+  {
+    "id": "SUR1008",
+    "title": "Campus Experience Survey",
+    "createdBy": "Rohit Sharma",
+    "for": ["UG"],
+    "questions": 10,
+    "responses": 980,
+    "status": "Active",
+    "lastUpdated": "04 May 2025",
+    "actions": ["Edit", "Results", "Close"]
+  },
+  {
+    "id": "SUR1009",
+    "title": "Career Awareness Tracker",
+    "createdBy": "Team Aimshala",
+    "for": ["11–12", "UG"],
+    "questions": 8,
+    "responses": 2890,
+    "status": "Draft",
+    "lastUpdated": "02 May 2025",
+    "actions": ["Edit", "Activate", "Delete"]
+  },
+  {
+    "id": "SUR1010",
+    "title": "Life Skills Self Assessment",
+    "createdBy": "Riya Malhotra",
+    "for": ["UG", "PG"],
+    "questions": 9,
+    "responses": 1750,
+    "status": "Active",
+    "lastUpdated": "01 May 2025",
+    "actions": ["Edit", "Results", "Close"]
+  }
+]
+export const CommentTable = [
+  {
+    id: "Com1001",
+    comment: "This helped me prepare!",
+    by: "ritika@email",
+    on: "Insight: Career Map Guide",
+    status: "Approved",
+    action: ["Edit", "Delete"]
+  },
+  {
+    id: "Com1002",
+    comment: "Coach was late to session",
+    by: "vivek@email",
+    on: "Session: UG Stream Talk",
+    status: "Approved",
+    action: ["Approve", "Remove", "Reply"]
+  },
+  {
+    id: "Com1003",
+    comment: "PDF not loading",
+    by: "internal_note",
+    on: "Article: Assessment Steps",
+    status: "Pending",
+    action: ["Approve", "Reject"]
+  },
+  {
+    id: "Com1004",
+    comment: "Loved the interactive format!",
+    by: "megha@email",
+    on: "Webinar: Study Abroad Planning",
+    status: "Approved",
+    action: ["Edit", "Delete"]
+  },
+  {
+    id: "Com1005",
+    comment: "Audio was unclear in parts.",
+    by: "anil@email",
+    on: "Video: Scholarship Tips",
+    status: "Flagged",
+    action: ["Approve", "Remove", "Reply"]
+  },
+  {
+    id: "Com1006",
+    comment: "Can we get the session recording?",
+    by: "sunita@email",
+    on: "Live Q&A: Career Guidance",
+    status: "Pending",
+    action: ["Approve", "Reject"]
+  },
+  {
+    id: "Com1007",
+    comment: "Helpful for choosing my stream.",
+    by: "yash@email",
+    on: "Tool: Stream Selector",
+    status: "Approved",
+    action: ["Edit", "Delete"]
+  },
+  {
+    id: "Com1008",
+    comment: "Session timing was not updated.",
+    by: "priya@email",
+    on: "Event: Mentor Meet",
+    status: "Flagged",
+    action: ["Approve", "Remove", "Reply"]
+  },
+  {
+    id: "Com1009",
+    comment: "Informative article. Thanks!",
+    by: "nisha@email",
+    on: "Blog: Exam Stress Tips",
+    status: "Approved",
+    action: ["Edit", "Delete"]
+  },
+  {
+    id: "Com1010",
+    comment: "Link was broken on mobile view.",
+    by: "support_team",
+    on: "Page: Feedback Form",
+    status: "Pending",
+    action: ["Approve", "Reject"]
+  }
+];

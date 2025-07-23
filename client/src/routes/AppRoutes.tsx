@@ -51,7 +51,7 @@ import { Desk as DigitalDesk } from "@/pages/DigitalDesk/Desk";
 import { Campaigns as DigitalCampaigns } from "@/pages/DigitalDesk/Campaigns";
 import { Surveys as DigitalSurveys } from "@/pages/DigitalDesk/Surveys";
 import { Insights as DigitalInsights } from "@/pages/DigitalDesk/CMS/Insights";
-import { Video as DigitalVideo } from "@/pages/DigitalDesk/CMS/Video";
+import { VideoLibraries as DigitalVideo } from "@/pages/DigitalDesk/CMS/Video";
 import { Faq as DigitalFaq } from "@/pages/DigitalDesk/CMS/Faq";
 import { HelpArticles as DigitalHelpArticles } from "@/pages/DigitalDesk/CMS/HelpArticles";
 import { InTheNews as DigitalInTheNews } from "@/pages/DigitalDesk/CMS/InTheNews";
