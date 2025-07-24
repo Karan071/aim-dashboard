@@ -1,7 +1,7 @@
 // export function HelpArticles() {
 //   return <div>HelpArticles</div>;
 // }
-import { Clock, CircleArrowUp, CircleArrowDown, Search, Users, FileCheck2,   FileDown,  BadgeQuestionMark,  Plus, Bell, X } from "lucide-react";
+import { Clock, CircleArrowUp, CircleArrowDown, Search, Users, FileCheck2,   FileDown,  BadgeQuestionMark,  Plus, Bell, X, Pencil, Archive } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -73,7 +73,7 @@ function Buttonbar() {
         <Plus className="h-3 w-3" />
         <span className="">Add Help Article</span>
       </Button>
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         <Button variant="standard" size="new">
           <BadgeQuestionMark className="h-3 w-3" />
           <span className=""> Organize by Category</span>
@@ -94,8 +94,7 @@ function Buttonbar() {
         <Filter className="h-4 w-4" />
         {showFilter ? "Hide Filters" : "Show Filters"}
       </Button>
-
-      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+      {showFilter && <AdvancedFilter onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -106,7 +105,7 @@ interface FilterProps {
 }
 
 
-function AssessFilter({ onClose }: FilterProps) {
+function AdvancedFilter({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("Category");
 
@@ -296,7 +295,7 @@ function StatCard() {
 function HelpTabledata() {
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [search, setSearch] = useState("");
 
   // Filtering (search by Title, Author, Category, For)
@@ -451,7 +450,11 @@ function HelpTabledata() {
                       <div className="flex items-center gap-2">
                         {row.Actions && row.Actions.map((action, i) => (
                           <Button key={i} variant="noborder" size="sm" className="bg-[var(--background)] border-0 shadow-none">
-                            {action}
+                            {action === 'View' && <Eye className="h-4 w-4" />}
+                            {action === 'Edit' && <Pencil className="h-4 w-4" />}
+                            {action === 'Delete' && <X className="h-4 w-4 text-[var(--red)]" />}
+                            {action === 'Archive' && <Archive className="h-4 w-4" />}
+                            {action !== 'View' && action !== 'Edit' && action !== 'Delete' && action !== 'Archive' && action}
                           </Button>
                         ))}
                       </div>
@@ -476,7 +479,7 @@ function HelpTabledata() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {

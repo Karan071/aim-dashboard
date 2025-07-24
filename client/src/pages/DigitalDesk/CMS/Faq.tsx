@@ -1,4 +1,4 @@
-import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, CheckCircle2, FileDown, BadgeQuestionMark,  Plus, Bell, X } from "lucide-react";
+import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, FileDown, BadgeQuestionMark,  Plus, Bell, X } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -6,17 +6,15 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { ChevronDown, Filter, ChevronRight, ChevronLeft, Eye } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {  FaqsTableData } from "@/data/Data";
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { useEffect } from "react";
-import RadioButton from "@/components/ui/Radiobutton";
-import DatePick from "@/components/ui/DatePicker"
 
-
+import { DatePickerWithRange } from '@/components/application-component/date-range-picker';
+import type { DateRange } from 'react-day-picker';
 
 
 const color = "text-[var(--text)]";
@@ -25,35 +23,30 @@ const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
 const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const Stats = [
   {
-    title: "Total Assessments",
-    value: "128",
+    title: "Total FAQ Pages",
+    value: "18",
     icon: Users,
     performance: Up,
   },
   {
-    title: "Active Assessments",
-    value: "87",
+    title: "Total Questions",
+    value: "246",
     icon: FileCheck2,
     performance: Down,
   },
   {
-    title: "Assessments Taken",
-    value: "8,947",
+    title: "Recently Updated Pages",
+    value: "5",
     icon: FileText,
     performance: Up,
   },
   {
-    title: "In Progress",
-    value: "563",
+    title: "Last Update",
+    value: " 18 May 2025",
     icon: Clock,
     performance: Up,
   },
-  {
-    title: "Completed Reports Generated",
-    value: "6,482",
-    icon: CheckCircle2,
-    performance: Up,
-  },
+
 ];
 
 
@@ -83,7 +76,7 @@ export function Faq() {
         toggleSelectAll={toggleSelectAll}
         currentRecords={currentRecords}
       />
-      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+
       <FaqsTable
         selectedRows={selectedRows}
         setSelectedRows={setSelectedRows}
@@ -106,24 +99,21 @@ function Buttonbar({ showFilter, setShowFilter }: ButtonbarProps) {
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
         <Plus className="h-3 w-3" />
-        <span className="">Create New Assessment</span>
+        <span className=""> Add Question to Page</span>
       </Button>
-      <div className="flex gap-4 items-center">
-        {/* Select All Toggle */}
-      
+      <div className="flex gap-4 flex-wrap items-center">
         <Button variant="standard" size="new">
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Manage Questions</span>
         </Button>
         <Button variant="standard" size="new">
           <Eye className="h-3 w-3" />
-          <span className="">View Results</span>
+          <span className=""> Edit Page Details</span>
         </Button>
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
-          <span className="">Export Reports</span>
+          <span className="">Export FAQs</span>
         </Button>
-        {/* Filter Button */}
         <Button
           variant="border"
           onClick={() => setShowFilter(true)}
@@ -132,6 +122,7 @@ function Buttonbar({ showFilter, setShowFilter }: ButtonbarProps) {
           <Filter className="h-4 w-4" />
           {showFilter ? "Hide Filters" : "Show Filters"}
         </Button>
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -142,46 +133,54 @@ interface FilterProps {
 }
 
 
-function AssessFilter({ onClose }: FilterProps) {
+function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("General");
+  const [activeTab, setActiveTab] = useState("Audience For");
+  const [audience, setAudience] = useState<string[]>([]);
+  const [status, setStatus] = useState<string[]>([]);
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
-
-      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-
-      onClose(); // Close modal otherwise
+      onClose();
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const [group, setGroup] = useState("6-8");
-  const [category, setCategory] = useState("Career");
-  const [status, setStatus] = useState("Active");
-
   const tabList = [
-    "General",
-    "Target Group",
-    "Category",
+    "Audience For",
     "Status",
-    "Created By",
     "Date Range",
   ];
+  const audienceOptions = ["Students", "Parents", "Coaches", "Admins"];
+  const statusOptions = ["Active", "Draft", "Archived"];
+
+  const handleAudienceChange = (option: string) => {
+    setAudience((prev) =>
+      prev.includes(option) ? prev.filter((a) => a !== option) : [...prev, option]
+    );
+  };
+  const handleStatusChange = (option: string) => {
+    setStatus((prev) =>
+      prev.includes(option) ? prev.filter((s) => s !== option) : [...prev, option]
+    );
+  };
+  const handleClearAll = () => {
+    setAudience([]);
+    setStatus([]);
+    setDateRange(undefined);
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-
       <div
         ref={modalRef}
         className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
@@ -191,14 +190,13 @@ function AssessFilter({ onClose }: FilterProps) {
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
+            onClick={handleClearAll}
           >
             Clear All
           </Button>
         </div>
-        {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
@@ -214,109 +212,47 @@ function AssessFilter({ onClose }: FilterProps) {
               ))}
             </div>
           </div>
-
-          {/* Tab Content */}
-
           <div className="p-6 overflow-y-auto relative w-full">
-            {activeTab === "General" && (
+            {activeTab === "Audience For" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Enter Assessment Name :</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
-
-              </>
-            )}
-
-            {activeTab === "Target Group" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Target Group:
-                </p>
+                <p className="text-sm text-[var(--text-head)] mb-4">Audience For:</p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "6-8",
-                    "9-10",
-                    "11-12",
-                    "UG",
-                    "PG",
-                    "Professionals",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={group}
-                      onChange={setGroup}
-                    />
+                  {audienceOptions.map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={audience.includes(option)}
+                        onCheckedChange={() => handleAudienceChange(option)}
+                      />
+                      {option}
+                    </label>
                   ))}
                 </div>
               </>
             )}
-
-            {activeTab === "Category" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Category :
-                </p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Career",
-                    "Aptitude",
-                    "Personality",
-                    "Skills",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={category}
-                      onChange={setCategory}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-
             {activeTab === "Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Choose Status :
-                </p>
+                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Active",
-                    "Inactive",
-                    "Draft",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={status}
-                      onChange={setStatus}
-                    />
+                  {statusOptions.map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={status.includes(option)}
+                        onCheckedChange={() => handleStatusChange(option)}
+                      />
+                      {option}
+                    </label>
                   ))}
                 </div>
               </>
             )}
-
-            {activeTab === "Created By" && (
-              <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Enter The Creator/Coach / Admin Name :</label>
-                <Input id="Gen" placeholder="Enter.." type="text" className="mt-4 w-full " />
-
-              </>
-            )}
-
             {activeTab === "Date Range" && (
               <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter the Last Assessment Date :</label>
+                <label htmlFor="date-range" className="text-[var(--text)]">Date Range: Last Updated</label>
                 <div className="mt-4 min-w-full">
-                  <DatePick />
+                  <DatePickerWithRange value={dateRange} onChange={setDateRange} />
                 </div>
               </>
             )}
-
-            {/* Footer */}
           </div>
         </div>
         <div className="relative bottom-0 right-0 w-full px-6 py-4 flex border-t-1 justify-end gap-2">

@@ -722,6 +722,189 @@ export const OrganisationProfiles = [
   }
 ];
 
+export const TeamDirectoryTable = [
+  {
+    id: 1,
+    picture: "avatar.png",
+    name: "Riya Malhotra",
+    role: "Co-Founder & Content Head",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 2,
+    picture: "avatar.png",
+    name: "Ankur Sharma",
+    role: "Lead Backend Engineer",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 3,
+    picture: "avatar.png",
+    name: "Neha Joshi",
+    role: "UX/UI Designer",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 4,
+    picture: "avatar.png",
+    name: "Ravi Kapoor",
+    role: "Outreach Strategist",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 5,
+    picture: "avatar.png",
+    name: "Rohan Sen",
+    role: "Program Advisor",
+    linkedin: "LinkedIn",
+    status: "Inactive",
+    actions: ["Edit", "Activate"],
+  },
+  {
+    id: 6,
+    picture: "avatar.png",
+    name: "Meera Chauhan",
+    role: "Marketing Coordinator",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 7,
+    picture: "avatar.png",
+    name: "Arjun Mehta",
+    role: "Frontend Developer",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 8,
+    picture: "avatar.png",
+    name: "Sneha Patel",
+    role: "Community Manager",
+    linkedin: "LinkedIn",
+    status: "Inactive",
+    actions: ["Edit", "Activate"],
+  },
+  {
+    id: 9,
+    picture: "avatar.png",
+    name: "Vikram Singh",
+    role: "Senior DevOps Engineer",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 10,
+    picture: "avatar.png",
+    name: "Kritika Bansal",
+    role: "Operations Manager",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 11,
+    picture: "avatar.png",
+    name: "Yash Jain",
+    role: "Data Analyst",
+    linkedin: "LinkedIn",
+    status: "Inactive",
+    actions: ["Edit", "Activate"],
+  },
+  {
+    id: 12,
+    picture: "avatar.png",
+    name: "Divya Sharma",
+    role: "Instructional Designer",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 13,
+    picture: "avatar.png",
+    name: "Manoj Kumar",
+    role: "Customer Support Lead",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 14,
+    picture: "avatar.png",
+    name: "Anita Reddy",
+    role: "HR Manager",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 15,
+    picture: "avatar.png",
+    name: "Tushar Verma",
+    role: "Full Stack Developer",
+    linkedin: "LinkedIn",
+    status: "Inactive",
+    actions: ["Edit", "Activate"],
+  },
+  {
+    id: 16,
+    picture: "avatar.png",
+    name: "Priya Nair",
+    role: "Learning Consultant",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 17,
+    picture: "avatar.png",
+    name: "Harshit Rawat",
+    role: "Business Analyst",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 18,
+    picture: "avatar.png",
+    name: "Sanya Kapoor",
+    role: "Visual Designer",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  },
+  {
+    id: 19,
+    picture: "avatar.png",
+    name: "Amit Desai",
+    role: "Finance Officer",
+    linkedin: "LinkedIn",
+    status: "Inactive",
+    actions: ["Edit", "Activate"],
+  },
+  {
+    id: 20,
+    picture: "avatar.png",
+    name: "Nikita Thakur",
+    role: "Content Strategist",
+    linkedin: "LinkedIn",
+    status: "Active",
+    actions: ["Edit", "Deactivate"],
+  }
+];
+
 
 export const GoogleMapListings = [
   {
@@ -917,7 +1100,7 @@ export const FormsSubmittedData = [
     "id": 6,
     "user": "Sara Iqbal",
     "type": "College",
-    "name": "Lighthouse Women’s College",
+    "name": "Lighthouse Women's College",
     "location": "Kolkata",
     "submitted": "11 May 2025",
     "entry": "View",
@@ -1280,7 +1463,7 @@ export const NewsMentionsData = [
   {
     "id": "7",
     "logo": "![Logo]",
-    "title": "Empowering Rural Youth: Aimshala’s Impact",
+    "title": "Empowering Rural Youth: Aimshala's Impact",
     "source": "The Hindu",
     "link": "[Read More]",
     "clicks": "989",
@@ -1291,7 +1474,7 @@ export const NewsMentionsData = [
   {
     "id": "8",
     "logo": "![Logo]",
-    "title": "Tech for Good: Aimshala’s Learning Tools",
+    "title": "Tech for Good: Aimshala's Learning Tools",
     "source": "YourStory",
     "link": "[Read More]",
     "clicks": "812",
@@ -1324,7 +1507,7 @@ export const NewsMentionsData = [
   {
     "id": "11",
     "logo": "![Logo]",
-    "title": "Aimshala’s Bootcamps Transforming Lives",
+    "title": "Aimshala's Bootcamps Transforming Lives",
     "source": "TOI",
     "link": "[Read More]",
     "clicks": "912",
@@ -1412,8 +1595,21 @@ export const NewsMentionsData = [
 ]
 export const testimonialsData = [
   {
+    "id": "0",
+    "picture": "avatar.png",
+    "name": "Alex Novak",
+    "role": "Alumnus, Class of 2022",
+    "category": "Alumni",
+    "audience": "UG, Professionals",
+    "type": "Text",
+    "contentPreview": "The platform shaped my career journey!",
+    "date": "20 May 2025",
+    "status": "Published",
+    "actions": ["Edit", "Archive"]
+  },
+  {
     "id": "1",
-    "picture": "photo-aanya.jpg",
+    "picture": "avatar.png",
     "name": "Aanya Kapoor",
     "role": "Student, Class 12",
     "category": "Student",
@@ -1426,7 +1622,7 @@ export const testimonialsData = [
   },
   {
     "id": "2",
-    "picture": "photo-sandeep.jpg",
+    "picture": "avatar.png",
     "name": "Sandeep Khosla",
     "role": "Parent of 10th Grader",
     "category": "Parent",
@@ -1435,11 +1631,11 @@ export const testimonialsData = [
     "contentPreview": "Amazing clarity for our son's choices",
     "date": "17 May 2025",
     "status": "Published",
-    "actions": ["View Video", "Archive"]
+    "actions": ["Edit", "Archive"]
   },
   {
     "id": "3",
-    "picture": "photo-neha.jpg",
+    "picture": "avatar.png",
     "name": "Neha Malhotra",
     "role": "Career Consultant",
     "category": "Coach",
@@ -1452,7 +1648,7 @@ export const testimonialsData = [
   },
   {
     "id": "4",
-    "picture": "photo-joseph.jpg",
+    "picture": "avatar.png",
     "name": "Joseph Mathew",
     "role": "Principal, Hope Academy",
     "category": "Partner",
@@ -1461,11 +1657,11 @@ export const testimonialsData = [
     "contentPreview": "Great collaboration with our school",
     "date": "14 May 2025",
     "status": "Pending",
-    "actions": ["Review", "Publish"]
+     "actions": ["Edit", "Archive"]
   },
   {
     "id": "5",
-    "picture": "photo-rhea.jpg",
+    "picture": "avatar.png",
     "name": "Rhea Sharma",
     "role": "Student, Class 11",
     "category": "Student",
@@ -1478,7 +1674,7 @@ export const testimonialsData = [
   },
   {
     "id": "6",
-    "picture": "photo-tarun.jpg",
+    "picture": "avatar.png",
     "name": "Tarun Bajaj",
     "role": "Working Professional",
     "category": "Coach",
@@ -1487,11 +1683,11 @@ export const testimonialsData = [
     "contentPreview": "The mentorship boosted my career",
     "date": "12 May 2025",
     "status": "Published",
-    "actions": ["View Video", "Archive"]
+    "actions": ["Edit", "Archive"]
   },
   {
     "id": "7",
-    "picture": "photo-ruchi.jpg",
+    "picture": "avatar.png",
     "name": "Ruchi Mehta",
     "role": "Parent of Class 9 Student",
     "category": "Parent",
@@ -1504,7 +1700,7 @@ export const testimonialsData = [
   },
   {
     "id": "8",
-    "picture": "photo-amit.jpg",
+    "picture": "avatar.png",
     "name": "Amit Rawal",
     "role": "NGO Director",
     "category": "Partner",
@@ -1513,11 +1709,11 @@ export const testimonialsData = [
     "contentPreview": "Valuable impact in remote communities",
     "date": "10 May 2025",
     "status": "Pending",
-    "actions": ["Review", "Publish"]
+     "actions": ["Edit", "Archive"]
   },
   {
     "id": "9",
-    "picture": "photo-meena.jpg",
+    "picture": "avatar.png",
     "name": "Meena Arora",
     "role": "Student, Class 10",
     "category": "Student",
@@ -1530,7 +1726,7 @@ export const testimonialsData = [
   },
   {
     "id": "10",
-    "picture": "photo-harsh.jpg",
+    "picture": "avatar.png",
     "name": "Harshvardhan Patel",
     "role": "Coach, MBA Prep",
     "category": "Coach",
@@ -1543,7 +1739,7 @@ export const testimonialsData = [
   },
   {
     "id": "11",
-    "picture": "photo-rekha.jpg",
+    "picture": "avatar.png",
     "name": "Rekha Nair",
     "role": "Parent of a College Student",
     "category": "Parent",
@@ -1552,11 +1748,11 @@ export const testimonialsData = [
     "contentPreview": "Guidance at the right time",
     "date": "07 May 2025",
     "status": "Published",
-    "actions": ["View Video", "Archive"]
+    "actions": ["Edit", "Archive"]
   },
   {
     "id": "12",
-    "picture": "photo-rajesh.jpg",
+    "picture": "avatar.png",
     "name": "Rajesh Khanna",
     "role": "Principal, City School",
     "category": "Partner",
@@ -1569,7 +1765,7 @@ export const testimonialsData = [
   },
   {
     "id": "13",
-    "picture": "photo-shalini.jpg",
+    "picture": "avatar.png",
     "name": "Shalini Vyas",
     "role": "Career Coach",
     "category": "Coach",
@@ -1578,11 +1774,11 @@ export const testimonialsData = [
     "contentPreview": "Career breakthrough for my mentees",
     "date": "05 May 2025",
     "status": "Published",
-    "actions": ["View Video", "Archive"]
+    "actions": ["Edit", "Archive"]
   },
   {
     "id": "14",
-    "picture": "photo-anshul.jpg",
+    "picture": "avatar.png",
     "name": "Anshul Mehra",
     "role": "Student, Final Year UG",
     "category": "Student",
@@ -1595,7 +1791,7 @@ export const testimonialsData = [
   },
   {
     "id": "15",
-    "picture": "photo-farha.jpg",
+    "picture": "avatar.png",
     "name": "Farha Qureshi",
     "role": "Counselor",
     "category": "Coach",
@@ -1604,11 +1800,11 @@ export const testimonialsData = [
     "contentPreview": "Students respond so well to the program",
     "date": "03 May 2025",
     "status": "Pending",
-    "actions": ["Review", "Publish"]
+      "actions": ["Edit", "Archive"]
   },
   {
     "id": "16",
-    "picture": "photo-vikram.jpg",
+    "picture": "avatar.png",
     "name": "Vikram Das",
     "role": "Parent of UG Student",
     "category": "Parent",
@@ -1621,7 +1817,7 @@ export const testimonialsData = [
   },
   {
     "id": "17",
-    "picture": "photo-anita.jpg",
+    "picture": "avatar.png",
     "name": "Anita Roy",
     "role": "Principal, Future High School",
     "category": "Partner",
@@ -1630,11 +1826,11 @@ export const testimonialsData = [
     "contentPreview": "Collaboration helps our faculty grow",
     "date": "01 May 2025",
     "status": "Pending",
-    "actions": ["Review", "Publish"]
+    "actions": ["Edit", "Archive"]
   },
   {
     "id": "18",
-    "picture": "photo-yash.jpg",
+    "picture": "avatar.png",
     "name": "Yash Jain",
     "role": "Student, Class 9",
     "category": "Student",
@@ -1647,7 +1843,7 @@ export const testimonialsData = [
   },
   {
     "id": "19",
-    "picture": "photo-rina.jpg",
+    "picture": "avatar.png",
     "name": "Rina Thakur",
     "role": "NGO Project Coordinator",
     "category": "Partner",
@@ -1655,6 +1851,19 @@ export const testimonialsData = [
     "type": "Text",
     "contentPreview": "Structured and timely assistance",
     "date": "29 Apr 2025",
+    "status": "Published",
+    "actions": ["Edit", "Archive"]
+  },
+  {
+    "id": "20",
+    "picture": "avatar.png",
+    "name": "John Doe",
+    "role": "Software Engineer",
+    "category": "Coach",
+    "audience": "Professionals",
+    "type": "Text",
+    "contentPreview": "AI tools made my workflow efficient!",
+    "date": "28 Apr 2025",
     "status": "Published",
     "actions": ["Edit", "Archive"]
   }
@@ -6643,8 +6852,9 @@ export const NewTable = [
     "Actions": ["Edit", "Archive"]
   }
 ];
-export const HelpTable=[
+export const HelpTable = [
   {
+    "id": 1,
     "Title": "How to Book a Session",
     "Category": "Sessions",
     "Tags": ["Booking", "Call"],
@@ -6655,6 +6865,7 @@ export const HelpTable=[
     "Actions": ["Edit", "Archive"]
   },
   {
+    "id": 2,
     "Title": "Accessing Your Assessment Results",
     "Category": "Assessments",
     "Tags": ["Results", "Score"],
@@ -6665,6 +6876,7 @@ export const HelpTable=[
     "Actions": ["Edit", "Archive"]
   },
   {
+    "id": 3,
     "Title": "Resetting Your Password",
     "Category": "Technical Support",
     "Tags": ["Login", "Account"],
@@ -6672,9 +6884,10 @@ export const HelpTable=[
     "Author": "Rahul Sen",
     "Last Updated": "13 May 2025",
     "Status": "Draft",
-    "Actions": ["Edit", "Publish"]
+    "Actions": ["Edit", "Archive"]
   },
   {
+    "id": 4,
     "Title": "Joining a Live Class",
     "Category": "Sessions",
     "Tags": ["Live", "Classroom"],
@@ -6685,6 +6898,7 @@ export const HelpTable=[
     "Actions": ["Edit", "Archive"]
   },
   {
+    "id": 5,
     "Title": "Updating Your Profile Information",
     "Category": "Technical Support",
     "Tags": ["Profile", "Account"],
@@ -6692,9 +6906,176 @@ export const HelpTable=[
     "Author": "Team Aimshala",
     "Last Updated": "10 May 2025",
     "Status": "Draft",
-    "Actions": ["Edit", "Publish"]
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 6,
+    "Title": "Understanding Your Curriculum",
+    "Category": "Academics",
+    "Tags": ["Curriculum", "Subjects"],
+    "For": "Students",
+    "Author": "Meena Agarwal",
+    "Last Updated": "9 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 7,
+    "Title": "How to Use the Mobile App",
+    "Category": "Technical Support",
+    "Tags": ["Mobile", "App"],
+    "For": "All Users",
+    "Author": "Team Aimshala",
+    "Last Updated": "8 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 8,
+    "Title": "Viewing Your Attendance Report",
+    "Category": "Reports",
+    "Tags": ["Attendance", "Tracking"],
+    "For": "Students",
+    "Author": "Rahul Sen",
+    "Last Updated": "7 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 9,
+    "Title": "Changing Your Registered Email",
+    "Category": "Technical Support",
+    "Tags": ["Email", "Profile"],
+    "For": "All Users",
+    "Author": "Priya Desai",
+    "Last Updated": "6 May 2025",
+    "Status": "Draft",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 10,
+    "Title": "Contacting Your Mentor",
+    "Category": "Communication",
+    "Tags": ["Mentor", "Support"],
+    "For": "Students",
+    "Author": "Riya Malhotra",
+    "Last Updated": "5 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 11,
+    "Title": "Downloading Study Materials",
+    "Category": "Resources",
+    "Tags": ["Download", "Materials"],
+    "For": "Students",
+    "Author": "Team Aimshala",
+    "Last Updated": "4 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 12,
+    "Title": "Giving Feedback for a Session",
+    "Category": "Feedback",
+    "Tags": ["Feedback", "Session"],
+    "For": "Students",
+    "Author": "Rahul Sen",
+    "Last Updated": "3 May 2025",
+    "Status": "Draft",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 13,
+    "Title": "How to Register for New Courses",
+    "Category": "Academics",
+    "Tags": ["Courses", "Registration"],
+    "For": "Students",
+    "Author": "Meena Agarwal",
+    "Last Updated": "2 May 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 14,
+    "Title": "Troubleshooting Audio/Video Issues",
+    "Category": "Technical Support",
+    "Tags": ["Audio", "Video"],
+    "For": "All Users",
+    "Author": "Priya Desai",
+    "Last Updated": "1 May 2025",
+    "Status": "Draft",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 15,
+    "Title": "Navigating the Dashboard",
+    "Category": "Technical Support",
+    "Tags": ["Dashboard", "Interface"],
+    "For": "All Users",
+    "Author": "Team Aimshala",
+    "Last Updated": "30 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 16,
+    "Title": "Understanding Your Fee Structure",
+    "Category": "Finance",
+    "Tags": ["Fee", "Payment"],
+    "For": "Students",
+    "Author": "Riya Malhotra",
+    "Last Updated": "29 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 17,
+    "Title": "Canceling a Scheduled Session",
+    "Category": "Sessions",
+    "Tags": ["Cancel", "Schedule"],
+    "For": "Students",
+    "Author": "Rahul Sen",
+    "Last Updated": "28 Apr 2025",
+    "Status": "Draft",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 18,
+    "Title": "Using the Parent Dashboard",
+    "Category": "Guides",
+    "Tags": ["Parent", "Dashboard"],
+    "For": "Parents",
+    "Author": "Team Aimshala",
+    "Last Updated": "27 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 19,
+    "Title": "Enabling Notifications",
+    "Category": "Settings",
+    "Tags": ["Notifications", "Alerts"],
+    "For": "All Users",
+    "Author": "Priya Desai",
+    "Last Updated": "26 Apr 2025",
+    "Status": "Draft",
+    "Actions": ["Edit", "Archive"]
+  },
+  {
+    "id": 20,
+    "Title": "Using Class Recordings",
+    "Category": "Resources",
+    "Tags": ["Recordings", "Class"],
+    "For": "Students",
+    "Author": "Meena Agarwal",
+    "Last Updated": "25 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
   }
-]
+];
+
+
 export const FaqsTableData = [
   {
     id: "1",
@@ -6835,7 +7216,7 @@ export const FaqsTableData = [
 
 export const TestmonialsData=[
   {
-    "Picture": "[placeholde]",
+    "Picture": "avatar.png",
     "Name": "Aanya Kapoor",
     "Role": "Student, Class 12",
     "Category": "Student",
@@ -6847,7 +7228,7 @@ export const TestmonialsData=[
     "Actions": ["Edit", "Archive"]
   },
   {
-    "Picture": "![Photo]",
+    "Picture": "avatar.png",
     "Name": "Rahul Mehta",
     "Role": "Coach - Career Guidance",
     "Category": "Coach",
@@ -6859,7 +7240,7 @@ export const TestmonialsData=[
     "Actions": ["Edit", "Archive"]
   },
   {
-    "Picture": "![Photo]",
+    "Picture": "avatar.png",
     "Name": "Sneha Verma",
     "Role": "Parent",
     "Category": "Parent",
@@ -6871,7 +7252,7 @@ export const TestmonialsData=[
     "Actions": ["Edit", "Publish"]
   },
   {
-    "Picture": "![Photo]",
+    "Picture": "avatar.png",
     "Name": "Aarav Joshi",
     "Role": "Student, Class 10",
     "Category": "Student",
@@ -6883,16 +7264,28 @@ export const TestmonialsData=[
     "Actions": ["Edit", "Archive"]
   },
   {
-    "Picture": "![Photo]",
+    "Picture": "avatar.png",
     "Name": "Divya Nair",
     "Role": "Academic Mentor",
     "Category": "Coach",
     "For": "UG Students",
     "Type": "Text",
-    "Content Preview": "Here’s how we mentor students to stay focused and confident.",
+    "Content Preview": "Here's how we mentor students to stay focused and confident.",
     "Date": "14 May 2025",
     "Status": "Draft",
     "Actions": ["Edit", "Publish"]
+  },
+  {
+    "Picture": "avatar.png",
+    "Name": "John Doe",
+    "Role": "Software Engineer",
+    "Category": "Coach",
+    "For": "Professionals",
+    "Type": "Text",
+    "Content Preview": "AI tools made my workflow efficient!",
+    "Date": "28 Apr 2025",
+    "Status": "Published",
+    "Actions": ["Edit", "Archive"]
   }
 ]
 

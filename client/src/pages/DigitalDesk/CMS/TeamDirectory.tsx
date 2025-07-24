@@ -11,14 +11,14 @@ import { ChevronDown, Filter, ChevronRight, ChevronLeft, Eye } from "lucide-reac
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { NewTable, defaultLogo } from "@/data/Data";
+import {TeamDirectoryTable, defaultLogo } from "@/data/Data";
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useEffect } from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import DatePick from "@/components/ui/DatePicker"
-
+import avatar from "@/assets/avatar.png";
 
 
 
@@ -28,14 +28,14 @@ const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
 const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const Stats = [
   {
-    title: "Total News Entries",
-    value: "93",
+    title: "Total Members Listed",
+    value: "36",
     icon: Users,
     performance: Up,
   },
   {
-    title: "Featured News Items",
-    value: "19",
+    title: "Last Update",
+    value: " 18 May 2025",
     icon: FileCheck2,
     performance: Down,
   },
@@ -67,20 +67,20 @@ function Buttonbar() {
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
         <Plus className="h-3 w-3" />
-        <span className="">Add News Item</span>
+        <span className="">Add Team Member</span>
       </Button>
       <div className="flex gap-4">
         <Button variant="standard" size="new">
           <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Upload News Logo</span>
+          <span className="">Upload Profile Picture</span>
         </Button>
         <Button variant="standard" size="new">
           <Eye className="h-3 w-3" />
-          <span className="">Add External Link</span>
+          <span className="">Add LinkedIn / Profile Link</span>
         </Button>
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
-          <span className="">Export News Mentions</span>
+          <span className="">Export Team Directory</span>
         </Button>
         <Button
           variant="border"
@@ -324,16 +324,16 @@ function StatCard() {
 function NewsData() {
   const [selectedNews, setSelectedNews] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedNewsStack, setSelectedNewsStack] = useState<typeof NewTable>(NewTable[0] ? [NewTable[0]] : []);
-  const [focusedNewsId, setFocusedNewsId] = useState<number | null>(null);
+  const [selectedNewsStack, setSelectedNewsStack] = useState<typeof TeamDirectoryTable>(TeamDirectoryTable[0] ? [TeamDirectoryTable[0]] : []);
+  const [focusedNewsId, setFocusedNewsId] = useState<string | null>(null);
 
   // Sorting logic
-  const sortedData = [...NewTable];
+  const sortedData = [...TeamDirectoryTable];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -355,7 +355,7 @@ function NewsData() {
     });
   }
 
-  const totalPages = Math.ceil(NewTable.length / recordsPerPage);
+  const totalPages = Math.ceil(TeamDirectoryTable.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   const currentRecords = sortedData.slice(indexOfFirstRecord, indexOfLastRecord);
@@ -378,42 +378,41 @@ function NewsData() {
     }
   };
 
-  const bringToTop = (newsIdx: number) => {
-    const newsItem = selectedNewsStack.find((_, idx) => idx === newsIdx);
+  const bringToTop = (newsName: string) => {
+    const newsItem = selectedNewsStack.find(item => item.name === newsName);
     if (newsItem) {
-      setSelectedNewsStack(prev => [newsItem, ...prev.filter((_, idx) => idx !== newsIdx)]);
-      setFocusedNewsId(newsIdx);
+      setSelectedNewsStack(prev => [newsItem, ...prev.filter(item => item.name !== newsName)]);
+      setFocusedNewsId(newsName);
     }
   };
 
-  const handleRowClick = (newsItem: typeof NewTable[0], idx: number) => {
-    const exists = selectedNewsStack.find(item => item.Title === newsItem.Title);
+  const handleRowClick = (newsItem: typeof TeamDirectoryTable[0]) => {
+    const exists = selectedNewsStack.find(item => item.name === newsItem.name);
     if (!exists) {
       setSelectedNewsStack(prev => [newsItem, ...prev].slice(0, 5));
-      setFocusedNewsId(idx);
+      setFocusedNewsId(newsItem.name);
     } else {
-      bringToTop(idx);
+      bringToTop(newsItem.name);
     }
   };
 
   const toggleSelectNews = (newsIdx: number) => {
+    const newsName = TeamDirectoryTable[newsIdx]?.name;
     if (selectedNews.includes(newsIdx)) {
       setSelectedNews(selectedNews.filter(id => id !== newsIdx));
-      setSelectedNewsStack(prev => prev.filter((_, idx) => idx !== newsIdx));
-      if (focusedNewsId === newsIdx) setFocusedNewsId(null);
+      setSelectedNewsStack(prev => prev.filter(item => item.name !== newsName));
+      if (focusedNewsId === newsName) setFocusedNewsId(null);
     } else {
       setSelectedNews([...selectedNews, newsIdx]);
     }
   };
 
   useEffect(() => {
-    const allRows = document.querySelectorAll("tr[data-id]");
+    const allRows = document.querySelectorAll("tr[data-name]");
     allRows.forEach(row => {
-      const id = Number(row.getAttribute("data-id"));
-      const isInStack = selectedNewsStack.some(item => 
-        item.Title === NewTable.find((_, nidx) => nidx === id)?.Title
-      );
-      const isTop = focusedNewsId === id;
+      const rowName = row.getAttribute("data-name");
+      const isInStack = selectedNewsStack.some(item => item.name === rowName);
+      const isTop = focusedNewsId === rowName;
 
       row.classList.remove("bg-[var(--brand-color3)]", "border-l-[var(--brand-color)]");
 
@@ -471,7 +470,7 @@ function NewsData() {
           <div className="flex justify-end items-center gap-4">
             <div className="flex justify-around items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
               <Input
-                placeholder="Search news..."
+                placeholder="Search ..."
                 className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
               />
               <Button
@@ -491,123 +490,105 @@ function NewsData() {
           <Table className="w-full caption-top border-collapse overflow-y-visible">
             <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
               <TableRow>
-                <TableHead className="min-w-[40px]"></TableHead>
-                <TableHead
-                  onClick={() => requestSort("Logo")}
-                  className="cursor-pointer text-[var(--text)] text-low"
-                >
-                  Logo
+                <TableHead className="min-w-[40px] text-[var(--text)]"></TableHead>
+                <TableHead className="text-[var(--text)] text-low">
+                  Picture
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Title")}
+                  onClick={() => requestSort("name")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Title {sortConfig?.key === "Title" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  Name {sortConfig?.key === "name" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Source")}
+                  onClick={() => requestSort("role")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Source {sortConfig?.key === "Source" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  Designation {sortConfig?.key === "role" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Link")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Link
+                  Linkedin
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Clicks")}
+                  onClick={() => requestSort("status")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Clicks {sortConfig?.key === "Clicks" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  Status {sortConfig?.key === "status" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead
-                  onClick={() => requestSort("Date")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Date {sortConfig?.key === "Date" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("Status")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Status {sortConfig?.key === "Status" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
+              
+              
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
-              {currentRecords.map((news, idx) => (
+              {currentRecords.map((news, idx) => {
+                const globalIdx = indexOfFirstRecord + idx;
+                return (
                 <TableRow
-                  key={idx}
-                  data-id={idx}
+                  key={globalIdx}
+                  data-name={news.name}
                   className={cn(
                     "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-                    selectedNewsStack.some(item => item.Title === news.Title)
+                    selectedNewsStack.some(item => item.name === news.name)
                       ? "bg-[var(--brand-color3)]"
                       : ""
                   )}
                   onClick={() => {
-                    toggleSelectNews(idx);
-                    handleRowClick(news, idx);
+                    toggleSelectNews(globalIdx);
+                    handleRowClick(news);
                   }}
                 >
                   <TableCell
                     className={cn(
                       "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
-                      selectedNewsStack.some(item => item.Title === news.Title)
-                        ? focusedNewsId === idx
+                      selectedNewsStack.some(item => item.name === news.name)
+                        ? focusedNewsId === news.name
                           ? "border-[var(--brand-color)]"
                           : "border-transparent"
                         : "border-transparent"
                     )}
                   >
                     <Checkbox
-                      checked={selectedNews.includes(idx)}
+                      checked={selectedNews.includes(globalIdx)}
                       onClick={(e) => e.stopPropagation()}
-                      onCheckedChange={() => toggleSelectNews(idx)}
+                      onCheckedChange={() => toggleSelectNews(globalIdx)}
                     />
                   </TableCell>
                   <TableCell>
-                    <div className="h-14 w-14 rounded-full overflow-hidden">
+                    <div className="h-10 w-10 rounded-full overflow-hidden">
                       <img
-                        src={news.Logo || defaultLogo}
-                        alt="Logo"
-                        className="h-14 w-14 object-cover"
+                        src={news.picture === "avatar.png" ? avatar : news.picture || defaultLogo}
+                        alt={news.name}
+                        className="h-10 w-10 object-cover"
                       />
                     </div>
                   </TableCell>
                   <TableCell className="font-medium max-w-[200px] truncate">
-                    {news.Title}
+                    {news.name}
                   </TableCell>
                   <TableCell>
-                    {news.Source}
+                    {news.role}
                   </TableCell>
                   <TableCell>
                     <a href="#" className="text-[var(--brand-color)] hover:underline">
-                      {news.Link}
+                      {news.linkedin}
                     </a>
-                  </TableCell>
-                  <TableCell>
-                    {news.Clicks.toLocaleString()}
-                  </TableCell>
-                  <TableCell>
-                    {news.Date}
                   </TableCell>
                   <TableCell>
                     <Badge className={cn(
                       "bg-opacity-10",
-                      news.Status === "Published" 
+                      news.status === "Active" 
                         ? "bg-[var(--green2)] text-[var(--green)]" 
                         : "bg-[var(--yellow2)] text-[var(--yellow)]"
                     )}>
-                      {news.Status}
+                      {news.status}
                     </Badge>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      {news.Actions.map((action, actionIdx) => (
+                      {news.actions.map((action, actionIdx) => (
                         <Button
                           key={actionIdx}
                           variant="noborder"
@@ -621,7 +602,7 @@ function NewsData() {
                     </div>
                   </TableCell>
                 </TableRow>
-              ))}
+              )})}
             </TableBody>
           </Table>
         </div>
@@ -640,7 +621,7 @@ function NewsData() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text)] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[ 10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {
@@ -656,8 +637,8 @@ function NewsData() {
             </DropdownMenu>
             <span className="text-low text-[var(--text)]">
               Showing {indexOfFirstRecord + 1}-
-              {Math.min(indexOfLastRecord, NewTable.length)} of{" "}
-              {NewTable.length} items
+              {Math.min(indexOfLastRecord, TeamDirectoryTable.length)} of{" "}
+              {TeamDirectoryTable.length} items
             </span>
           </div>
           <div className="flex items-center gap-2">

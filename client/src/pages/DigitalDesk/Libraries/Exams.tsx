@@ -65,23 +65,14 @@ const stats = [
 ];
 
 export function Exams() {
-  const [showFilter, setShowFilter] = useState(false);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-[var(--text-head)]">Exams</h1>
         <StatsCards />
         <Topbar />
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      
         
         <TableSection/>
       </div>
@@ -91,6 +82,7 @@ export function Exams() {
 
 
 function Topbar() {
+  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div>
@@ -132,6 +124,15 @@ function Topbar() {
           <FileDown className="h-3 w-3" />
           <span>Export Library Data</span>
         </Button>
+        <Button
+          variant="border"
+          onClick={() => setShowFilter(true)}
+          className="flex items-center gap-2 self-end min-h-[40px]"
+        >
+          <Filter className="h-4 w-4" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );

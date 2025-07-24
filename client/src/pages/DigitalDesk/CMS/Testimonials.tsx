@@ -1,7 +1,7 @@
 // export function Testimonials() {
 //   return <div>Testimonials</div>;
 // }
-import {  CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, FileDown, BadgeQuestionMark, Plus, Bell, X } from "lucide-react";
+import {  CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, FileDown, BadgeQuestionMark, Plus, Bell, X, Pencil, Archive } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { testimonialsData } from "@/data/Data";
 import placeholder from '@/assets/asset.jpg';
+import avatar from '@/assets/avatar.png';
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
@@ -41,8 +42,8 @@ const Stats = [
     performance: Down,
   },
   {
-    title: "Recent Additions (Last 30 Days)",
-    value: "33",
+    title: "Text Testimonials",
+    value: "1",
     icon: FileText,
     performance: Up,
   },
@@ -74,7 +75,7 @@ function Buttonbar() {
         <Plus className="h-3 w-3" />
         <span className="">Add Testimonial</span>
       </Button>
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         <Button variant="standard" size="new">
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Upload Photo / Vide</span>
@@ -86,7 +87,6 @@ function Buttonbar() {
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className=""> Export Testimonials</span>
-
         </Button>
         <Button
         variant="border"
@@ -96,7 +96,6 @@ function Buttonbar() {
         <Filter className="h-4 w-4" />
         {showFilter ? "Hide Filters" : "Show Filters"}
       </Button>
-
       {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
       </div>
     </div>
@@ -330,7 +329,7 @@ function TestimonialsTable() {
   const dataWithIds = testimonialsData.map((item, index) => ({ ...item, id: typeof item.id === 'number' ? item.id : index }));
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [search, setSearch] = useState("");
 
   // Filtering by search
@@ -472,7 +471,13 @@ function TestimonialsTable() {
                   <TableCell>
                     {/* Render image if picture is a valid image src, else fallback */}
                     <div className="h-14 w-14 rounded-full overflow-hidden flex items-center justify-center bg-[var(--faded)]">
-                      {typeof item.picture === "string" && item.picture.endsWith(".jpg") ? (
+                      {typeof item.picture === "string" && item.picture === "avatar.png" ? (
+                        <img
+                          src={avatar}
+                          alt={item.name}
+                          className="h-14 w-14 object-cover"
+                        />
+                      ) : typeof item.picture === "string" && item.picture.endsWith(".jpg") ? (
                         <img
                           src={"/assets/" + item.picture}
                           alt={item.name}
@@ -503,7 +508,10 @@ function TestimonialsTable() {
                     <div className="flex items-center gap-2">
                       {item.actions && item.actions.map((action, i) => (
                         <Button key={i} variant="noborder" size="sm" className="bg-[var(--background)] border-0 shadow-none">
-                          {action}
+                          {action === 'Edit' && <Pencil className="h-4 w-4" />}
+                          {action === 'Delete' && <X className="h-4 w-4 text-[var(--red)]" />}
+                          {action === 'Archive' && <Archive className="h-4 w-4" />}
+                          {action !== 'Edit' && action !== 'Delete' && action !== 'Archive' && action}
                         </Button>
                       ))}
                     </div>
@@ -527,7 +535,7 @@ function TestimonialsTable() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[ 10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {

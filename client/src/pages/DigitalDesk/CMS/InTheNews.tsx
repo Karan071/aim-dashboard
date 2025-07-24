@@ -1,6 +1,4 @@
-// export function InTheNews() {
-//   return <div>InTheNews</div>;
-// }
+
 import {  CircleArrowUp, CircleArrowDown, Search, Check, Users, FileCheck2,   Trash, FileDown, Edit, BadgeQuestionMark, Plus } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -69,7 +67,7 @@ function Buttonbar() {
         <Plus className="h-3 w-3" />
         <span className="">Add News Item</span>
       </Button>
-      <div className="flex gap-4">
+      <div className="flex gap-4 flex-wrap">
         <Button variant="standard" size="new">
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Upload News Logo</span>
@@ -91,7 +89,6 @@ function Buttonbar() {
           {showFilter ? "Hide Filters" : "Show Filters"}
         </Button>
         {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      
       </div>
     </div>
   );
