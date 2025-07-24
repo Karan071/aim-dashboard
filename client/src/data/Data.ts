@@ -1393,206 +1393,6 @@ export const VideoTableData: VideoTableItem[] = [
   }
 ];
 
-export const NewsMentionsData = [
-  {
-    "id": "1",
-    "logo": "![Logo]",
-    "title": "Aimshala Recognized by Economic Times",
-    "source": "Economic Times",
-    "link": "[Read More]",
-    "clicks": "1,124",
-    "date": "16 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "2",
-    "logo": "![Logo]",
-    "title": "Career Innovation Spotlight on NDTV",
-    "source": "NDTV",
-    "link": "[Read More]",
-    "clicks": "879",
-    "date": "13 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "3",
-    "logo": "![Logo]",
-    "title": "How Aimshala is Changing Education",
-    "source": "Hindustan Times",
-    "link": "[Read More]",
-    "clicks": "704",
-    "date": "09 May 2025",
-    "status": "Pending",
-    "actions": ["Review", "Publish"]
-  },
-  {
-    "id": "4",
-    "logo": "![Logo]",
-    "title": "Future of Learning: Aimshala's AI Push",
-    "source": "Business Standard",
-    "link": "[Read More]",
-    "clicks": "945",
-    "date": "08 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "5",
-    "logo": "![Logo]",
-    "title": "Startups to Watch: Aimshala",
-    "source": "Inc42",
-    "link": "[Read More]",
-    "clicks": "1,230",
-    "date": "05 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "6",
-    "logo": "![Logo]",
-    "title": "Aimshala's Journey in EdTech",
-    "source": "Forbes India",
-    "link": "[Read More]",
-    "clicks": "768",
-    "date": "02 May 2025",
-    "status": "Pending",
-    "actions": ["Review", "Publish"]
-  },
-  {
-    "id": "7",
-    "logo": "![Logo]",
-    "title": "Empowering Rural Youth: Aimshala's Impact",
-    "source": "The Hindu",
-    "link": "[Read More]",
-    "clicks": "989",
-    "date": "30 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "8",
-    "logo": "![Logo]",
-    "title": "Tech for Good: Aimshala's Learning Tools",
-    "source": "YourStory",
-    "link": "[Read More]",
-    "clicks": "812",
-    "date": "28 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "9",
-    "logo": "![Logo]",
-    "title": "Aimshala Among Top EdTech Innovators",
-    "source": "Entrepreneur India",
-    "link": "[Read More]",
-    "clicks": "1,015",
-    "date": "26 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "10",
-    "logo": "![Logo]",
-    "title": "EdTech Trends 2025: Featuring Aimshala",
-    "source": "Mint",
-    "link": "[Read More]",
-    "clicks": "653",
-    "date": "23 Apr 2025",
-    "status": "Pending",
-    "actions": ["Review", "Publish"]
-  },
-  {
-    "id": "11",
-    "logo": "![Logo]",
-    "title": "Aimshala's Bootcamps Transforming Lives",
-    "source": "TOI",
-    "link": "[Read More]",
-    "clicks": "912",
-    "date": "21 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "12",
-    "logo": "![Logo]",
-    "title": "Inside Aimshala's Learning Innovation Hub",
-    "source": "India Today",
-    "link": "[Read More]",
-    "clicks": "574",
-    "date": "19 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "13",
-    "logo": "![Logo]",
-    "title": "Learning on Mobile: Aimshala's New App",
-    "source": "ET Tech",
-    "link": "[Read More]",
-    "clicks": "1,156",
-    "date": "17 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "14",
-    "logo": "![Logo]",
-    "title": "How Aimshala Keeps Students Motivated",
-    "source": "Indian Express",
-    "link": "[Read More]",
-    "clicks": "478",
-    "date": "14 Apr 2025",
-    "status": "Pending",
-    "actions": ["Review", "Publish"]
-  },
-  {
-    "id": "15",
-    "logo": "![Logo]",
-    "title": "Women in EdTech: Aimshala Leads the Way",
-    "source": "Femina",
-    "link": "[Read More]",
-    "clicks": "833",
-    "date": "12 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "16",
-    "logo": "![Logo]",
-    "title": "AI in Classrooms: Aimshala's Strategy",
-    "source": "Analytics India",
-    "link": "[Read More]",
-    "clicks": "697",
-    "date": "10 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "17",
-    "logo": "![Logo]",
-    "title": "Aimshala Brings Learning to Tier-2 Cities",
-    "source": "LiveMint",
-    "link": "[Read More]",
-    "clicks": "1,042",
-    "date": "07 Apr 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": "18",
-    "logo": "![Logo]",
-    "title": "Student Voices: How Aimshala Changed My Life",
-    "source": "Times Now",
-    "link": "[Read More]",
-    "clicks": "690",
-    "date": "05 Apr 2025",
-    "status": "Pending",
-    "actions": ["Review", "Publish"]
-  }
-]
 export const testimonialsData = [
   {
     "id": "0",
@@ -1868,112 +1668,10 @@ export const testimonialsData = [
     "actions": ["Edit", "Archive"]
   }
 ]
-export const teamDirectoryTableData = [
-  {
-    "picture": "/placeholder-avatar.svg",
-    "name": "Riya Malhotra",
-    "role": "Co-Founder & Content Head",
-    "linkedin": "View Profile",
-    "status": "Active",
-    "actions": ["Edit", "Deactivate"]
-  },
-  {
-    "picture": "/placeholder-avatar.svg",
-    "name": "Ankur Sharma",
-    "role": "Lead Backend Engineer",
-    "linkedin": "LinkedIn",
-    "status": "Active",
-    "actions": ["Edit", "Deactivate"]
-  },
-  {
-    "picture": "/placeholder-avatar.svg",
-    "name": "Neha Joshi",
-    "role": "UX/UI Designer",
-    "linkedin": "LinkedIn",
-    "status": "Active",
-    "actions": ["Edit", "Deactivate"]
-  },
-  {
-    "picture": "/placeholder-avatar.svg",
-    "name": "Ravi Kapoor",
-    "role": "Outreach Strategist",
-    "linkedin": "LinkedIn",
-    "status": "Active",
-    "actions": ["Edit", "Deactivate"]
-  },
-  {
-    "picture": "/placeholder-avatar.svg",
-    "name": "Rohan Sen",
-    "role": "Program Advisor",
-    "linkedin": "LinkedIn",
-    "status": "Inactive",
-    "actions": ["Edit", "Activate"]
-  }
-]
-export const LibraryTableData = [
-  {
-    "title": "Career Options in Cybersecurity",
-    "tags": ["Security", "IT"],
-    "for": "UG, PG",
-    "source": "Public Data",
-    "lastUpdated": "18 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "title": "Exploring Graphic Design Paths",
-    "tags": ["Creativity", "Media"],
-    "for": "UG",
-    "source": "On Request",
-    "lastUpdated": "16 May 2025",
-    "status": "Draft",
-    "actions": ["Edit", "Publish"]
-  }
-]
-export const ExamsTableData = [
-  {
-    "title": "CUET UG 2025 Schedule",
-    "tags": ["CUET", "UG"],
-    "for": "11–12, UG",
-    "source": "Public Data",
-    "upcomingDate": "15 July 2025",
-    "lastUpdated": "17 May 2025",
-    "status": "Draft",
-    "actions": ["Edit", "Schedule"]
-  },
-  {
-    "title": "CLAT 2025 Key Dates",
-    "tags": ["Law", "Entrance"],
-    "for": "UG",
-    "source": "Public Data",
-    "upcomingDate": "10 Dec 2025",
-    "lastUpdated": "18 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  }
-]
-export const ScholarshipsTableData = [
-  {
-    "title": "Women in STEM UG Scholarship",
-    "tags": ["Gender", "STEM"],
-    "for": "UG",
-    "source": "On Request",
-    "upcomingDate": "05 September 2025",
-    "lastUpdated": "18 May 2025",
-    "status": "Pending",
-    "actions": ["Edit", "Approve"]
-  },
-  {
-    "title": "International Leaders Fund",
-    "tags": ["Global", "PG"],
-    "for": "PG",
-    "source": "Owner",
-    "upcomingDate": "30 October 2025",
-    "lastUpdated": "14 May 2025",
-    "status": "Draft",
-    "actions": ["Edit", "Publish"]
-  }
-]
+
+
+
+
 export const NGOsTableData = [
   {
     "title": "Skill Building for Youth",
@@ -1994,112 +1692,8 @@ export const NGOsTableData = [
     "actions": ["Edit", "Publish"]
   }
 ]
-export const SurveysTableData = [
-  {
-    "title": "Career Preferences Survey",
-    "createdBy": "Riya Malhotra",
-    "for": "11–12, UG",
-    "questions": 10,
-    "responses": 4120,
-    "status": "Active",
-    "lastUpdated": "16 May 2025",
-    "actions": ["Edit", "Results", "Close"]
-  },
-  {
-    "title": "Online Learning Feedback",
-    "createdBy": "Team Aimshala",
-    "for": "UG, PG",
-    "questions": 8,
-    "responses": 2630,
-    "status": "Active",
-    "lastUpdated": "14 May 2025",
-    "actions": ["Edit", "Results", "Close"]
-  },
-  {
-    "title": "Skill Awareness Check",
-    "createdBy": "Rahul Sen",
-    "for": "PG",
-    "questions": 6,
-    "responses": 1020,
-    "status": "Draft",
-    "lastUpdated": "12 May 2025",
-    "actions": ["Edit", "Activate", "Delete"]
-  }
-]
-export const HelpArticlesTableData = [
-  {
-    "title": "How to Book a Session",
-    "category": "Sessions",
-    "tags": ["Booking", "Call"],
-    "for": "Students",
-    "author": "Team Aimshala",
-    "lastUpdated": "16 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "title": "Accessing Your Assessment Results",
-    "category": "Assessments",
-    "tags": ["Results", "Score"],
-    "for": "Students",
-    "author": "Riya Malhotra",
-    "lastUpdated": "15 May 2025",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "title": "Resetting Your Password",
-    "category": "Technical Support",
-    "tags": ["Login", "Account"],
-    "for": "All Users",
-    "author": "Rahul Sen",
-    "lastUpdated": "13 May 2025",
-    "status": "Draft",
-    "actions": ["Edit", "Publish"]
-  }
-]
-export const FAQsTableData = [
-  {
-    "pageTitle": "Student Onboarding",
-    "for": "Students",
-    "questions": 15,
-    "lastUpdated": "18 May 2025",
-    "status": "Active",
-    "actions": ["View FAQs →"]
-  },
-  {
-    "pageTitle": "Coach FAQs",
-    "for": "Coaches",
-    "questions": 11,
-    "lastUpdated": "17 May 2025",
-    "status": "Active",
-    "actions": ["View FAQs →"]
-  },
-  {
-    "pageTitle": "Parent Support & Guidance",
-    "for": "Parents",
-    "questions": 9,
-    "lastUpdated": "16 May 2025",
-    "status": "Draft",
-    "actions": ["View FAQs →"]
-  },
-  {
-    "pageTitle": "Session & Booking Help",
-    "for": "All Users",
-    "questions": 14,
-    "lastUpdated": "15 May 2025",
-    "status": "Active",
-    "actions": ["View FAQs →"]
-  },
-  {
-    "pageTitle": "Technical Troubleshooting",
-    "for": "All Users",
-    "questions": 12,
-    "lastUpdated": "13 May 2025",
-    "status": "Draft",
-    "actions": ["View FAQs →"]
-  }
-]
+
+
 export const PublishedTableData = [
   {
     "title": "Future-Proof Careers in 2030",
@@ -7214,80 +6808,8 @@ export const FaqsTableData = [
   }
 ];
 
-export const TestmonialsData=[
-  {
-    "Picture": "avatar.png",
-    "Name": "Aanya Kapoor",
-    "Role": "Student, Class 12",
-    "Category": "Student",
-    "For": "11–12, UG",
-    "Type": "Text",
-    "Content Preview": "The guidance helped me select my stream",
-    "Date": "18 May 2025",
-    "Status": "Published",
-    "Actions": ["Edit", "Archive"]
-  },
-  {
-    "Picture": "avatar.png",
-    "Name": "Rahul Mehta",
-    "Role": "Coach - Career Guidance",
-    "Category": "Coach",
-    "For": "All Students",
-    "Type": "Video",
-    "Content Preview": "Watch how I help students plan their careers effectively.",
-    "Date": "17 May 2025",
-    "Status": "Published",
-    "Actions": ["Edit", "Archive"]
-  },
-  {
-    "Picture": "avatar.png",
-    "Name": "Sneha Verma",
-    "Role": "Parent",
-    "Category": "Parent",
-    "For": "School Students",
-    "Type": "Text",
-    "Content Preview": "As a parent, I felt confident with the support system in place.",
-    "Date": "16 May 2025",
-    "Status": "Draft",
-    "Actions": ["Edit", "Publish"]
-  },
-  {
-    "Picture": "avatar.png",
-    "Name": "Aarav Joshi",
-    "Role": "Student, Class 10",
-    "Category": "Student",
-    "For": "9–10",
-    "Type": "Image",
-    "Content Preview": "A photo from the career awareness workshop.",
-    "Date": "15 May 2025",
-    "Status": "Published",
-    "Actions": ["Edit", "Archive"]
-  },
-  {
-    "Picture": "avatar.png",
-    "Name": "Divya Nair",
-    "Role": "Academic Mentor",
-    "Category": "Coach",
-    "For": "UG Students",
-    "Type": "Text",
-    "Content Preview": "Here's how we mentor students to stay focused and confident.",
-    "Date": "14 May 2025",
-    "Status": "Draft",
-    "Actions": ["Edit", "Publish"]
-  },
-  {
-    "Picture": "avatar.png",
-    "Name": "John Doe",
-    "Role": "Software Engineer",
-    "Category": "Coach",
-    "For": "Professionals",
-    "Type": "Text",
-    "Content Preview": "AI tools made my workflow efficient!",
-    "Date": "28 Apr 2025",
-    "Status": "Published",
-    "Actions": ["Edit", "Archive"]
-  }
-]
+
+
 
 
 export const accessCodeTable = [
@@ -8216,244 +7738,163 @@ export const CareersTable = [
   }
 ];
 
-  export const ExamsTable = [
-  {
-    "id": 1,
-    "title": "CUET UG 2025 Schedule",
-    "tags": ["CUET", "UG"],
-    "for": ["11–12", "UG"],
-    "source": "Public Data",
-    "upcomingDate": "2025-07-15",
-    "lastUpdated": "2025-05-17",
-    "status": "Draft",
-    "actions": ["Edit", "Schedule"]
-  },
-  {
-    "id": 2,
-    "title": "CLAT 2025 Key Dates",
-    "tags": ["Law", "Entrance"],
-    "for": ["UG"],
-    "source": "Public Data",
-    "upcomingDate": "2025-12-10",
-    "lastUpdated": "2025-05-18",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": 3,
-    "title": "JEE Main 2026 First Attempt",
-    "tags": ["Engineering", "JEE"],
-    "for": ["11–12", "UG"],
-    "source": "NTA",
-    "upcomingDate": "2026-01-10",
-    "lastUpdated": "2025-07-01",
-    "status": "Draft",
-    "actions": ["Edit", "Schedule"]
-  },
-  {
-    "id": 4,
-    "title": "NEET UG 2026 Tentative Dates",
-    "tags": ["Medical", "Entrance"],
-    "for": ["11–12", "UG"],
-    "source": "Public Data",
-    "upcomingDate": "2026-05-05",
-    "lastUpdated": "2025-06-20",
-    "status": "Draft",
-    "actions": ["Edit"]
-  },
-  {
-    "id": 5,
-    "title": "UPSC Prelims 2026 Notification",
-    "tags": ["UPSC", "Government"],
-    "for": ["UG", "Graduates"],
-    "source": "UPSC",
-    "upcomingDate": "2026-02-15",
-    "lastUpdated": "2025-07-10",
-    "status": "Scheduled",
-    "actions": ["Edit", "Reschedule"]
-  },
-  {
-    "id": 6,
-    "title": "SSC CGL 2025 Tier 1",
-    "tags": ["SSC", "Government"],
-    "for": ["Graduates"],
-    "source": "SSC",
-    "upcomingDate": "2025-09-12",
-    "lastUpdated": "2025-06-30",
-    "status": "Published",
-    "actions": ["Edit", "Archive"]
-  },
-  {
-    "id": 7,
-    "title": "GATE 2026 Application Start",
-    "tags": ["Engineering", "PG"],
-    "for": ["Graduates", "PG"],
-    "source": "IIT Council",
-    "upcomingDate": "2025-09-01",
-    "lastUpdated": "2025-07-18",
-    "status": "Draft",
-    "actions": ["Edit", "Schedule"]
-  },
-  {
-    "id": 8,
-    "title": "NDA 2 2025 Admit Card",
-    "tags": ["Defence", "UPSC"],
-    "for": ["11–12", "UG"],
-    "source": "UPSC",
-    "upcomingDate": "2025-08-05",
-    "lastUpdated": "2025-07-15",
-    "status": "Scheduled",
-    "actions": ["Edit", "Notify"]
-  },
-  {
-    "id": 9,
-    "title": "CAT 2025 Registration Open",
-    "tags": ["MBA", "Entrance"],
-    "for": ["Graduates"],
-    "source": "IIM Council",
-    "upcomingDate": "2025-08-10",
-    "lastUpdated": "2025-07-10",
-    "status": "Published",
-    "actions": ["Edit", "Close"]
-  },
-  {
-    "id": 10,
-    "title": "ICSE 10th Board Exam Dates",
-    "tags": ["ICSE", "Board"],
-    "for": ["10"],
-    "source": "CISCE",
-    "upcomingDate": "2026-02-22",
-    "lastUpdated": "2025-07-12",
-    "status": "Draft",
-    "actions": ["Edit", "Finalize"]
-  },
-  {
-    "id": 11,
-    "title": "CBSE 12th Term 1 Timetable",
-    "tags": ["CBSE", "Board"],
-    "for": ["11–12"],
-    "source": "CBSE",
-    "upcomingDate": "2025-11-10",
-    "lastUpdated": "2025-07-19",
-    "status": "Draft",
-    "actions": ["Edit", "Review"]
-  }
-];
+  export const ExamsTable =[
+    {
+      "id": 1,
+      "ExamName": "JEE Main",
+      "Type": "Entrance",
+      "Segment": "11–12, UG",
+      "Tags": " Trending",
+      "Status": "Published",
+      "Created On": "15 May 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 2,
+      "ExamName": "SSC CGL",
+      "Type": "Govt Job",
+      "Segment": "UG, PG",
+      "Tags": " Future Prediction",
+      "Status": "Published",
+      "Created On": "02 Jul 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 3,
+      "ExamName": "SAT",
+      "Type": "International",
+      "Segment": "UG",
+      "Tags": " Trending",
+      "Status": "Pending",
+      "Created On": "10 Jul 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 4,
+      "ExamName": "CUET",
+      "Type": "Entrance",
+      "Segment": "12, UG",
+      "Tags": " Trending",
+      "Status": "Published",
+      "Created On": "01 Apr 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 5,
+      "ExamName": "NEET UG",
+      "Type": "Entrance",
+      "Segment": "12, UG",
+      "Tags": " Trending",
+      "Status": "Published",
+      "Created On": "12 Mar 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 6,
+      "ExamName": "CAT",
+      "Type": "Management",
+      "Segment": "UG, PG",
+      "Tags": " Future",
+      "Status": "Published",
+      "Created On": "20 Apr 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 7,
+      "ExamName": "GATE",
+      "Type": "Engineering",
+      "Segment": "PG",
+      "Tags": "Trending",
+      "Status": "Pending",
+      "Created On": "25 Jun 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 8,
+      "ExamName": "CLAT",
+      "Type": "Law Entrance",
+      "Segment": "UG",
+      "Tags": " Trending",
+      "Status": "Published",
+      "Created On": "11 May 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 9,
+      "ExamName": "UPSC CSE",
+      "Type": "Govt Job",
+      "Segment": "UG, PG",
+      "Tags": "Future Prediction",
+      "Status": "Published",
+      "Created On": "05 Jul 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 10,
+      "ExamName": "TOEFL",
+      "Type": "International",
+      "Segment": "UG, PG",
+      "Tags": "Trending",
+      "Status": "Pending",
+      "Created On": "03 May 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 11,
+      "ExamName": "IELTS",
+      "Type": "International",
+      "Segment": "UG, PG",
+      "Tags": "Trending",
+      "Status": "Pending",
+      "Created On": "09 May 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 12,
+      "ExamName": "XAT",
+      "Type": "Management",
+      "Segment": "PG",
+      "Tags": "Future",
+      "Status": "Published",
+      "Created On": "19 Apr 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 13,
+      "ExamName": "NDA",
+      "Type": "Defence",
+      "Segment": "12, UG",
+      "Tags": "Trending",
+      "Status": "Published",
+      "Created On": "14 Jun 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 14,
+      "ExamName": "BITSAT",
+      "Type": "Engineering",
+      "Segment": "12, UG",
+      "Tags": "Trending",
+      "Status": "Published",
+      "Created On": "22 Mar 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    },
+    {
+      "id": 15,
+      "ExamName": "RRB NTPC",
+      "Type": "Govt Job",
+      "Segment": "UG",
+      "Tags": "Future Prediction",
+      "Status": "Published",
+      "Created On": "08 Jul 2025",
+      "Actions": [" Edit", " Trending", " Future"]
+    }
+  ]
+  
 
 
 
- export const ScholarshipsTable = [
-  {
-    id: 1,
-    title: "Women in STEM UG Scholarship",
-    tags: ["Gender", "STEM"],
-    for: ["UG"],
-    source: "On Request",
-    upcomingDate: "2025-09-05",
-    lastUpdated: "2025-05-18",
-    status: "Pending",
-    actions: ["Edit", "Approve"]
-  },
-  {
-    id: 2,
-    title: "International Leaders Fund",
-    tags: ["Global", "PG"],
-    for: ["PG"],
-    source: "Owner",
-    upcomingDate: "2025-10-30",
-    lastUpdated: "2025-05-14",
-    status: "Draft",
-    actions: ["Edit", "Publish"]
-  },
-  {
-    id: 3,
-    title: "Merit-Based UG Scholarship",
-    tags: ["Merit", "UG"],
-    for: ["UG"],
-    source: "Partner",
-    upcomingDate: "2025-08-10",
-    lastUpdated: "2025-06-01",
-    status: "Active",
-    actions: ["Edit", "Deactivate"]
-  },
-  {
-    id: 4,
-    title: "Social Impact Fellowship",
-    tags: ["Community", "PG"],
-    for: ["PG"],
-    source: "On Request",
-    upcomingDate: "2025-11-15",
-    lastUpdated: "2025-05-30",
-    status: "Pending",
-    actions: ["Edit", "Approve"]
-  },
-  {
-    id: 5,
-    title: "Tech Innovators Grant",
-    tags: ["Technology", "Research"],
-    for: ["PhD"],
-    source: "Owner",
-    upcomingDate: "2025-09-25",
-    lastUpdated: "2025-06-10",
-    status: "Draft",
-    actions: ["Edit", "Publish"]
-  },
-  {
-    id: 6,
-    title: "Underprivileged Support Program",
-    tags: ["Social", "UG"],
-    for: ["UG"],
-    source: "NGO",
-    upcomingDate: "2025-08-05",
-    lastUpdated: "2025-06-12",
-    status: "Pending",
-    actions: ["Edit", "Approve"]
-  },
-  {
-    id: 7,
-    title: "International Mobility Scholarship",
-    tags: ["Exchange", "PG"],
-    for: ["PG"],
-    source: "Partner",
-    upcomingDate: "2025-12-01",
-    lastUpdated: "2025-06-18",
-    status: "Active",
-    actions: ["Edit", "Suspend"]
-  },
-  {
-    id: 8,
-    title: "First Generation Learners Award",
-    tags: ["Equity", "UG"],
-    for: ["UG"],
-    source: "On Request",
-    upcomingDate: "2025-09-12",
-    lastUpdated: "2025-06-03",
-    status: "Pending",
-    actions: ["Edit", "Approve"]
-  },
-  {
-    id: 9,
-    title: "Women Entrepreneurs Grant",
-    tags: ["Gender", "Entrepreneurship"],
-    for: ["PG", "PhD"],
-    source: "Owner",
-    upcomingDate: "2025-11-05",
-    lastUpdated: "2025-05-22",
-    status: "Draft",
-    actions: ["Edit", "Publish"]
-  },
-  {
-    id: 10,
-    title: "Sustainable Development Research Fund",
-    tags: ["Environment", "Research"],
-    for: ["PhD"],
-    source: "Partner",
-    upcomingDate: "2025-10-10",
-    lastUpdated: "2025-06-20",
-    status: "Active",
-    actions: ["Edit", "Archive"]
-  }
-];
+
 
 
   export const NgosTable= [
@@ -9600,3 +9041,886 @@ export const CommentTable = [
     action: ["Approve", "Reject"]
   }
 ];
+
+export const CareerTable=[
+  {
+    "id": "CAR1001",
+    "career_name": "Data Scientist",
+    "industry": "IT & Data",
+    "tags": ["Trending"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1002",
+    "career_name": "Sustainability Expert",
+    "industry": "Environment",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1003",
+    "career_name": "Animation Designer",
+    "industry": "Creative",
+    "tags": ["Future Prediction"],
+    "status": "Pending",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1004",
+    "career_name": "Blockchain Developer",
+    "industry": "Finance & Technology",
+    "tags": ["Emerging"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1005",
+    "career_name": "UX Researcher",
+    "industry": "Design & Research",
+    "tags": ["User-Centric"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1006",
+    "career_name": "AI Ethicist",
+    "industry": "Ethics & Technology",
+    "tags": ["Future Prediction"],
+    "status": "Pending",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1007",
+    "career_name": "Cybersecurity Analyst",
+    "industry": "IT & Security",
+    "tags": ["Trending"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1008",
+    "career_name": "Urban Farmer",
+    "industry": "Agriculture",
+    "tags": ["Sustainable"],
+    "status": "Pending",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1009",
+    "career_name": "Genomics Technician",
+    "industry": "Biotech",
+    "tags": ["Emerging"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1010",
+    "career_name": "Voice Interface Designer",
+    "industry": "Creative Tech",
+    "tags": ["Innovative"],
+    "status": "Pending",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1011",
+    "career_name": "Renewable Energy Engineer",
+    "industry": "Energy",
+    "tags": ["Sustainable", "Trending"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1012",
+    "career_name": "Robotics Technician",
+    "industry": "Engineering",
+    "tags": ["Trending"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1013",
+    "career_name": "Metaverse Architect",
+    "industry": "Virtual Reality",
+    "tags": ["Future Prediction"],
+    "status": "Pending",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1014",
+    "career_name": "Climate Change Analyst",
+    "industry": "Environment",
+    "tags": ["Important", "Future"],
+    "status": "Published",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  },
+  {
+    "id": "CAR1015",
+    "career_name": "Digital Wellness Coach",
+    "industry": "Health & Lifestyle",
+    "tags": ["Innovative"],
+    "status": "Pending",
+    "actions": ["Edit", "Trending", "Future", "Approve"]
+  }
+]
+export const DegreeTable=[
+  {
+    "id": "DEG1001",
+    "degree_name": "B.Tech",
+    "level": "UG",
+    "stream": "Engineering",
+    "status": "Published",
+    "created_on": "10 Jan 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1002",
+    "degree_name": "BBA",
+    "level": "UG",
+    "stream": "Management",
+    "status": "Published",
+    "created_on": "18 Feb 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1003",
+    "degree_name": "MBA",
+    "level": "PG",
+    "stream": "Management",
+    "status": "Published",
+    "created_on": "05 May 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1004",
+    "degree_name": "Diploma in Design",
+    "level": "Diploma",
+    "stream": "Creative",
+    "status": "Pending Review",
+    "created_on": "15 Jul 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1005",
+    "degree_name": "B.Sc Computer Science",
+    "level": "UG",
+    "stream": "IT & Data",
+    "status": "Published",
+    "created_on": "20 Mar 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1006",
+    "degree_name": "M.Tech",
+    "level": "PG",
+    "stream": "Engineering",
+    "status": "Published",
+    "created_on": "02 Apr 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1007",
+    "degree_name": "Diploma in Animation",
+    "level": "Diploma",
+    "stream": "Creative",
+    "status": "Pending Review",
+    "created_on": "11 Jun 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1008",
+    "degree_name": "B.Com",
+    "level": "UG",
+    "stream": "Commerce",
+    "status": "Published",
+    "created_on": "08 Jan 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1009",
+    "degree_name": "MCA",
+    "level": "PG",
+    "stream": "IT & Data",
+    "status": "Published",
+    "created_on": "01 Mar 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1010",
+    "degree_name": "Diploma in Hospitality",
+    "level": "Diploma",
+    "stream": "Hospitality",
+    "status": "Pending Review",
+    "created_on": "22 Jul 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1011",
+    "degree_name": "BA Psychology",
+    "level": "UG",
+    "stream": "Humanities",
+    "status": "Published",
+    "created_on": "12 Feb 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1012",
+    "degree_name": "MA Economics",
+    "level": "PG",
+    "stream": "Economics",
+    "status": "Published",
+    "created_on": "29 May 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1013",
+    "degree_name": "Diploma in Graphic Design",
+    "level": "Diploma",
+    "stream": "Creative",
+    "status": "Pending Review",
+    "created_on": "06 Jul 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1014",
+    "degree_name": "B.Sc Biotechnology",
+    "level": "UG",
+    "stream": "Biotech",
+    "status": "Published",
+    "created_on": "14 Jan 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "DEG1015",
+    "degree_name": "PG Diploma in AI",
+    "level": "PG Diploma",
+    "stream": "IT & Data",
+    "status": "Published",
+    "created_on": "17 Jun 2025",
+    "actions": ["Edit", "View"]
+  }
+]
+export const CourseTable=[
+  {
+    "id": "COR101",
+    "course_name": "Resume Mastery Bootcamp",
+    "type": "Live Cohort",
+    "level": "Intermediate",
+    "source": "On Aimshala",
+    "provider": "Coach Radhika Mehta",
+    "status": "Published",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR102",
+    "course_name": "Python for Analysts",
+    "type": "Self-Paced",
+    "level": "Beginner",
+    "source": "Third-Party",
+    "provider": "SkillCoach - Landing Page",
+    "status": "Published",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR103",
+    "course_name": "CUET Exam Strategy",
+    "type": "Self-Paced",
+    "level": "Advanced",
+    "source": "On Aimshala",
+    "provider": "Coach Ankit Sharma",
+    "status": "Unpublished",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR104",
+    "course_name": "Excel for Business",
+    "type": "Self-Paced",
+    "level": "Beginner",
+    "source": "Third-Party",
+    "provider": "SkillBoost Academy",
+    "status": "Published",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR105",
+    "course_name": "Design Thinking Workshop",
+    "type": "Live Cohort",
+    "level": "Intermediate",
+    "source": "On Aimshala",
+    "provider": "Coach Aarav Kapoor",
+    "status": "Published",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR106",
+    "course_name": "AI for Beginners",
+    "type": "Self-Paced",
+    "level": "Beginner",
+    "source": "Third-Party",
+    "provider": "TechNova Platform",
+    "status": "Published",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR107",
+    "course_name": "Public Speaking Masterclass",
+    "type": "Live Cohort",
+    "level": "Advanced",
+    "source": "On Aimshala",
+    "provider": "Coach Meera Rao",
+    "status": "Unpublished",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR108",
+    "course_name": "Digital Marketing Essentials",
+    "type": "Self-Paced",
+    "level": "Intermediate",
+    "source": "Third-Party",
+    "provider": "MarketingEdge",
+    "status": "Published",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR109",
+    "course_name": "Career Planning Blueprint",
+    "type": "Live Cohort",
+    "level": "Beginner",
+    "source": "On Aimshala",
+    "provider": "Coach Rishabh Singh",
+    "status": "Published",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR110",
+    "course_name": "Basics of Stock Market",
+    "type": "Self-Paced",
+    "level": "Beginner",
+    "source": "Third-Party",
+    "provider": "Finance101",
+    "status": "Unpublished",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR111",
+    "course_name": "Critical Thinking Lab",
+    "type": "Live Cohort",
+    "level": "Intermediate",
+    "source": "On Aimshala",
+    "provider": "Coach Neha Verma",
+    "status": "Published",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR112",
+    "course_name": "Data Visualization with Tableau",
+    "type": "Self-Paced",
+    "level": "Advanced",
+    "source": "Third-Party",
+    "provider": "VizEdge Academy",
+    "status": "Published",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR113",
+    "course_name": "Leadership Fundamentals",
+    "type": "Live Cohort",
+    "level": "Intermediate",
+    "source": "On Aimshala",
+    "provider": "Coach Ananya Jain",
+    "status": "Unpublished",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "COR114",
+    "course_name": "SQL for Beginners",
+    "type": "Self-Paced",
+    "level": "Beginner",
+    "source": "Third-Party",
+    "provider": "DataMentor",
+    "status": "Published",
+    "actions": ["Edit", "View External"]
+  },
+  {
+    "id": "COR115",
+    "course_name": "Interview Readiness Bootcamp",
+    "type": "Live Cohort",
+    "level": "Advanced",
+    "source": "On Aimshala",
+    "provider": "Coach Rahul Sinha",
+    "status": "Published",
+    "actions": ["Edit", "View"]
+  }
+]
+export const ScholarshipsTable=[
+  {
+    "id": "SCH101",
+    "scholarship_name": "INSPIRE Scholarship",
+    "type": "Govt",
+    "level": "UG",
+    "eligibility": "Merit-Based",
+    "status": "Published",
+    "created_on": "10 Mar 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH102",
+    "scholarship_name": "Tata Capital Pankh",
+    "type": "Private",
+    "level": "UG, PG",
+    "eligibility": "Need-Based",
+    "status": "Published",
+    "created_on": "22 Apr 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH103",
+    "scholarship_name": "Study Abroad Global Grant",
+    "type": "NGO",
+    "level": "PG",
+    "eligibility": "Merit + Need",
+    "status": "Pending Review",
+    "created_on": "18 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SCH104",
+    "scholarship_name": "Maulana Azad Scholarship",
+    "type": "Govt",
+    "level": "PG",
+    "eligibility": "Minority + Merit",
+    "status": "Published",
+    "created_on": "15 Jan 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH105",
+    "scholarship_name": "Aditya Birla Scholarship",
+    "type": "Private",
+    "level": "UG",
+    "eligibility": "Merit-Based",
+    "status": "Published",
+    "created_on": "05 Feb 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH106",
+    "scholarship_name": "UNESCO Global Scholars Fund",
+    "type": "NGO",
+    "level": "PG",
+    "eligibility": "International + Merit",
+    "status": "Pending Review",
+    "created_on": "28 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SCH107",
+    "scholarship_name": "NSP Central Sector Scheme",
+    "type": "Govt",
+    "level": "UG",
+    "eligibility": "Merit + Income",
+    "status": "Published",
+    "created_on": "02 Mar 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH108",
+    "scholarship_name": "Kotak Kanya Scholarship",
+    "type": "Private",
+    "level": "UG",
+    "eligibility": "Girls + Need",
+    "status": "Published",
+    "created_on": "12 Apr 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH109",
+    "scholarship_name": "Youth for India Fellowship",
+    "type": "NGO",
+    "level": "PG",
+    "eligibility": "Graduates + Social Impact",
+    "status": "Pending Review",
+    "created_on": "05 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SCH110",
+    "scholarship_name": "Dr. Ambedkar Scholarship",
+    "type": "Govt",
+    "level": "UG, PG",
+    "eligibility": "SC/ST + Merit",
+    "status": "Published",
+    "created_on": "20 Feb 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH111",
+    "scholarship_name": "HDFC Educational Crisis Fund",
+    "type": "Private",
+    "level": "UG",
+    "eligibility": "Emergency Need",
+    "status": "Published",
+    "created_on": "10 Mar 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH112",
+    "scholarship_name": "Save the Children Education Grant",
+    "type": "NGO",
+    "level": "UG",
+    "eligibility": "Orphan/Displaced",
+    "status": "Pending Review",
+    "created_on": "01 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SCH113",
+    "scholarship_name": "Post Matric Scholarship",
+    "type": "Govt",
+    "level": "UG, PG",
+    "eligibility": "SC/ST + Income",
+    "status": "Published",
+    "created_on": "15 Jan 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH114",
+    "scholarship_name": "L’Oréal India For Young Women in Science",
+    "type": "Private",
+    "level": "UG",
+    "eligibility": "Girls + Science",
+    "status": "Published",
+    "created_on": "18 Mar 2025",
+    "actions": ["Edit", "View"]
+  },
+  {
+    "id": "SCH115",
+    "scholarship_name": "World Education Foundation Support Fund",
+    "type": "NGO",
+    "level": "PG",
+    "eligibility": "Merit + Global South",
+    "status": "Pending Review",
+    "created_on": "25 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  }
+]
+export const SkillsTable=[
+  {
+    "id": "SKL101",
+    "skill_name": "Data Visualization",
+    "category": "Technical",
+    "segment": "UG, PG",
+    "tags": ["Trending"],
+    "status": "Published",
+    "created_on": "15 May 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL102",
+    "skill_name": "Canva Design",
+    "category": "Creative",
+    "segment": "9–12, UG",
+    "tags": ["Future Prediction"],
+    "status": "Unpublished",
+    "created_on": "20 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL103",
+    "skill_name": "Public Speaking",
+    "category": "Soft Skills",
+    "segment": "All Segments",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "created_on": "05 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL104",
+    "skill_name": "Python Basics",
+    "category": "Technical",
+    "segment": "11–12, UG",
+    "tags": ["Trending"],
+    "status": "Published",
+    "created_on": "01 Apr 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL105",
+    "skill_name": "Emotional Intelligence",
+    "category": "Soft Skills",
+    "segment": "UG, PG",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "created_on": "12 Mar 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL106",
+    "skill_name": "Figma Prototyping",
+    "category": "Creative",
+    "segment": "UG, PG",
+    "tags": ["Trending"],
+    "status": "Published",
+    "created_on": "22 Jun 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL107",
+    "skill_name": "Excel for Beginners",
+    "category": "Technical",
+    "segment": "All Segments",
+    "tags": ["Future Prediction"],
+    "status": "Unpublished",
+    "created_on": "18 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL108",
+    "skill_name": "Conflict Resolution",
+    "category": "Soft Skills",
+    "segment": "UG, PG",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "created_on": "30 Jun 2025",
+      "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL109",
+    "skill_name": "Video Editing",
+    "category": "Creative",
+    "segment": "9–12, UG",
+    "tags": ["Trending"],
+    "status": "Published",
+    "created_on": "10 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL110",
+    "skill_name": "SQL Basics",
+    "category": "Technical",
+    "segment": "UG, PG",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "created_on": "07 May 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL111",
+    "skill_name": "Design Thinking",
+    "category": "Creative",
+    "segment": "UG, PG",
+    "tags": ["Trending", "Future Prediction"],
+    "status": "Published",
+    "created_on": "28 Apr 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL112",
+    "skill_name": "Critical Thinking",
+    "category": "Soft Skills",
+    "segment": "All Segments",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "created_on": "21 Jun 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL113",
+    "skill_name": "HTML & CSS",
+    "category": "Technical",
+    "segment": "11–12, UG",
+    "tags": ["Trending"],
+    "status": "Published",
+    "created_on": "05 May 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL114",
+    "skill_name": "3D Modeling Basics",
+    "category": "Creative",
+    "segment": "UG, PG",
+    "tags": ["Future Prediction"],
+    "status": "Unpublished",
+    "created_on": "25 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  },
+  {
+    "id": "SKL115",
+    "skill_name": "Team Collaboration",
+    "category": "Soft Skills",
+    "segment": "All Segments",
+    "tags": ["Future Prediction"],
+    "status": "Published",
+    "created_on": "19 Jul 2025",
+    "actions": ["Edit", "Approve"]
+  }
+]
+export const FeedbackTable=[
+  {
+    "id": "FDB101",
+    "user": "Riya Kapoor",
+    "submitted_on": "18 May 2025",
+    "submitted_for": "Session Interface",
+    "screenshot": "View",
+    "message": "Icons are too small on mobile",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB102",
+    "user": "Sarthak Jain",
+    "submitted_on": "17 May 2025",
+    "submitted_for": "ACE Test Navigation",
+    "screenshot": "No",
+    "message": "Flow is unclear for test submission",
+    "can_be_contacted": "No",
+    "status": "Resolved",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB103",
+    "user": "Aarti Mehta",
+    "submitted_on": "16 May 2025",
+    "submitted_for": "Platform Homepage",
+    "screenshot": "View",
+    "message": "Content overlaps with image slider",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB104",
+    "user": "Kunal Desai",
+    "submitted_on": "15 May 2025",
+    "submitted_for": "Assessment Reports",
+    "screenshot": "No",
+    "message": "Graphs don't show properly on Firefox",
+    "can_be_contacted": "Yes",
+    "status": "Archived",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB105",
+    "user": "Meena Yadav",
+    "submitted_on": "14 May 2025",
+    "submitted_for": "Login Page",
+    "screenshot": "View",
+    "message": "Forgot password link not working",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB106",
+    "user": "Ajay Singh",
+    "submitted_on": "13 May 2025",
+    "submitted_for": "Quiz Timer",
+    "screenshot": "View",
+    "message": "Timer doesn’t pause during break",
+    "can_be_contacted": "No",
+    "status": "Resolved",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB107",
+    "user": "Neha Verma",
+    "submitted_on": "12 May 2025",
+    "submitted_for": "Course Video Player",
+    "screenshot": "No",
+    "message": "Playback speed option missing",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB108",
+    "user": "Rajesh Kumar",
+    "submitted_on": "11 May 2025",
+    "submitted_for": "Certificate Download",
+    "screenshot": "View",
+    "message": "PDF file not opening after download",
+    "can_be_contacted": "No",
+    "status": "Archived",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB109",
+    "user": "Isha Malhotra",
+    "submitted_on": "10 May 2025",
+    "submitted_for": "Mentor Chatbox",
+    "screenshot": "View",
+    "message": "Messages not loading properly",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB110",
+    "user": "Tanmay Joshi",
+    "submitted_on": "09 May 2025",
+    "submitted_for": "Course Enrollment Page",
+    "screenshot": "No",
+    "message": "Button redirects to blank screen",
+    "can_be_contacted": "Yes",
+    "status": "Resolved",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB111",
+    "user": "Prerna Ghosh",
+    "submitted_on": "08 May 2025",
+    "submitted_for": "Profile Update",
+    "screenshot": "View",
+    "message": "Unable to upload profile picture",
+    "can_be_contacted": "No",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB112",
+    "user": "Yash Raj",
+    "submitted_on": "07 May 2025",
+    "submitted_for": "Test Result View",
+    "screenshot": "No",
+    "message": "Incorrect scores being displayed",
+    "can_be_contacted": "Yes",
+    "status": "Archived",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB113",
+    "user": "Sneha Dube",
+    "submitted_on": "06 May 2025",
+    "submitted_for": "Notification Panel",
+    "screenshot": "View",
+    "message": "Notifications are repeated multiple times",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB114",
+    "user": "Arjun Seth",
+    "submitted_on": "05 May 2025",
+    "submitted_for": "Dashboard Loading",
+    "screenshot": "No",
+    "message": "Takes too long to load dashboard",
+    "can_be_contacted": "No",
+    "status": "Resolved",
+    "actions": ["View", "Archive"]
+  },
+  {
+    "id": "FDB115",
+    "user": "Tanya Bakshi",
+    "submitted_on": "04 May 2025",
+    "submitted_for": "Live Class Join",
+    "screenshot": "View",
+    "message": "Join button doesn't work after 5 mins delay",
+    "can_be_contacted": "Yes",
+    "status": "Pending",
+    "actions": ["View", "Archive"]
+  }
+]

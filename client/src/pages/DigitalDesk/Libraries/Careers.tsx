@@ -2,16 +2,19 @@ import { Button } from "@/components/ui/button";
 import {
   Eye,
   Filter,
-  BadgeDollarSign,
-
+  BadgeQuestionMark,
   Notebook,
-  Search,
-
-  GitGraph,
   Plus,
+  Search,
+  Pen,
   FileDown,
-  X,
-  Check,
+
+  Flame,
+  TrendingUp,
+  Tag,
+  Send as SendIcon,
+  Ban,
+  Flag,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -34,14 +37,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { CareersTable } from "@/data/Data";
+import {  CareerTable } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import DatePicker from '@/components/ui/DatePicker';
+
 import React from "react";
-import RadioButton from "@/components/ui/Radiobutton";
+
+
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -50,29 +54,96 @@ const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
-    title: "Total Library Entries",
-    value: "342",
+    title: "Total Careers",
+    value: "312",
     icon: Notebook,
     performance: Up,
   },
- 
-
   {
-    title: "Last Updated",
-    value: "18 May 2025",
-    icon: BadgeDollarSign,
+    title: "Published",
+    value: "248",
+    icon: Notebook,
+    performance: Up,
+  },
+   {
+    title: "Unpublished",
+    value: "44",
+    icon: Notebook,
     performance: Down,
   },
+  {
+    title: "Pending Review",
+    value: "20",
+    icon: Notebook,
+    performance: Down,
+  },
+  {
+    title: "Trending Careers ",
+    value: "18",
+    icon: Notebook,
+    performance: Down,
+  },
+  {
+    title: "Future Prediction",
+    value: "26",
+    icon: Notebook,
+    performance: Down,
+  },
+  {
+    title: "New This Month",
+    value: "17",
+    icon: Notebook,
+    performance: Down,
+  },
+ 
 ];
 
+
+
+
+
 export function Careers() {
-  const [showFilter, setShowFilter] = useState(false);
+ 
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Careers</h1>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">Careers Desk</h1>
         <StatsCards />
-        <Topbar />
+   <Topbar  />
+
+        <TableSection/>
+      </div>
+    </div>
+  );
+}
+
+function Topbar()  {
+     const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <Button
+        variant="brand"
+        size="new"
+      >
+        <Plus className="h-3 w-3" />
+        <span>  Add New Career</span>
+      </Button>
+      <div className="flex gap-4 flex-wrap">
+        <Button variant="standard" size="new">
+          <BadgeQuestionMark className="h-3 w-3" />
+          <span className=""> Career Categories</span>
+        </Button>
+        <Button variant="standard" size="new">
+          <Eye className="h-3 w-3" />
+          <span className="">Import  (Excel/CSV)
+          </span>
+        </Button>
+     
+        <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+          <span className="">Export</span>
+        </Button>
         <Button
           variant="border"
           onClick={() => setShowFilter(true)}
@@ -81,106 +152,60 @@ export function Careers() {
           <Filter className="h-4 w-4" />
           {showFilter ? "Hide Filters" : "Show Filters"}
         </Button>
-
         {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-        
-        <TableSection/>
       </div>
     </div>
   );
 }
-
-
-function Topbar() {
-  return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-        <div>
-      <Button
-          variant="brand"
-          size="new"
-        >
-          <Plus className="h-3 w-3" />
-          <span> Add New Entry</span>
-        </Button>
-         </div>
-      <div className="flex gap-4 align-middle">
-         
-        <Button
-          variant="standard"
-          size="new"
-        >
-          <GitGraph className="h-3 w-3" />
-          <span>Bulk Upload Entries</span>
-        </Button>
-          <Button
-          variant="standard"
-          size="new"
-        >
-          <GitGraph className="h-3 w-3" />
-          <span>Manage Categories</span>
-        </Button>
-          <Button
-          variant="standard"
-          size="new"
-        >
-          <GitGraph className="h-3 w-3" />
-          <span>Link References</span>
-        </Button>
-        <Button
-          variant="standard"
-          size="new"
-        >
-          <FileDown className="h-3 w-3" />
-          <span>Export Library Data</span>
-        </Button>
-      </div>
-    </div>
-  );
-}
-
 
 interface FilterProps {
   onClose: () => void;
 }
 
-
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("General");
+  const [activeTab, setActiveTab] = useState("Type");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
-
-      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-
-      onClose(); // Close modal otherwise
+      onClose(); 
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const [status, setStatus] = useState("Paid");
-  const [type, setType] = useState("Session");
+  // Filter states
+  const [types, setTypes] = useState<string[]>([]);
+  const [segments, setSegments] = useState<string[]>([]);
+  const [status, setStatus] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   const tabList = [
-    "General",
-    "Commission Type",
+    "Type",
+    "Target Segment",
     "Status",
-    "Date Range",
+    "Tags",
   ];
+
+  // Helper for checkbox
+  const handleCheckboxChange = (
+    stateSetter: React.Dispatch<React.SetStateAction<string[]>>,
+    option: string
+  ) => {
+    stateSetter((prev) =>
+      prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option]
+    );
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-
       <div
         ref={modalRef}
         className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
@@ -190,6 +215,12 @@ function AdvancedFilters({ onClose }: FilterProps) {
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
+            onClick={() => {
+              setTypes([]);
+              setSegments([]);
+              setStatus([]);
+              setTags([]);
+            }}
           >
             Clear All
           </Button>
@@ -197,7 +228,6 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
@@ -215,72 +245,76 @@ function AdvancedFilters({ onClose }: FilterProps) {
           </div>
 
           {/* Tab Content */}
-
           <div className="p-6 overflow-y-auto relative w-full">
-            {activeTab === "General" && (
+            {activeTab === "Type" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Enter Name/Email/Phone :</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+                <p className="text-sm text-[var(--text-head)] mb-4">Type:</p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {["Entrance", "Scholarship", "Language", "Board", "Govt Job"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={types.includes(option)}
+                        onCheckedChange={() => handleCheckboxChange(setTypes, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              </>
+            )}
 
+            {activeTab === "Target Segment" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">Target Segment:</p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {["6–8", "9–10", "UG", "PG", "Career Changer"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={segments.includes(option)}
+                        onCheckedChange={() => handleCheckboxChange(setSegments, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
               </>
             )}
 
             {activeTab === "Status" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Statue:
+                  Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Paid",
-                    "Pending",
-                    "Cancelled",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={status}
-                      onChange={setStatus}
-                    />
+                  {["Published", "Unpublished", "Pending"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={status.includes(option)}
+                        onCheckedChange={() => handleCheckboxChange(setStatus, option)}
+                      />
+                      {option}
+                    </label>
                   ))}
                 </div>
               </>
             )}
 
-            {activeTab === "Commission Type" && (
+            {activeTab === "Tags" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Commission Type:
-                </p>
+                <p className="text-sm text-[var(--text-head)] mb-4">Tags:</p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Session",
-                    "Referral",
-                    "Campaign",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={type}
-                      onChange={setType}
-                    />
+                  {["Trending", "Future-Focused"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={tags.includes(option)}
+                        onCheckedChange={() => handleCheckboxChange(setTags, option)}
+                      />
+                      {option}
+                    </label>
                   ))}
                 </div>
               </>
             )}
-
-
-            {activeTab === "Date Range" && (
-              <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter You Last Activity Date:</label>
-                <div className="mt-4 min-w-full">
-                  <DatePicker />
-                </div>
-              </>
-            )}
-
             {/* Footer */}
           </div>
         </div>
@@ -298,7 +332,6 @@ function AdvancedFilters({ onClose }: FilterProps) {
     </div>
   );
 }
-
 
 function StatsCards() {
   return (
@@ -327,37 +360,45 @@ function StatsCards() {
   );
 }
 
-
-
-
 function TableSection() {
-  const dataWithIds = CareersTable.map((item, index) => ({ ...item, id: index }));
-  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedStack, setSelectedStack] = useState<typeof dataWithIds>([]);
-  const [focusedId, setFocusedId] = useState<number | null>(null);
+  const [selectedStack, setSelectedStack] = useState<
+    typeof CareerTable 
+  >(CareerTable [0] ? [CareerTable [0]] : []);
+  const [focusedId, setFocusedId] = useState<string | null>(CareerTable [0] ? String(CareerTable [0].id) : null);
 
-  // Sorting logic
-  const sortedData = [...dataWithIds];
+
+  const sortedData = [...CareerTable];
   if (sortConfig !== null) {
+    const { key, direction } = sortConfig;
     sortedData.sort((a, b) => {
-      const aValue = a[sortConfig.key as keyof typeof a];
-      const bValue = b[sortConfig.key as keyof typeof b];
-      
-      // Handle array values for sorting
-      const compareA = Array.isArray(aValue) ? aValue.join(", ") : aValue;
-      const compareB = Array.isArray(bValue) ? bValue.join(", ") : bValue;
-      
-      if (compareA < compareB) {
-        return sortConfig.direction === "ascending" ? -1 : 1;
+     
+      let aValue: any = a[key as keyof typeof a];
+      let bValue: any = b[key as keyof typeof b];
+
+      // If the column is an array (e.g., tags) convert to comma-separated string for comparison
+      if (key === "tags") {
+        aValue = Array.isArray(aValue) ? aValue.join(", ") : aValue;
+        bValue = Array.isArray(bValue) ? bValue.join(", ") : bValue;
       }
-      if (compareA > compareB) {
-        return sortConfig.direction === "ascending" ? 1 : -1;
+
+      // Example placeholder for a date column; keep for future extension
+      if (key === "createdOn" || key === "lastUpdated" || key === "Created On") {
+        aValue = Date.parse(aValue as string);
+        bValue = Date.parse(bValue as string);
+      }
+
+      if (aValue < bValue) {
+        return direction === "ascending" ? -1 : 1;
+      }
+      if (aValue > bValue) {
+        return direction === "ascending" ? 1 : -1;
       }
       return 0;
     });
@@ -366,7 +407,10 @@ function TableSection() {
   const totalPages = Math.ceil(sortedData.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = sortedData.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = sortedData.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
 
   const requestSort = (key: string) => {
     let direction: "ascending" | "descending" = "ascending";
@@ -380,20 +424,21 @@ function TableSection() {
     setSortConfig({ key, direction });
   };
 
+  // Select All logic
   const toggleSelectAll = () => {
-    if (selectedUsers.length === currentRecords.length && currentRecords.length > 0) {
+    if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(currentRecords.map((user): number => user.id));
+      setSelectedUsers(currentRecords.map((user) => String(user.id)));
     }
   };
 
-  const bringToTop = (userId: number) => {
-    const item = selectedStack.find((c) => c.id === userId);
-    if (item) {
+  const bringToTop = (userId: string) => {
+    const coach = selectedStack.find((c) => String(c.id) === userId);
+    if (coach) {
       setSelectedStack((prev) => [
-        item,
-        ...prev.filter((c) => c.id !== userId),
+        coach,
+        ...prev.filter((c) => String(c.id) !== userId),
       ]);
       setFocusedId(userId);
     }
@@ -403,10 +448,12 @@ function TableSection() {
     const allRows = document.querySelectorAll("tr[data-id]");
 
     allRows.forEach((row) => {
-      const id = Number(row.getAttribute("data-id"));
-      const isInStack = selectedStack.some((item) => item.id === id);
+      const idAttr = row.getAttribute("data-id");
+      const id = idAttr ?? null;
+      const isInStack = selectedStack.some((us) => String(us.id) === id);
       const isTop = focusedId === id;
 
+      // Remove previous styles
       row.classList.remove(
         "bg-[var(--brand-color3)]",
         "border-l-[var(--brand-color)]"
@@ -414,6 +461,7 @@ function TableSection() {
 
       if (isInStack) {
         row.classList.add("bg-[var(--brand-color3)]");
+
         if (isTop) {
           row.classList.add("border-l-[var(--brand-color)]");
         }
@@ -421,20 +469,21 @@ function TableSection() {
     });
   }, [selectedStack, focusedId]);
 
-  const handleRowClick = (item: (typeof dataWithIds)[0]) => {
-    const exists = selectedStack.find((c) => c.id === item.id);
+  const handleRowClick = (user: (typeof CareerTable )[0]) => {
+    // Double-click detected
+    const exists = selectedStack.find((c) => String(c.id) === String(user.id));
     if (!exists) {
       setSelectedStack((prev) => {
-        const updated = [item, ...prev];
+        const updated = [user, ...prev];
         return updated.slice(0, 5); // limit to 5
       });
-      setFocusedId(item.id);
+      setFocusedId(String(user.id));
     } else {
-      bringToTop(item.id);
+      bringToTop(String(user.id));
     }
   };
 
-  const toggleSelectUser = (userId: number) => {
+  const toggleSelectUser = (userId: string) => {
     if (selectedUsers.includes(userId)) {
       setSelectedUsers(selectedUsers.filter((id) => id !== userId));
     } else {
@@ -445,15 +494,22 @@ function TableSection() {
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
-        <div className="flex items-center justify-between border-b h-20 p-4 mt-auto">
+        {/* Select All and badge UI */}
+        <div className="flex h-20 items-center justify-between border-b p-4 mt-auto">
           <div className="flex items-center justify-between pl-0 p-4">
             <div className="flex items-center gap-2 border-none shadow-none">
               <Checkbox
-                id="select-all"
-                checked={selectedUsers.length === currentRecords.length && currentRecords.length > 0}
+                id="select-all-campaigns"
+                checked={
+                  selectedUsers.length === currentRecords.length &&
+                  currentRecords.length > 0
+                }
                 onCheckedChange={toggleSelectAll}
               />
-              <label htmlFor="select-all" className="text-sm font-medium text-[var(--text)]">
+              <label
+                htmlFor="select-all-campaigns"
+                className="text-sm font-medium text-[var(--text)]"
+              >
                 Select All
               </label>
               {selectedUsers.length > 0 && (
@@ -462,20 +518,42 @@ function TableSection() {
                 </Badge>
               )}
             </div>
-
+            
             {selectedUsers.length > 0 && (
-              <div className="flex gap-2 ml-2">
-                <Button variant="border" size="sm">
-                  <Check className=" h-4 w-4 text-[var(--green)]" />
-                  Publish All
+              <div className="flex gap-2 ml-2 flex-wrap">
+                <Button variant="border" size="sm" className="gap-1">
+                  <Flame className="h-4 w-4" />
+                  <span className="hidden sm:inline">Trending</span>
                 </Button>
-                <Button variant="border" size="sm">
-                  <Eye className=" h-4 w-4" />
-                  Archive
+                <Button variant="border" size="sm" className="gap-1">
+                  <TrendingUp className="h-4 w-4" />
+                  <span className="hidden sm:inline">Prediction</span>
+                </Button>
+                <Button variant="border" size="sm" className="gap-1">
+                  <Tag className="h-4 w-4" />
+                  <span className="hidden sm:inline">Unmark Tags</span>
+                </Button>
+                <Button variant="border" size="sm" className="gap-1">
+                  <SendIcon className="h-4 w-4" />
+                  <span className="hidden sm:inline">Notify</span>
+                </Button>
+                <Button variant="delete" size="sm" className="gap-1">
+                  <Ban className="h-4 w-4" />
+                  <span className="hidden sm:inline">Inactive</span>
+                </Button>
+                <Button variant="border" size="sm" className="gap-1">
+                  <FileDown className="h-4 w-4" />
+                  <span className="hidden sm:inline">Export</span>
+                </Button>
+                <Button variant="border" size="sm" className="gap-1">
+                  <Flag className="h-4 w-4" />
+                  <span className="hidden sm:inline">Flag</span>
                 </Button>
               </div>
             )}
           </div>
+          
+          {/* Search Bar */}
           <div className="flex justify-end items-center gap-4 ">
             <div className="flex justify-around items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
               <Input
@@ -494,20 +572,29 @@ function TableSection() {
             </div>
           </div>
         </div>
-
+        {/* Table UI */}
         <div className="overflow-x-auto text-[var(--text)] w-full px-0 mx-0 text-low">
           <Table className="w-full caption-top border-collapse overflow-y-visible">
             <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
-                  onClick={() => requestSort("title")}
-                  className="cursor-pointer text-[var(--text)]"
+                  onClick={() => requestSort("career_name")}
+                  className="cursor-pointer text-[var(--text)] text-low"
                 >
-                  Title{" "}
-                  {sortConfig?.key === "title" &&
+                  Career Name{" "}
+                  {sortConfig?.key === "career_name" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
+                <TableHead
+                  onClick={() => requestSort("industry")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Industry{" "}
+                  {sortConfig?.key === "industry" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+               
                 <TableHead
                   onClick={() => requestSort("tags")}
                   className="cursor-pointer text-[var(--text)]"
@@ -516,120 +603,82 @@ function TableSection() {
                   {sortConfig?.key === "tags" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead
-                  onClick={() => requestSort("for")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  For{" "}
-                  {sortConfig?.key === "for" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("source")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Source{" "}
-                  {sortConfig?.key === "source" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("lastUpdated")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Last Updated{" "}
-                  {sortConfig?.key === "lastUpdated" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("status")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Status{" "}
-                  {sortConfig?.key === "status" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
+                <TableHead className="text-[var(--text)]">Status</TableHead>
+                
+              
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
-              {currentRecords.map((item) => (
+              {currentRecords.map((user) => (
                 <TableRow
-                  key={item.id}
-                  data-id={item.id}
+                  key={user.id}
+                  data-id={user.id}
                   className={cn(
                     "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-                    selectedStack.some((c) => c.id === item.id)
+                    selectedStack.some((c) => String(c.id) === String(user.id))
                       ? "bg-[var(--brand-color3)]"
                       : ""
                   )}
                   onClick={() => {
-                    toggleSelectUser(item.id);
-                    handleRowClick(item);
+                    toggleSelectUser(String(user.id));
+                    handleRowClick(user);
                   }}
                 >
                   <TableCell
                     className={cn(
                       "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
-                      selectedStack.some((c) => c.id === item.id)
-                        ? focusedId === item.id
+                      selectedStack.some((c) => String(c.id) === String(user.id))
+                        ? focusedId === String(user.id)
                           ? "border-[var(--brand-color)]"
                           : "border-transparent"
                         : "border-transparent"
                     )}
                   >
                     <Checkbox
-                      checked={selectedUsers.includes(item.id)}
+                      checked={selectedUsers.includes(String(user.id))}
                       onClick={(e) => e.stopPropagation()}
-                      onCheckedChange={() => toggleSelectUser(item.id)}
+                      onCheckedChange={() => toggleSelectUser(String(user.id))}
                     />
                   </TableCell>
                   <TableCell>
-                    <div className="font-medium">{item.title}</div>
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <div className="flex justify-start items-center">
+                          <div className="font-medium">{user.career_name}</div>
+                        </div>
+                      </div>
+                    </div>
                   </TableCell>
                   <TableCell>
-                    {item.tags &&
-                      item.tags.map((tag, i) => (
-                        <Badge key={i} variant="border" className="mr-1">
-                          {tag}
-                        </Badge>
-                      ))}
+                    <div className="text-low">{user.industry}</div>
+                  </TableCell>
+                  
+                  <TableCell>
+                    <div className="text-low">{user.tags}</div>
                   </TableCell>
                   <TableCell>
-                    {Array.isArray(item.for) ? item.for.join(", ") : item.for}
+                    <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
-                  <TableCell>{item.source}</TableCell>
-                  <TableCell>{item.lastUpdated}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        item.status === "Published" ? "standard" : "border"
-                      }
-                    >
-                      {item.status}
-                    </Badge>
-                  </TableCell>
+                 
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      {item.actions &&
-                        item.actions.map((action, i) => (
-                          <Button
-                            key={i}
-                            variant="noborder"
-                            size="sm"
-                            className="bg-[var(--background)] border-0 shadow-none"
-                          >
-                            {action === "Edit" && (
-                              <Eye className="h-4 w-4" />
-                            )}
-                            {action === "Archive" && (
-                              <X className="h-4 w-4 text-[var(--red)]" />
-                            )}
-                            {action === "Publish" && (
-                              <Check className="h-4 w-4 text-[var(--green)]" />
-                            )}
-                            <span className="sr-only">{action}</span>
-                          </Button>
-                        ))}
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        className="bg-white border-0 shadow-none"
+                      >
+                        <Eye className="h-4 w-3" />
+                        <span className="sr-only">View</span>
+                      </Button>
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        className="bg-white border-0 shadow-none"
+                      >
+                        <Pen className="h-4 w-3" />
+                        <span className="sr-only">Edit</span>
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -637,6 +686,7 @@ function TableSection() {
             </TableBody>
           </Table>
         </div>
+
 
         <div className="flex items-center justify-between flex-wrap gap-2 p-4">
           <div className="flex items-center gap-4">
@@ -652,7 +702,7 @@ function TableSection() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[ 10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {
@@ -669,7 +719,7 @@ function TableSection() {
             <span className="text-low text-[var(--text)]">
               Showing {indexOfFirstRecord + 1}-
               {Math.min(indexOfLastRecord, sortedData.length)} of{" "}
-              {sortedData.length} entries
+              {sortedData.length} exams
             </span>
           </div>
           <div className="flex items-center gap-2 ">
@@ -708,3 +758,5 @@ function TableSection() {
     </div>
   );
 }
+
+
