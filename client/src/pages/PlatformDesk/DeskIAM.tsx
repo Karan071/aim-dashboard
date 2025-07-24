@@ -1,13 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import RadioButton from "@/components/ui/Radiobutton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeskIAMtable } from "@/data/Data";
 import { cn } from "@/lib/utils";
-import { BookAIcon, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Eye, FileDown, Filter,Pen, Plus, SquarePen, UserCheck, Users, UserX } from "lucide-react";
+import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Eye, FileDown, Filter,Pen, Plus, Search, SquarePen, UserCheck, Users, UserX, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -86,13 +87,14 @@ function Buttonbar() {
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div className="flex gap-4">
       <Button variant="brand" size="new" 
-      onClick={() => navigate("/desk/admin/desk-iam/addTeamMember")}>
+      onClick={() => navigate("/desk/platform/desk-iam/addTeamMember")}>
         <Plus className="h-3 w-3" />
         <span className="">Add User</span>
       </Button>
         </div>
       <div className="flex gap-4">
-        <Button variant="standard" size="new">
+        <Button variant="standard" size="new"
+        onClick={() => navigate("/desk/platform/desk-iam/manageRole")}>
           <BookAIcon className="h-3 w-3" />
           <span className="">Manage Roles</span>
         </Button>
@@ -308,16 +310,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
 function TableSection() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedStack, setSelectedStack] = useState<
-    typeof DeskIAMtable
-  >(DeskIAMtable[0] ? [DeskIAMtable[0]] : []);
-  const [focusedId, setFocusedId] = useState<string | null>(DeskIAMtable[0]?.id || null);
-
   // Sorting logic
   const sortedData = [...DeskIAMtable];
   if (sortConfig !== null) {
@@ -355,55 +352,16 @@ function TableSection() {
   };
 
 
-  const bringToTop = (userId: string) => {
-    const coach = selectedStack.find((c) => c.id === userId);
-    if (coach) {
-      setSelectedStack((prev) => [
-        coach,
-        ...prev.filter((c) => c.id !== userId),
-      ]);
-      setFocusedId(userId);
-    }
-  };
-
-  useEffect(() => {
-    const allRows = document.querySelectorAll("tr[data-id]");
-
-    allRows.forEach((row) => {
-      const id = String(row.getAttribute("data-id"));
-      const isInStack = selectedStack.some((us) => us.id === id);
-      const isTop = focusedId === id;
-
-      // Remove previous styles
-      row.classList.remove(
-        "bg-[var(--brand-color3)]",
-        "border-l-[var(--brand-color)]"
-      );
-
-      if (isInStack) {
-        row.classList.add("bg-[var(--brand-color3)]");
-
-        if (isTop) {
-          row.classList.add("border-l-[var(--brand-color)]");
-        }
-      }
-    });
-  }, [selectedStack, focusedId]);
-
-
-  const handleRowClick = (user: (typeof DeskIAMtable)[0]) => {
-    // Double-click detected
-    const exists = selectedStack.find((c) => c.id === user.id);
-    if (!exists) {
-      setSelectedStack((prev) => {
-        const updated = [user, ...prev];
-        return updated.slice(0, 5); // limit to 5
-      });
-      setFocusedId(user.id);
+  const toggleSelectAll = () => {
+    if (selectedUsers.length === currentRecords.length) {
+      setSelectedUsers([]);
     } else {
-      bringToTop(user.id);
+      setSelectedUsers(
+        currentRecords.map((user): string => user.id)
+      );
     }
   };
+
 
   const toggleSelectUser = (userId: string) => {
     if (selectedUsers.includes(userId)) {
@@ -416,12 +374,67 @@ function TableSection() {
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
-        
+        <div className="flex items-center justify-between border-b  h-20 p-4 mt-auto">
+          <div className="flex items-center justify-between pl-0 p-4  gap-2">
+            <div className="flex items-center gap-2 border-none shadow-none">
+              <Checkbox
+                id="select-all"
+                checked={selectedUsers.length === currentRecords.length && currentRecords.length > 0}
+                onCheckedChange={toggleSelectAll}
+              />
+              <label htmlFor="select-all" className="text-sm font-medium text-[var(--text)]">
+                Select All
+              </label>
+              {selectedUsers.length > 0 && (
+                <Badge variant="border" className="ml-2 ">
+                  {selectedUsers.length} selected
+                </Badge>
+              )}
+            </div>
+
+            {selectedUsers.length > 0 && (
+              <div className="flex gap-2">        {/*wrap */}
+                <Button variant="border" size="sm">
+                  <Bell className="h-4 w-4" />
+                  Send Reminder
+                </Button>
+                <Button variant="border" size="sm">
+                  <Check className=" h-4 w-4 text-[var(--green)]" />
+                  Approve All
+                </Button>
+                <Button variant="delete" size="sm">
+                  <X className=" h-4 w-4 text-[var(--red)]" />
+                  Block / Remove
+                </Button>
+              </div>
+            )}
+          </div>
+          <div className="flex justify-end items-center gap-4 ">
+
+            <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
+              <Input
+                placeholder="Search"
+                className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
+              />
+              <Button
+                type="submit"
+                size="icon"
+                variant="standard"
+                className="rounded-none rounded-r-md bg-[var(--button)]"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5 text-[var(--text)]" />
+              </Button>
+            </div>
+
+          </div>
+        </div>
 
         <div className="overflow-x-auto text-[var(--text)] w-full px-0 mx-0 text-low">
           <Table className="w-full caption-top border-collapse overflow-y-visible">
             <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
               <TableRow>
+                <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
                   onClick={() => requestSort("name")}
                   className="cursor-pointer text-[var(--text)] text-low"
@@ -484,19 +497,26 @@ function TableSection() {
             <TableBody className="overflow-visible relative z-0">
               {currentRecords.map((user) => (
                 <TableRow
-                  key={user.id}
-                  data-id={user.id}
-                  className={cn(
-                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-                    selectedStack.some((c) => c.id === user.id)
-                      ? "bg-[var(--brand-color3)]"
-                      : ""
-                  )}
-                  onClick={() => {
-                    toggleSelectUser(user.id);
-                    handleRowClick(user);
-                  }}
-                >
+                                  key={user.id}
+                                  data-id={user.id}
+                                  className={cn(
+                                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
+                                  )}
+                                  onClick={() => {
+                                    toggleSelectUser(user.id);
+                                  }}
+                                >
+                                  <TableCell
+                                    className={cn(
+                                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
+                                    )}
+                                  >
+                                    <Checkbox
+                                      checked={selectedUsers.includes(user.id)}
+                                      onClick={(e) => e.stopPropagation()}
+                                      onCheckedChange={() => toggleSelectUser(user.id)}
+                                    />
+                                  </TableCell>
                   <TableCell>
                             <div className="text-low">{user.name}</div>
                                       <div className="text-xs text-[var(--text)]">
@@ -576,7 +596,7 @@ function TableSection() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {

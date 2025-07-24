@@ -989,7 +989,7 @@ function SessionTabs() {
       </div>
 
             {/* Table Controls */}
-            <div className="flex-1 rounded-md rounded-l-none border bg-[var(--background)] overflow-x-auto">
+            <div className="flex-1 rounded-md rounded-tl-none border bg-[var(--background)] overflow-x-auto">
                 <div className="flex items-center justify-between border-b h-20 p-4">
                     <div className="flex items-center gap-2">
                         <Checkbox
