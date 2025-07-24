@@ -11,7 +11,7 @@ import { Prepare as PlatformPrepare } from "@/pages/PlatformDesk/Prepare";
 import { Contribute as PlatformContribute } from "@/pages/PlatformDesk/Contribute";
 import { AccessCode as PlatformAccessCode } from "@/pages/PlatformDesk/Plans/AccessCode";
 import { ConsultantPremium as PlatformConsultantPremium } from "@/pages/PlatformDesk/Plans/ConsultantPremium";
-import { Forms as PlatformForms } from "@/pages/PlatformDesk/Forms";
+import { FormTabsWrapper as PlatformForms } from "@/pages/PlatformDesk/Forms";
 import { DeskIAM as PlatformDeskIAM } from "@/pages/PlatformDesk/DeskIAM";
 
 // Review Desk

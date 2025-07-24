@@ -1,124 +1,65 @@
+import { Building2, UserCheck, Globe, Clock, CircleArrowUp, CircleArrowDown, Search, Check, X, FileDown, Newspaper } from "lucide-react";
+import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import {
-  Search,
-  Eye,
-  Filter,
-  BadgeDollarSign,
-  Package,
-  Notebook,
-  FileDown,
-  RotateCcw,
-  Tickets,
-  DollarSign,
-  User,
-  Bell,
-  Check,
-  X,
-} from "lucide-react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
+import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
+import { ChevronDown, Filter, ChevronRight, ChevronLeft, Eye } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { paymentsTable } from "@/data/Data";
-//import { motion, AnimatePresence } from "motion/react";
+import { CustomInputTable } from "@/data/Data";
+
+import * as React from "react"
+import { cn } from "@/lib/utils"
 import { useEffect } from "react";
-import { cn } from "@/lib/utils";
-import { Checkbox } from "@/components/ui/checkbox";
-import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem
-} from "@/components/ui/select";
 import { DateRangePicker } from "@/components/ui/RangeCalender";
+
+
+
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
 const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
 const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
-
-const stats = [
+const orgStats = [
   {
-    title: "Total Collected",
-    value: "₹3,200",
-    icon: Notebook,
+    title: "Pending Inputs",
+    value: "38",
+    icon: Building2,
     performance: Up,
   },
   {
-    title: "Total Platform Fee",
-    value: "₹628",
-    icon: BadgeDollarSign,
-    performance: Up,
-  },
-  {
-    title: "Total Payout (Escrow)",
-    value: "₹2,572",
-    icon: Package,
+    title: "Approved",
+    value: "94",
+    icon: UserCheck,
     performance: Down,
   },
   {
-    title: "Total GST Liability",
-    value: "₹113.04",
-    icon: BadgeDollarSign,
+    title: "Rejected",
+    value: "17",
+    icon: Globe,
+    performance: Down,
+  },
+  {
+    title: "New This Week",
+    value: "12",
+    icon: Clock,
     performance: Up,
   },
 ];
 
-export function Payments() {
-  return (
-    <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Payments</h1>
-      <StatsCards />
-      <Buttonbar />
-      <TableSection />
-    </div>
-  );
-}
 
-function Buttonbar() {
+
+
+export function CustomInputbar() {
   const [showFilter, setShowFilter] = useState(false);
-  const [GST, setGST] = useState("Include GST");
-  const [status, setStatus] = useState("All");
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <div className="flex gap-4">
-        <Button variant="standard" size="new">
-          <Tickets className="h-3 w-3" />
-          <span className="">Initiate Refund</span>
-        </Button>
-        <Button variant="brand" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Download Invoice</span>
-        </Button>
+        <div className="flex gap-4">
       </div>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <DollarSign className="h-3 w-3" />
-          <span className="">Tax Discrepancy</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <User className="h-3 w-3" />
-          <span className="">Visit User</span>
-        </Button>
+      <div className="flex gap-4">
         <Button
           variant="standard" size="new"
           onClick={() => setShowFilter(true)}
@@ -128,34 +69,11 @@ function Buttonbar() {
         </Button>
 
         {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-        <Select value={status} onValueChange={setStatus}>
-          <SelectTrigger className="w-[130px] min-h-[40px]">
-            <SelectValue placeholder="Select Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="All">All</SelectItem>
-            <SelectItem value="Success">Success</SelectItem>
-            <SelectItem value="Failed">Failed</SelectItem>
-            <SelectItem value="Pending">Pending</SelectItem>
-            <SelectItem value="Refunded">Refunded</SelectItem>
-          </SelectContent>
-        </Select>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export</span>
-        </Button>
-        <Button
-          variant="standard"
-          size="new"
-          onClick={() => setGST(GST === "Include GST" ? "Exclude GST" : "Include GST")}
-        >
-          <span>{GST}</span>
-        </Button>
+
       </div>
     </div>
   );
 }
-
 
 
 interface FilterProps {
@@ -165,7 +83,7 @@ interface FilterProps {
 
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("Date Range");
+  const [activeTab, setActiveTab] = useState("General");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -187,13 +105,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const [type, setType] = useState("Masterclass");
-  const [status, setStatus] = useState("Success");
+  const [form, setForm] = useState("Degree");
+  const [status, setStatus] = useState("Pending");
+  const [submit, setSubmit] = useState("User");
 
   const tabList = [
-    "Date Range",
-    "Payment Type",
+    "General",
+    "Form Field",
     "Status",
+    "Submitted By",
+    "Date Range",
   ];
 
   return (
@@ -235,18 +156,72 @@ function AdvancedFilters({ onClose }: FilterProps) {
           {/* Tab Content */}
 
           <div className="p-6 overflow-y-auto relative w-full">
+            {activeTab === "General" && (
+              <>
+                <label htmlFor="Gen" className="text-[var(--text)]">Search by Value / User Name :</label>
+                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+
+              </>
+            )}
+
+            {activeTab === "Submitted By" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Search by Submitted By:
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "User",
+                    "Coach",
+                    "Org",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={submit}
+                      onChange={setSubmit}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Form Field" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Search by Form Field:
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Degree",
+                    "Skill",
+                    "College",
+                    "Organisation",
+                    "Exam"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={form}
+                      onChange={setForm}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
 
             {activeTab === "Status" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Status of Payment:
+                  Select by Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
                   {[
-                    "Success",
-                    "Failed",
                     "Pending",
-                    "Refunded",
+                    "Approved",
+                    "Rejected",
                   ].map((option) => (
                     <RadioButton
                       key={option}
@@ -260,35 +235,9 @@ function AdvancedFilters({ onClose }: FilterProps) {
               </>
             )}
 
-            {activeTab === "Payment Type" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Payment type :
-                </p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Masterclass",
-                    "Assessment",
-                    "1:1 Session",
-                    "Learning",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={type}
-                      onChange={setType}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-
-
-
             {activeTab === "Date Range" && (
               <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter the Date range :</label>
+                <label htmlFor="act" className="text-[var(--text)]">Search by Date Range:</label>
                 <div className="mt-4 min-w-full">
                   <DateRangePicker />
                 </div>
@@ -313,12 +262,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
-
-function StatsCards() {
+export function CustomInputStats() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
-      {stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
+      {orgStats.map((stat, index) => (
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -342,18 +290,21 @@ function StatsCards() {
 }
 
 
-
-
-function TableSection() {
-  const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
+export function EXCustomInputTable() {
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
+  const [selectedStack, setSelectedStack] = useState<
+    typeof CustomInputTable
+  >(CustomInputTable[0] ? [CustomInputTable[0]] : []);
+  const [focusedId, setFocusedId] = useState<string | null>(CustomInputTable[0]?.id || null);
+
   // Sorting logic
-  const sortedData = [...paymentsTable];
+  const sortedData = [...CustomInputTable];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -388,18 +339,67 @@ function TableSection() {
     setSortConfig({ key, direction });
   };
 
-
   const toggleSelectAll = () => {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
       setSelectedUsers(
-        currentRecords.map((user): number => user.id)
+        currentRecords.map((user) => user.id)
       );
     }
   };
 
-  const toggleSelectUser = (userId: number) => {
+  const bringToTop = (userId: string) => {
+    const coach = selectedStack.find((c) => c.id === userId);
+    if (coach) {
+      setSelectedStack((prev) => [
+        coach,
+        ...prev.filter((c) => c.id !== userId),
+      ]);
+      setFocusedId(userId);
+    }
+  };
+
+  useEffect(() => {
+    const allRows = document.querySelectorAll("tr[data-id]");
+
+    allRows.forEach((row) => {
+      const id = String(row.getAttribute("data-id"));
+      const isInStack = selectedStack.some((coach) => coach.id === id);
+      const isTop = focusedId === id;
+
+      // Remove previous styles
+      row.classList.remove(
+        "bg-[var(--brand-color3)]",
+        "border-l-[var(--brand-color)]"
+      );
+
+      if (isInStack) {
+        row.classList.add("bg-[var(--brand-color3)]");
+
+        if (isTop) {
+          row.classList.add("border-l-[var(--brand-color)]");
+        }
+      }
+    });
+  }, [selectedStack, focusedId]);
+
+
+  const handleRowClick = (user: (typeof CustomInputTable)[0]) => {
+    // Double-click detected
+    const exists = selectedStack.find((c) => c.id === user.id);
+    if (!exists) {
+      setSelectedStack((prev) => {
+        const updated = [user, ...prev];
+        return updated.slice(0, 5); // limit to 5
+      });
+      setFocusedId(user.id);
+    } else {
+      bringToTop(user.id);
+    }
+  };
+
+  const toggleSelectUser = (userId: string) => {
     if (selectedUsers.includes(userId)) {
       setSelectedUsers(selectedUsers.filter((id) => id !== userId));
     } else {
@@ -409,9 +409,9 @@ function TableSection() {
 
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
-      <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
-        <div className="flex items-center justify-between border-b  h-20 p-4 mt-auto">
-          <div className="flex items-center justify-between pl-0 p-4  gap-2">
+      <div className="flex-1 rounded-md rounded-tl-none border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
+        <div className="flex items-center justify-between border-b h-20 p-4 mt-auto">
+          <div className="flex items-center justify-between pl-0 p-4">
             <div className="flex items-center gap-2 border-none shadow-none">
               <Checkbox
                 id="select-all"
@@ -429,25 +429,32 @@ function TableSection() {
             </div>
 
             {selectedUsers.length > 0 && (
-              <div className="flex gap-2">        {/*wrap */}
+              <div className="flex gap-2 ml-2">
                 <Button variant="border" size="sm">
-                  <Bell className="h-4 w-4" />
-                  Send Reminder
-                </Button>
-                <Button variant="border" size="sm">
-                  <Check className=" h-4 w-4 text-[var(--green)]" />
-                  Approve All
+                  <Check className="h-4 w-4 text-[var(--green)]" />
+                  Approve & Add to Master List
                 </Button>
                 <Button variant="delete" size="sm">
                   <X className=" h-4 w-4 text-[var(--red)]" />
-                  Block / Remove
+                  Reject & Archive
+                </Button>
+                <Button variant="border" size="sm">
+                  <Eye className=" h-4 w-4" />
+                  View Form Source
+                </Button>
+                <Button variant="border" size="sm">
+                  <Newspaper className=" h-4 w-4" />
+                  Track Approval Logs
+                </Button>
+                <Button variant="border" size="sm">
+                  <FileDown className=" h-4 w-4" />
+                  Export Entries
                 </Button>
               </div>
             )}
           </div>
           <div className="flex justify-end items-center gap-4 ">
-
-            <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
+            <div className="flex justify-around items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
               <Input
                 placeholder="Search"
                 className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
@@ -462,7 +469,6 @@ function TableSection() {
                 <Search className="h-5 w-5 text-[var(--text)]" />
               </Button>
             </div>
-
           </div>
         </div>
 
@@ -472,75 +478,51 @@ function TableSection() {
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
-                  onClick={() => requestSort("PaymentID")}
+                  onClick={() => requestSort("fieldName")}
                   className="cursor-pointer text-[var(--text)] text-low"
                 >
-                  Payment ID{" "}
-                  {sortConfig?.key === "PaymentID" &&
+                  Field Name{" "}
+                  {sortConfig?.key === "fieldName" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Date")}
+                  onClick={() => requestSort("submittedValue")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Submitted Value{" "}
+                  {sortConfig?.key === "submittedValue" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("formName")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Form Name{" "}
+                  {sortConfig?.key === "formName" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("submittedBy")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Submitted By{" "}
+                  {sortConfig?.key === "submittedBy" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("date")}
                   className="cursor-pointer text-[var(--text)]"
                 >
                   Date{" "}
-                  {sortConfig?.key === "Date" &&
+                  {sortConfig?.key === "date" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("User")}
+                  onClick={() => requestSort("status")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  User{" "}
-                  {sortConfig?.key === "User" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("Type")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Type{" "}
-                  {sortConfig?.key === "Type" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("ProductTitle")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Product / Title{" "}
-                  {sortConfig?.key === "ProductTitle" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("Gross")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Gross ₹{" "}
-                  {sortConfig?.key === "Gross" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("PlatformFee")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Platform Fee ₹{" "}
-                  {sortConfig?.key === "PlatformFee" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("GST")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  GST ₹{" "}
-                  {sortConfig?.key === "GST" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("GSTStatus")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Status{" "}
-                  {sortConfig?.key === "GSTStatus" &&
+                  	Status{" "}
+                  {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
@@ -553,14 +535,23 @@ function TableSection() {
                   data-id={user.id}
                   className={cn(
                     "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
+                    selectedStack.some((c) => c.id === user.id)
+                      ? "bg-[var(--brand-color3)]"
+                      : ""
                   )}
                   onClick={() => {
                     toggleSelectUser(user.id);
+                    handleRowClick(user);
                   }}
                 >
                   <TableCell
                     className={cn(
                       "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
+                      selectedStack.some((c) => c.id === user.id)
+                        ? focusedId === user.id
+                          ? "border-[var(--brand-color)]"
+                          : "border-transparent"
+                        : "border-transparent"
                     )}
                   >
                     <Checkbox
@@ -569,59 +560,79 @@ function TableSection() {
                       onCheckedChange={() => toggleSelectUser(user.id)}
                     />
                   </TableCell>
-                  <TableCell
-                  >
+                  <TableCell>
                     <div className="flex items-center gap-4">
                       <div>
-                        <div className="flex justify-start items-center">
-                          <div className="font-medium">{user.PaymentID}</div>
+                        <div className="flex justify-start flex-col">
+                          <div className="font-medium">{user.fieldName}</div>
+                          <div className="text-xs">{user.id}</div>
                         </div>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.Date}</div>
+                    <div className="text-low">{user.submittedValue}</div>
+                  </TableCell>
+                      <TableCell>
+                          <div className="text-sm">
+                              <div>{`${user.formName}`}</div>
+                          </div>
+                      </TableCell>
+                      
+                      <TableCell>
+                          <div className="text-sm">{user.submittedBy}</div>
+                      </TableCell>
+                      <TableCell>
+                          <div className="text-sm">{user.date}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.User}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.Type}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">
-                      <div>{`${user.ProductTitle}`}</div>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.Gross}</div>
-                  </TableCell>
-                  <TableCell>{user.PlatformFee}</TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.GST}</div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="standard">{user.GSTStatus}</Badge>
-                  </TableCell>
+                          <Badge
+                              className={
+                                  user.status === "Approved"
+                                      ? "bg-[var(--green2)] text-[var(--green)]"
+                                      : "bg-[var(--yellow2)] text-[var(--yellow)]"
+                              }
+                          >
+                            {user.status}
+                          </Badge>
+                      </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <Eye className="h-4 w-4" />
+                        <span className="sr-only">View</span>
+                      </Button>
 
                       <Button
                         variant="noborder"
                         size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                       >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
+                        <Check className="h-4 w-3 text-[var(--green)]"/>
+                        <span className="sr-only">Add to Degree List</span>
                       </Button>
+
                       <Button
                         variant="noborder"
                         size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                       >
-                        <RotateCcw className="h-4 w-3" />
-                        <span className="sr-only">Retry</span>
+                        <X className="h-4 w-3 text-[var(--red)]" />
+                        <span className="sr-only">Reject</span>
                       </Button>
                     </div>
                   </TableCell>
+
                 </TableRow>
               ))}
             </TableBody>
@@ -698,5 +709,3 @@ function TableSection() {
     </div>
   );
 }
-
-
