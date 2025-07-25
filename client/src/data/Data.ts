@@ -10243,3 +10243,185 @@ export const PartnershipsTable = [
     "Actions": "Call, Message"
   }
 ];
+export const CoachLeadsTable = [
+  {
+    "id": "CL-1001",
+    "Name": "Radhika Mehta",
+    "CoachType": "Consultant",
+    "AreaOfExpertise": "Career Transitions",
+    "Status": "Engaged",
+    "LeadScore": "High",
+    "AssignedTo": "Riya Sinha",
+    "Source": "Website",
+    "CreatedOn": "18 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1002",
+    "Name": "Ankit Sharma",
+    "CoachType": "Mentor",
+    "AreaOfExpertise": "Interview Prep",
+    "Status": "Contacted",
+    "LeadScore": "Medium",
+    "AssignedTo": "Ajay Mehta",
+    "Source": "Channel Partner",
+    "CreatedOn": "19 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1003",
+    "Name": "Shruti Nair",
+    "CoachType": "Educator",
+    "AreaOfExpertise": "English & Communication",
+    "Status": "New",
+    "LeadScore": "Low",
+    "AssignedTo": "Not Assigned",
+    "Source": "Referral",
+    "CreatedOn": "20 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1004",
+    "Name": "Dev Verma",
+    "CoachType": "Consultant",
+    "AreaOfExpertise": "Corporate Soft Skills",
+    "Status": "In Follow-Up",
+    "LeadScore": "High",
+    "AssignedTo": "Riya Sinha",
+    "Source": "WhatsApp",
+    "CreatedOn": "17 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1005",
+    "Name": "Priya Desai",
+    "CoachType": "Mentor",
+    "AreaOfExpertise": "Resume Building",
+    "Status": "Contacted",
+    "LeadScore": "Medium",
+    "AssignedTo": "Ajay Mehta",
+    "Source": "LinkedIn",
+    "CreatedOn": "15 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1006",
+    "Name": "Ramesh Yadav",
+    "CoachType": "Educator",
+    "AreaOfExpertise": "Aptitude Training",
+    "Status": "New",
+    "LeadScore": "Low",
+    "AssignedTo": "Not Assigned",
+    "Source": "Referral",
+    "CreatedOn": "22 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1007",
+    "Name": "Neha Sharma",
+    "CoachType": "Consultant",
+    "AreaOfExpertise": "Behavioral Interviews",
+    "Status": "Engaged",
+    "LeadScore": "High",
+    "AssignedTo": "Riya Sinha",
+    "Source": "Website",
+    "CreatedOn": "23 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1008",
+    "Name": "Aman Kapoor",
+    "CoachType": "Mentor",
+    "AreaOfExpertise": "Group Discussions",
+    "Status": "In Follow-Up",
+    "LeadScore": "Medium",
+    "AssignedTo": "Ajay Mehta",
+    "Source": "Email Campaign",
+    "CreatedOn": "21 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1009",
+    "Name": "Simran Joshi",
+    "CoachType": "Educator",
+    "AreaOfExpertise": "Communication Skills",
+    "Status": "New",
+    "LeadScore": "Low",
+    "AssignedTo": "Not Assigned",
+    "Source": "WhatsApp",
+    "CreatedOn": "19 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1010",
+    "Name": "Kunal Arora",
+    "CoachType": "Consultant",
+    "AreaOfExpertise": "Sales Training",
+    "Status": "Contacted",
+    "LeadScore": "Medium",
+    "AssignedTo": "Ajay Mehta",
+    "Source": "Channel Partner",
+    "CreatedOn": "18 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1011",
+    "Name": "Meera Chopra",
+    "CoachType": "Mentor",
+    "AreaOfExpertise": "LinkedIn Optimization",
+    "Status": "Engaged",
+    "LeadScore": "High",
+    "AssignedTo": "Riya Sinha",
+    "Source": "Website",
+    "CreatedOn": "17 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1012",
+    "Name": "Tarun Bhatia",
+    "CoachType": "Educator",
+    "AreaOfExpertise": "Public Speaking",
+    "Status": "In Follow-Up",
+    "LeadScore": "Medium",
+    "AssignedTo": "Anjali Nair",
+    "Source": "Email Campaign",
+    "CreatedOn": "20 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1013",
+    "Name": "Kritika Rao",
+    "CoachType": "Consultant",
+    "AreaOfExpertise": "Leadership Development",
+    "Status": "New",
+    "LeadScore": "Low",
+    "AssignedTo": "Not Assigned",
+    "Source": "Referral",
+    "CreatedOn": "24 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1014",
+    "Name": "Vikas Menon",
+    "CoachType": "Mentor",
+    "AreaOfExpertise": "Mock Interviews",
+    "Status": "Contacted",
+    "LeadScore": "Medium",
+    "AssignedTo": "Ajay Mehta",
+    "Source": "Channel Partner",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CL-1015",
+    "Name": "Sanya Singh",
+    "CoachType": "Educator",
+    "AreaOfExpertise": "Voice & Accent",
+    "Status": "Engaged",
+    "LeadScore": "High",
+    "AssignedTo": "Riya Sinha",
+    "Source": "Website",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  }
+];
