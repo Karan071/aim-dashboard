@@ -9,17 +9,16 @@
 // }
 import { Button } from "@/components/ui/button";
 import {
-  Eye,
   Filter,
-  BadgeQuestionMark,
-  Bell,
   Notebook,
-  Plus,
   Search,
   MessageSquare,
   Phone,
   FileDown,
-  X,
+  MessageCircle,
+  Tag,
+  User2,
+  PenSquare,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -47,9 +46,9 @@ import {CoachLeadsTable   } from "@/data/Data";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
-import type { DateRange } from "react-day-picker";
 import React from "react";
+import RadioButton from "@/components/ui/Radiobutton";
+import { DateRangePicker } from "@/components/ui/RangeCalender";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -83,7 +82,7 @@ const stats = [
   },
   {
     title: "Converted Coaches",
-    value: "9",
+    value: "19",
     icon: Notebook,
     performance: Down,
   },
@@ -110,32 +109,13 @@ export function Coaches() {
 function Topbar() {
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span> Create New Partner</span>
-      </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Manage Partners</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">Import Leads (Excel/CSV)</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">View Leads</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export Leads</span>
-        </Button>
+    <div className="px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      
+      <div className="flex gap-4 justify-end">
+        
         <Button
-          variant="border"
+          variant="standard" size="new"
           onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
         >
           <Filter className="h-4 w-4" />
           {showFilter ? "Hide Filters" : "Show Filters"}
@@ -150,34 +130,37 @@ interface FilterProps {
   onClose: () => void;
 }
 
+
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("General");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
+      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
+
+      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-      onClose();
+
+      onClose(); // Close modal otherwise
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  // Filter states
-  const [search, setSearch] = useState("");
-  const [coachType, setCoachType] = useState<string[]>([]);
-  const [status, setStatus] = useState<string[]>([]);
-  const [leadScore, setLeadScore] = useState<string[]>([]);
-  const [areaOfExpertise, setAreaOfExpertise] = useState<string[]>([]);
-  const [channelPartner, setChannelPartner] = useState<string[]>([]);
-  const [assignedTo, setAssignedTo] = useState<string[]>([]);
-  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
+  const [status, setStatus] = useState("New");
+  const [coachType, setCoachType] = useState("Consultant");
+  const [leadScore, setLeadScore] = useState("High");
+  const [areaOfExpertise, setAreaOfExpertise] = useState("Career Counseling");
+  const [assignedTo, setAssignedTo] = useState("Team Member 1");
+  const [channelPartner, setChannelPartner] = useState("Yes");
 
   const tabList = [
     "General",
@@ -190,36 +173,18 @@ function AdvancedFilters({ onClose }: FilterProps) {
     "Date Range",
   ];
 
-  // Helper for checkbox
-  const handleMultiSelect = (setter: React.Dispatch<React.SetStateAction<string[]>>, option: string) => {
-    setter((prev) =>
-      prev.includes(option) ? prev.filter((s) => s !== option) : [...prev, option]
-    );
-  };
-
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
-            Filters
-          </CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
-            onClick={() => {
-              setSearch("");
-              setCoachType([]);
-              setStatus([]);
-              setLeadScore([]);
-              setAreaOfExpertise([]);
-              setChannelPartner([]);
-              setAssignedTo([]);
-              setDateRange(undefined);
-            }}
           >
             Clear All
           </Button>
@@ -227,16 +192,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
+
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${
-                    activeTab === tab
-                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                  }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -245,131 +210,164 @@ function AdvancedFilters({ onClose }: FilterProps) {
           </div>
 
           {/* Tab Content */}
+
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">
-                  Search by Name / Email / Mobile:
-                </label>
-                <Input
-                  id="Gen"
-                  placeholder="Enter name, email, or mobile..."
-                  type="text"
-                  className="mt-4 w-full "
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                <label htmlFor="Gen" className="text-[var(--text)]">Search By Name : :</label>
+                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+
               </>
             )}
-            {activeTab === "Coach Type" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Coach Type:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Consultant", "Mentor", "Educator"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={coachType.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setCoachType, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
+
             {activeTab === "Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select your current Status:
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["New", "Contacted", "In Follow-Up", "Engaged", "Closed"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={status.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setStatus, option)}
-                      />
-                      {option}
-                    </label>
+                  {[
+                    "New",
+                    "Contacted",
+                    "In Follow-Up",
+                    "Engaged",
+                    "Closed",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={status}
+                      onChange={setStatus}
+                    />
                   ))}
                 </div>
               </>
             )}
-            {activeTab === "Lead Score" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Lead Score:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["High", "Medium", "Low"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={leadScore.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setLeadScore, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
+
             {activeTab === "Area of Expertise" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Area of Expertise:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Area of Expertise :
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Career Counseling", "Entrance Prep", "Soft Skills", "etc."].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={areaOfExpertise.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setAreaOfExpertise, option)}
-                      />
-                      {option}
-                    </label>
+                  {[
+                    "Career Counseling",
+                    " Entrance Prep",
+                    "Soft Skills",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={areaOfExpertise}
+                      onChange={setAreaOfExpertise}
+                    />
                   ))}
                 </div>
               </>
             )}
-            {activeTab === "Channel Partner" && (
+
+            {activeTab === "Lead Score" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Channel Partner:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Lead Score :
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Yes", "No"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={channelPartner.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setChannelPartner, option)}
-                      />
-                      {option}
-                    </label>
+                  {[
+                    "High",
+                    "Medium",
+                    "Low",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={leadScore}
+                      onChange={setLeadScore}
+                    />
                   ))}
                 </div>
               </>
             )}
+
+            {activeTab === "Coach Type" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Coach Type :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Consultant",
+                    "Mentor",
+                    "Educator",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={coachType}
+                      onChange={setCoachType}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
             {activeTab === "Assigned To" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Assigned To:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Team Member"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={assignedTo.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setAssignedTo, option)}
-                      />
-                      {option}
-                    </label>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Assigned To :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Team Member 1",
+                    "Team Member 2",
+                    "Team Member 3",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={assignedTo}
+                      onChange={setAssignedTo}
+                    />
                   ))}
                 </div>
               </>
             )}
-            {activeTab === "Date Range" && (
+
+              {activeTab === "Channel Partner" && (
               <>
-                <label htmlFor="date-range" className="text-[var(--text)] mt-4 block">
-                  Date Range: Created / Last Activity
-                </label>
-                <div className="mt-4 min-w-full">
-                  <DatePickerWithRange
-                    value={dateRange}
-                    onChange={setDateRange}
-                  />
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Channel Partner :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Yes",
+                    "No",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={channelPartner}
+                      onChange={setChannelPartner}
+                    />
+                  ))}
                 </div>
               </>
             )}
+
+                {activeTab === "Date Range" && (
+              <>
+                <label htmlFor="act" className="text-[var(--text)]">Select Your Date Range:</label>
+                <div className="mt-4 min-w-full">
+                  <DateRangePicker />
+                </div>
+              </>
+            )}
+
             {/* Footer */}
           </div>
         </div>
@@ -388,13 +386,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
+
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -581,19 +580,27 @@ function TableSection() {
 
             {selectedUsers.length > 0 && (
               <div className="flex gap-2 ml-2">
-                <Button variant="border" size="sm">
-                  <Bell className="h-4 w-4" />
-                  Send Reminder
-                </Button>
-                <Button variant="border" size="sm">
-                  <FileDown className=" h-4 w-4" />
-                  Export list
-                </Button>
-                <Button variant="delete" size="sm">
-                  <X className=" h-4 w-4 text-[var(--red)]" />
-                  Mark Inactive / Remove
-                </Button>
-              </div>
+              <Button variant="border" size="sm">
+                <PenSquare className="h-4 w-4" />
+                Assign / Reassign Leads
+              </Button>
+              <Button variant="border" size="sm">
+                <User2 className=" h-4 w-4" />
+                Change Status
+              </Button>
+              <Button variant="border" size="sm">
+                <Tag className=" h-4 w-4 " />
+                Update Expertise
+              </Button>
+              <Button variant="border" size="sm">
+                <MessageCircle className=" h-4 w-4" />
+                Send Outreach Campaign
+              </Button>
+              <Button variant="border" size="sm">
+                <FileDown className=" h-4 w-4 " />
+                Export (.CSV)
+              </Button>
+            </div>
             )}
           </div>
 
@@ -739,13 +746,13 @@ function TableSection() {
                     <div className="text-low">{user.AreaOfExpertise}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.Status}</div>
+                  <Badge variant="standard">{user.Status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.LeadScore}</div>
+                  <Badge variant="standard">{user.LeadScore}</Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="standard">{user.AssignedTo}</Badge>
+                    <div className="text-low">{user.AssignedTo}</div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.Source}</div>

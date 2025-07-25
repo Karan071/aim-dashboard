@@ -5,14 +5,13 @@ import { Button } from "@/components/ui/button";
 import {
   Eye,
   Filter,
-  BadgeQuestionMark,
-  Bell,
   Notebook,
-  Plus,
   Search,
   Pen,
   FileDown,
-  X,
+  User2,
+  Tag,
+  MessageCircle,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -34,15 +33,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { SurveysTable } from "@/data/Data";
+import { ChevronDown, ChevronLeft, ChevronRight, PenSquare } from "lucide-react";
+import { LeadExplorersTable } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
-import type { DateRange } from "react-day-picker";
+import { DateRangePicker } from "@/components/ui/RangeCalender";
 import React from "react";
+import RadioButton from "@/components/ui/Radiobutton";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -51,36 +50,41 @@ const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
-    title: "Total Explorers",
-    value: "12,457",
+    title: "Total Leads",
+    value: "128",
     icon: Notebook,
     performance: Up,
   },
   {
-    title: "Active Explorers (30 Days)",
-    value: "4,385",
+    title: "High Score Leads",
+    value: "28",
     icon: Notebook,
     performance: Up,
   },
   {
-    title: "New Signups (This Week)",
-    value: "312",
+    title: "Assigned",
+    value: "90",
     icon: Notebook,
     performance: Down,
   },
   {
-    title: "New Signups (This Month)",
-    value: "1,038",
+    title: "Engaged",
+    value: "32",
     icon: Notebook,
     performance: Down,
   },
   {
-    title: "Total Enquiries",
-    value: "642",
+    title: "Converted",
+    value: "18",
     icon: Notebook,
     performance: Down,
   },
-  
+  {
+    title: "Unassigned",
+    value: "12",
+    icon: Notebook,
+    performance: Down,
+  },      
   
 
 ];
@@ -89,7 +93,7 @@ export function Explorers() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Explorers</h1>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">Leads Explorers</h1>
         <StatsCards />
         <Topbar />
 
@@ -102,30 +106,12 @@ export function Explorers() {
 function Topbar() {
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span> Create New Survey</span>
-      </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Manage Questions</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">Import Questions (Excel/CSV)</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">View Survey Results</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export Survey Data</span>
-        </Button>
+    <div className=" px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+     
+      <div className="flex justify-end">
+        
         <Button
-          variant="border"
+          variant="standard" size="new"
           onClick={() => setShowFilter(true)}
           className="flex items-center gap-2 self-end min-h-[40px]"
         >
@@ -142,68 +128,61 @@ interface FilterProps {
   onClose: () => void;
 }
 
+
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("General");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
+      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
+
+      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-      onClose();
+
+      onClose(); // Close modal otherwise
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  // Filter states
-  const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<string[]>([]);
-  const [audience, setAudience] = useState<string[]>([]);
-  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
+  const [status, setStatus] = useState("New");
+  const [segment, setSegment] = useState("6-8");
+  const [leadScore, setLeadScore] = useState("High");
+  const [objective, setObjective] = useState("Study Abroad");
+  const [assignedTo, setAssignedTo] = useState("Team Member 1");
+  const [channelPartner, setChannelPartner] = useState("Yes");
 
-  const tabList = ["General", "Status", "Audience For", "Date Range"];
-
-  // Helper for checkbox
-  const handleStatusChange = (option: string) => {
-    setStatus((prev) =>
-      prev.includes(option)
-        ? prev.filter((s) => s !== option)
-        : [...prev, option]
-    );
-  };
-  const handleAudienceChange = (option: string) => {
-    setAudience((prev) =>
-      prev.includes(option)
-        ? prev.filter((a) => a !== option)
-        : [...prev, option]
-    );
-  };
+  const tabList = [
+    "General",
+    "Segment",
+    "Status",
+    "Lead Score",
+    "Objective",
+    "Assigned To",
+    "Channel Partner",
+    "Date Range",
+  ];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
-            Filters
-          </CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
-            onClick={() => {
-              setSearch("");
-              setStatus([]);
-              setAudience([]);
-              setDateRange(undefined);
-            }}
           >
             Clear All
           </Button>
@@ -211,16 +190,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
+
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${
-                    activeTab === tab
-                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                  }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -229,74 +208,167 @@ function AdvancedFilters({ onClose }: FilterProps) {
           </div>
 
           {/* Tab Content */}
+
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">
-                  Search by Survey Title / Creator:
-                </label>
-                <Input
-                  id="Gen"
-                  placeholder="Enter title or creator..."
-                  type="text"
-                  className="mt-4 w-full "
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                <label htmlFor="Gen" className="text-[var(--text)]">Search By Name : :</label>
+                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+
               </>
             )}
 
             {activeTab === "Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select your current Status:
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Active", "Inactive", "Draft"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={status.includes(option)}
-                        onCheckedChange={() => handleStatusChange(option)}
-                      />
-                      {option}
-                    </label>
+                  {[
+                    "New",
+                    "Contacted",
+                    "In Follow-Up",
+                    "Engaged",
+                    "Closed",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={status}
+                      onChange={setStatus}
+                    />
                   ))}
                 </div>
               </>
             )}
 
-            {activeTab === "Audience For" && (
+            {activeTab === "Segment" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Audience For:
+                  Select Your Segment :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["9–10", "11–12", "UG", "PG", "Professionals"].map(
-                    (option) => (
-                      <label key={option} className="flex items-center gap-2">
-                        <Checkbox
-                          checked={audience.includes(option)}
-                          onCheckedChange={() => handleAudienceChange(option)}
-                        />
-                        {option}
-                      </label>
-                    )
-                  )}
+                  {[
+                    "6-8",
+                    "9-10",
+                    "11-12",
+                    "UG",
+                    "PG",
+                    "Professional"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={segment}
+                      onChange={setSegment}
+                    />
+                  ))}
                 </div>
               </>
             )}
 
-            {activeTab === "Date Range" && (
+            {activeTab === "Lead Score" && (
               <>
-                <label htmlFor="date-range" className="text-[var(--text)]">
-                  Date Range: Created or Last Active
-                </label>
-                <div className="mt-4 min-w-full">
-                  <DatePickerWithRange
-                    value={dateRange}
-                    onChange={setDateRange}
-                  />
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Lead Score :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "High",
+                    "Medium",
+                    "Low",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={leadScore}
+                      onChange={setLeadScore}
+                    />
+                  ))}
                 </div>
               </>
             )}
+
+            {activeTab === "Objective" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Objective :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Study Abroad",
+                    "Career Counselling",
+                    "Job Prep",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={objective}
+                      onChange={setObjective}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Assigned To" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Assigned To :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Team Member 1",
+                    "Team Member 2",
+                    "Team Member 3",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={assignedTo}
+                      onChange={setAssignedTo}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+              {activeTab === "Channel Partner" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Channel Partner :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Yes",
+                    "No",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={channelPartner}
+                      onChange={setChannelPartner}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+                {activeTab === "Date Range" && (
+              <>
+                <label htmlFor="act" className="text-[var(--text)]">Select Your Date Range:</label>
+                <div className="mt-4 min-w-full">
+                  <DateRangePicker />
+                </div>
+              </>
+            )}
+
             {/* Footer */}
           </div>
         </div>
@@ -315,13 +387,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
+
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-6">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -353,15 +426,15 @@ function TableSection() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedStack, setSelectedStack] = useState<typeof SurveysTable>(
-    SurveysTable[0] ? [SurveysTable[0]] : []
+  const [selectedStack, setSelectedStack] = useState<typeof LeadExplorersTable>(
+    LeadExplorersTable[0] ? [LeadExplorersTable[0]] : []
   );
   const [focusedId, setFocusedId] = useState<string | null>(
-    SurveysTable[0]?.id || null
+    LeadExplorersTable[0]?.id || null
   );
 
   // Sorting logic
-  const sortedData = [...SurveysTable];
+  const sortedData = [...LeadExplorersTable];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       let aValue = a[sortConfig.key as keyof typeof a];
@@ -372,13 +445,13 @@ function TableSection() {
         bValue = Array.isArray(bValue) ? bValue.join(", ") : bValue;
       }
       if (sortConfig.key === "questions" || sortConfig.key === "responses") {
-        aValue = Number(aValue);
-        bValue = Number(bValue);
+        aValue = String(aValue);
+        bValue = String(bValue);
       }
       if (sortConfig.key === "lastUpdated") {
         // Parse as date
-        aValue = Date.parse(aValue as string);
-        bValue = Date.parse(bValue as string);
+        aValue = String(aValue);
+        bValue = String(bValue);
       }
       if (aValue < bValue) {
         return sortConfig.direction === "ascending" ? -1 : 1;
@@ -454,7 +527,7 @@ function TableSection() {
     });
   }, [selectedStack, focusedId]);
 
-  const handleRowClick = (user: (typeof SurveysTable)[0]) => {
+  const handleRowClick = (user: (typeof LeadExplorersTable)[0]) => {
     // Double-click detected
     const exists = selectedStack.find((c) => c.id === user.id);
     if (!exists) {
@@ -507,16 +580,24 @@ function TableSection() {
             {selectedUsers.length > 0 && (
               <div className="flex gap-2 ml-2">
                 <Button variant="border" size="sm">
-                  <Bell className="h-4 w-4" />
-                  Send Reminder
+                  <PenSquare className="h-4 w-4" />
+                  Assign / Reassign Leads
                 </Button>
                 <Button variant="border" size="sm">
-                  <FileDown className=" h-4 w-4" />
-                  Export list
+                  <User2 className=" h-4 w-4" />
+                  Change Status
                 </Button>
-                <Button variant="delete" size="sm">
-                  <X className=" h-4 w-4 text-[var(--red)]" />
-                  Mark Inactive / Remove
+                <Button variant="border" size="sm">
+                  <Tag className=" h-4 w-4 " />
+                  Tag with Lead Score
+                </Button>
+                <Button variant="border" size="sm">
+                  <MessageCircle className=" h-4 w-4" />
+                  Send Campaign Message
+                </Button>
+                <Button variant="border" size="sm">
+                  <FileDown className=" h-4 w-4 " />
+                  Export (.CSV)
                 </Button>
               </div>
             )}
@@ -548,52 +629,67 @@ function TableSection() {
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
-                  onClick={() => requestSort("title")}
+                  onClick={() => requestSort("name")}
                   className="cursor-pointer text-[var(--text)] text-low"
                 >
-                  Title{" "}
-                  {sortConfig?.key === "title" &&
+                  Name{" "}
+                  {sortConfig?.key === "name" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("createdBy")}
+                  onClick={() => requestSort("segment")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Created By{" "}
-                  {sortConfig?.key === "createdBy" &&
+                  Segment{" "}
+                  {sortConfig?.key === "segment" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("for")}
+                  onClick={() => requestSort("objective")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  For{" "}
-                  {sortConfig?.key === "for" &&
+                  Objective{" "}
+                  {sortConfig?.key === "objective" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("questions")}
+                  onClick={() => requestSort("status")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Questions{" "}
-                  {sortConfig?.key === "questions" &&
+                  Status{" "}
+                  {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("responses")}
+                  onClick={() => requestSort("lead_score")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Responses{" "}
-                  {sortConfig?.key === "responses" &&
+                  Lead Score{" "}
+                {sortConfig?.key === "lead_score" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>  
+                <TableHead
+                  onClick={() => requestSort("assigned_to")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Assigned To{" "}
+                  {sortConfig?.key === "assigned_to" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Status</TableHead>
                 <TableHead
-                  onClick={() => requestSort("lastUpdated")}
+                  onClick={() => requestSort("source")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Last Updated{" "}
-                  {sortConfig?.key === "lastUpdated" &&
+                  Source{" "}
+                  {sortConfig?.key === "source" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("created_on")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Created On{" "}
+                  {sortConfig?.key === "created_on" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
 
@@ -636,28 +732,31 @@ function TableSection() {
                     <div className="flex items-center gap-4">
                       <div>
                         <div className="flex justify-start items-center">
-                          <div className="font-medium">{user.title}</div>
+                          <div className="font-medium">{user.name}</div>
                         </div>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.createdBy}</div>
+                    <div className="text-low">{user.segment}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.for}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.questions}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.responses}</div>
+                    <div className="text-low">{user.objective}</div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.lastUpdated}</div>
+                    <Badge variant="standard">{user.lead_score}</Badge>
+                  </TableCell>
+                  <TableCell>
+                      <div className="text-low">{user.assigned_to}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">{user.source}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">{user.created_on}</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
