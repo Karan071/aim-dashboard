@@ -37,13 +37,13 @@ import { Bugs as RelationBugs } from "@/pages/RelationDesk/Cases/Bugs";
 import { Abuses as RelationAbuses } from "@/pages/RelationDesk/Cases/Abuses";
 import { Explorers as RelationExplorersList } from "@/pages/RelationDesk/Explorers";
 import { Coaches as RelationCoachesList } from "@/pages/RelationDesk/Coaches";
-import { Institute } from "@/pages/RelationDesk/Organisation/Institute";
-import { Schools } from "@/pages/RelationDesk/Organisation/Schools";
-import { Colleges } from "@/pages/RelationDesk/Organisation/Colleges";
-import { Companies } from "@/pages/RelationDesk/Organisation/Companies";
-import { Universities } from "@/pages/RelationDesk/Organisation/Universities";
-import { Ngo } from "@/pages/RelationDesk/Organisation/Ngo";
-import { MyAccount } from "@/pages/RelationDesk/MyAccount";
+import { Institute as RelationInstitute } from "@/pages/RelationDesk/Organisation/Institute";
+import { Schools as RelationSchools } from "@/pages/RelationDesk/Organisation/Schools";
+import { Colleges as RelationColleges } from "@/pages/RelationDesk/Organisation/Colleges";
+import { Companies as RelationCompanies } from "@/pages/RelationDesk/Organisation/Companies";
+import { Universities as RelationUniversities } from "@/pages/RelationDesk/Organisation/Universities";
+import { Ngo as RelationNgo } from "@/pages/RelationDesk/Organisation/Ngo";
+import { MyAccounts } from "@/pages/RelationDesk/MyAccount";
 import { Leaderboard as RelationLeaderboard } from "@/pages/RelationDesk/Leaderboard";
 
 // Digital Desk
@@ -172,26 +172,26 @@ export default function AppRoutes() {
       <Route path="relation/coaches" element={<RelationCoachesList />} />
       <Route
         path="relation/organisations/institutes"
-        element={<Institute />}
+        element={<RelationInstitute />}
       />
       <Route
         path="relation/organisations/schools"
-        element={<Schools />}
+        element={<RelationSchools />}
       />
       <Route
         path="relation/organisations/colleges"
-        element={<Colleges />}
+        element={<RelationColleges />}
       />
       <Route
         path="relation/organisations/companies"
-        element={<Companies />}
+        element={<RelationCompanies />}
       />
       <Route
         path="relation/organisations/universities"
-        element={<Universities />}
+          element={<RelationUniversities />}
       />
-      <Route path="relation/organisations/ngos" element={<Ngo />} />
-      <Route path="relation/my-accounts" element={<MyAccount />} />
+      <Route path="relation/organisations/ngos" element={<RelationNgo />} />
+      <Route path="relation/my-accounts" element={<MyAccounts />} />
       <Route
         path="relation/leaderboard"
         element={<RelationLeaderboard />}
