@@ -722,6 +722,205 @@ export const OrganisationProfiles = [
   }
 ];
 
+export const CoachProfilesTable = [
+  {
+    id: "MTR/MH/07/25/189",
+    Name: "Ajay Kumar",
+    Type: "Mentor",
+    Specialty: "Psychology, UG Careers",
+    Contact: "Email, Phone",
+    Status: "Pending",
+    Organisation: "Aim College",
+    Joined: "12 May 2025",
+    LastActive: "2 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/190",
+    Name: "Rohini Sharma",
+    Type: "Mentor",
+    Specialty: "Career Transition, Soft Skills",
+    Contact: "Email",
+    Status: "Approved",
+    Organisation: "Aim College",
+    Joined: "10 Apr 2025",
+    LastActive: "1 day ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/191",
+    Name: "Karan Singh",
+    Type: "Mentor",
+    Specialty: "Engineering Careers",
+    Contact: "Phone",
+    Status: "Pending",
+    Organisation: "Aim College",
+    Joined: "24 Jun 2025",
+    LastActive: "5 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/192",
+    Name: "Sneha N",
+    Type: "Mentor",
+    Specialty: "Medicine Careers",
+    Contact: "Email, Phone",
+    Status: "Pending",
+    Organisation: "Aim College",
+    Joined: "07 May 2025",
+    LastActive: "4 days ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/193",
+    Name: "Vikram Chawla",
+    Type: "Mentor",
+    Specialty: "MBA, PG Careers",
+    Contact: "Email",
+    Status: "Approved",
+    Organisation: "Aim College",
+    Joined: "01 Jan 2025",
+    LastActive: "Just now",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/194",
+    Name: "Anjali Mehta",
+    Type: "Mentor",
+    Specialty: "Design & Architecture",
+    Contact: "Phone",
+    Status: "Pending",
+    Organisation: "Design School",
+    Joined: "05 Mar 2025",
+    LastActive: "6 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/195",
+    Name: "Ritesh Raj",
+    Type: "Mentor",
+    Specialty: "Commerce & Accounts",
+    Contact: "Email",
+    Status: "Approved",
+    Organisation: "Finance Academy",
+    Joined: "16 Apr 2025",
+    LastActive: "3 days ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/196",
+    Name: "Sanya Kapoor",
+    Type: "Mentor",
+    Specialty: "Interview Prep",
+    Contact: "Email, Phone",
+    Status: "Pending",
+    Organisation: "Career Boost",
+    Joined: "20 May 2025",
+    LastActive: "1 day ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/197",
+    Name: "Yuvraj Bhatia",
+    Type: "Mentor",
+    Specialty: "Government Exams",
+    Contact: "Phone",
+    Status: "Pending",
+    Organisation: "IAS Institute",
+    Joined: "18 Apr 2025",
+    LastActive: "2 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/198",
+    Name: "Tanvi Khurana",
+    Type: "Mentor",
+    Specialty: "Law & Legal Studies",
+    Contact: "Email",
+    Status: "Approved",
+    Organisation: "LawPath",
+    Joined: "03 May 2025",
+    LastActive: "Just now",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/199",
+    Name: "Deepak Jain",
+    Type: "Mentor",
+    Specialty: "Science Stream Guidance",
+    Contact: "Email, Phone",
+    Status: "Pending",
+    Organisation: "STEM Coaching",
+    Joined: "25 Jun 2025",
+    LastActive: "7 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/200",
+    Name: "Nisha Rathi",
+    Type: "Mentor",
+    Specialty: "Arts & Humanities",
+    Contact: "Email",
+    Status: "Approved",
+    Organisation: "Arts Plus",
+    Joined: "02 Feb 2025",
+    LastActive: "12 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/201",
+    Name: "Rajeev Malhotra",
+    Type: "Mentor",
+    Specialty: "Startups & Innovation",
+    Contact: "Phone",
+    Status: "Pending",
+    Organisation: "Startup Studio",
+    Joined: "14 Mar 2025",
+    LastActive: "1 week ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/202",
+    Name: "Megha Lamba",
+    Type: "Mentor",
+    Specialty: "Soft Skills Training",
+    Contact: "Email, Phone",
+    Status: "Approved",
+    Organisation: "Skill Forge",
+    Joined: "27 May 2025",
+    LastActive: "5 hours ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  },
+  {
+    id: "MTR/MH/07/25/203",
+    Name: "Amit Raghav",
+    Type: "Mentor",
+    Specialty: "IELTS, TOEFL Prep",
+    Contact: "Email, Phone",
+    Status: "Pending",
+    Organisation: "Language Lab",
+    Joined: "30 Jun 2025",
+    LastActive: "30 mins ago",
+    Picture: "avatar.png",
+    Actions: ["View", "Flag"]
+  }
+];
+
+
 export const TeamDirectoryTable = [
   {
     id: 1,
@@ -9586,7 +9785,7 @@ export const ScholarshipsTable=[
   },
   {
     "id": "SCH114",
-    "scholarship_name": "L’Oréal India For Young Women in Science",
+    "scholarship_name": "L'Oréal India For Young Women in Science",
     "type": "Private",
     "level": "UG",
     "eligibility": "Girls + Science",
@@ -9819,7 +10018,7 @@ export const FeedbackTable=[
     "submitted_on": "13 May 2025",
     "submitted_for": "Quiz Timer",
     "screenshot": "View",
-    "message": "Timer doesn’t pause during break",
+    "message": "Timer doesn't pause during break",
     "can_be_contacted": "No",
     "status": "Resolved",
     "actions": ["View", "Archive"]
