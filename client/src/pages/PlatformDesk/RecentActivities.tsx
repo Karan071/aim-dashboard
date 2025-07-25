@@ -41,24 +41,37 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 
 export function RecentActivities() {
-  const [showFilter, setShowFilter] = useState(false)
     return (
          <div className="flex gap-2 flex-col">
             <h1 className="text-2xl font-bold text-[var(--text-head)]">Recent Activities</h1>
-             <Button
-        variant="border"
-        onClick={() => setShowFilter(true)}
-        className="flex items-center gap-2 self-end"
-      >
-        <Filter className="h-4 w-4" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
-
-      {showFilter && <AdvanceFilter onClose={() => setShowFilter(false)} />}
-
+            <Filterbar/>
             <ActivityTable />
         </div>
     )
+}
+
+
+
+export function Filterbar() {
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+        <div className="flex gap-4">
+      </div>
+      <div className="flex gap-4">
+        <Button
+          variant="standard" size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-3 w-3" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
+
+        {showFilter && <AdvanceFilter onClose={() => setShowFilter(false)} />}
+
+      </div>
+    </div>
+  );
 }
 
 
@@ -396,7 +409,7 @@ function ActivityTable() {
                                 >
                                 <TableCell
                     className={cn(
-                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
+                      "pl-3 transition-all duration-200 border-l-4 border-l-[var(--background)] group-hover:border-[var(--brand-color)]",
                      )}
                   >
                     <Checkbox

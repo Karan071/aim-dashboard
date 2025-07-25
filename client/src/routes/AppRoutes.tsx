@@ -13,6 +13,8 @@ import { AccessCode as PlatformAccessCode } from "@/pages/PlatformDesk/Plans/Acc
 import { ConsultantPremium as PlatformConsultantPremium } from "@/pages/PlatformDesk/Plans/ConsultantPremium";
 import { FormTabsWrapper as PlatformForms } from "@/pages/PlatformDesk/Forms";
 import { DeskIAM as PlatformDeskIAM } from "@/pages/PlatformDesk/DeskIAM";
+import { AddTeamMember as PlatformAddTeamMember } from "@/pages/PlatformDesk/underDeskIAM/AddTeamMember";
+import { ManageRoles as PlatformManageRoles } from "@/pages/PlatformDesk/underDeskIAM/ManageRoles";
 
 // Review Desk
 import { Desk as ReviewDesk } from "@/pages/ReviewDesk/Desk";
@@ -22,6 +24,8 @@ import { ChannelPartners as ReviewChannelPartner } from "@/pages/ReviewDesk/Chan
 import { Libraries as ReviewLibraries } from "@/pages/ReviewDesk/Libraries";
 import { MapListing as ReviewMapListing } from "@/pages/ReviewDesk/MapListing";
 import { CustomInput as ReviewCustomInput } from "@/pages/ReviewDesk/CustomInput";
+import { CurrenOpenings as ReviewCurrenOpenings } from "@/pages/ReviewDesk/CurrenOpenings";
+import { JobApplication as ReviewJobApplication } from "@/pages/ReviewDesk/JobApplication";
 
 // Relations Desk
 import { Desk as RelationDesk } from "@/pages/RelationDesk/Desk";
@@ -116,6 +120,8 @@ export default function AppRoutes() {
       />
       <Route path="platform/forms" element={<PlatformForms />} />
       <Route path="platform/desk-iam" element={<PlatformDeskIAM />} />
+      <Route path="platform/desk-iam/addTeamMember" element={<PlatformAddTeamMember />} />
+      <Route path="platform/desk-iam/manageRole" element={<PlatformManageRoles />} />
 
       {/* Review Desk Routes */}
       <Route path="review/desk" element={<ReviewDesk />} />
@@ -134,6 +140,8 @@ export default function AppRoutes() {
         path="review/custom-inputs"
         element={<ReviewCustomInput />}
       />
+      <Route path="review/current-openings" element={<ReviewCurrenOpenings />} />  
+      <Route path="review/job-application" element={<ReviewJobApplication />} /> 
 
       {/* Relations Desk Routes */}
       <Route path="relation/desk" element={<RelationDesk />} />

@@ -10624,3 +10624,327 @@ export const CoachLeadsTable = [
     "Actions": "Call, Message"
   }
 ];
+export const CurrenOpeningsTable = [
+  {
+    "id": "COP0004",
+    "title": "IELTS Trainer",
+    "category": "Career Planning",
+    "location": "Bangalore (On-site)",
+    "applicants": 911,
+    "status": "Active",
+    "posted": "5 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0005",
+    "title": "Psychology Mentor",
+    "category": "Counselling & Psychology",
+    "location": "Hyderabad (Remote)",
+    "applicants": 233,
+    "status": "Active",
+    "posted": "2 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0006",
+    "title": "NEET Advisor",
+    "category": "Counselling & Psychology",
+    "location": "Delhi (Hybrid)",
+    "applicants": 890,
+    "status": "Active",
+    "posted": "3 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0007",
+    "title": "Engineering Counselor",
+    "category": "Test Prep",
+    "location": "Pune (Hybrid)",
+    "applicants": 741,
+    "status": "Active",
+    "posted": "4 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0008",
+    "title": "MBA Guide",
+    "category": "Language Training",
+    "location": "Hyderabad (Remote)",
+    "applicants": 992,
+    "status": "Active",
+    "posted": "1 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0009",
+    "title": "SAT Expert",
+    "category": "Academic Support",
+    "location": "Hyderabad (Remote)",
+    "applicants": 912,
+    "status": "Active",
+    "posted": "3 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0010",
+    "title": "Scholarship Mentor",
+    "category": "Career Planning",
+    "location": "Mumbai (Remote)",
+    "applicants": 987,
+    "status": "Active",
+    "posted": "4 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0011",
+    "title": "Group Discussion Coach",
+    "category": "Test Prep",
+    "location": "Bangalore (On-site)",
+    "applicants": 171,
+    "status": "Active",
+    "posted": "1 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0012",
+    "title": "Resume Specialist",
+    "category": "Career Planning",
+    "location": "Mumbai (Remote)",
+    "applicants": 371,
+    "status": "Active",
+    "posted": "2 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0013",
+    "title": "Mock Interview Trainer",
+    "category": "Test Prep",
+    "location": "Delhi (Hybrid)",
+    "applicants": 508,
+    "status": "Active",
+    "posted": "5 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0014",
+    "title": "Soft Skills Coach",
+    "category": "Test Prep",
+    "location": "Mumbai (Remote)",
+    "applicants": 462,
+    "status": "Active",
+    "posted": "6 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  },
+  {
+    "id": "COP0015",
+    "title": "Overseas Consultant",
+    "category": "Career Planning",
+    "location": "Delhi (Hybrid)",
+    "applicants": 609,
+    "status": "Active",
+    "posted": "4 month ago",
+    "actions": ["👁 View", "✏️ Edit", "❌ Close"]
+  }
+]
+export const JobApplicationTable = [
+  {
+    "application_id": "JBA0001",
+    "company_name": "Capgemini",
+    "designation": "Product Manager",
+    "apply_date": "22 May 2025",
+    "contacts": "John",
+    "type": "Contract",
+    "status": "New",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0002",
+    "company_name": "Capgemini",
+    "designation": "Product Manager",
+    "apply_date": "05 Mar 2025",
+    "contacts": "John",
+    "type": "Contract",
+    "status": "New",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0003",
+    "company_name": "Microsoft",
+    "designation": "Data Analyst",
+    "apply_date": "08 Feb 2025",
+    "contacts": "Amit",
+    "type": "Internship",
+    "status": "Approved",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0004",
+    "company_name": "Microsoft",
+    "designation": "DevOps Engineer",
+    "apply_date": "31 Jan 2025",
+    "contacts": "John",
+    "type": "Internship",
+    "status": "New",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0005",
+    "company_name": "Flipkart",
+    "designation": "Data Analyst",
+    "apply_date": "30 Apr 2025",
+    "contacts": "Priya",
+    "type": "Full-time",
+    "status": "Pending",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0006",
+    "company_name": "Deloitte",
+    "designation": "UX Designer",
+    "apply_date": "16 Mar 2025",
+    "contacts": "John",
+    "type": "Internship",
+    "status": "Rejected",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0007",
+    "company_name": "Infosys",
+    "designation": "Consultant",
+    "apply_date": "13 Jun 2025",
+    "contacts": "John",
+    "type": "Contract",
+    "status": "New",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0008",
+    "company_name": "Infosys",
+    "designation": "Consultant",
+    "apply_date": "13 Mar 2025",
+    "contacts": "Amit",
+    "type": "Internship",
+    "status": "New",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0009",
+    "company_name": "Deloitte",
+    "designation": "UX Designer",
+    "apply_date": "28 Mar 2025",
+    "contacts": "Liam",
+    "type": "Internship",
+    "status": "Approved",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0010",
+    "company_name": "TCS",
+    "designation": "Data Analyst",
+    "apply_date": "02 Jul 2025",
+    "contacts": "Meena",
+    "type": "Full-time",
+    "status": "Rejected",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0011",
+    "company_name": "Google",
+    "designation": "Data Analyst",
+    "apply_date": "20 May 2025",
+    "contacts": "Suresh",
+    "type": "Internship",
+    "status": "Pending",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0012",
+    "company_name": "Infosys",
+    "designation": "Data Analyst",
+    "apply_date": "08 Jun 2025",
+    "contacts": "Suresh",
+    "type": "Contract",
+    "status": "Rejected",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0013",
+    "company_name": "Wipro",
+    "designation": "DevOps Engineer",
+    "apply_date": "28 Apr 2025",
+    "contacts": "Liam",
+    "type": "Contract",
+    "status": "New",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0014",
+    "company_name": "EY",
+    "designation": "DevOps Engineer",
+    "apply_date": "13 Jul 2025",
+    "contacts": "Nina",
+    "type": "Full-time",
+    "status": "Pending",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0015",
+    "company_name": "Microsoft",
+    "designation": "Data Analyst",
+    "apply_date": "21 Jul 2025",
+    "contacts": "Amit",
+    "type": "Contract",
+    "status": "Approved",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0016",
+    "company_name": "Amazon",
+    "designation": "DevOps Engineer",
+    "apply_date": "12 Apr 2025",
+    "contacts": "Priya",
+    "type": "Internship",
+    "status": "Approved",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0017",
+    "company_name": "Infosys",
+    "designation": "Consultant",
+    "apply_date": "08 Apr 2025",
+    "contacts": "Liam",
+    "type": "Contract",
+    "status": "Pending",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0018",
+    "company_name": "EY",
+    "designation": "Consultant",
+    "apply_date": "01 May 2025",
+    "contacts": "Nina",
+    "type": "Internship",
+    "status": "Pending",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0019",
+    "company_name": "EY",
+    "designation": "Data Analyst",
+    "apply_date": "25 Feb 2025",
+    "contacts": "Suresh",
+    "type": "Internship",
+    "status": "Approved",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  },
+  {
+    "application_id": "JBA0020",
+    "company_name": "Infosys",
+    "designation": "Data Analyst",
+    "apply_date": "15 Apr 2025",
+    "contacts": "Meena",
+    "type": "Internship",
+    "status": "Rejected",
+    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+  }
+]
