@@ -1,16 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import RadioButton from "@/components/ui/Radiobutton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DeskIAMtable } from "@/data/Data";
+import { CurrenOpeningsTable } from "@/data/Data";
 import { cn } from "@/lib/utils";
-import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Eye, FileDown, Filter,Pen, Plus, Search, SquarePen, UserCheck, Users, UserX, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Bell, Calendar,  ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Eye, FileDown, Filter,Pen, PenSquare, Pin, Plus, Search, UserCheck, Users, UserX, X } from "lucide-react";
+import {  useState } from "react";
 
 
 
@@ -40,10 +38,10 @@ const stats = [
   },
 ];
 
-export function DeskIAM(){
+export function CurrenOpenings(){
     return(
        <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">DeskIAM</h1>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">Current Openings</h1>
             <StatsCards/>
             <Buttonbar/>
             <TableSection/>
@@ -82,21 +80,19 @@ function StatsCards() {
 
 function Buttonbar() {
   const [showFilter, setShowFilter] = useState(false);
-  const navigate = useNavigate();
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div className="flex gap-4">
       <Button variant="brand" size="new" 
-      onClick={() => navigate("/desk/platform/desk-iam/addTeamMember")}>
+     >
         <Plus className="h-3 w-3" />
-        <span className="">Add User</span>
+        <span className="">Add New Opening</span>
       </Button>
         </div>
       <div className="flex gap-4">
-        <Button variant="standard" size="new"
-        onClick={() => navigate("/desk/platform/desk-iam/manageRole")}>
-          <BookAIcon className="h-3 w-3" />
-          <span className="">Manage Roles</span>
+        <Button variant="standard" size="new">
+          <Calendar className="h-3 w-3" />
+          <span className="">Posted Within</span>
         </Button>
         <Button
         variant="standard" size="new" 
@@ -107,203 +103,11 @@ function Buttonbar() {
         {showFilter ? "Hide Filters" : "Show Filters"}
       </Button>
 
-      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export</span>
-        </Button>
       </div>
     </div>
   );
 }
 
-
-interface FilterProps {
-  onClose: () => void;
-}
-
-
-function AdvancedFilters({ onClose }: FilterProps) {
-  const modalRef = useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("General");
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      // Do nothing if clicking inside modal
-      if (modalRef.current && modalRef.current.contains(e.target as Node)) {
-        return;
-      }
-
-      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
-      const target = e.target as HTMLElement;
-      if (target.closest("[data-radix-popper-content-wrapper]")) {
-        return;
-      }
-
-      onClose(); // Close modal otherwise
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose]);
-
-  const [status, setStatus] = useState("Active");
-  const [department, setDepartment] = useState("Operations");
-  const [designation, setDesignation] = useState("Admin");
-
-  const tabList = [
-    "General",
-    "Department",
-    "Designation",
-    "Status",
-    "Reporting To",
-  ];
-
-  return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-
-      <div
-        ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
-      >
-        <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
-          <Button
-            variant="link"
-            className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
-          >
-            Clear All
-          </Button>
-        </div>
-        {/* Sidebar */}
-        <div className="flex ">
-          <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
-            <div className="flex flex-col ">
-              {tabList.map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
-                >
-                  {tab}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Tab Content */}
-
-          <div className="p-6 overflow-y-auto relative w-full">
-            {activeTab === "General" && (
-              <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Enter Name/Email :</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
-
-              </>
-            )}
-
-            {activeTab === "Status" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Status:
-                </p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Active",
-                    "Inactive",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={status}
-                      onChange={setStatus}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-
-            {activeTab === "Designation" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Designation :
-                </p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Admin",
-                    "Manager",
-                    "Executive",
-                    "HOD",
-                    "Team Lead",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={designation}
-                      onChange={setDesignation}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-
-            {activeTab === "Department" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Department :
-                </p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Operations",
-                    "Content",
-                    "Relations",
-                    "DevOps",
-                    "Digital",
-                    "Support",
-                    "Sales"
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={department}
-                      onChange={setDepartment}
-                    />
-                  ))}
-                </div>
-              </>
-            )}
-
-            {activeTab === "Reporting To" && (
-              <>
-                 <label htmlFor="Gen" className="text-[var(--text)]">Enter Who do you report to:</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
-                 </>
-            )}
-            {/* Footer */}
-          </div>
-        </div>
-        <div className="relative bottom-0 right-0 w-full px-6 py-4 flex border-t-1 justify-end gap-2">
-          <div className="flex gap-4 absolute left-[50%] -translate-x-[50%]">
-            <Button variant="border" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button variant="brand" onClick={onClose}>
-              Apply Filters
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 
 
@@ -316,7 +120,7 @@ function TableSection() {
     direction: "ascending" | "descending";
   } | null>(null);
   // Sorting logic
-  const sortedData = [...DeskIAMtable];
+    const sortedData = [...CurrenOpeningsTable];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -395,16 +199,24 @@ function TableSection() {
             {selectedUsers.length > 0 && (
               <div className="flex gap-2">        {/*wrap */}
                 <Button variant="border" size="sm">
-                  <Bell className="h-4 w-4" />
-                  Send Reminder
+                  <PenSquare className="h-4 w-4" />
+                  Change status
                 </Button>
                 <Button variant="border" size="sm">
-                  <Check className=" h-4 w-4 text-[var(--green)]" />
-                  Approve All
+                  <Eye className=" h-4 w-4" />
+                  View applicants
+                </Button>
+                <Button variant="border" size="sm">
+                  <FileDown className=" h-4 w-4 " />
+                  Export
+                </Button>
+                <Button variant="border" size="sm">
+                  <Pin className=" h-4 w-4 " />
+                  Feature
                 </Button>
                 <Button variant="delete" size="sm">
-                  <X className=" h-4 w-4 text-[var(--red)]" />
-                  Block / Remove
+                  <Bell className=" h-4 w-4 " />
+                  Send follow-up
                 </Button>
               </div>
             )}
@@ -436,51 +248,35 @@ function TableSection() {
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
-                  onClick={() => requestSort("name")}
+                  onClick={() => requestSort("title")}
                   className="cursor-pointer text-[var(--text)] text-low"
                 >
-                  Name / Designation{" "}
-                  {sortConfig?.key === "name" &&
+                  Title{" "}
+                  {sortConfig?.key === "title" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("email")}
+                  onClick={() => requestSort("category")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Email /Mobile{" "}
-                  {sortConfig?.key === "email" &&
+                  Category{" "}
+                  {sortConfig?.key === "category" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("department")}
+                  onClick={() => requestSort("location")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Department{" "}
-                  {sortConfig?.key === "department" &&
+                  Location{" "}
+                  {sortConfig?.key === "location" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("reportingTo")}
+                  onClick={() => requestSort("applicants")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Reporting to{" "}
-                  {sortConfig?.key === "reportingTo" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("role")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Role{" "}
-                  {sortConfig?.key === "role" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("lastLogin")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Last Login{" "}
-                  {sortConfig?.key === "lastLogin" &&
+                  Applicants{" "}
+                  {sortConfig?.key === "applicants" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
@@ -489,6 +285,14 @@ function TableSection() {
                 >
                   Status{" "}
                   {sortConfig?.key === "status" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("posted")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Posted{" "}
+                  {sortConfig?.key === "posted" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
@@ -518,34 +322,29 @@ function TableSection() {
                                     />
                                   </TableCell>
                   <TableCell>
-                            <div className="text-low">{user.name}</div>
+                            <div className="text-low">{user.title}</div>
                                       <div className="text-xs text-[var(--text)]">
-                                        {user.designation}
+                                        {user.id}
                                       </div>
                   </TableCell>
                   <TableCell>
-                                      <div className="text-low">{user.email}</div>
-                                      <div className="text-xs text-[var(--text)]">
-                                        {user.mobile}
-                                      </div>
+                                      <div className="text-low">{user.category}</div>
+
                                     </TableCell>
                                     
                   <TableCell>
-                    <div className="text-low">{user.department}</div>
+                    <div className="text-low">{user.location}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.reportingTo}</div>
+                    <div className="text-low">{user.applicants}</div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">
-                      <div>{`${user.role}`}</div>
+                    <Badge variant="standard">{user.status}</Badge>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.lastLogin}</div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="standard">{user.status}</Badge>
+                    <div className="text-low">{user.posted}</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
@@ -571,8 +370,8 @@ function TableSection() {
                         size="sm"
                         className="border-0 shadow-none"
                       >
-                        <SquarePen className="h-4 w-3" />
-                        <span className="sr-only">Reset Password</span>
+                        <X className="h-4 w-3" />
+                        <span className="sr-only">Close</span>
                       </Button>
                     </div>
                   </TableCell>

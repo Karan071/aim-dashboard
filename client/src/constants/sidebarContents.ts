@@ -225,6 +225,16 @@ export const SidebarData = {
           url: "/desk/review/custom-inputs",
           icon: getNextIcon(),
         },
+        {
+          title: "Current Openings",
+          url: "/desk/review/current-openings",
+          icon: getNextIcon(),
+        },
+        {
+          title: "Job Application",
+          url: "/desk/review/job-application",
+          icon: getNextIcon(),
+        },
       ],
     },
     // Relations Desk

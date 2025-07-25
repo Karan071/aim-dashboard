@@ -17,7 +17,7 @@ export function FormTabsWrapper() {
           <FormStats />
           <Formbar />
           <div className="">
-            <div className="inline-flex items-center justify-center rounded-b-none rounded-l-sm  rounded-r-sm bg-[var(--faded)] text-[var(--text)]">
+            <div className="inline-flex items-center justify-center rounded-b-none rounded-l-sm  rounded-r-sm bg-[var(--background)] border text-[var(--text)]">
               <button
                 className={`inline-flex items-center justify-center whitespace-nowrap rounded-b-none rounded-l-sm rounded-r-sm px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
                   activeTab === "forms" ? "bg-[var(--brand-color)] text-white " : ""
@@ -46,7 +46,7 @@ export function FormTabsWrapper() {
           <CustomInputStats />
           <CustomInputbar/>
           <div className="">
-            <div className="inline-flex items-center justify-center rounded-b-none rounded-l-sm  rounded-r-sm bg-[var(--faded)] text-[var(--text)]">
+            <div className="inline-flex items-center justify-center rounded-b-none rounded-l-sm  rounded-r-sm bg-[var(--background)] border text-[var(--text)]">
               <button
                 className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 `}
                 onClick={() => setActiveTab("forms")}

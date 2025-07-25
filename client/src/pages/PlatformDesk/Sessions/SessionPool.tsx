@@ -319,7 +319,7 @@ function StatCard() {
   return (
     <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
       {Stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
