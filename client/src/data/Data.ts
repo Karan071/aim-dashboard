@@ -10091,3 +10091,155 @@ export const ChannelPartnersTable=[
     "Actions": "Call, Assign"
   }
 ]
+export const PartnershipsTable = [
+  {
+    "id": "PAR-1001",
+    "Name/Org": "Green Valley School",
+    "Type": "School",
+    "InterestArea": "Listing + Sessions",
+    "Status": "Follow-Up",
+    "AssignedTo": "Riya Sinha",
+    "CreatedOn": "18 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1002",
+    "Name/Org": "Career Catalyst NGO",
+    "Type": "NGO",
+    "InterestArea": "Career Events",
+    "Status": "Contacted",
+    "AssignedTo": "Ajay Mehta",
+    "CreatedOn": "17 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1003",
+    "Name/Org": "TalentUp Corp",
+    "Type": "Corporation",
+    "InterestArea": "B2B + Internship Access",
+    "Status": "New",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "20 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1004",
+    "Name/Org": "Coach Neha Sharma",
+    "Type": "Coach",
+    "InterestArea": "Content Partnership",
+    "Status": "Converted",
+    "AssignedTo": "N/A",
+    "CreatedOn": "10 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1005",
+    "Name/Org": "Sunrise Public School",
+    "Type": "School",
+    "InterestArea": "Internship Drive",
+    "Status": "New",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "22 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1006",
+    "Name/Org": "BridgeHope Foundation",
+    "Type": "NGO",
+    "InterestArea": "Skill Development",
+    "Status": "Contacted",
+    "AssignedTo": "Ankit Sharma",
+    "CreatedOn": "19 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1007",
+    "Name/Org": "EduPro Pvt Ltd",
+    "Type": "Corporation",
+    "InterestArea": "B2B Collaboration",
+    "Status": "Follow-Up",
+    "AssignedTo": "Riya Sinha",
+    "CreatedOn": "21 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1008",
+    "Name/Org": "Coach Ramesh Yadav",
+    "Type": "Coach",
+    "InterestArea": "Mentor Sessions",
+    "Status": "Converted",
+    "AssignedTo": "N/A",
+    "CreatedOn": "15 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1009",
+    "Name/Org": "FutureEdge School",
+    "Type": "School",
+    "InterestArea": "Career Counseling",
+    "Status": "Contacted",
+    "AssignedTo": "Ajay Mehta",
+    "CreatedOn": "16 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1010",
+    "Name/Org": "Spark India Foundation",
+    "Type": "NGO",
+    "InterestArea": "Workshops + Outreach",
+    "Status": "New",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "23 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1011",
+    "Name/Org": "InnovateX Corp",
+    "Type": "Corporation",
+    "InterestArea": "Hiring + Internships",
+    "Status": "Follow-Up",
+    "AssignedTo": "Neha Verma",
+    "CreatedOn": "24 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1012",
+    "Name/Org": "Coach Priya Desai",
+    "Type": "Coach",
+    "InterestArea": "Online Courses",
+    "Status": "Converted",
+    "AssignedTo": "N/A",
+    "CreatedOn": "11 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1013",
+    "Name/Org": "Excel Heights School",
+    "Type": "School",
+    "InterestArea": "Career Talks + Internships",
+    "Status": "Contacted",
+    "AssignedTo": "Riya Sinha",
+    "CreatedOn": "18 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1014",
+    "Name/Org": "Unity Works",
+    "Type": "NGO",
+    "InterestArea": "Placement Drives",
+    "Status": "Follow-Up",
+    "AssignedTo": "Anjali Nair",
+    "CreatedOn": "19 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "PAR-1015",
+    "Name/Org": "BrightPath Corp",
+    "Type": "Corporation",
+    "InterestArea": "Hiring, Mentorship",
+    "Status": "New",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  }
+];
