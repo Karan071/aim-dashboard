@@ -2,17 +2,14 @@ import { Button } from "@/components/ui/button";
 import {
   Eye,
   Filter,
-BadgeQuestionMark,
-
+  BadgeQuestionMark,
   Bell,
   Notebook,
-
   Plus,
   Search,
   Pen,
   FileDown,
   X,
-
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -35,16 +32,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import {  SurveysTable } from "@/data/Data";
+import { SurveysTable } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DatePickerWithRange } from '@/components/application-component/date-range-picker';
-import type { DateRange } from 'react-day-picker';
+import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
+import type { DateRange } from "react-day-picker";
 import React from "react";
-
-
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -64,46 +59,35 @@ const stats = [
     icon: Notebook,
     performance: Up,
   },
-   {
+  {
     title: "Total Responses Collected",
     value: "13,580",
     icon: Notebook,
     performance: Down,
   },
-
- 
 ];
 
-
-
-
-
 export function Surveys() {
- 
-
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-[var(--text-head)]">Surveys</h1>
         <StatsCards />
-   <Topbar  />
+        <Topbar />
 
-        <TableSection/>
+        <TableSection />
       </div>
     </div>
   );
 }
 
-function Topbar()  {
-     const [showFilter, setShowFilter] = useState(false);
+function Topbar() {
+  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button
-        variant="brand"
-        size="new"
-      >
+      <Button variant="brand" size="new">
         <Plus className="h-3 w-3" />
-        <span>  Create New Survey</span>
+        <span> Create New Survey</span>
       </Button>
       <div className="flex gap-4 flex-wrap">
         <Button variant="standard" size="new">
@@ -112,8 +96,7 @@ function Topbar()  {
         </Button>
         <Button variant="standard" size="new">
           <Eye className="h-3 w-3" />
-          <span className="">Import Questions (Excel/CSV)
-          </span>
+          <span className="">Import Questions (Excel/CSV)</span>
         </Button>
         <Button variant="standard" size="new">
           <Eye className="h-3 w-3" />
@@ -154,7 +137,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-      onClose(); 
+      onClose();
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -166,22 +149,21 @@ function AdvancedFilters({ onClose }: FilterProps) {
   const [audience, setAudience] = useState<string[]>([]);
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const tabList = [
-    "General",
-    "Status",
-    "Audience For",
-    "Date Range",
-  ];
+  const tabList = ["General", "Status", "Audience For", "Date Range"];
 
   // Helper for checkbox
   const handleStatusChange = (option: string) => {
     setStatus((prev) =>
-      prev.includes(option) ? prev.filter((s) => s !== option) : [...prev, option]
+      prev.includes(option)
+        ? prev.filter((s) => s !== option)
+        : [...prev, option]
     );
   };
   const handleAudienceChange = (option: string) => {
     setAudience((prev) =>
-      prev.includes(option) ? prev.filter((a) => a !== option) : [...prev, option]
+      prev.includes(option)
+        ? prev.filter((a) => a !== option)
+        : [...prev, option]
     );
   };
 
@@ -192,7 +174,9 @@ function AdvancedFilters({ onClose }: FilterProps) {
         className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Filters
+          </CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
@@ -214,10 +198,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${
+                    activeTab === tab
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -229,23 +214,23 @@ function AdvancedFilters({ onClose }: FilterProps) {
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Search by Survey Title / Creator:</label>
+                <label htmlFor="Gen" className="text-[var(--text)]">
+                  Search by Survey Title / Creator:
+                </label>
                 <Input
                   id="Gen"
                   placeholder="Enter title or creator..."
                   type="text"
                   className="mt-4 w-full "
                   value={search}
-                  onChange={e => setSearch(e.target.value)}
+                  onChange={(e) => setSearch(e.target.value)}
                 />
               </>
             )}
 
             {activeTab === "Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Status:
-                </p>
+                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
                   {["Active", "Inactive", "Draft"].map((option) => (
                     <label key={option} className="flex items-center gap-2">
@@ -266,24 +251,31 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Audience For:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["9–10", "11–12", "UG", "PG", "Professionals"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={audience.includes(option)}
-                        onCheckedChange={() => handleAudienceChange(option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
+                  {["9–10", "11–12", "UG", "PG", "Professionals"].map(
+                    (option) => (
+                      <label key={option} className="flex items-center gap-2">
+                        <Checkbox
+                          checked={audience.includes(option)}
+                          onCheckedChange={() => handleAudienceChange(option)}
+                        />
+                        {option}
+                      </label>
+                    )
+                  )}
                 </div>
               </>
             )}
 
             {activeTab === "Date Range" && (
               <>
-                <label htmlFor="date-range" className="text-[var(--text)]">Date Range: Created or Last Active</label>
+                <label htmlFor="date-range" className="text-[var(--text)]">
+                  Date Range: Created or Last Active
+                </label>
                 <div className="mt-4 min-w-full">
-                  <DatePickerWithRange value={dateRange} onChange={setDateRange} />
+                  <DatePickerWithRange
+                    value={dateRange}
+                    onChange={setDateRange}
+                  />
                 </div>
               </>
             )}
@@ -309,7 +301,10 @@ function StatsCards() {
   return (
     <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
       {stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card
+          key={index}
+          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+        >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -340,10 +335,12 @@ function TableSection() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedStack, setSelectedStack] = useState<
-    typeof SurveysTable
-  >(SurveysTable[0] ? [SurveysTable[0]] : []);
-  const [focusedId, setFocusedId] = useState<string | null>(SurveysTable[0]?.id || null);
+  const [selectedStack, setSelectedStack] = useState<typeof SurveysTable>(
+    SurveysTable[0] ? [SurveysTable[0]] : []
+  );
+  const [focusedId, setFocusedId] = useState<string | null>(
+    SurveysTable[0]?.id || null
+  );
 
   // Sorting logic
   const sortedData = [...SurveysTable];
@@ -488,7 +485,7 @@ function TableSection() {
                 </Badge>
               )}
             </div>
-            
+
             {selectedUsers.length > 0 && (
               <div className="flex gap-2 ml-2">
                 <Button variant="border" size="sm">
@@ -506,7 +503,7 @@ function TableSection() {
               </div>
             )}
           </div>
-          
+
           {/* Search Bar */}
           <div className="flex justify-end items-center gap-4 ">
             <div className="flex justify-around items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
@@ -581,7 +578,7 @@ function TableSection() {
                   {sortConfig?.key === "lastUpdated" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-              
+
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -635,13 +632,13 @@ function TableSection() {
                   <TableCell>
                     <div className="text-low">{user.questions}</div>
                   </TableCell>
-                   <TableCell>
+                  <TableCell>
                     <div className="text-low">{user.responses}</div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
-                   <TableCell>
+                  <TableCell>
                     <div className="text-low">{user.lastUpdated}</div>
                   </TableCell>
                   <TableCell>
@@ -670,7 +667,6 @@ function TableSection() {
           </Table>
         </div>
 
-
         <div className="flex items-center justify-between flex-wrap gap-2 p-4">
           <div className="flex items-center gap-4">
             <DropdownMenu>
@@ -685,7 +681,7 @@ function TableSection() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[ 10, 25, 50, 100].map((size) => (
+                {[10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {
@@ -719,7 +715,9 @@ function TableSection() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"}`}
+                className={`h-8 w-8 p-0 ${
+                  page === currentPage ? "text-white" : "text-[var(--text)]"
+                }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
@@ -741,5 +739,3 @@ function TableSection() {
     </div>
   );
 }
-
-

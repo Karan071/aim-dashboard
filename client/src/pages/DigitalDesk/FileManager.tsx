@@ -1,3 +1,8 @@
 export function FileManager() {
-  return <div>FileManager</div>;
+  return (
+    <div>
+      FileManager
+      <p>No data provided</p>
+    </div>
+  );
 }

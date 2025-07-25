@@ -1,3 +1,8 @@
 export function MetaInformation() {
-  return <div>MetaInformation</div>;
+  return (
+    <div>
+      MetaInformation
+      <p>No data provided</p>
+    </div>
+  );
 }

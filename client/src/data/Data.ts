@@ -9924,3 +9924,170 @@ export const FeedbackTable=[
     "actions": ["View", "Archive"]
   }
 ]
+export const ChannelPartnersTable=[
+  {
+    "id": "CHA-1001",
+    "PartnerName": "Campus Spark (DU)",
+    "LeadType": "Explorer",
+    "LeadName/Org": "Aayush Kapoor",
+    "Status": "Converted",
+    "Commission": "₹300 – Paid",
+    "AssignedTo": "Riya Sinha",
+    "CreatedOn": "10 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1002",
+    "PartnerName": "CareerLinks India",
+    "LeadType": "Coach",
+    "LeadName/Org": "Ankit Sharma",
+    "Status": "Contacted",
+    "Commission": "₹0 – Pending",
+    "AssignedTo": "Ajay Mehta",
+    "CreatedOn": "14 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1003",
+    "PartnerName": "EduServe Partners",
+    "LeadType": "School",
+    "LeadName/Org": "Green Valley School",
+    "Status": "Follow-Up",
+    "Commission": "₹450 – Approved",
+    "AssignedTo": "N/A",
+    "CreatedOn": "18 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1004",
+    "PartnerName": "CareerBridge",
+    "LeadType": "Org",
+    "LeadName/Org": "StartSmart NGO",
+    "Status": "New",
+    "Commission": "₹0 – Pending",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "20 Jul 2025",
+    "Actions": "Call, Assign"
+  },
+  {
+    "id": "CHA-1005",
+    "PartnerName": "NextGen Talent",
+    "LeadType": "Explorer",
+    "LeadName/Org": "Ishita Malhotra",
+    "Status": "Converted",
+    "Commission": "₹500 – Paid",
+    "AssignedTo": "Neha Verma",
+    "CreatedOn": "21 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1006",
+    "PartnerName": "Bright Future",
+    "LeadType": "Coach",
+    "LeadName/Org": "Rahul Jain",
+    "Status": "Follow-Up",
+    "Commission": "₹200 – Approved",
+    "AssignedTo": "Nikhil Rao",
+    "CreatedOn": "22 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1007",
+    "PartnerName": "SkillEdge Academy",
+    "LeadType": "School",
+    "LeadName/Org": "Delhi Public School",
+    "Status": "Contacted",
+    "Commission": "₹100 – Pending",
+    "AssignedTo": "Sakshi Sharma",
+    "CreatedOn": "23 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1008",
+    "PartnerName": "EduMentors",
+    "LeadType": "Org",
+    "LeadName/Org": "BrightMind Foundation",
+    "Status": "Converted",
+    "Commission": "₹600 – Paid",
+    "AssignedTo": "Varun Batra",
+    "CreatedOn": "24 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1009",
+    "PartnerName": "YouthIgnite",
+    "LeadType": "Explorer",
+    "LeadName/Org": "Sneha Gupta",
+    "Status": "New",
+    "Commission": "₹0 – Pending",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "24 Jul 2025",
+    "Actions": "Call, Assign"
+  },
+  {
+    "id": "CHA-1010",
+    "PartnerName": "MentorConnect",
+    "LeadType": "Coach",
+    "LeadName/Org": "Vikram Ahuja",
+    "Status": "Follow-Up",
+    "Commission": "₹350 – Approved",
+    "AssignedTo": "Anjali Nair",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1011",
+    "PartnerName": "CampusShine",
+    "LeadType": "School",
+    "LeadName/Org": "Modern School Noida",
+    "Status": "Contacted",
+    "Commission": "₹100 – Pending",
+    "AssignedTo": "Raghav Khanna",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1012",
+    "PartnerName": "FutureMakers",
+    "LeadType": "Org",
+    "LeadName/Org": "ChangeMakers Trust",
+    "Status": "New",
+    "Commission": "₹0 – Pending",
+    "AssignedTo": "Unassigned",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Assign"
+  },
+  {
+    "id": "CHA-1013",
+    "PartnerName": "SkillX",
+    "LeadType": "Explorer",
+    "LeadName/Org": "Karan Malhotra",
+    "Status": "Converted",
+    "Commission": "₹400 – Paid",
+    "AssignedTo": "Priya Singh",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1014",
+    "PartnerName": "PathwayEd",
+    "LeadType": "Coach",
+    "LeadName/Org": "Tanya Bajaj",
+    "Status": "Follow-Up",
+    "Commission": "₹150 – Approved",
+    "AssignedTo": "Deepak Chauhan",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Message"
+  },
+  {
+    "id": "CHA-1015",
+    "PartnerName": "LeapFrog Alliance",
+    "LeadType": "School",
+    "LeadName/Org": "Sunrise Public School",
+    "Status": "New",
+    "Commission": "₹0 – Pending",
+    "AssignedTo": "Not Assigned",
+    "CreatedOn": "25 Jul 2025",
+    "Actions": "Call, Assign"
+  }
+]
