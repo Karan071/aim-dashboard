@@ -62,7 +62,7 @@ const stats = [
     title: "Under Investigation",
     value: "6",
     icon: UserCheck,
-    performance: Up,
+    performance: Down,
   },
 
   {
