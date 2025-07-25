@@ -38,7 +38,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { SurveysTable } from "@/data/Data";
+import {ChannelPartnersTable  } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -172,25 +172,28 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
   // Filter states
   const [search, setSearch] = useState("");
+  const [leadType, setLeadType] = useState<string[]>([]);
+  const [partnerType, setPartnerType] = useState<string[]>([]);
   const [status, setStatus] = useState<string[]>([]);
-  const [audience, setAudience] = useState<string[]>([]);
+  const [commissionStatus, setCommissionStatus] = useState<string[]>([]);
+  const [region, setRegion] = useState("");
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
+  const [assignedTo, setAssignedTo] = useState<string[]>([]);
 
-  const tabList = ["General", "Status", "Audience For", "Date Range"];
+  const tabList = [
+    "General",
+    "Lead Type",
+    "Partner Type",
+    "Status",
+    "Commission Status",
+    "Region / Date Range",
+    "Assigned To",
+  ];
 
   // Helper for checkbox
-  const handleStatusChange = (option: string) => {
-    setStatus((prev) =>
-      prev.includes(option)
-        ? prev.filter((s) => s !== option)
-        : [...prev, option]
-    );
-  };
-  const handleAudienceChange = (option: string) => {
-    setAudience((prev) =>
-      prev.includes(option)
-        ? prev.filter((a) => a !== option)
-        : [...prev, option]
+  const handleMultiSelect = (setter: React.Dispatch<React.SetStateAction<string[]>>, option: string) => {
+    setter((prev) =>
+      prev.includes(option) ? prev.filter((s) => s !== option) : [...prev, option]
     );
   };
 
@@ -209,9 +212,13 @@ function AdvancedFilters({ onClose }: FilterProps) {
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
             onClick={() => {
               setSearch("");
+              setLeadType([]);
+              setPartnerType([]);
               setStatus([]);
-              setAudience([]);
+              setCommissionStatus([]);
+              setRegion("");
               setDateRange(undefined);
+              setAssignedTo([]);
             }}
           >
             Clear All
@@ -242,11 +249,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
             {activeTab === "General" && (
               <>
                 <label htmlFor="Gen" className="text-[var(--text)]">
-                  Search by Survey Title / Creator:
+                  Search by Partner Name / Code:
                 </label>
                 <Input
                   id="Gen"
-                  placeholder="Enter title or creator..."
+                  placeholder="Enter partner name or code..."
                   type="text"
                   className="mt-4 w-full "
                   value={search}
@@ -254,16 +261,15 @@ function AdvancedFilters({ onClose }: FilterProps) {
                 />
               </>
             )}
-
-            {activeTab === "Status" && (
+            {activeTab === "Lead Type" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">Lead Type:</p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Active", "Inactive", "Draft"].map((option) => (
+                  {["Explorer", "School", "Coach", "Organisation"].map((option) => (
                     <label key={option} className="flex items-center gap-2">
                       <Checkbox
-                        checked={status.includes(option)}
-                        onCheckedChange={() => handleStatusChange(option)}
+                        checked={leadType.includes(option)}
+                        onCheckedChange={() => handleMultiSelect(setLeadType, option)}
                       />
                       {option}
                     </label>
@@ -271,31 +277,68 @@ function AdvancedFilters({ onClose }: FilterProps) {
                 </div>
               </>
             )}
-
-            {activeTab === "Audience For" && (
+            {activeTab === "Partner Type" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Audience For:
-                </p>
+                <p className="text-sm text-[var(--text-head)] mb-4">Partner Type:</p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["9–10", "11–12", "UG", "PG", "Professionals"].map(
-                    (option) => (
-                      <label key={option} className="flex items-center gap-2">
-                        <Checkbox
-                          checked={audience.includes(option)}
-                          onCheckedChange={() => handleAudienceChange(option)}
-                        />
-                        {option}
-                      </label>
-                    )
-                  )}
+                  {["Campus Rep", "Freelancer", "Agency", "Corporate"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={partnerType.includes(option)}
+                        onCheckedChange={() => handleMultiSelect(setPartnerType, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
                 </div>
               </>
             )}
-
-            {activeTab === "Date Range" && (
+            {activeTab === "Status" && (
               <>
-                <label htmlFor="date-range" className="text-[var(--text)]">
+                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {["New", "Contacted", "Follow-Up", "Engaged", "Converted", "Rejected"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={status.includes(option)}
+                        onCheckedChange={() => handleMultiSelect(setStatus, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              </>
+            )}
+            {activeTab === "Commission Status" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">Commission Status:</p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {["Pending", "Approved", "Paid"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={commissionStatus.includes(option)}
+                        onCheckedChange={() => handleMultiSelect(setCommissionStatus, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
+                </div>
+              </>
+            )}
+            {activeTab === "Region / Date Range" && (
+              <>
+                <label htmlFor="region" className="text-[var(--text)]">
+                  Region:
+                </label>
+                <Input
+                  id="region"
+                  placeholder="Enter region..."
+                  type="text"
+                  className="mt-2 w-full "
+                  value={region}
+                  onChange={(e) => setRegion(e.target.value)}
+                />
+                <label htmlFor="date-range" className="text-[var(--text)] mt-4 block">
                   Date Range: Created or Last Active
                 </label>
                 <div className="mt-4 min-w-full">
@@ -303,6 +346,22 @@ function AdvancedFilters({ onClose }: FilterProps) {
                     value={dateRange}
                     onChange={setDateRange}
                   />
+                </div>
+              </>
+            )}
+            {activeTab === "Assigned To" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">Assigned To:</p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {["Riya Sinha", "Ajay Mehta", "N/A", "Not Assigned", "Neha Verma", "Nikhil Rao", "Sakshi Sharma", "Varun Batra", "Anjali Nair", "Raghav Khanna", "Unassigned", "Priya Singh", "Deepak Chauhan"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={assignedTo.includes(option)}
+                        onCheckedChange={() => handleMultiSelect(setAssignedTo, option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
                 </div>
               </>
             )}
@@ -362,19 +421,19 @@ function TableSection() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedStack, setSelectedStack] = useState<typeof SurveysTable>(
-    SurveysTable[0] ? [SurveysTable[0]] : []
+  const [selectedStack, setSelectedStack] = useState<typeof ChannelPartnersTable>(
+    ChannelPartnersTable[0] ? [ChannelPartnersTable[0]] : []
   );
   const [focusedId, setFocusedId] = useState<string | null>(
-    SurveysTable[0]?.id || null
+    ChannelPartnersTable[0]?.id || null
   );
 
   // Sorting logic
-  const sortedData = [...SurveysTable];
+  const sortedData = [...ChannelPartnersTable];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
-      let aValue = a[sortConfig.key as keyof typeof a];
-      let bValue = b[sortConfig.key as keyof typeof b];
+      let aValue: string | number = a[sortConfig.key as keyof typeof a] as string;
+      let bValue: string | number = b[sortConfig.key as keyof typeof b] as string;
       // Special handling for 'for' (array), 'questions', 'responses', and 'lastUpdated' (date)
       if (sortConfig.key === "for") {
         aValue = Array.isArray(aValue) ? aValue.join(", ") : aValue;
@@ -385,9 +444,11 @@ function TableSection() {
         bValue = Number(bValue);
       }
       if (sortConfig.key === "lastUpdated") {
-        // Parse as date
         aValue = Date.parse(aValue as string);
         bValue = Date.parse(bValue as string);
+      }
+      if (typeof aValue === "number" && typeof bValue === "number") {
+        return sortConfig.direction === "ascending" ? aValue - bValue : bValue - aValue;
       }
       if (aValue < bValue) {
         return sortConfig.direction === "ascending" ? -1 : 1;
@@ -463,7 +524,7 @@ function TableSection() {
     });
   }, [selectedStack, focusedId]);
 
-  const handleRowClick = (user: (typeof SurveysTable)[0]) => {
+  const handleRowClick = (user: (typeof ChannelPartnersTable)[0]) => {
     // Double-click detected
     const exists = selectedStack.find((c) => c.id === user.id);
     if (!exists) {
@@ -557,52 +618,60 @@ function TableSection() {
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
-                  onClick={() => requestSort("title")}
+                  onClick={() => requestSort("PartnerName")}
                   className="cursor-pointer text-[var(--text)] text-low"
                 >
-                  Title{" "}
-                  {sortConfig?.key === "title" &&
+                  Partner Name{" "}
+                  {sortConfig?.key === "PartnerName" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("createdBy")}
+                  onClick={() => requestSort("LeadType")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Created By{" "}
-                  {sortConfig?.key === "createdBy" &&
+                  Lead Type{" "}
+                  {sortConfig?.key === "LeadType" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("for")}
+                  onClick={() => requestSort("LeadName/Org")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  For{" "}
-                  {sortConfig?.key === "for" &&
+                  Lead Name/Org{" "}
+                  {sortConfig?.key === "LeadName/Org" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+
+                <TableHead
+                  onClick={() => requestSort("Status")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Status{" "}
+                  {sortConfig?.key === "Status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("questions")}
+                  onClick={() => requestSort("Commission")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Questions{" "}
-                  {sortConfig?.key === "questions" &&
+                  Commission{" "}
+                  {sortConfig?.key === "Commission" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("responses")}
+                  onClick={() => requestSort("AssignedTo")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Responses{" "}
-                  {sortConfig?.key === "responses" &&
+                  Assigned To{" "}
+                  {sortConfig?.key === "AssignedTo" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Status</TableHead>
                 <TableHead
-                  onClick={() => requestSort("lastUpdated")}
+                  onClick={() => requestSort("CreatedOn")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Last Updated{" "}
-                  {sortConfig?.key === "lastUpdated" &&
+                  Created On{" "}
+                  {sortConfig?.key === "CreatedOn" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
 
@@ -645,28 +714,28 @@ function TableSection() {
                     <div className="flex items-center gap-4">
                       <div>
                         <div className="flex justify-start items-center">
-                          <div className="font-medium">{user.title}</div>
+                          <div className="font-medium">{user.PartnerName}</div>
                         </div>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.createdBy}</div>
+                    <div className="text-low">{user.LeadType}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.for}</div>
+                    <div className="text-low">{user["LeadName/Org"]}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.questions}</div>
+                    <div className="text-low">{user.Status}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.responses}</div>
+                    <div className="text-low">{user.Commission}</div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="standard">{user.status}</Badge>
+                    <Badge variant="standard">{user.AssignedTo}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.lastUpdated}</div>
+                    <div className="text-low">{user.CreatedOn}</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">

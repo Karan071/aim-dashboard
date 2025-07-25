@@ -64,12 +64,7 @@ const stats = [
     icon: UserCheck,
     performance: Up,
   },
-  {
-    title: "Reported Areas",
-    value: "Chat, Sessions, Comments, Public Posts",
-    icon: UserPlus,
-    performance: Down,
-  },
+
   {
     title: "Last Updated",
     value: "18 May 2025",
@@ -342,7 +337,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
 function AbuseTable() {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
@@ -593,7 +588,7 @@ function AbuseTable() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="text-[var(--text)] dark:bg-[var(--background)]">
-              {[5, 10, 25, 50, 100].map((size) => (
+              {[ 10, 25, 50, 100].map((size) => (
                 <DropdownMenuItem
                   key={size}
                   onClick={() => {
