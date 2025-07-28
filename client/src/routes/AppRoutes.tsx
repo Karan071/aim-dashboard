@@ -84,6 +84,7 @@ import { Payout as FinancePayout } from "@/pages/FinanceDesk/Payout";
 import { Platform as FinancePlatform } from "@/pages/FinanceDesk/Platform";
 import { Earning as FinanceEarning } from "@/pages/FinanceDesk/Earning";
 import { Reports as FinanceReports } from "@/pages/FinanceDesk/Reports";
+import {Withdrawal as FinanceWithdrawal} from "@/pages/FinanceDesk/Withdrawal"
 
 // DevOps Desk
 import { DevopsDesk as DevopsDesk } from "@/pages/DevopsDesk/DevopsDesk";
@@ -250,6 +251,7 @@ export default function AppRoutes() {
       <Route path="finance/desk" element={<FinanceDesk />} />
       <Route path="finance/payments" element={<FinancePayments />} />
       <Route path="finance/commissions" element={<FinanceCommission />} />
+      <Route path="finance/withdrawal" element={<FinanceWithdrawal/>} />
       <Route path="finance/payouts" element={<FinancePayout />} />
       <Route path="finance/platform" element={<FinancePlatform />} />
       <Route path="finance/earnings" element={<FinanceEarning />} />
