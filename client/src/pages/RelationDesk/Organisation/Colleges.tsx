@@ -62,24 +62,13 @@ const orgStats = [
 
 
 export function Colleges() {
-  const [showFilter, setShowFilter] = useState(false)
 
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold text-[var(--text-head)]">Organisation</h1>
       <OrgCard />
 
-      <Button
-        variant="border"
-        onClick={() => setShowFilter(true)}
-        className="flex items-center gap-2 self-end"
-      >
-        <Filter className="h-4 w-4" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
-
-      {showFilter && <OrgFilter onClose={() => setShowFilter(false)} />}
-
+      <Buttonbar />
       <OrganisationTable />
     </div>
   )
@@ -89,8 +78,30 @@ interface OrgFilterProps {
   onClose: () => void;
 }
 
+function Buttonbar() {
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+        <div className="flex gap-4">
+      </div>
+      <div className="flex gap-4">
+        <Button
+          variant="standard" size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-3 w-3" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
+  
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+  
+      </div>
+    </div>
+  );
+  }
+  
 
-function OrgFilter({ onClose }: OrgFilterProps) {
+function AdvancedFilters({ onClose }: OrgFilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("General");
 
@@ -330,12 +341,19 @@ function OrgCard() {
   );
 }
 
-
+const statusTabs = [
+  { label: "Colleges", value: "College" },
+  { label: "Companies", value: "Corporation" },
+  { label: "institutes", value: "Institute" },
+  { label: "NGOs", value: "NGO" },
+  { label: "Schools", value: "School" },
+  { label: "Universities", value: "University" },
+];
 
 function OrganisationTable() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
@@ -344,22 +362,22 @@ function OrganisationTable() {
     typeof orgTableData
   >(orgTableData[0] ? [orgTableData[0]] : []);
   const [focusedId, setFocusedId] = useState<string | null>(orgTableData[0]?.id || null);
+  const [filterStatus, setFilterStatus] = useState("College");
 
   // Sorting logic
-  const sortedData = [...orgTableData];
-  if (sortConfig !== null) {
-    sortedData.sort((a, b) => {
-      const aValue = a[sortConfig.key as keyof typeof a];
-      const bValue = b[sortConfig.key as keyof typeof b];
-      if (aValue < bValue) {
-        return sortConfig.direction === "ascending" ? -1 : 1;
-      }
-      if (aValue > bValue) {
-        return sortConfig.direction === "ascending" ? 1 : -1;
-      }
-      return 0;
-    });
-  }
+  const filteredData = orgTableData.filter(
+    (entry) => entry.type === filterStatus
+  );
+  const sortedData = [...filteredData];
+if (sortConfig !== null) {
+  sortedData.sort((a, b) => {
+    const aValue = a[sortConfig.key as keyof typeof a];
+    const bValue = b[sortConfig.key as keyof typeof b];
+    if (aValue < bValue) return sortConfig.direction === "ascending" ? -1 : 1;
+    if (aValue > bValue) return sortConfig.direction === "ascending" ? 1 : -1;
+    return 0;
+  });
+}
 
   const totalPages = Math.ceil(sortedData.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
@@ -426,13 +444,6 @@ function OrganisationTable() {
     });
   }, [selectedStack, focusedId]);
 
-  {/*const removeCoach = (userId: number) => {
-    setSelectedCoachStack((prev) => prev.filter((c) => c.id !== userId));
-    if (focusedCoachId === userId) {
-      setFocusedCoachId(null);
-    }
-  };*/}
-
   const handleRowClick = (user: (typeof orgTableData)[0]) => {
     // Double-click detected
     const exists = selectedStack.find((c) => c.id === user.id);
@@ -456,6 +467,27 @@ function OrganisationTable() {
   };
 
   return (
+    <div className="flex flex-col w-full">
+        {/* Filter Tabs */}
+        <div className="flex  text-sm font-medium ">
+          {statusTabs.map((tab) => (
+            <button
+              key={tab.value}
+              onClick={() => {
+                setFilterStatus(tab.value);
+                setCurrentPage(1);
+              }}
+              className={cn(
+                "px-4 py-2 rounded-t-sm border",
+                filterStatus === tab.value
+                  ? "text-white bg-[var(--brand-color)]"
+                  : "text-[var(--text)] bg-[var(--background)]"
+              )}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
         <div className="flex items-center justify-between border-b h-20 p-4 mt-auto">
@@ -518,43 +550,43 @@ function OrganisationTable() {
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
-                  onClick={() => requestSort("profile.name")}
+                  onClick={() => requestSort("name")}
                   className="cursor-pointer text-[var(--text)] text-low"
                 >
                   Organization{" "}
-                  {sortConfig?.key === "profile.name" &&
+                  {sortConfig?.key === "name" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("contact.email")}
+                  onClick={() => requestSort("contact")}
                   className="cursor-pointer text-[var(--text)]"
                 >
                   Contact{" "}
-                  {sortConfig?.key === "contact.email" &&
+                  {sortConfig?.key === "contact" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Location")}
+                  onClick={() => requestSort("location")}
                   className="cursor-pointer text-[var(--text)]"
                 >
                   Location{" "}
-                  {sortConfig?.key === "Location" &&
+                  {sortConfig?.key === "location" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Type")}
+                  onClick={() => requestSort("type")}
                   className="cursor-pointer text-[var(--text)]"
                 >
                   Type{" "}
-                  {sortConfig?.key === "Type" &&
+                  {sortConfig?.key === "type" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("ClaimedStatus")}
+                  onClick={() => requestSort("claimStatus")}
                   className="cursor-pointer text-[var(--text)]"
                 >
                   Claimed Status{" "}
-                  {sortConfig?.key === "ClaimedStatus" &&
+                  {sortConfig?.key === "claimStatus" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
@@ -567,11 +599,11 @@ function OrganisationTable() {
                 </TableHead>
                 
                 <TableHead
-                  onClick={() => requestSort("lastActive")}
+                  onClick={() => requestSort("registered")}
                   className="cursor-pointer text-[var(--text)]"
                 >
                   Registered/Last Active{" "}
-                  {sortConfig?.key === "lastActive" &&
+                  {sortConfig?.key === "registered" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
@@ -713,7 +745,7 @@ function OrganisationTable() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {
@@ -766,154 +798,8 @@ function OrganisationTable() {
           </div>
         </div>
       </div>
+    </div>
 
-
-
-      {/*<div className="xl:block hidden">
-      <div className="lg:h-[500px] xl:min-w-90 xxl:min-w-100  sticky xl:top-[10px] shadow-none lg:scale-100 min-w-full h-fit">
-        <AnimatePresence>
-          {selectedCoachStack.map((coach, index) => {
-            const isTopCard =
-              coach.id === Number(focusedCoachId) ||
-              (focusedCoachId === null && index === 0);
-            const cardIndex = selectedCoachStack.length - 1 - index;
-
-            return (
-              <motion.div
-                key={coach.id}
-                className="absolute left-0 right-0 mx-auto max-w-md w-full h-max cursor-pointer shadow-none"
-                style={{
-                  top: `${cardIndex * 30}px`,
-                  zIndex: isTopCard ? 100 : 10 + cardIndex,
-                }}
-                onClick={() => bringToTop(coach.id)}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{
-                  opacity: 1,
-                  scale: isTopCard ? 1 : 0.95,
-                }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                whileHover={isTopCard ? {} : { scale: 0.97 }}
-              >
-                <motion.div
-                  className="relative border h-full border-border rounded-lg overflow-hidden bg-background"
-                  whileTap={isTopCard ? { scale: 0.98 } : {}}
-                >
-                  {!isTopCard && (
-                    <motion.div
-                      className="flex items-center justify-between text-xs text-[var(--text)] px-4 py-2 bg-accent/10 rounded-t-lg z-10"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.1 }}
-                    >
-                      <div>
-                        <span className="truncate max-w-[100px] block">
-                          {coach.name}
-                        </span>
-                      </div>
-                      <div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            removeCoach(coach.id);
-                          }}
-                          className="text-[var(--red)] hover:text-[var(--red)/70] text-[16px]"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {isTopCard && (
-                    
-                    <motion.div
-                      className="flex  flex-col  justify-center items-center p-6"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <div className="flex-col ">
-                      <motion.img
-                        src={photo}
-                        alt={coach.name}
-                        className="w-28 h-28 rounded-full object-cover border-4 border-primary shadow-lg m-auto"
-                        whileHover={{ scale: 1.05 }}
-                      />
-                      <h1 className="text-xl font-semibold mt-4 text-[var(--text-head)]">
-                        {coach.name}
-                      </h1>
-                      <h2 className="text-sm text-[var(--text)] mb-2">
-                        {coach.location}
-                      </h2>
-
-                      <div className="flex justify-center gap-3 mt-2">
-                        <motion.button
-                          className="bg-[var(--green2)] rounded-full p-2 hover:[var(--green2)/80] transition-colors"
-                          title="Call"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Phone className="w-5 h-5 text-[var(--green)]" />
-                        </motion.button>
-                        <motion.button
-                          className="bg-[var(--red2)] rounded-full p-2 hover:bg-[var(--red2)/80] dark:bg-[var(--red2)] transition-colors"
-                          title="Email"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Mail className="w-5 h-5 text-[var(--red)]" />
-                        </motion.button>
-                        <motion.button
-                          className="bg-[var(--yellow2)] dark:bg-[var(--yellow2)] rounded-full p-2 hover:bg-[var(--yellow2)/80] transition-colors"
-                          title="Message"
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <MessageCircle className="w-5 h-5 text-[var(--yellow)]" />
-                        </motion.button>
-                      </div>
-                      </div>
-                      <div className="mt-6 text-sm text-left w-full">
-                        <h3 className="font-semibold text-[var(--text-head)] mb-1">
-                          PERSONAL INFORMATION
-                        </h3>
-                        <p className="text-[var(--text)] text-sm mb-4">
-                          This coach has not added a bio.
-                        </p>
-                        <div className="grid grid-cols-2 gap-y-2 text-sm text-[var(--text)]">
-                          <div className="font-medium">Designation</div>
-                          <div>{coach.type}</div>
-                          <div className="font-medium">Email ID</div>
-                          <div>{coach.contact.email}</div>
-                          <div className="font-medium">Phone No</div>
-                          <div>{coach.contact.phone}</div>
-                          <div className="font-medium">Lead Score</div>
-                          <div>-</div>
-                          <div className="font-medium">Tags</div>
-                          <div className="flex gap-2">
-                            <Badge variant="brand" className="text-xs ">
-                              Lead
-                            </Badge>
-                            <Badge variant="brand" className="text-xs">
-                              Partner
-                            </Badge>
-                          </div>
-                          <div className="font-medium">Last Contacted</div>
-                          <div>{coach.lastActive}</div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
-    </div>*/}
     </div>
   );
 }

@@ -15,8 +15,9 @@ import { AccessCode as PlatformAccessCode } from "@/pages/PlatformDesk/Plans/Acc
 import { ConsultantPremium as PlatformConsultantPremium } from "@/pages/PlatformDesk/Plans/ConsultantPremium";
 import { FormTabsWrapper as PlatformForms } from "@/pages/PlatformDesk/Forms";
 import { DeskIAM as PlatformDeskIAM } from "@/pages/PlatformDesk/DeskIAM";
-import { AddTeamMember as PlatformAddTeamMember } from "@/pages/PlatformDesk/underDeskIAM/AddTeamMember";
-import { ManageRoles as PlatformManageRoles } from "@/pages/PlatformDesk/underDeskIAM/ManageRoles";
+import { AddNewRoleWrapper as PlatformAddNewRoleWrapper } from "@/pages/PlatformDesk/UnderDeskIAM/AddNewRoleWrapper";
+import { AddTeamMember as PlatformAddTeamMember } from "@/pages/PlatformDesk/UnderDeskIAM/AddTeamMember";
+import { ManageRoles as PlatformManageRoles } from "@/pages/PlatformDesk/UnderDeskIAM/ManageRoles";
 
 // Review Desk
 import { Desk as ReviewDesk } from "@/pages/ReviewDesk/Desk";
@@ -128,6 +129,7 @@ export default function AppRoutes() {
       <Route path="platform/desk-iam" element={<PlatformDeskIAM />} />
       <Route path="platform/desk-iam/addTeamMember" element={<PlatformAddTeamMember />} />
       <Route path="platform/desk-iam/manageRole" element={<PlatformManageRoles />} />
+      <Route path="platform/desk-iam/addNewRole" element={<PlatformAddNewRoleWrapper />} />
 
       {/* Review Desk Routes */}
       <Route path="review/desk" element={<ReviewDesk />} />
