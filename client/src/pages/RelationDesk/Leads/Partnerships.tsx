@@ -1,20 +1,18 @@
-// export function Partnerships() {
-//   return <div>Partnerships</div>;
-// }
+
 import { Button } from "@/components/ui/button";
 import {
-  Eye,
   Filter,
-  BadgeQuestionMark,
-  Bell,
   Notebook,
-  Plus,
   Search,
  
   FileDown,
   X,
   Phone,
   MessageSquare,
+  Pen,
+  MessageCircle,
+  PenSquare,
+  Tag,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -42,9 +40,9 @@ import {PartnershipsTable  } from "@/data/Data";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
-import type { DateRange } from "react-day-picker";
 import React from "react";
+import RadioButton from "@/components/ui/Radiobutton";
+import { DateRangePicker } from "@/components/ui/RangeCalender";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -90,7 +88,6 @@ const stats = [
 
 export function Partnerships() {
   return (
-    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-[var(--text-head)]">Partnerships</h1>
         <StatsCards />
@@ -98,39 +95,19 @@ export function Partnerships() {
 
         <TableSection />
       </div>
-    </div>
   );
 }
 
 function Topbar() {
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span> Create New Partner</span>
-      </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Manage Partners</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">Import Leads (Excel/CSV)</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">View Leads</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export Leads</span>
-        </Button>
+    <div className="px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      
+      <div className="flex gap-4 justify-end">
+        
         <Button
-          variant="border"
+          variant="standard" size="new"
           onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
         >
           <Filter className="h-4 w-4" />
           {showFilter ? "Hide Filters" : "Show Filters"}
@@ -151,28 +128,30 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
+      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
+
+      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-      onClose();
+
+      onClose(); // Close modal otherwise
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  // Filter states
-  const [search, setSearch] = useState("");
-  const [requestType, setRequestType] = useState<string[]>([]);
-  const [interestArea, setInterestArea] = useState<string[]>([]);
-  const [status, setStatus] = useState<string[]>([]);
-  const [source, setSource] = useState<string[]>([]);
-
-  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
-  const [assignedTo, setAssignedTo] = useState<string[]>([]);
+  const [status, setStatus] = useState("New");
+  const [requests, setRequests] = useState("School");
+  const [interestArea, setInterestArea] = useState("Career Events");
+  const [commissionStatus, setCommissionStatus] = useState("Pending");
+  const [assignedTo, setAssignedTo] = useState("Team Member 1");
+  const [source, setSource] = useState("Website");
 
   const tabList = [
     "General",
@@ -182,38 +161,21 @@ function AdvancedFilters({ onClose }: FilterProps) {
     "Assigned To",
     "Source",
     "Date Range",
-  ];
 
-  // Helper for checkbox
-  const handleMultiSelect = (setter: React.Dispatch<React.SetStateAction<string[]>>, option: string) => {
-    setter((prev) =>
-      prev.includes(option) ? prev.filter((s) => s !== option) : [...prev, option]
-    );
-  };
+  ];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
-            Filters
-          </CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
-            onClick={() => {
-              setSearch("");
-              setRequestType([]);
-              setInterestArea([]);
-              setStatus([]);
-              setSource([]);
-             
-              setDateRange(undefined);
-              setAssignedTo([]);
-            }}
           >
             Clear All
           </Button>
@@ -221,16 +183,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
+
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${
-                    activeTab === tab
-                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                  }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -239,115 +201,157 @@ function AdvancedFilters({ onClose }: FilterProps) {
           </div>
 
           {/* Tab Content */}
+
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">
-                  Search by Name / Organisation / Email:
-                </label>
-                <Input
-                  id="Gen"
-                  placeholder="Enter name, organisation, or email..."
-                  type="text"
-                  className="mt-4 w-full "
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                <label htmlFor="Gen" className="text-[var(--text)]">Search By Partner Name / Code : :</label>
+                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+
               </>
             )}
-            {activeTab === "Request Type" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Request Type:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["School", "NGO", "Corporation", "Coach", "Affiliate", "Campus Rep"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={requestType.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setRequestType, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
-            {activeTab === "Interest Area" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Interest Area:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Career Events", "Learning Programs", "B2B Sessions", "Listing"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={interestArea.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setInterestArea, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
+
             {activeTab === "Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select your current Status:
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["New", "Contacted", "In Follow-Up", "Converted", "Rejected"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={status.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setStatus, option)}
-                      />
-                      {option}
-                    </label>
+                  {[
+                    "New",
+                    "Contacted",
+                    "In Follow-Up",
+                    "Converted",
+                    "Rejected",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={status}
+                      onChange={setStatus}
+                    />
                   ))}
                 </div>
               </>
             )}
+
+            {activeTab === "Request Type" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Request Type :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "School", "NGO", "Corporation", "Coach", "Affiliate", "Campus Rep"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={requests}
+                      onChange={setRequests}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Interest Area" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Interest Area :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Career Events", "Learning Programs", "B2B Sessions", "Listing", "Other"
+
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={interestArea}
+                      onChange={setInterestArea}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+              {activeTab === "Source" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Source :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Website", "WhatsApp", "Referral", "Event"
+
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={source}
+                      onChange={setSource}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Commission Status" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Commission Status :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Pending", "Approved", "Paid"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={commissionStatus}
+                      onChange={setCommissionStatus}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
             {activeTab === "Assigned To" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Assigned To:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Riya Sinha", "Ajay Mehta", "N/A", "Not Assigned", "Neha Verma", "Nikhil Rao", "Sakshi Sharma", "Varun Batra", "Anjali Nair", "Raghav Khanna", "Unassigned", "Priya Singh", "Deepak Chauhan"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={assignedTo.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setAssignedTo, option)}
-                      />
-                      {option}
-                    </label>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Assigned To :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Team Member 1", "Team Member 2", "Team Member 3"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={assignedTo}
+                      onChange={setAssignedTo}
+                    />
                   ))}
                 </div>
               </>
             )}
-            {activeTab === "Source" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Source:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Website", "WhatsApp", "Referral", "Event"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={source.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setSource, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
+
             {activeTab === "Date Range" && (
               <>
-                <label htmlFor="date-range" className="text-[var(--text)] mt-4 block">
-                  Date Range: Created or Last Active
-                </label>
+                <label htmlFor="act" className="text-[var(--text)]">Select Your Date Range:</label>
                 <div className="mt-4 min-w-full">
-                  <DatePickerWithRange
-                    value={dateRange}
-                    onChange={setDateRange}
-                  />
+                  <DateRangePicker />
                 </div>
               </>
             )}
+
             {/* Footer */}
           </div>
         </div>
@@ -366,13 +370,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
+
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -560,17 +565,30 @@ function TableSection() {
             {selectedUsers.length > 0 && (
               <div className="flex gap-2 ml-2">
                 <Button variant="border" size="sm">
-                  <Bell className="h-4 w-4" />
-                  Send Reminder
+                  <MessageCircle className="h-4 w-4" />
+                  Send Follow-Up Email / WhatsApp
+                </Button> 
+                <Button variant="border" size="sm">
+                  <PenSquare className=" h-4 w-4" />
+                  Assign or Reassign
                 </Button>
                 <Button variant="border" size="sm">
-                  <FileDown className=" h-4 w-4" />
-                  Export list
+                  <Pen className=" h-4 w-4 " />
+                  Update Commission
                 </Button>
-                <Button variant="delete" size="sm">
-                  <X className=" h-4 w-4 text-[var(--red)]" />
-                  Mark Inactive / Remove
+                <Button variant="border" size="sm">
+                  <Tag className=" h-4 w-4 " />
+                  Mark as Converted
                 </Button>
+                <Button variant="border" size="sm">
+                  <X className=" h-4 w-4" />
+                  Mark as Rejected
+                </Button>
+                <Button variant="border" size="sm">
+                  <FileDown className=" h-4 w-4 " />
+                  Export Request Data
+                </Button>
+                
               </div>
             )}
           </div>

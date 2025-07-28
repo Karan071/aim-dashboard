@@ -6,16 +6,17 @@
 // }
 import { Button } from "@/components/ui/button";
 import {
-  Eye,
   Filter,
-  BadgeQuestionMark,
-  Bell,
   Notebook,
   Plus,
   Search,
   Pen,
   FileDown,
   X,
+  PhoneCall,
+  MessageCircle,
+  PenSquare,
+  Tag,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -38,14 +39,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import {ChannelPartnersTable  } from "@/data/Data";
+import { ChannelPartnersTable } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
-import type { DateRange } from "react-day-picker";
 import React from "react";
+import RadioButton from "@/components/ui/Radiobutton";
+import { DateRangePicker } from "@/components/ui/RangeCalender";
+import CitySelection from "@/components/ui/CitySelection";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -89,8 +91,8 @@ const stats = [
     icon: Notebook,
     performance: Down,
   },
-  
-  
+
+
 
 ];
 
@@ -108,35 +110,20 @@ export function ChannelPartners() {
   );
 }
 
+interface FilterProps {
+  onClose: () => void;
+}
+
 function Topbar() {
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span> Create New Partner</span>
-      </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Manage Partners</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">Import Leads (Excel/CSV)</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">View Leads</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export Leads</span>
-        </Button>
+    <div className="px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+
+      <div className="flex gap-4 justify-end">
+
         <Button
-          variant="border"
+          variant="standard" size="new"
           onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
         >
           <Filter className="h-4 w-4" />
           {showFilter ? "Hide Filters" : "Show Filters"}
@@ -147,9 +134,6 @@ function Topbar() {
   );
 }
 
-interface FilterProps {
-  onClose: () => void;
-}
 
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -157,28 +141,29 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
+      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
+
+      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-      onClose();
+
+      onClose(); // Close modal otherwise
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  // Filter states
-  const [search, setSearch] = useState("");
-  const [leadType, setLeadType] = useState<string[]>([]);
-  const [partnerType, setPartnerType] = useState<string[]>([]);
-  const [status, setStatus] = useState<string[]>([]);
-  const [commissionStatus, setCommissionStatus] = useState<string[]>([]);
-  const [region, setRegion] = useState("");
-  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
-  const [assignedTo, setAssignedTo] = useState<string[]>([]);
+  const [status, setStatus] = useState("New");
+  const [leadType, setLeadType] = useState("Explorer");
+  const [partnerType, setPartnerType] = useState("Campus Rep");
+  const [commissionStatus, setCommissionStatus] = useState("Pending");
+  const [assignedTo, setAssignedTo] = useState("Team Member 1");
 
   const tabList = [
     "General",
@@ -186,40 +171,24 @@ function AdvancedFilters({ onClose }: FilterProps) {
     "Partner Type",
     "Status",
     "Commission Status",
-    "Region / Date Range",
+    "Region",
+    "Date Range",
     "Assigned To",
-  ];
 
-  // Helper for checkbox
-  const handleMultiSelect = (setter: React.Dispatch<React.SetStateAction<string[]>>, option: string) => {
-    setter((prev) =>
-      prev.includes(option) ? prev.filter((s) => s !== option) : [...prev, option]
-    );
-  };
+  ];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
-            Filters
-          </CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
-            onClick={() => {
-              setSearch("");
-              setLeadType([]);
-              setPartnerType([]);
-              setStatus([]);
-              setCommissionStatus([]);
-              setRegion("");
-              setDateRange(undefined);
-              setAssignedTo([]);
-            }}
           >
             Clear All
           </Button>
@@ -227,16 +196,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
+
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${
-                    activeTab === tab
-                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                  }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -245,126 +214,141 @@ function AdvancedFilters({ onClose }: FilterProps) {
           </div>
 
           {/* Tab Content */}
+
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">
-                  Search by Partner Name / Code:
-                </label>
-                <Input
-                  id="Gen"
-                  placeholder="Enter partner name or code..."
-                  type="text"
-                  className="mt-4 w-full "
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
+                <label htmlFor="Gen" className="text-[var(--text)]">Search By Partner Name / Code : :</label>
+                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+
               </>
             )}
-            {activeTab === "Lead Type" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Lead Type:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Explorer", "School", "Coach", "Organisation"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={leadType.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setLeadType, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
-            {activeTab === "Partner Type" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Partner Type:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Campus Rep", "Freelancer", "Agency", "Corporate"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={partnerType.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setPartnerType, option)}
-                      />
-                      {option}
-                    </label>
-                  ))}
-                </div>
-              </>
-            )}
+
             {activeTab === "Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select your current Status:
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["New", "Contacted", "Follow-Up", "Engaged", "Converted", "Rejected"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={status.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setStatus, option)}
-                      />
-                      {option}
-                    </label>
+                  {[
+                    "New",
+                    "Contacted",
+                    "In Follow-Up",
+                    "Engaged",
+                    "Closed",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={status}
+                      onChange={setStatus}
+                    />
                   ))}
                 </div>
               </>
             )}
+
+            {activeTab === "Partner Type" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Partner Type :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Campus Rep", "Freelancer", "Agency", "Corporate"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={partnerType}
+                      onChange={setPartnerType}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Lead Type" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Lead Type :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Explorer", "School", "Coach", "Organisation"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={leadType}
+                      onChange={setLeadType}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
             {activeTab === "Commission Status" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Commission Status:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Pending", "Approved", "Paid"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={commissionStatus.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setCommissionStatus, option)}
-                      />
-                      {option}
-                    </label>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Commission Status :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Pending", "Approved", "Paid"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={commissionStatus}
+                      onChange={setCommissionStatus}
+                    />
                   ))}
                 </div>
               </>
             )}
-            {activeTab === "Region / Date Range" && (
-              <>
-                <label htmlFor="region" className="text-[var(--text)]">
-                  Region:
-                </label>
-                <Input
-                  id="region"
-                  placeholder="Enter region..."
-                  type="text"
-                  className="mt-2 w-full "
-                  value={region}
-                  onChange={(e) => setRegion(e.target.value)}
-                />
-                <label htmlFor="date-range" className="text-[var(--text)] mt-4 block">
-                  Date Range: Created or Last Active
-                </label>
-                <div className="mt-4 min-w-full">
-                  <DatePickerWithRange
-                    value={dateRange}
-                    onChange={setDateRange}
-                  />
-                </div>
-              </>
-            )}
+
             {activeTab === "Assigned To" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Assigned To:</p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Riya Sinha", "Ajay Mehta", "N/A", "Not Assigned", "Neha Verma", "Nikhil Rao", "Sakshi Sharma", "Varun Batra", "Anjali Nair", "Raghav Khanna", "Unassigned", "Priya Singh", "Deepak Chauhan"].map((option) => (
-                    <label key={option} className="flex items-center gap-2">
-                      <Checkbox
-                        checked={assignedTo.includes(option)}
-                        onCheckedChange={() => handleMultiSelect(setAssignedTo, option)}
-                      />
-                      {option}
-                    </label>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Your Region :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)]  ">
+                  {[
+                    "Team Member 1", "Team Member 2", "Team Member 3"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={assignedTo}
+                      onChange={setAssignedTo}
+                    />
                   ))}
                 </div>
               </>
             )}
+
+            {activeTab === "Region" && (
+              <>
+                <CitySelection />
+              </>
+            )}
+
+
+            {activeTab === "Date Range" && (
+              <>
+                <label htmlFor="act" className="text-[var(--text)]">Select Your Date Range:</label>
+                <div className="mt-4 min-w-full">
+                  <DateRangePicker />
+                </div>
+              </>
+            )}
+
             {/* Footer */}
           </div>
         </div>
@@ -385,11 +369,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-6">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -577,16 +561,28 @@ function TableSection() {
             {selectedUsers.length > 0 && (
               <div className="flex gap-2 ml-2">
                 <Button variant="border" size="sm">
-                  <Bell className="h-4 w-4" />
-                  Send Reminder
+                  <MessageCircle className="h-4 w-4" />
+                  Send Message to Lead
                 </Button>
                 <Button variant="border" size="sm">
-                  <FileDown className=" h-4 w-4" />
-                  Export list
+                  <PenSquare className=" h-4 w-4" />
+                  Reassign Lead
                 </Button>
-                <Button variant="delete" size="sm">
-                  <X className=" h-4 w-4 text-[var(--red)]" />
-                  Mark Inactive / Remove
+                <Button variant="border" size="sm">
+                  <Pen className=" h-4 w-4 " />
+                  Update Commission
+                </Button>
+                <Button variant="border" size="sm">
+                  <X className=" h-4 w-4" />
+                  Mark as Rejected
+                </Button>
+                <Button variant="border" size="sm">
+                  <FileDown className=" h-4 w-4 " />
+                  Export (.CSV)
+                </Button>
+                <Button variant="border" size="sm">
+                  <Tag className=" h-4 w-4 " />
+                  Tag as Converted
                 </Button>
               </div>
             )}
@@ -742,18 +738,16 @@ function TableSection() {
                       <Button
                         variant="noborder"
                         size="sm"
-                        className="bg-white border-0 shadow-none"
                       >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
+                        <PhoneCall className="h-4 w-3" />
+                        <span className="sr-only">Call</span>
                       </Button>
                       <Button
                         variant="noborder"
                         size="sm"
-                        className="bg-white border-0 shadow-none"
                       >
-                        <Pen className="h-4 w-3" />
-                        <span className="sr-only">Edit</span>
+                        <Plus className="h-4 w-3" />
+                        <span className="sr-only">Assign</span>
                       </Button>
                     </div>
                   </TableCell>
@@ -811,9 +805,8 @@ function TableSection() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${
-                  page === currentPage ? "text-white" : "text-[var(--text)]"
-                }`}
+                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"
+                  }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}

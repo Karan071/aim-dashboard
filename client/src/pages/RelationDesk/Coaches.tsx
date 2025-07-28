@@ -76,27 +76,36 @@ const stats = [
 ];
 
 export function Coaches() {
-  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold text-[var(--text-head)]">Coaches</h1>
       <StatsCards />
-        {/*<Buttonbar />*/}
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-
-
+        <Buttonbar />
         <CoachTableSection />
       </div>
   );
+}
+
+function Buttonbar() {
+const [showFilter, setShowFilter] = useState(false);
+return (
+  <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div className="flex gap-4">
+    </div>
+    <div className="flex gap-4">
+      <Button
+        variant="standard" size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+        {showFilter ? "Hide Filters" : "Show Filters"}
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+
+    </div>
+  </div>
+);
 }
 
 interface FilterProps {
@@ -351,7 +360,7 @@ function StatsCards() {
 function CoachTableSection() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
     key: string;
     direction: "ascending" | "descending";
@@ -710,7 +719,7 @@ function CoachTableSection() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
-                {[5, 10, 25, 50, 100].map((size) => (
+                {[10, 25, 50, 100].map((size) => (
                   <DropdownMenuItem
                     key={size}
                     onClick={() => {
