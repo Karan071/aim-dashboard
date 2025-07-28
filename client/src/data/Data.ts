@@ -722,6 +722,119 @@ export const OrganisationProfiles = [
   }
 ];
 
+export const ManageTable = [
+  {
+    "id": "ASS1001",
+    "assessmentName": "JEE Main Mock Test 1",
+    "segments": ["11-12", "UG"],
+    "category": "Engineering",
+    "price": 299,
+    "partnerShare": "25% Standard",
+    "enrollments": 1250,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1002",
+    "assessmentName": "NEET Practice Test",
+    "segments": ["11-12", "UG"],
+    "category": "Medical",
+    "price": 399,
+    "partnerShare": "50% Premium",
+    "enrollments": 890,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1003",
+    "assessmentName": "CAT Preparation Test",
+    "segments": ["UG", "PG"],
+    "category": "Management",
+    "price": 499,
+    "partnerShare": "25% Standard",
+    "enrollments": 650,
+    "status": "Draft",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1004",
+    "assessmentName": "GATE Computer Science",
+    "segments": ["UG", "PG"],
+    "category": "Engineering",
+    "price": 599,
+    "partnerShare": "50% Premium",
+    "enrollments": 420,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1005",
+    "assessmentName": "UPSC Prelims Mock",
+    "segments": ["UG", "PG"],
+    "category": "Civil Services",
+    "price": 799,
+    "partnerShare": "25% Standard",
+    "enrollments": 780,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1006",
+    "assessmentName": "Bank PO Test Series",
+    "segments": ["UG", "PG"],
+    "category": "Banking",
+    "price": 349,
+    "partnerShare": "25% Standard",
+    "enrollments": 1100,
+    "status": "Draft",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1007",
+    "assessmentName": "SSC CGL Practice",
+    "segments": ["UG", "PG"],
+    "category": "Government",
+    "price": 249,
+    "partnerShare": "50% Premium",
+    "enrollments": 950,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1008",
+    "assessmentName": "Aptitude Assessment",
+    "segments": ["9-10", "11-12"],
+    "category": "General",
+    "price": 199,
+    "partnerShare": "25% Standard",
+    "enrollments": 2100,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1009",
+    "assessmentName": "English Proficiency Test",
+    "segments": ["UG", "PG"],
+    "category": "Language",
+    "price": 299,
+    "partnerShare": "50% Premium",
+    "enrollments": 680,
+    "status": "Draft",
+    "actions": ["Questions", "Results", "Logs"]
+  },
+  {
+    "id": "ASS1010",
+    "assessmentName": "Quantitative Skills Test",
+    "segments": ["11-12", "UG"],
+    "category": "Mathematics",
+    "price": 399,
+    "partnerShare": "25% Standard",
+    "enrollments": 1450,
+    "status": "Active",
+    "actions": ["Questions", "Results", "Logs"]
+  }
+];
+
 export const CoachProfilesTable = [
   {
     id: "MTR/MH/07/25/189",
@@ -2892,7 +3005,7 @@ export const assessmentsTable = [
     "assessmentName": "Career Aptitude Test",
     "userName": "Rahul Sharma",
     "userId": "USR001",
-    "segments": "9-10, UG, Professional",
+    "segments": "9-10",
     "date": "10 Jul 2025",
     "source": {
       "type": "Direct"

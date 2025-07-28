@@ -9,14 +9,18 @@ import {
   CheckCircle2,
   Trash,
   FileDown,
-  Edit,
+ 
   BadgeQuestionMark,
-  Newspaper,
+
   Plus,
   Download,
   MessageCircle,
   NotebookPen,
   Pen,
+ 
+  Bell,
+  RotateCcw,
+  Ban,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -33,7 +37,7 @@ import {
   Filter,
   ChevronRight,
   ChevronLeft,
-  Eye,
+ 
 } from "lucide-react";
 import {
   Table,
@@ -416,6 +420,8 @@ function AssessmentTable() {
     }
   };
 
+
+
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
@@ -678,44 +684,63 @@ function AssessmentTable() {
                           // navigate(`/user-details/${user.id}`) or your view logic
                         }}
                       >
-                        <Eye className="h-4 w-4" />
-                        <span className="sr-only">View</span>
+                        <Bell className="h-4 w-4" />
+                        <span className="sr-only">Remind</span>
+                      </Button>
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // navigate(`/user-details/${user.id}`) or your view logic
+                        }}
+                      >
+                        <Ban className="h-4 w-4" />
+                        <span className="sr-only">Revoke</span>
+                      </Button>
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // navigate(`/user-details/${user.id}`) or your view logic
+                        }}
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                        <span className="sr-only">Reset</span>
                       </Button>
 
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // approve logic
-                        }}
-                      >
-                        <Edit className="h-4 w-3" />
-                        <span className="sr-only">Edit</span>
-                      </Button>
-
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // block logic
-                        }}
-                      >
-                        <BadgeQuestionMark className="h-4 w-3" />
-                        <span className="sr-only">Question</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // block logic
-                        }}
-                      >
-                        <Newspaper className="h-4 w-3" />
-                        <span className="sr-only">Results</span>
-                      </Button>
+                      {/* <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="noborder"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }}
+                          >
+                            <MoreHorizontal className="h-4 w-4" />
+                            <span className="sr-only">Actions</span>
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end" className="w-48">
+                          {user.actions?.map((action) => (
+                            <DropdownMenuItem
+                              key={action}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleAction(action, user.id);
+                              }}
+                              className="flex items-center gap-2"
+                            >
+                              {action === "Remind" && <Bell className="h-4 w-4" />}
+                              {action === "Revoke" && <Ban className="h-4 w-4" />}
+                              {action === "Reset" && <RotateCcw className="h-4 w-4" />}
+                              {action}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu> */}
                     </div>
                   </TableCell>
                 </TableRow>
