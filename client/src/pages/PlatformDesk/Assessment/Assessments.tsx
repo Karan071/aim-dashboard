@@ -1,24 +1,64 @@
-import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, CheckCircle2, Trash,  FileDown, Edit, BadgeQuestionMark, Newspaper, Plus, Download, MessageCircle, NotebookPen, Pen } from "lucide-react";
-import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
+import {
+  Clock,
+  CircleArrowUp,
+  CircleArrowDown,
+  Search,
+  Users,
+  FileCheck2,
+  FileText,
+  CheckCircle2,
+  Trash,
+  FileDown,
+  Edit,
+  BadgeQuestionMark,
+  Newspaper,
+  Plus,
+  Download,
+  MessageCircle,
+  NotebookPen,
+  Pen,
+} from "lucide-react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
-import { ChevronDown, Filter, ChevronRight, ChevronLeft, Eye } from "lucide-react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import {
+  DropdownMenu,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+} from "@/components/ui/dropdown-menu";
+import {
+  ChevronDown,
+  Filter,
+  ChevronRight,
+  ChevronLeft,
+  Eye,
+} from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { assessmentsTable } from "@/data/Data";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import { useNavigate } from "react-router-dom";
-import DatePick from "@/components/ui/DatePicker"
-
-
-
+import DatePick from "@/components/ui/DatePicker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -63,19 +103,18 @@ const Stats = [
   },
 ];
 
-
-
 export function Assessments() {
-
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Assessments</h1>
+      <h1 className="text-2xl font-bold text-[var(--text-head)]">
+        Assessments
+      </h1>
       <StatCard />
       <Actionbar />
-      
+
       <AssessmentTable />
     </div>
-  )
+  );
 }
 
 function Actionbar() {
@@ -88,30 +127,30 @@ function Actionbar() {
         <span className="">Create New Assessment</span>
       </Button>
       <div className="flex gap-4 flex-wrap">
-        <Button 
-         className="cursor-pointer"
-          variant="standard" 
+        <Button
+          className="cursor-pointer"
+          variant="standard"
           size="new"
-          onClick={() => navigate('manage')}
+          onClick={() => navigate("manage")}
         >
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Manage</span>
         </Button>
-      
+
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Export</span>
         </Button>
         <Button
-        variant="standard" size="new"
-        onClick={() => setShowFilter(true)}
-      >
-        <Filter className="h-4 w-4" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-4 w-4" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
 
-      {showFilter && <AdvancedFilter onClose={() => setShowFilter(false)} />}
-
+        {showFilter && <AdvancedFilter onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -120,7 +159,6 @@ function Actionbar() {
 interface FilterProps {
   onClose: () => void;
 }
-
 
 function AdvancedFilter({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -150,22 +188,18 @@ function AdvancedFilter({ onClose }: FilterProps) {
   const [category, setCategory] = useState("Career");
   const [status, setStatus] = useState("Active");
 
-  const tabList = [
-    "Segment",
-    "Category",
-    "Status",
-    "Created Date",
-  ];
+  const tabList = ["Segment", "Category", "Status", "Created Date"];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-
       <div
         ref={modalRef}
         className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Filters
+          </CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
@@ -176,16 +210,16 @@ function AdvancedFilter({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${
+                    activeTab === tab
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -196,30 +230,23 @@ function AdvancedFilter({ onClose }: FilterProps) {
           {/* Tab Content */}
 
           <div className="p-6 overflow-y-auto relative w-full">
-           
-
             {activeTab === "Segment" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
                   Select the Segment:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "6-8",
-                    "9-10",
-                    "11-12",
-                    "UG",
-                    "PG",
-                    "Professionals",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={group}
-                      onChange={setGroup}
-                    />
-                  ))}
+                  {["6-8", "9-10", "11-12", "UG", "PG", "Professionals"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={group}
+                        onChange={setGroup}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -230,20 +257,17 @@ function AdvancedFilter({ onClose }: FilterProps) {
                   Select the Category :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Career",
-                    "Aptitude",
-                    "Personality",
-                    "Skills",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={category}
-                      onChange={setCategory}
-                    />
-                  ))}
+                  {["Career", "Aptitude", "Personality", "Skills"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={category}
+                        onChange={setCategory}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -254,11 +278,7 @@ function AdvancedFilter({ onClose }: FilterProps) {
                   Choose Status :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Active",
-                    "Inactive",
-                    "Draft",
-                  ].map((option) => (
+                  {["Active", "Inactive", "Draft"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -271,10 +291,11 @@ function AdvancedFilter({ onClose }: FilterProps) {
               </>
             )}
 
-           
             {activeTab === "Created Date" && (
               <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter the Last Assessment Date :</label>
+                <label htmlFor="act" className="text-[var(--text)]">
+                  Enter the Last Assessment Date :
+                </label>
                 <div className="mt-4 min-w-full">
                   <DatePick />
                 </div>
@@ -301,9 +322,12 @@ function AdvancedFilter({ onClose }: FilterProps) {
 
 function StatCard() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-6">
       {Stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card
+          key={index}
+          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+        >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -333,7 +357,7 @@ function AssessmentTable() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  
+
   // Sorting logic
   const sortedData = [...assessmentsTable];
   if (sortConfig !== null) {
@@ -363,9 +387,6 @@ function AssessmentTable() {
   const requestSort = (key: string) => {
     let direction: "ascending" | "descending" = "ascending";
     if (
-
-
-
       sortConfig &&
       sortConfig.key === key &&
       sortConfig.direction === "ascending"
@@ -380,12 +401,12 @@ function AssessmentTable() {
       setSelectedUsers([]);
     } else {
       setSelectedUsers(
-        currentRecords.map((user) => user.id).filter((id): id is string => id !== undefined)
+        currentRecords
+          .map((user) => user.id)
+          .filter((id): id is string => id !== undefined)
       );
     }
   };
-
- 
 
   const toggleSelectUser = (userId: string) => {
     if (selectedUsers.includes(userId)) {
@@ -403,10 +424,16 @@ function AssessmentTable() {
             <div className="flex items-center gap-2 border-none shadow-none">
               <Checkbox
                 id="select-all"
-                checked={selectedUsers.length === currentRecords.length && currentRecords.length > 0}
+                checked={
+                  selectedUsers.length === currentRecords.length &&
+                  currentRecords.length > 0
+                }
                 onCheckedChange={toggleSelectAll}
               />
-              <label htmlFor="select-all" className="text-sm font-medium text-[var(--text)]">
+              <label
+                htmlFor="select-all"
+                className="text-sm font-medium text-[var(--text)]"
+              >
                 Select All
               </label>
               {selectedUsers.length > 0 && (
@@ -546,8 +573,7 @@ function AssessmentTable() {
                   key={user.id}
                   data-id={user.id}
                   className={cn(
-                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-                  
+                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
                   )}
                   onClick={() => {
                     if (user.id) {
@@ -557,26 +583,34 @@ function AssessmentTable() {
                 >
                   <TableCell
                     className={cn(
-                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
-                     )}
+                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]"
+                    )}
                   >
                     <Checkbox
-                      checked={user.id ? selectedUsers.includes(user.id) : false}
+                      checked={
+                        user.id ? selectedUsers.includes(user.id) : false
+                      }
                       onClick={(e) => e.stopPropagation()}
-                      onCheckedChange={() => user.id && toggleSelectUser(user.id)}
+                      onCheckedChange={() =>
+                        user.id && toggleSelectUser(user.id)
+                      }
                     />
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-4">
                       <div>
                         <div className="flex justify-start items-center">
-                          <div className="font-medium">{user.assessmentName}</div>
+                          <div className="font-medium">
+                            {user.assessmentName}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.userName} ({user.userId})</div>
+                    <div className="text-low">
+                      {user.userName} ({user.userId})
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.segments}</div>
@@ -586,11 +620,44 @@ function AssessmentTable() {
                   </TableCell>
                   <TableCell>
                     <div className="text-low">
-                      {user.source.type === "Direct" ? "Direct" : user.source.partnerName}
+                      {user.source.type === "Direct" ? (
+                        "Direct"
+                      ) : (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger className="text-left">
+                              <div className="hover:text-[var(--brand-color)]">
+                                {user.source.partnerName}
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="right"
+                              className="p-2 max-w-[200px]"
+                            >
+                              <div className="flex flex-col gap-1 text-xs">
+                                <div>Commission: {user.source.commission}</div>
+                                <div>
+                                  Assessment Price: ₹
+                                  {user.source.assessmentPrice}
+                                </div>
+                                <div>
+                                  Partner Share: ₹{user.source.partnerShare}
+                                </div>
+                                <div>
+                                  Aimshala Share: ₹{user.source.aimshalaShare}
+                                </div>
+                                <div>Access Code: {user.source.accessCode}</div>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">₹{user.amountPaid} | {user.amountCode}</div>
+                    <div className="text-low">
+                      ₹{user.amountPaid} | {user.amountCode}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.status}</Badge>
@@ -651,7 +718,6 @@ function AssessmentTable() {
                       </Button>
                     </div>
                   </TableCell>
-
                 </TableRow>
               ))}
             </TableBody>
@@ -706,7 +772,9 @@ function AssessmentTable() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"}`}
+                className={`h-8 w-8 p-0 ${
+                  page === currentPage ? "text-white" : "text-[var(--text)]"
+                }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
