@@ -21,6 +21,9 @@ import {
   Bell,
   RotateCcw,
   Ban,
+ 
+
+ 
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -60,9 +63,10 @@ import {
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
-import RadioButton from "@/components/ui/Radiobutton";
+
 import { useNavigate } from "react-router-dom";
-import DatePick from "@/components/ui/DatePicker";
+import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
+import type { DateRange } from "react-day-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -154,7 +158,7 @@ function Actionbar() {
           {showFilter ? "Hide Filters" : "Show Filters"}
         </Button>
 
-        {showFilter && <AdvancedFilter onClose={() => setShowFilter(false)} />}
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -163,42 +167,39 @@ function Actionbar() {
 interface FilterProps {
   onClose: () => void;
 }
-
-function AdvancedFilter({ onClose }: FilterProps) {
+function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("Segment");
+  const [activeTab, setActiveTab] = useState("Search");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
-
-      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-
-      onClose(); // Close modal otherwise
+      onClose();
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const [group, setGroup] = useState("6-8");
-  const [category, setCategory] = useState("Career");
-  const [status, setStatus] = useState("Active");
+  // Filter states
+  const [search, setSearch] = useState("");
+  const [segment, setSegment] = useState("9-10");
+  const [source, setSource] = useState("Direct");
+  const [status, setStatus] = useState("Not Started");
+  const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const tabList = ["Segment", "Category", "Status", "Created Date"];
+  const tabList = ["Search", "Date Range", "Segment", "Source", "Status"];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
           <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
@@ -207,6 +208,13 @@ function AdvancedFilter({ onClose }: FilterProps) {
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
+            onClick={() => {
+              setSearch("");
+              setSegment("9-10");
+              setSource("Direct");
+              setStatus("Not Started");
+              setDateRange(undefined);
+            }}
           >
             Clear All
           </Button>
@@ -232,46 +240,73 @@ function AdvancedFilter({ onClose }: FilterProps) {
           </div>
 
           {/* Tab Content */}
-
           <div className="p-6 overflow-y-auto relative w-full">
+            {activeTab === "Search" && (
+              <>
+                <label htmlFor="search" className="text-[var(--text)]">
+                  Search (by Name, ID, Assessment, Code):
+                </label>
+                <Input
+                  id="search"
+                  placeholder="Enter search query..."
+                  type="text"
+                  className="mt-4 w-full "
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </>
+            )}
+
+            {activeTab === "Date Range" && (
+              <>
+                <label htmlFor="date-range" className="text-[var(--text)]">
+                  Date Range:
+                </label>
+                <div className="mt-4 min-w-full">
+                  <DatePickerWithRange
+                    value={dateRange}
+                    onChange={setDateRange}
+                  />
+                </div>
+              </>
+            )}
+
             {activeTab === "Segment" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
                   Select the Segment:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["6-8", "9-10", "11-12", "UG", "PG", "Professionals"].map(
+                  {["9-10", "11-12", "UG", "PG", "Professionals"].map(
                     (option) => (
-                      <RadioButton
-                        key={option}
-                        label={option}
-                        value={option}
-                        selected={group}
-                        onChange={setGroup}
-                      />
+                      <label key={option} className="flex items-center gap-2">
+                        <Checkbox
+                          checked={segment === option}
+                          onCheckedChange={() => setSegment(option)}
+                        />
+                        {option}
+                      </label>
                     )
                   )}
                 </div>
               </>
             )}
 
-            {activeTab === "Category" && (
+            {activeTab === "Source" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Category :
+                  Select Source:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Career", "Aptitude", "Personality", "Skills"].map(
-                    (option) => (
-                      <RadioButton
-                        key={option}
-                        label={option}
-                        value={option}
-                        selected={category}
-                        onChange={setCategory}
+                  {["Direct", "Partners"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={source === option}
+                        onCheckedChange={() => setSource(option)}
                       />
-                    )
-                  )}
+                      {option}
+                    </label>
+                  ))}
                 </div>
               </>
             )}
@@ -279,33 +314,21 @@ function AdvancedFilter({ onClose }: FilterProps) {
             {activeTab === "Status" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Choose Status :
+                  Choose Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Active", "Inactive", "Draft"].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={status}
-                      onChange={setStatus}
-                    />
+                  {["Not Started", "In Progress", "Completed"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={status === option}
+                        onCheckedChange={() => setStatus(option)}
+                      />
+                      {option}
+                    </label>
                   ))}
                 </div>
               </>
             )}
-
-            {activeTab === "Created Date" && (
-              <>
-                <label htmlFor="act" className="text-[var(--text)]">
-                  Enter the Last Assessment Date :
-                </label>
-                <div className="mt-4 min-w-full">
-                  <DatePick />
-                </div>
-              </>
-            )}
-
             {/* Footer */}
           </div>
         </div>
@@ -323,6 +346,7 @@ function AdvancedFilter({ onClose }: FilterProps) {
     </div>
   );
 }
+
 
 function StatCard() {
   return (

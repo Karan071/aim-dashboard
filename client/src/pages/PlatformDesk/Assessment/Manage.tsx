@@ -10,6 +10,8 @@ import {
 
   FileDown,
   X,
+  FileText,
+  BarChart3,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -123,7 +125,7 @@ interface FilterProps {
 
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("General");
+  const [activeTab, setActiveTab] = useState("Search");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -142,27 +144,12 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
   // Filter states
   const [search, setSearch] = useState("");
-  const [status, setStatus] = useState<string[]>([]);
-  const [audience, setAudience] = useState<string[]>([]);
+  const [segment, setSegment] = useState("9-10");
+  const [source, setSource] = useState("Direct");
+  const [status, setStatus] = useState("Not Started");
   const [dateRange, setDateRange] = useState<DateRange | undefined>(undefined);
 
-  const tabList = ["General", "Status", "Segments", "Category", "Date Range"];
-
-  // Helper for checkbox
-  const handleStatusChange = (option: string) => {
-    setStatus((prev) =>
-      prev.includes(option)
-        ? prev.filter((s) => s !== option)
-        : [...prev, option]
-    );
-  };
-  const handleAudienceChange = (option: string) => {
-    setAudience((prev) =>
-      prev.includes(option)
-        ? prev.filter((a) => a !== option)
-        : [...prev, option]
-    );
-  };
+  const tabList = ["Search", "Date Range", "Segment", "Source", "Status"];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
@@ -179,8 +166,9 @@ function AdvancedFilters({ onClose }: FilterProps) {
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
             onClick={() => {
               setSearch("");
-              setStatus([]);
-              setAudience([]);
+              setSegment("9-10");
+              setSource("Direct");
+              setStatus("Not Started");
               setDateRange(undefined);
             }}
           >
@@ -209,14 +197,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
           {/* Tab Content */}
           <div className="p-6 overflow-y-auto relative w-full">
-            {activeTab === "General" && (
+            {activeTab === "Search" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">
-                  Search by Assessment Name / ID:
+                <label htmlFor="search" className="text-[var(--text)]">
+                  Search (by Name, ID, Assessment, Code):
                 </label>
                 <Input
-                  id="Gen"
-                  placeholder="Enter assessment name or ID..."
+                  id="search"
+                  placeholder="Enter search query..."
                   type="text"
                   className="mt-4 w-full "
                   value={search}
@@ -225,15 +213,52 @@ function AdvancedFilters({ onClose }: FilterProps) {
               </>
             )}
 
-            {activeTab === "Status" && (
+            {activeTab === "Date Range" && (
               <>
-                <p className="text-sm text-[var(--text-head)] mb-4">Status:</p>
+                <label htmlFor="date-range" className="text-[var(--text)]">
+                  Date Range:
+                </label>
+                <div className="mt-4 min-w-full">
+                  <DatePickerWithRange
+                    value={dateRange}
+                    onChange={setDateRange}
+                  />
+                </div>
+              </>
+            )}
+
+            {activeTab === "Segment" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select the Segment:
+                </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Active", "Draft", "Pending"].map((option) => (
+                  {["9-10", "11-12", "UG", "PG", "Professionals"].map(
+                    (option) => (
+                      <label key={option} className="flex items-center gap-2">
+                        <Checkbox
+                          checked={segment === option}
+                          onCheckedChange={() => setSegment(option)}
+                        />
+                        {option}
+                      </label>
+                    )
+                  )}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Source" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select Source:
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {["Direct", "Partners"].map((option) => (
                     <label key={option} className="flex items-center gap-2">
                       <Checkbox
-                        checked={status.includes(option)}
-                        onCheckedChange={() => handleStatusChange(option)}
+                        checked={source === option}
+                        onCheckedChange={() => setSource(option)}
                       />
                       {option}
                     </label>
@@ -242,58 +267,21 @@ function AdvancedFilters({ onClose }: FilterProps) {
               </>
             )}
 
-            {activeTab === "Segments" && (
+            {activeTab === "Status" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Segments:
+                  Choose Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["9-10", "11-12", "UG", "PG"].map(
-                    (option) => (
-                      <label key={option} className="flex items-center gap-2">
-                        <Checkbox
-                          checked={audience.includes(option)}
-                          onCheckedChange={() => handleAudienceChange(option)}
-                        />
-                        {option}
-                      </label>
-                    )
-                  )}
-                </div>
-              </>
-            )}
-
-            {activeTab === "Category" && (
-              <>
-                <p className="text-sm text-[var(--text-head)] mb-4">
-                  Category:
-                </p>
-                <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Engineering", "Medical", "Management", "Civil Services", "Banking", "Government", "General", "Language", "Mathematics"].map(
-                    (option) => (
-                      <label key={option} className="flex items-center gap-2">
-                        <Checkbox
-                          checked={audience.includes(option)}
-                          onCheckedChange={() => handleAudienceChange(option)}
-                        />
-                        {option}
-                      </label>
-                    )
-                  )}
-                </div>
-              </>
-            )}
-
-            {activeTab === "Date Range" && (
-              <>
-                <label htmlFor="date-range" className="text-[var(--text)]">
-                  Date Range: Created or Last Active
-                </label>
-                <div className="mt-4 min-w-full">
-                  <DatePickerWithRange
-                    value={dateRange}
-                    onChange={setDateRange}
-                  />
+                  {["Not Started", "In Progress", "Completed"].map((option) => (
+                    <label key={option} className="flex items-center gap-2">
+                      <Checkbox
+                        checked={status === option}
+                        onCheckedChange={() => setStatus(option)}
+                      />
+                      {option}
+                    </label>
+                  ))}
                 </div>
               </>
             )}
@@ -655,16 +643,39 @@ function TableSection() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      {user.actions.map((action, index) => (
-                        <Button
-                          key={index}
-                          variant="noborder"
-                          size="sm"
-                          className="bg-white border-0 shadow-none text-xs"
-                        >
-                          {action}
-                        </Button>
-                      ))}
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Handle Questions action
+                        }}
+                      >
+                        <FileText className="h-4 w-4" />
+                        <span className="sr-only">Questions</span>
+                      </Button>
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Handle Results action
+                        }}
+                      >
+                        <BarChart3 className="h-4 w-4" />
+                        <span className="sr-only">Results</span>
+                      </Button>
+                      <Button
+                        variant="noborder"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Handle Logs action
+                        }}
+                      >
+                        <Eye className="h-4 w-4" />
+                        <span className="sr-only">Logs</span>
+                      </Button>
                     </div>
                   </TableCell>
                 </TableRow>
