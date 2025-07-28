@@ -3,6 +3,8 @@ import { Routes, Route } from "react-router-dom";
 // Platform Desk Components
 import { Desk as PlatformDesk } from "@/pages/PlatformDesk/Desk";
 import { RecentActivities as PlatformRecentActivities } from "@/pages/PlatformDesk/RecentActivities";
+import {Assessments as PlatformAssessment } from "@/pages/PlatformDesk/Assessment/Assessments";
+import {Manage as PlatformAssessmentManage } from "@/pages/PlatformDesk/Assessment/Manage";
 import { Sessions as PlatformSessions } from "@/pages/PlatformDesk/Sessions/Sessions";
 import { SessionPool as PlatformSessionPool } from "@/pages/PlatformDesk/Sessions/SessionPool";
 import { Masterclass as PlatformMasterclass } from "@/pages/PlatformDesk/Sessions/Masterclass";
@@ -100,7 +102,10 @@ export default function AppRoutes() {
     <Routes>
       {/* Platform Desk Routes */}
       <Route path="platform/desk" element={<PlatformDesk />} />
+
       <Route path="platform/activities" element={<PlatformRecentActivities />} />
+      <Route path="/platform/assessment" element={<PlatformAssessment />} />
+      <Route path="/platform/assessment/manage" element={<PlatformAssessmentManage  />} />
       <Route path="platform/products/sessions" element={<PlatformSessions />} />
       <Route
         path="platform/products/session-pool"

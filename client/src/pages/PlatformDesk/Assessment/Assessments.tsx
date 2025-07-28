@@ -1,4 +1,4 @@
-import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, CheckCircle2, Trash,  FileDown, Edit, BadgeQuestionMark, Newspaper, Plus, FileUp, Download, MessageCircle, NotebookPen, Pen } from "lucide-react";
+import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, CheckCircle2, Trash,  FileDown, Edit, BadgeQuestionMark, Newspaper, Plus, FileUp, Download, MessageCircle, NotebookPen, Pen, Settings } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -25,31 +25,37 @@ const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
 const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const Stats = [
   {
-    title: "Total Assessments",
+    title: "Total Enrollments",
     value: "38",
     icon: Users,
     performance: Up,
   },
   {
-    title: "Published",
+    title: "Progress",
     value: "26",
     icon: FileCheck2,
     performance: Down,
   },
   {
-    title: "Drafts",
+    title: "Completed",
     value: "7",
     icon: FileText,
     performance: Up,
   },
   {
-    title: "Pending Approvals",
+    title: "Started",
     value: "5",
     icon: Clock,
     performance: Up,
   },
   {
-    title: "New This Month",
+    title: "Total Revenue",
+    value: "6",
+    icon: CheckCircle2,
+    performance: Up,
+  },
+  {
+    title: "Via Partners",
     value: "6",
     icon: CheckCircle2,
     performance: Up,
@@ -64,14 +70,14 @@ export function Assessments() {
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold text-[var(--text-head)]">Assessments</h1>
       <StatCard />
-      <Buttonbar />
+      <Actionbar />
       
       <AssessmentTable />
     </div>
   )
 }
 
-function Buttonbar() {
+function Actionbar() {
   
   const [showFilter, setShowFilter] = useState(false);
   return (
@@ -81,14 +87,15 @@ function Buttonbar() {
         <span className="">Create New Assessment</span>
       </Button>
       <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
+        <Button 
+          variant="standard" 
+          size="new"
+          onClick={() =>  = '/platform/assessment/manage'}
+        >
           <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Manage Categories</span>
+          <span className="">Manage</span>
         </Button>
-        <Button variant="standard" size="new">
-          <FileUp className="h-3 w-3" />
-          <span className="">Import (.CSV)</span>
-        </Button>
+      
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Export</span>
@@ -101,7 +108,7 @@ function Buttonbar() {
         {showFilter ? "Hide Filters" : "Show Filters"}
       </Button>
 
-      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+      {showFilter && <AdvancedFilter onClose={() => setShowFilter(false)} />}
 
       </div>
     </div>
@@ -113,7 +120,7 @@ interface FilterProps {
 }
 
 
-function AssessFilter({ onClose }: FilterProps) {
+function AdvancedFilter({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("Segment");
 
@@ -331,11 +338,13 @@ function AssessmentTable() {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
       const bValue = b[sortConfig.key as keyof typeof b];
-      if (aValue < bValue) {
-        return sortConfig.direction === "ascending" ? -1 : 1;
-      }
-      if (aValue > bValue) {
-        return sortConfig.direction === "ascending" ? 1 : -1;
+      if (aValue && bValue) {
+        if (aValue < bValue) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (aValue > bValue) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
       }
       return 0;
     });
@@ -369,7 +378,7 @@ function AssessmentTable() {
       setSelectedUsers([]);
     } else {
       setSelectedUsers(
-        currentRecords.map((user) => user.id)
+        currentRecords.map((user) => user.id).filter((id): id is string => id !== undefined)
       );
     }
   };
@@ -463,59 +472,43 @@ function AssessmentTable() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
+                  onClick={() => requestSort("userName")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  User Name & ID{" "}
+                  {sortConfig?.key === "userName" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
                   onClick={() => requestSort("segments")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Segments{" "}
+                  Segment{" "}
                   {sortConfig?.key === "segments" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("category")}
+                  onClick={() => requestSort("date")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Category{" "}
-                  {sortConfig?.key === "category" &&
+                  Date{" "}
+                  {sortConfig?.key === "date" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("price")}
+                  onClick={() => requestSort("source")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Price (₹){" "}
-                  {sortConfig?.key === "price" &&
+                  Source{" "}
+                  {sortConfig?.key === "source" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("consultantDiscount")}
+                  onClick={() => requestSort("amountPaid")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Consultant Discount{" "}
-                  {sortConfig?.key === "consultantDiscount" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("consultantShare")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Consultant Share (₹){" "}
-                  {sortConfig?.key === "consultantShare" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("premiumDiscount")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Premium Discount{" "}
-                  {sortConfig?.key === "premiumDiscount" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
-                  onClick={() => requestSort("premiumShare")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Premium Share (₹){" "}
-                  {sortConfig?.key === "premiumShare" &&
+                  Amount Paid{" "}
+                  {sortConfig?.key === "amountPaid" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
@@ -527,11 +520,19 @@ function AssessmentTable() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("createdOn")}
+                  onClick={() => requestSort("assignCoach")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Created On{" "}
-                  {sortConfig?.key === "createdOn" &&
+                  Assign Coach{" "}
+                  {sortConfig?.key === "assignCoach" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("result")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Result{" "}
+                  {sortConfig?.key === "result" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">Actions</TableHead>
@@ -547,7 +548,9 @@ function AssessmentTable() {
                   
                   )}
                   onClick={() => {
-                    toggleSelectUser(user.id);
+                    if (user.id) {
+                      toggleSelectUser(user.id);
+                    }
                   }}
                 >
                   <TableCell
@@ -556,9 +559,9 @@ function AssessmentTable() {
                      )}
                   >
                     <Checkbox
-                      checked={selectedUsers.includes(user.id)}
+                      checked={user.id ? selectedUsers.includes(user.id) : false}
                       onClick={(e) => e.stopPropagation()}
-                      onCheckedChange={() => toggleSelectUser(user.id)}
+                      onCheckedChange={() => user.id && toggleSelectUser(user.id)}
                     />
                   </TableCell>
                   <TableCell>
@@ -571,33 +574,30 @@ function AssessmentTable() {
                     </div>
                   </TableCell>
                   <TableCell>
+                    <div className="text-low">{user.userName} ({user.userId})</div>
+                  </TableCell>
+                  <TableCell>
                     <div className="text-low">{user.segments}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-sm">
-                      <div>{`${user.category}`}</div>
+                    <div className="text-sm">{user.date}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">
+                      {user.source.type === "Direct" ? "Direct" : user.source.partnerName}
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.price}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.consultantDiscount}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.consultantShare}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.premiumDiscount}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.premiumShare}</div>
+                    <div className="text-low">₹{user.amountPaid} | {user.amountCode}</div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="text-sm">{user.createdOn}</div>
+                    <div className="text-sm">{user.assignCoach}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm">{user.result || "-"}</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">

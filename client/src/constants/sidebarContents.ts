@@ -116,6 +116,11 @@ export const SidebarData = {
           url: "/desk/platform/activities",
           icon: getNextIcon(),
         },
+         {
+          title: "Assessment",
+          url: "/desk/platform/assessment",
+          icon: getNextIcon(),
+        },
         {
           title: "Sessions",
           icon: getNextIcon(),
