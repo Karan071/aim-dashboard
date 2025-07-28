@@ -1,4 +1,4 @@
-import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, CheckCircle2, Trash,  FileDown, Edit, BadgeQuestionMark, Newspaper, Plus, FileUp, Download, MessageCircle, NotebookPen, Pen, Settings } from "lucide-react";
+import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, CheckCircle2, Trash,  FileDown, Edit, BadgeQuestionMark, Newspaper, Plus, Download, MessageCircle, NotebookPen, Pen } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -14,6 +14,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useEffect } from "react";
 import RadioButton from "@/components/ui/Radiobutton";
+import { useNavigate } from "react-router-dom";
 import DatePick from "@/components/ui/DatePicker"
 
 
@@ -78,7 +79,7 @@ export function Assessments() {
 }
 
 function Actionbar() {
-  
+  const navigate = useNavigate();
   const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
@@ -88,9 +89,10 @@ function Actionbar() {
       </Button>
       <div className="flex gap-4 flex-wrap">
         <Button 
+         className="cursor-pointer"
           variant="standard" 
           size="new"
-          onClick={() =>  = '/platform/assessment/manage'}
+          onClick={() => navigate('manage')}
         >
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Manage</span>

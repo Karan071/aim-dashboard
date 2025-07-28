@@ -104,8 +104,8 @@ export default function AppRoutes() {
       <Route path="platform/desk" element={<PlatformDesk />} />
 
       <Route path="platform/activities" element={<PlatformRecentActivities />} />
-      <Route path="/platform/assessment" element={<PlatformAssessment />} />
-      <Route path="/platform/assessment/manage" element={<PlatformAssessmentManage  />} />
+      <Route path="platform/assessment" element={<PlatformAssessment />} />
+      <Route path="platform/assessment/manage" element={<PlatformAssessmentManage/>} />
       <Route path="platform/products/sessions" element={<PlatformSessions />} />
       <Route
         path="platform/products/session-pool"

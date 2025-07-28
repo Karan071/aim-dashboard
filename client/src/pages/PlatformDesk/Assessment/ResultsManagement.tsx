@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FileCheck2, Download, Eye, BarChart3, TrendingUp, TrendingDown } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
+
 
 export function ResultsManagement() {
   const results = [
@@ -146,6 +146,7 @@ export function ResultsManagement() {
                   </TableCell>
                   <TableCell>
                     <Badge 
+                    //@ts-ignore
                       variant={
                         result.performance === "Excellent" ? "standard" : 
                         result.performance === "Good" ? "border" : "delete"
