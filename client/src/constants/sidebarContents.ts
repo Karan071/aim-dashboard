@@ -543,6 +543,11 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
+          title: "Withdrawal",
+          url: "/desk/finance/withdrawal",
+          icon: getNextIcon(),
+        },
+        {
           title: "Payouts",
           url: "/desk/finance/payouts",
           icon: getNextIcon(),
