@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export function AddNewRoleorEdit() {
+export function EditRole() {
   return (
     <div className="flex gap-4 flex-row">
       <div className="flex flex-col p-6 gap-2 bg-[var(--background)] rounded-sm">
