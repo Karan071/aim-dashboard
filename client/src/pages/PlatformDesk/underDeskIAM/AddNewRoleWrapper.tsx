@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { AddNewRoleorEdit } from "@/pages/PlatformDesk/underDeskIAM/AddNewRoleorEdit";
-import { useSearchParams } from "react-router-dom";
+import { AddNewRoleorEdit } from "@/pages/PlatformDesk/UnderDeskIAM/AddNewRoleorEdit";
 
 // Mock staff data
 const staffMock = [
@@ -29,8 +28,6 @@ const staffMock = [
 ];
 
 export function AddNewRoleWrapper() {
-  const [searchParams] = useSearchParams();
-  const showStaffBox = searchParams.get("withStaff") === "true";
 
   return (
     <div className="flex flex-col xl:flex-row w-full gap-4">
@@ -46,11 +43,9 @@ export function AddNewRoleWrapper() {
         <AddNewRoleorEdit />
       </div>
 
-      {showStaffBox && (
         <div className="w-full xl:w-1/2 ">
           <StaffListBox />
         </div>
-      )}
     </div>
   );
 }
