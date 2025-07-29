@@ -33,7 +33,7 @@ import { JobApplication as ReviewJobApplication } from "@/pages/ReviewDesk/JobAp
 // Relations Desk
 import { Desk as RelationDesk } from "@/pages/RelationDesk/Desk";
 import { MyPipeline as RelationPipeline } from "@/pages/RelationDesk/MyPipeline";
-import { Pool as RelationPool } from "@/pages/RelationDesk/Pool";
+// import { Pool as RelationPool } from "@/pages/RelationDesk/Pool";
 import { Explorers as RelationExplorers } from "@/pages/RelationDesk/Leads/Explorers";
 import { Coaches as RelationCoaches } from "@/pages/RelationDesk/Leads/Coaches";
 import { Organisation as RelationOrganisation } from "@/pages/RelationDesk/Leads/Organisation";
@@ -154,7 +154,7 @@ export default function AppRoutes() {
       {/* Relations Desk Routes */}
       <Route path="relation/desk" element={<RelationDesk />} />
       <Route path="relation/pipeline" element={<RelationPipeline />} />
-      <Route path="relation/pool" element={<RelationPool />} />
+      {/* <Route path="relation/pool" element={<RelationPool />} /> */}
       <Route
         path="relation/leads/explorers"
         element={<RelationExplorers />}

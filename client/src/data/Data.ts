@@ -11906,3 +11906,171 @@ export const LeadOrganisationTable = [
     "actions": ["📞 Call", "💬 Message"]
   }
 ]
+
+export const PoolTable = [
+  {
+    "id": "LD301",
+    "type": "Lead",
+    "concern": "Abandoned Cart",
+    "objective": "Upsell",
+    "for": "Assessment",
+    "source": "Web",
+    "age": "1 hr ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD302",
+    "type": "Lead",
+    "concern": "Course Inquiry",
+    "objective": "Enrollment",
+    "for": "UG Program",
+    "source": "Email",
+    "age": "2 hrs ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD303",
+    "type": "Lead",
+    "concern": "Career Confusion",
+    "objective": "Guidance",
+    "for": "UG Student",
+    "source": "Web",
+    "age": "4 hrs ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD304",
+    "type": "Lead",
+    "concern": "Abandoned Cart",
+    "objective": "Re-engagement",
+    "for": "Assessment",
+    "source": "Social Media",
+    "age": "6 hrs ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD305",
+    "type": "Lead",
+    "concern": "Exam Confusion",
+    "objective": "Clarification",
+    "for": "PG Aspirant",
+    "source": "Web",
+    "age": "8 hrs ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD306",
+    "type": "Lead",
+    "concern": "Abandoned Cart",
+    "objective": "Follow-up",
+    "for": "Mentorship",
+    "source": "App",
+    "age": "10 hrs ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD307",
+    "type": "Lead",
+    "concern": "Career Change",
+    "objective": "Transition",
+    "for": "Working Professional",
+    "source": "Referral",
+    "age": "12 hrs ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD308",
+    "type": "Lead",
+    "concern": "Course Inquiry",
+    "objective": "Upskill",
+    "for": "PG Program",
+    "source": "Web",
+    "age": "1 day ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD309",
+    "type": "Lead",
+    "concern": "Assessment Delay",
+    "objective": "Resolve",
+    "for": "Student",
+    "source": "Email",
+    "age": "2 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD310",
+    "type": "Lead",
+    "concern": "Abandoned Cart",
+    "objective": "Upsell",
+    "for": "Course Bundle",
+    "source": "App",
+    "age": "2 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD311",
+    "type": "Lead",
+    "concern": "Refund Request",
+    "objective": "Retention",
+    "for": "Coaching",
+    "source": "Web",
+    "age": "3 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD312",
+    "type": "Lead",
+    "concern": "No Show",
+    "objective": "Rebook",
+    "for": "Mentorship",
+    "source": "Call",
+    "age": "3 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD313",
+    "type": "Lead",
+    "concern": "Payment Failure",
+    "objective": "Recovery",
+    "for": "Subscription",
+    "source": "App",
+    "age": "4 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD314",
+    "type": "Lead",
+    "concern": "Unsubscribed",
+    "objective": "Retention",
+    "for": "Newsletter",
+    "source": "Email",
+    "age": "4 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  },
+  {
+    "id": "LD315",
+    "type": "Lead",
+    "concern": "Abandoned Cart",
+    "objective": "Upsell",
+    "for": "Assessment",
+    "source": "Web",
+    "age": "5 days ago",
+    "status": "🆕 New",
+    "action": "🔒 Assign"
+  }
+]

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface Role {
   id: string;
@@ -25,7 +26,7 @@ type SortOrder = "asc" | "desc";
 export function ManageRoles() {
   const [sortField, setSortField] = useState<SortField>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
-
+  const navigate = useNavigate();
   const handleSort = (field: SortField) => {
     if (sortField === field) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -48,7 +49,7 @@ export function ManageRoles() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <Button variant="brand">+ Add New Role</Button>
+      <Button variant="brand" onClick={() => navigate("/desk/platform/desk-iam/addNewRole?withStaff=false")}>+ Add New Role</Button>
       </div>
 
       {/* Table */}
@@ -95,7 +96,7 @@ export function ManageRoles() {
               <Button variant="noborder">
                 <Eye size={16} />
               </Button>
-              <Button variant="noborder">
+              <Button variant="noborder" onClick={() => navigate("/desk/platform/desk-iam/addNewRole?withStaff=true")}>
                 <Pencil size={16} />
               </Button>
               <Button variant="noborder" className="text-[var(--red)]">

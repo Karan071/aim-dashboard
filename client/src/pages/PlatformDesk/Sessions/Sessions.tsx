@@ -16,6 +16,7 @@ import { LiveTable } from "../SessionTables/Live";
 import { RefundsTable } from "../SessionTables/Refunds";
 import { CancelledTable } from "../SessionTables/Cancelled";
 import { CompletedTable } from "../SessionTables/Completed";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -63,12 +64,27 @@ const Stats = [
 export function Sessions() {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Sessions</h1>
+      <Topbar />
       <StatCard />
       <Buttonbar />
       
 
       <SessionTabs />
+    </div>
+  );
+}
+
+function Topbar() {
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Sessions
+        </h1>
+      </div>
+      <div>
+        <DatePickerWithRange />
+      </div>
     </div>
   );
 }
