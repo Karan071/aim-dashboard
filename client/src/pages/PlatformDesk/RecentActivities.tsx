@@ -258,6 +258,7 @@ function Topbar() {
         </h1>
       </div>
       <div className="flex items-center gap-2">
+        <DatePickerWithRange />
         <Button
           variant="noborder"
           size="icon"
@@ -267,7 +268,6 @@ function Topbar() {
           <Funnel className="h-4 w-4" />
         </Button>
         {showFilter && <AdvanceFilter onClose={() => setShowFilter(false)} />}
-        <DatePickerWithRange />
       </div>
     </div>
   );

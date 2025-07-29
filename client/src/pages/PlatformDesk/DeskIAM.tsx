@@ -12,8 +12,6 @@ import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleA
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
 const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
