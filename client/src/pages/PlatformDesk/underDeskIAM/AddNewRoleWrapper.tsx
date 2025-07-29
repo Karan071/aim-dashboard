@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { AddNewRoleorEdit } from "@/pages/PlatformDesk/UnderDeskIAM/AddNewRoleorEdit";
+import { AddNewRoleorEdit } from "@/pages/PlatformDesk/underDeskIAM/AddNewRoleorEdit";
 
 // Mock staff data
 const staffMock = [
@@ -28,7 +28,6 @@ const staffMock = [
 ];
 
 export function AddNewRoleWrapper() {
-
   return (
     <div className="flex flex-col xl:flex-row w-full gap-4">
       <div className="w-full xl:w-1/2">
@@ -43,9 +42,9 @@ export function AddNewRoleWrapper() {
         <AddNewRoleorEdit />
       </div>
 
-        <div className="w-full xl:w-1/2 ">
-          <StaffListBox />
-        </div>
+      <div className="w-full xl:w-1/2 ">
+        <StaffListBox />
+      </div>
     </div>
   );
 }
