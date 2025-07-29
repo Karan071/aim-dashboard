@@ -6,11 +6,9 @@ import {
   Star,
   User,
   Newspaper,
-  Filter,
   Bell,
   X,
-  ArrowUp,
-  ArrowDown,
+  Funnel,
 } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +38,12 @@ import RadioButton from "@/components/ui/Radiobutton";
 import DatePicker from "@/components/ui/DatePicker";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DatePickerWithRange } from "@/components/date-picker";
-import { Card, CardHeader } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const stats = [
   {
@@ -193,38 +196,22 @@ function StatsCards() {
     <div className="w-full overflow-x-auto">
       <div className="flex gap-2 min-w-max">
         {stats.map((stat, index) => (
-          <Card
+          <div
             key={index}
-            className="rounded-sm shadow-none bg-[var(--background)] min-w-[200px] max-w-[250px] flex-shrink-0"
+            className="rounded-sm border bg-[var(--background)] min-w-[120px] max-w-[200px] flex-shrink-0 min-h-[55px] p-2"
           >
-            <CardHeader className="flex-col items-center px-3 gap-2 py-3">
+            <div className="flex flex-col items-center gap-1">
               {"sections" in stat ? (
-                <div className="w-full py-1 flex gap-4">
-                  {" "}
+                <div className="w-full flex gap-2">
                   {stat.sections?.map((section, idx) => (
                     <div key={idx} className="flex-1">
-                      {" "}
-                      {/* Added flex-1 to make sections take equal space */}
                       <div className="flex justify-between items-center">
-                        <div className="text-xs uppercase text-light line-clamp-1">
+                        <div className="text-[11px] uppercase text-light line-clamp-1">
                           {section.subtitle}
                         </div>
-                        <span
-                          className={`text-xs flex items-center ${
-                            section.performance === "Up"
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }`}
-                        >
-                          {section.performance === "Up" ? (
-                            <ArrowUp className="h-4 w-4" />
-                          ) : (
-                            <ArrowDown className="h-4 w-4" />
-                          )}
-                        </span>
                       </div>
-                      <div className="flex items-center gap-4">
-                        <div className="text-base font-semibold">
+                      <div className="flex items-center">
+                        <div className="text-sm font-semibold">
                           {section.value}
                         </div>
                       </div>
@@ -234,31 +221,17 @@ function StatsCards() {
               ) : (
                 <div className="w-full">
                   <div className="flex justify-between items-center">
-                    <div className="text-xs uppercase text-light line-clamp-1">
+                    <div className="text-[11px] uppercase text-light line-clamp-1">
                       {stat.title}
                     </div>
-                    <span
-                      className={`text-xs flex items-center ${
-                        stat.performance === "Up"
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
-                    >
-                      {stat.performance === "Up" ? (
-                        <ArrowUp className="h-4 w-4" />
-                      ) : (
-                        <ArrowDown className="h-4 w-4" />
-                      )}
-                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    {/* Removed the circular icon div */}
-                    <div className="text-base font-semibold">{stat.value}</div>
+                  <div className="flex items-center">
+                    <div className="text-sm font-semibold">{stat.value}</div>
                   </div>
                 </div>
               )}
-            </CardHeader>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
     </div>
@@ -270,13 +243,13 @@ export function RecentActivities() {
     <div className="flex gap-2 flex-col">
       <Topbar />
       <StatsCards />
-      <Filterbar />
       <ActivityTable />
     </div>
   );
 }
 
 function Topbar() {
+  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
@@ -284,29 +257,17 @@ function Topbar() {
           Recent Activities
         </h1>
       </div>
-      <div>
-        <DatePickerWithRange />
-      </div>
-    </div>
-  );
-}
-
-export function Filterbar() {
-  const [showFilter, setShowFilter] = useState(false);
-  return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <div className="flex gap-4"></div>
-      <div className="flex gap-4">
+      <div className="flex items-center gap-2">
         <Button
-          variant="standard"
-          size="new"
+          variant="noborder"
+          size="icon"
           onClick={() => setShowFilter(true)}
+          aria-label={showFilter ? "Hide Filters" : "Show Filters"}
         >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
+          <Funnel className="h-4 w-4" />
         </Button>
-
         {showFilter && <AdvanceFilter onClose={() => setShowFilter(false)} />}
+        <DatePickerWithRange />
       </div>
     </div>
   );
@@ -667,28 +628,68 @@ function ActivityTable() {
                   </TableCell>
                   <TableCell>{user.description}</TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button variant="noborder" size="sm">
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button variant="noborder" size="sm">
-                        <Check className="h-4 w-3 text-[var(--green)]" />
-                        <span className="sr-only">Varify</span>
-                      </Button>
+                    <div className="flex items-center">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="icon-only" size="icon">
+                              <Eye className="h-4 w-3" />
+                              <span className="sr-only">View</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View Details</p>
+                          </TooltipContent>
+                        </Tooltip>
 
-                      <Button variant="noborder" size="sm">
-                        <Star className="h-4 w-3" />
-                        <span className="sr-only">Review</span>
-                      </Button>
-                      <Button variant="noborder" size="sm">
-                        <User className="h-4 w-3" />
-                        <span className="sr-only">Assign</span>
-                      </Button>
-                      <Button variant="noborder" size="sm">
-                        <Newspaper className="h-4 w-3 " />
-                        <span className="sr-only">Followups</span>
-                      </Button>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="icon-only" size="icon">
+                              <Check className="h-4 w-3 text-[var(--green)]" />
+                              <span className="sr-only">Verify</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Verify Activity</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="icon-only" size="icon">
+                              <Star className="h-4 w-3" />
+                              <span className="sr-only">Review</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Add Review</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="icon-only" size="icon">
+                              <User className="h-4 w-3" />
+                              <span className="sr-only">Assign</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Assign User</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="icon-only" size="icon">
+                              <Newspaper className="h-4 w-3" />
+                              <span className="sr-only">Followups</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View Followups</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
