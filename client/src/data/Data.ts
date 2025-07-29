@@ -722,6 +722,128 @@ export const OrganisationProfiles = [
   }
 ];
 
+export const coachesList = [
+  {
+    id: "COH001",
+    name: "Dr. Priya Singh",
+    specialization: "Career Counseling",
+    experience: "8 years",
+    rating: "4.8",
+    status: "Active"
+  },
+  {
+    id: "COH002",
+    name: "Prof. Rajesh Kumar",
+    specialization: "Engineering Guidance",
+    experience: "12 years",
+    rating: "4.9",
+    status: "Active"
+  },
+  {
+    id: "COH003",
+    name: "Dr. Meera Iyer",
+    specialization: "Medical Counseling",
+    experience: "15 years",
+    rating: "4.7",
+    status: "Active"
+  },
+  {
+    id: "COH004",
+    name: "Adv. Sanjay Verma",
+    specialization: "Law Entrance Prep",
+    experience: "10 years",
+    rating: "4.6",
+    status: "Active"
+  },
+  {
+    id: "COH005",
+    name: "Prof. Anita Desai",
+    specialization: "MBA Preparation",
+    experience: "9 years",
+    rating: "4.8",
+    status: "Active"
+  },
+  {
+    id: "COH006",
+    name: "Ms. Ritu Gupta",
+    specialization: "Design & Arts",
+    experience: "6 years",
+    rating: "4.5",
+    status: "Active"
+  },
+  {
+    id: "COH007",
+    name: "Prof. Sunil Kumar",
+    specialization: "Commerce & Finance",
+    experience: "11 years",
+    rating: "4.7",
+    status: "Active"
+  },
+  {
+    id: "COH008",
+    name: "Dr. Kavita Rao",
+    specialization: "Humanities & Arts",
+    experience: "13 years",
+    rating: "4.6",
+    status: "Active"
+  },
+  {
+    id: "COH009",
+    name: "Prof. Rajiv Malhotra",
+    specialization: "General Knowledge",
+    experience: "7 years",
+    rating: "4.4",
+    status: "Active"
+  },
+  {
+    id: "COH010",
+    name: "Dr. Manoj Sharma",
+    specialization: "Logical Reasoning",
+    experience: "14 years",
+    rating: "4.9",
+    status: "Active"
+  },
+  {
+    id: "COH011",
+    name: "Ms. Neha Joshi",
+    specialization: "Psychology",
+    experience: "5 years",
+    rating: "4.3",
+    status: "Inactive"
+  },
+  {
+    id: "COH012",
+    name: "Dr. Amit Patel",
+    specialization: "Data Science",
+    experience: "8 years",
+    rating: "4.8",
+    status: "Active"
+  },
+  {
+    id: "COH013",
+    name: "Prof. Sneha Verma",
+    specialization: "Digital Marketing",
+    experience: "6 years",
+    rating: "4.5",
+    status: "Active"
+  },
+  {
+    id: "COH014",
+    name: "Dr. Rahul Sen",
+    specialization: "AI & Machine Learning",
+    experience: "10 years",
+    rating: "4.7",
+    status: "Active"
+  },
+  {
+    id: "COH015",
+    name: "Ms. Kavita Sharma",
+    specialization: "UX/UI Design",
+    experience: "7 years",
+    rating: "4.6",
+    status: "Active"
+  }
+];
 export const ManageTable = [
   {
     "id": "ASS1001",
@@ -1521,7 +1643,6 @@ interface VideoTableItem {
   videoUrl: string;
   status: string;
 }
-
 export const VideoTableData: VideoTableItem[] = [
   {
     id: "1",
@@ -3621,7 +3742,6 @@ export const assessmentsTable = [
     "actions": ["Remind", "Revoke", "Reset"]
   }
 ];
-
 export const upcomingAssessmentsTable = [
   [
     {
@@ -4374,7 +4494,6 @@ export const TemplateTableData = [
     metaStatus: "Not Pushed",
   },
 ];
-
 export const ReviewTableData = [
   {
     "id": 1,
@@ -5075,7 +5194,6 @@ export const introductory_sessions = [
     actions: ["Assign", "Edit", "Disable"]
   }
 ];
-
 export const b2b_sessions = [
   {
     id: 1,
@@ -6525,7 +6643,6 @@ export const FollowupTable = [
     "actions": ["View", "Done", "Note"]
   }
 ]
-
 export const CoachReview = [
 
   {
@@ -7945,7 +8062,6 @@ export const PayoutTable = [
     "Action": "Approve"
   }
 ]
-
 export const ReportTable =[
   {
     "id": 1,
@@ -8735,7 +8851,6 @@ export const CareersTable = [
       "actions": ["Edit", "Publish"]
     }
   ]
-
 export const addTeamMember=[
   {
     "id": 1,
