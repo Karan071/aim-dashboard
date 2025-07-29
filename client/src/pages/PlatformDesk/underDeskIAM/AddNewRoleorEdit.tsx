@@ -1,51 +1,59 @@
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Label } from "@/components/ui/label";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 
-
-export default function AddNewRoleorEdit() {
-    return (
-        <div className="flex gap-4 flex-row">
-            <div className="flex flex-col p-6 gap-2 bg-[var(--background)] rounded-sm">
-                <div className="flex justify-center items-center ">
-                    <div className="bg-[var(--brand-color2)] flex flex-col border-l-4 gap-2 border-l-[var(--brand-color)] p-4">
-                        <p className="text-sm text-[var(--text)]">Changing role permissions won't affected current staff members permissions that are using this role.</p>
-                        <div className="flex gap-2">
-                            <Checkbox className="text-sm text-[var(--text)]" />
-                            <span className="text-sm font-semibold text-[var(--text)]">Update all staff members permissions that are using this role</span>
-                            </div>
-                    </div>
-                </div>
-              <div className="space-y-4 text-[var(--text)] flex flex-col">
-      <div className="grid grid-cols-2 pb-4">
-        <div className="col-span-2 flex flex-col gap-2">
-          <Label className="text-sm font-semibold">Role Name</Label>
-          <Select>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select User Role" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Admin">Admin</SelectItem>
-              <SelectItem value="HOD">HOD</SelectItem>
-              <SelectItem value="Manager">Manager</SelectItem>
-              <SelectItem value="Team Lead">Team Lead</SelectItem>
-              <SelectItem value="Executive">Executive</SelectItem>
-            </SelectContent>
-          </Select>
+export function AddNewRoleorEdit() {
+  return (
+    <div className="flex gap-4 flex-row">
+      <div className="flex flex-col p-6 gap-2 bg-[var(--background)] rounded-sm">
+        <div className="flex justify-center items-center ">
+          <div className="bg-[var(--brand-color2)] flex flex-col border-l-4 gap-2 border-l-[var(--brand-color)] p-4">
+            <p className="text-sm text-[var(--text)]">
+              Changing role permissions won't affected current staff members
+              permissions that are using this role.
+            </p>
+            <div className="flex gap-2">
+              <Checkbox className="text-sm text-[var(--text)]" />
+              <span className="text-sm font-semibold text-[var(--text)]">
+                Update all staff members permissions that are using this role
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-      <Roles/>
-      </div>
-            
+        <div className="space-y-4 text-[var(--text)] flex flex-col">
+          <div className="grid grid-cols-2 pb-4">
+            <div className="col-span-2 flex flex-col gap-2">
+              <Label className="text-sm font-semibold">Role Name</Label>
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select User Role" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Admin">Admin</SelectItem>
+                  <SelectItem value="HOD">HOD</SelectItem>
+                  <SelectItem value="Manager">Manager</SelectItem>
+                  <SelectItem value="Team Lead">Team Lead</SelectItem>
+                  <SelectItem value="Executive">Executive</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
         </div>
-    );
+        <Roles />
+      </div>
+    </div>
+  );
 }
-
 
 const HeaderRow = () => (
   <div className="grid grid-cols-8 gap-2 px-4 pt-0 mt-0 py-2 items-center rounded-t-sm text-sm font-medium">
@@ -98,51 +106,50 @@ function PermissionSection({
 
   return (
     <div className="border rounded-sm overflow-hidden">
-  {/* Header row */}
-  <div className="bg-[var(--faded)] grid grid-cols-8 px-4 py-3 text-sm font-semibold w-full gap-2 items-center">
-    
-    {/* Title */}
-    <div className="col-span-2 flex items-center">
-      <span>{title}</span>
-    </div>
-    {isOpen && (
-      <>
-    {/* Select All Checkboxes */}
-    {[...Array(3)].map((_, colIdx) => (
-      <div key={colIdx} className="text-center">
-        <Checkbox
-          checked={checkboxState.every((row) => row[colIdx])}
-          onCheckedChange={() => handleSelectAllCol(colIdx)}
-        />
-        {/* Optional: add label like 'Edit' if needed */}
+      {/* Header row */}
+      <div className="bg-[var(--faded)] grid grid-cols-8 px-4 py-3 text-sm font-semibold w-full gap-2 items-center">
+        {/* Title */}
+        <div className="col-span-2 flex items-center">
+          <span>{title}</span>
+        </div>
+        {isOpen && (
+          <>
+            {/* Select All Checkboxes */}
+            {[...Array(3)].map((_, colIdx) => (
+              <div key={colIdx} className="text-center">
+                <Checkbox
+                  checked={checkboxState.every((row) => row[colIdx])}
+                  onCheckedChange={() => handleSelectAllCol(colIdx)}
+                />
+                {/* Optional: add label like 'Edit' if needed */}
+              </div>
+            ))}
+            <div></div>
+            <div className="col-span-1 justify-center flex  gap-8 px-4">
+              {[...Array(3)].map((_, colIdx) => (
+                <div key={colIdx + 3} className="text-center">
+                  <Checkbox
+                    checked={checkboxState.every((row) => row[colIdx + 3])}
+                    onCheckedChange={() => handleSelectAllCol(colIdx + 3)}
+                  />
+                  {/* Optional: add label like 'Edit' if needed */}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        <div className={` ${isOpen ? "hidden" : "block col-span-5"}`}></div>
+        {/* Chevron Toggle */}
+        <div className="flex justify-end">
+          <ChevronDown
+            onClick={onToggle}
+            className={`transition-transform cursor-pointer ${
+              isOpen ? "rotate-180" : ""
+            }`}
+            size={18}
+          />
+        </div>
       </div>
-    ))}
-    <div></div>
-    <div className="col-span-1 justify-center flex  gap-8 px-4">
-    {[...Array(3)].map((_, colIdx) => (
-      <div key={colIdx+3} className="text-center">
-        <Checkbox
-          checked={checkboxState.every((row) => row[colIdx+3])}
-          onCheckedChange={() => handleSelectAllCol(colIdx+3)}
-        />
-        {/* Optional: add label like 'Edit' if needed */}
-      </div>
-    ))}
-  </div>
-  </>
-  )}
-  <div className={` ${isOpen ? "hidden" : "block col-span-5"}`}></div>
-    {/* Chevron Toggle */}
-    <div className="flex justify-end">
-      <ChevronDown
-        onClick={onToggle}
-        className={`transition-transform cursor-pointer ${isOpen ? "rotate-180" : ""}`}
-        size={18}
-      />
-    </div>
-  </div>
-
-
 
       {/* Animated Section Body */}
       <AnimatePresence initial={false}>
@@ -191,10 +198,8 @@ function PermissionSection({
   );
 }
 
-
-
 function Roles() {
-  const Segments=[
+  const Segments = [
     "Select All",
     "6 Students",
     "7-8 Students",
@@ -247,7 +252,7 @@ function Roles() {
     "Leaderboard",
   ];
 
-  const DigitalDesk=[
+  const DigitalDesk = [
     "Select All",
     "Compaigns",
     "Web",
@@ -269,7 +274,7 @@ function Roles() {
     "Teams Directory",
   ];
 
-  const ReviewDesk=[
+  const ReviewDesk = [
     "Select All",
     "Partners",
     "Coach Profiles",
@@ -290,18 +295,18 @@ function Roles() {
     "Scholarships",
     "Study Materials",
     "Map Listing",
-    "Forms"
+    "Forms",
   ];
 
-  const DevOpsDesk=[
+  const DevOpsDesk = [
     "Select All",
     "My Pipeline",
     "Cases",
     "My Segment",
-    "Leaderboard"
+    "Leaderboard",
   ];
 
-  const FinanceDesk=[
+  const FinanceDesk = [
     "Select All",
     "Payments",
     "Commisions",
@@ -315,33 +320,47 @@ function Roles() {
   const [openSection, setOpenSection] = useState<string | null>("Segments");
 
   const [segment, setSegment] = useState(
-    Array(Segments.length).fill(null).map(() => Array(6).fill(false))
+    Array(Segments.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
 
   const [platformState, setPlatformState] = useState(
-    Array(PlatformDesk.length).fill(null).map(() => Array(6).fill(false))
+    Array(PlatformDesk.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
 
   const [relationState, setRelationState] = useState(
-    Array(RelationDesk.length).fill(null).map(() => Array(6).fill(false))
+    Array(RelationDesk.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
 
   const [DigitalState, setDigitalState] = useState(
-    Array(DigitalDesk.length).fill(null).map(() => Array(6).fill(false))
+    Array(DigitalDesk.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
 
   const [reviewState, setReviewState] = useState(
-    Array(ReviewDesk.length).fill(null).map(() => Array(6).fill(false))
+    Array(ReviewDesk.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
 
   const [devOpsState, setDevOpsState] = useState(
-    Array(DevOpsDesk.length).fill(null).map(() => Array(6).fill(false))
+    Array(DevOpsDesk.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
 
   const [financeState, setFinanceState] = useState(
-    Array(FinanceDesk.length).fill(null).map(() => Array(6).fill(false))
+    Array(FinanceDesk.length)
+      .fill(null)
+      .map(() => Array(6).fill(false))
   );
-  
+
   return (
     <div className="space-y-4 text-[var(--text)] flex flex-col">
       <div className="space-y-2 text-sm font-medium">
@@ -352,9 +371,7 @@ function Roles() {
           rows={Segments}
           isOpen={openSection === "Segments"}
           onToggle={() =>
-            setOpenSection((prev) =>
-              prev === "Segments" ? null : "Segments"
-            )
+            setOpenSection((prev) => (prev === "Segments" ? null : "Segments"))
           }
           checkboxState={segment}
           setCheckboxState={setSegment}
@@ -441,4 +458,3 @@ function Roles() {
     </div>
   );
 }
-

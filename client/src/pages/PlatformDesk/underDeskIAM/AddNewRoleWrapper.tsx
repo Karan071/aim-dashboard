@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import AddNewRoleorEdit from "@/pages/PlatformDesk/UnderDeskIAM/AddNewRoleorEdit";
+import { AddNewRoleorEdit } from "@/pages/PlatformDesk/underDeskIAM/AddNewRoleorEdit";
 import { useSearchParams } from "react-router-dom";
 
 // Mock staff data
@@ -29,7 +29,7 @@ const staffMock = [
 ];
 
 export function AddNewRoleWrapper() {
-    const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const showStaffBox = searchParams.get("withStaff") === "true";
 
   return (
@@ -47,9 +47,9 @@ export function AddNewRoleWrapper() {
       </div>
 
       {showStaffBox && (
-      <div className="w-full xl:w-1/2 ">
-        <StaffListBox />
-      </div>
+        <div className="w-full xl:w-1/2 ">
+          <StaffListBox />
+        </div>
       )}
     </div>
   );
@@ -69,26 +69,26 @@ function StaffListBox() {
         </h3>
       </div>
 
-<div className="rounded-sm bg-[var(--background)] p-4 shadow-none">
-      <Input
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-3 text-sm"
-      />
+      <div className="rounded-sm bg-[var(--background)] p-4 shadow-none">
+        <Input
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mb-3 text-sm"
+        />
 
-      <ul className="divide-y">
-        {filteredStaff.map((user) => (
-          <li key={user.id} className="flex items-center py-2 gap-2">
-            <img
-              src={user.avatar || "/placeholder.png"}
-              alt={user.name}
-              className="h-8 w-8 rounded-full object-cover"
-            />
-            <span className="text-sm text-[var(--text)]">{user.name}</span>
-          </li>
-        ))}
-      </ul>
+        <ul className="divide-y">
+          {filteredStaff.map((user) => (
+            <li key={user.id} className="flex items-center py-2 gap-2">
+              <img
+                src={user.avatar || "/placeholder.png"}
+                alt={user.name}
+                className="h-8 w-8 rounded-full object-cover"
+              />
+              <span className="text-sm text-[var(--text)]">{user.name}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

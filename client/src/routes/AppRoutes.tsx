@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 // Platform Desk Components
 import { Desk as PlatformDesk } from "@/pages/PlatformDesk/Desk";
 import { RecentActivities as PlatformRecentActivities } from "@/pages/PlatformDesk/RecentActivities";
-import {Assessments as PlatformAssessment } from "@/pages/PlatformDesk/Assessment/Assessments";
-import {Manage as PlatformAssessmentManage } from "@/pages/PlatformDesk/Assessment/Manage";
+import { Assessments as PlatformAssessment } from "@/pages/PlatformDesk/Assessment/Assessments";
+import { Manage as PlatformAssessmentManage } from "@/pages/PlatformDesk/Assessment/Manage";
 import { Sessions as PlatformSessions } from "@/pages/PlatformDesk/Sessions/Sessions";
 import { SessionPool as PlatformSessionPool } from "@/pages/PlatformDesk/Sessions/SessionPool";
 import { Masterclass as PlatformMasterclass } from "@/pages/PlatformDesk/Sessions/Masterclass";
@@ -15,9 +15,9 @@ import { AccessCode as PlatformAccessCode } from "@/pages/PlatformDesk/Plans/Acc
 import { ConsultantPremium as PlatformConsultantPremium } from "@/pages/PlatformDesk/Plans/ConsultantPremium";
 import { FormTabsWrapper as PlatformForms } from "@/pages/PlatformDesk/Forms";
 import { DeskIAM as PlatformDeskIAM } from "@/pages/PlatformDesk/DeskIAM";
-import { AddNewRoleWrapper as PlatformAddNewRoleWrapper } from "@/pages/PlatformDesk/UnderDeskIAM/AddNewRoleWrapper";
-import { AddTeamMember as PlatformAddTeamMember } from "@/pages/PlatformDesk/UnderDeskIAM/AddTeamMember";
-import { ManageRoles as PlatformManageRoles } from "@/pages/PlatformDesk/UnderDeskIAM/ManageRoles";
+import { AddNewRoleWrapper as PlatformAddNewRoleWrapper } from "@/pages/PlatformDesk/underDeskIAM/AddNewRoleWrapper";
+import { AddTeamMember as PlatformAddTeamMember } from "@/pages/PlatformDesk/underDeskIAM/AddTeamMember";
+import { ManageRoles as PlatformManageRoles } from "@/pages/PlatformDesk/underDeskIAM/ManageRoles";
 
 // Review Desk
 import { Desk as ReviewDesk } from "@/pages/ReviewDesk/Desk";
@@ -85,7 +85,7 @@ import { Payout as FinancePayout } from "@/pages/FinanceDesk/Payout";
 import { Platform as FinancePlatform } from "@/pages/FinanceDesk/Platform";
 import { Earning as FinanceEarning } from "@/pages/FinanceDesk/Earning";
 import { Reports as FinanceReports } from "@/pages/FinanceDesk/Reports";
-import {Withdrawal as FinanceWithdrawal} from "@/pages/FinanceDesk/Withdrawal"
+import { Withdrawal as FinanceWithdrawal } from "@/pages/FinanceDesk/Withdrawal";
 
 // DevOps Desk
 import { DevopsDesk as DevopsDesk } from "@/pages/DevopsDesk/DevopsDesk";
@@ -105,9 +105,15 @@ export default function AppRoutes() {
       {/* Platform Desk Routes */}
       <Route path="platform/desk" element={<PlatformDesk />} />
 
-      <Route path="platform/activities" element={<PlatformRecentActivities />} />
+      <Route
+        path="platform/activities"
+        element={<PlatformRecentActivities />}
+      />
       <Route path="platform/assessment" element={<PlatformAssessment />} />
-      <Route path="platform/assessment/manage" element={<PlatformAssessmentManage/>} />
+      <Route
+        path="platform/assessment/manage"
+        element={<PlatformAssessmentManage />}
+      />
       <Route path="platform/products/sessions" element={<PlatformSessions />} />
       <Route
         path="platform/products/session-pool"
@@ -120,49 +126,52 @@ export default function AppRoutes() {
       <Route path="platform/engage" element={<PlatformEngage />} />
       <Route path="platform/prepare" element={<PlatformPrepare />} />
       <Route path="platform/contribute" element={<PlatformContribute />} />
-      <Route path="platform/plans/access-code" element={<PlatformAccessCode />} />
+      <Route
+        path="platform/plans/access-code"
+        element={<PlatformAccessCode />}
+      />
       <Route
         path="platform/plans/consultants-premium"
         element={<PlatformConsultantPremium />}
       />
       <Route path="platform/forms" element={<PlatformForms />} />
       <Route path="platform/desk-iam" element={<PlatformDeskIAM />} />
-      <Route path="platform/desk-iam/addTeamMember" element={<PlatformAddTeamMember />} />
-      <Route path="platform/desk-iam/manageRole" element={<PlatformManageRoles />} />
-      <Route path="platform/desk-iam/addNewRole" element={<PlatformAddNewRoleWrapper />} />
+      <Route
+        path="platform/desk-iam/addTeamMember"
+        element={<PlatformAddTeamMember />}
+      />
+      <Route
+        path="platform/desk-iam/manageRole"
+        element={<PlatformManageRoles />}
+      />
+      <Route
+        path="platform/desk-iam/addNewRole"
+        element={<PlatformAddNewRoleWrapper />}
+      />
 
       {/* Review Desk Routes */}
       <Route path="review/desk" element={<ReviewDesk />} />
       <Route path="review/coaches" element={<ReviewCoaches />} />
-      <Route
-        path="review/organisations"
-        element={<ReviewOrganization />}
-      />
+      <Route path="review/organisations" element={<ReviewOrganization />} />
       <Route
         path="review/channel-partners"
         element={<ReviewChannelPartner />}
       />
       <Route path="review/libraries" element={<ReviewLibraries />} />
       <Route path="review/map-listing" element={<ReviewMapListing />} />
+      <Route path="review/custom-inputs" element={<ReviewCustomInput />} />
       <Route
-        path="review/custom-inputs"
-        element={<ReviewCustomInput />}
+        path="review/current-openings"
+        element={<ReviewCurrenOpenings />}
       />
-      <Route path="review/current-openings" element={<ReviewCurrenOpenings />} />  
-      <Route path="review/job-application" element={<ReviewJobApplication />} /> 
+      <Route path="review/job-application" element={<ReviewJobApplication />} />
 
       {/* Relations Desk Routes */}
       <Route path="relation/desk" element={<RelationDesk />} />
       <Route path="relation/pipeline" element={<RelationPipeline />} />
       {/* <Route path="relation/pool" element={<RelationPool />} /> */}
-      <Route
-        path="relation/leads/explorers"
-        element={<RelationExplorers />}
-      />
-      <Route
-        path="relation/leads/coaches"
-        element={<RelationCoaches />}
-      />
+      <Route path="relation/leads/explorers" element={<RelationExplorers />} />
+      <Route path="relation/leads/coaches" element={<RelationCoaches />} />
       <Route
         path="relation/leads/organisations"
         element={<RelationOrganisation />}
@@ -175,16 +184,10 @@ export default function AppRoutes() {
         path="relation/leads/partnerships-requests"
         element={<RelationPartnerships />}
       />
-      <Route
-        path="relation/cases/problems"
-        element={<RelationProblems />}
-      />
+      <Route path="relation/cases/problems" element={<RelationProblems />} />
       <Route path="relation/cases/bugs" element={<RelationBugs />} />
       <Route path="relation/cases/abuses" element={<RelationAbuses />} />
-      <Route
-        path="relation/explorers"
-        element={<RelationExplorersList />}
-      />
+      <Route path="relation/explorers" element={<RelationExplorersList />} />
       <Route path="relation/coaches" element={<RelationCoachesList />} />
       <Route
         path="relation/organisations/institutes"
@@ -204,14 +207,11 @@ export default function AppRoutes() {
       />
       <Route
         path="relation/organisations/universities"
-          element={<RelationUniversities />}
+        element={<RelationUniversities />}
       />
       <Route path="relation/organisations/ngos" element={<RelationNgo />} />
       <Route path="relation/my-accounts" element={<MyAccounts />} />
-      <Route
-        path="relation/leaderboard"
-        element={<RelationLeaderboard />}
-      />
+      <Route path="relation/leaderboard" element={<RelationLeaderboard />} />
 
       {/* Digital Desk Routes */}
       <Route path="digital/desk" element={<DigitalDesk />} />
@@ -225,7 +225,10 @@ export default function AppRoutes() {
         element={<DigitalHelpArticles />}
       />
       <Route path="digital/cms/in-the-news" element={<DigitalInTheNews />} />
-      <Route path="digital/cms/testimonials" element={<DigitalTestimonials />} />
+      <Route
+        path="digital/cms/testimonials"
+        element={<DigitalTestimonials />}
+      />
       <Route
         path="digital/cms/teams-directory"
         element={<DigitalTeamDirectory />}
@@ -253,7 +256,7 @@ export default function AppRoutes() {
       <Route path="finance/desk" element={<FinanceDesk />} />
       <Route path="finance/payments" element={<FinancePayments />} />
       <Route path="finance/commissions" element={<FinanceCommission />} />
-      <Route path="finance/withdrawal" element={<FinanceWithdrawal/>} />
+      <Route path="finance/withdrawal" element={<FinanceWithdrawal />} />
       <Route path="finance/payouts" element={<FinancePayout />} />
       <Route path="finance/platform" element={<FinancePlatform />} />
       <Route path="finance/earnings" element={<FinanceEarning />} />

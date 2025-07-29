@@ -94,7 +94,7 @@ function Buttonbar() {
         </div>
       <div className="flex gap-4">
         <Button variant="standard" size="new"
-        onClick={() => navigate("/desk/platform/desk-iam/manageRole")}>
+        onClick={() => navigate("manageRole")}>
           <BookAIcon className="h-3 w-3" />
           <span className="">Manage Roles</span>
         </Button>
