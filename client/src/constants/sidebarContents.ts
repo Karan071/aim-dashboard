@@ -137,12 +137,12 @@ export const SidebarData = {
               url: "/desk/platform/products/session-pool",
               icon: getNextIcon(),
             },
-            {
-              title: "Masterclasses",
-              url: "/desk/platform/products/masterclasses",
-              icon: getNextIcon(),
-            },
           ],
+        },
+        {
+          title: "Masterclasses",
+          url: "/desk/platform/products/masterclasses",
+          icon: getNextIcon(),
         },
         {
           title: "Engage",

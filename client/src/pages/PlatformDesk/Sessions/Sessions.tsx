@@ -1,9 +1,20 @@
-
-import { Clock, CircleArrowUp, CircleArrowDown,Users, FileCheck2, FileText, CheckCircle2,  FileDown,   Plus,  ChartArea, Download } from "lucide-react";
+import {
+  Clock,
+  CircleArrowUp,
+  CircleArrowDown,
+  Users,
+  FileCheck2,
+  FileText,
+  CheckCircle2,
+  FileDown,
+  Plus,
+  ChartArea,
+  Download,
+} from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Filter,  } from "lucide-react";
+import { Filter } from "lucide-react";
 import { useState } from "react";
 import * as React from "react";
 
@@ -53,7 +64,7 @@ const Stats = [
     icon: CheckCircle2,
     performance: Up,
   },
-   {
+  {
     title: "Refunded",
     value: "298",
     icon: Clock,
@@ -67,7 +78,6 @@ export function Sessions() {
       <Topbar />
       <StatCard />
       <Buttonbar />
-      
 
       <SessionTabs />
     </div>
@@ -78,9 +88,7 @@ function Topbar() {
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">
-          Sessions
-        </h1>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">Sessions</h1>
       </div>
       <div>
         <DatePickerWithRange />
@@ -90,7 +98,7 @@ function Topbar() {
 }
 
 function Buttonbar() {
-    const [showFilter, setShowFilter] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -98,7 +106,7 @@ function Buttonbar() {
         <span className=""> Create Session</span>
       </Button>
       <div className="flex gap-4 flex-wrap">
-         <Button variant="standard" size="new">
+        <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Manage Pool</span>
         </Button>
@@ -111,15 +119,15 @@ function Buttonbar() {
           <span className="">Export</span>
         </Button>
         <Button
-        variant="standard"
-        size="new"
-        onClick={() => setShowFilter(true)}
-      >
-        <Filter className="h-3 w-3" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-3 w-3" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
 
-      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+        {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -161,7 +169,7 @@ function AssessFilter({ onClose }: FilterProps) {
     "Booking Status",
     "Refund Status",
     "Date Range",
-    "Acceptance Mode"
+    "Acceptance Mode",
   ];
 
   return (
@@ -171,7 +179,9 @@ function AssessFilter({ onClose }: FilterProps) {
         className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Filters
+          </CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
@@ -186,10 +196,11 @@ function AssessFilter({ onClose }: FilterProps) {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                 className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${
+                    activeTab === tab
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -200,8 +211,15 @@ function AssessFilter({ onClose }: FilterProps) {
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Search by Name :</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
+                <label htmlFor="Gen" className="text-[var(--text)]">
+                  Search by Name :
+                </label>
+                <Input
+                  id="Gen"
+                  placeholder="Enter .."
+                  type="text"
+                  className="mt-4 w-full "
+                />
               </>
             )}
 
@@ -211,20 +229,17 @@ function AssessFilter({ onClose }: FilterProps) {
                   Select the Coach Type:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Consultant",
-                    "Mentor",
-                    "Educator",
-                    "Counselor",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={coach}
-                      onChange={setCoach}
-                    />
-                  ))}
+                  {["Consultant", "Mentor", "Educator", "Counselor"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={coach}
+                        onChange={setCoach}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -235,21 +250,17 @@ function AssessFilter({ onClose }: FilterProps) {
                   Select the Session Type :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "1:1",
-                    "In-Person",
-                    "Ask Question",
-                    "Instant",
-                    "B2B",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={session}
-                      onChange={setSession}
-                    />
-                  ))}
+                  {["1:1", "In-Person", "Ask Question", "Instant", "B2B"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={session}
+                        onChange={setSession}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -260,20 +271,17 @@ function AssessFilter({ onClose }: FilterProps) {
                   Select Booking Status :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Booked",
-                    "Completed",
-                    "Missed",
-                    "Cancelled",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={booking}
-                      onChange={setBooking}
-                    />
-                  ))}
+                  {["Booked", "Completed", "Missed", "Cancelled"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={booking}
+                        onChange={setBooking}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -284,20 +292,17 @@ function AssessFilter({ onClose }: FilterProps) {
                   Select Refund Status :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Not Requested",
-                    "Requested",
-                    "Approved",
-                    "Denied",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={refund}
-                      onChange={setRefund}
-                    />
-                  ))}
+                  {["Not Requested", "Requested", "Approved", "Denied"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={refund}
+                        onChange={setRefund}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -308,10 +313,7 @@ function AssessFilter({ onClose }: FilterProps) {
                   Select Acceptance Mode :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Manual",
-                    "Auto",
-                  ].map((option) => (
+                  {["Manual", "Auto"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -326,13 +328,14 @@ function AssessFilter({ onClose }: FilterProps) {
 
             {activeTab === "Date Range" && (
               <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter the Last Assessment Date :</label>
+                <label htmlFor="act" className="text-[var(--text)]">
+                  Enter the Last Assessment Date :
+                </label>
                 <div className="mt-4 min-w-full">
                   <DateRangePicker />
                 </div>
               </>
             )}
-
           </div>
         </div>
         <div className="relative bottom-0 right-0 w-full px-6 py-4 flex border-t-1 justify-end gap-2">
@@ -377,8 +380,6 @@ function StatCard() {
   );
 }
 
-
-
 const tabs = [
   { label: "In Pool", value: "inPool" },
   { label: "Upcoming", value: "upcoming" },
@@ -400,7 +401,7 @@ function SessionTabs() {
       case "live":
         return <LiveTable />;
       case "completed":
-        return <CompletedTable />;  
+        return <CompletedTable />;
       case "cancelled":
         return <CancelledTable />;
       case "refunded":
