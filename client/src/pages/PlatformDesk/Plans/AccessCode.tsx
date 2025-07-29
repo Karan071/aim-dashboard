@@ -1,18 +1,10 @@
 
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Bell, Check, ChevronDown, ChevronLeft, ChevronRight, Eye, Filter, Search, SquarePen, X, } from "lucide-react";
+import { Bell, Check, ChevronDown, ChevronLeft, ChevronRight, Eye, Funnel, Search, SquarePen, X, } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -25,34 +17,56 @@ import { CardTitle } from "@/components/ui/card";
 
 
 export function AccessCode() {
-    const [showFilter, setShowFilter] = useState(false);
   return (
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text)]">Access Code</h1>
-        <CodeForm />
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-
+        <Topbar />
         <CodeTableSection/>
       </div>
   );
 }
 
+function Topbar() {
+  const [showForm, setShowForm] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Recent Activities
+        </h1>
+      </div>
+      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2">
+      <Button
+          variant="standard"
+          size="new"
+          onClick={() => setShowForm(true)}
+          aria-label={showForm ? "Hide Form" : "Show Form"}
+        >
+          Form
+        </Button>
+        {showForm && <Form onClose={() => setShowForm(false)} />}
+      </div>
+        <Button
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+          aria-label={showFilter ? "Hide Filters" : "Show Filters"}
+        >
+          <Funnel className="h-4 w-4" />
+        </Button>
+        {showFilter && <AdvanceFilter onClose={() => setShowFilter(false)} />}
+      </div>
+      </div>
+  );
+}
 
 interface FilterProps {
   onClose: () => void;
 }
 
 
-function AdvancedFilters({ onClose }: FilterProps) {
+function AdvanceFilter({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("Product Type");
 
@@ -241,123 +255,238 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
+interface FormProps {
+  onClose: () => void;
+}
 
 
-function CodeForm() {
+function Form({ onClose }: FormProps) {
+  const modalRef = React.useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState("Code Type");
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      // Do nothing if clicking inside modal
+      if (modalRef.current && modalRef.current.contains(e.target as Node)) {
+        return;
+      }
+
+      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
+      const target = e.target as HTMLElement;
+      if (target.closest("[data-radix-popper-content-wrapper]")) {
+        return;
+      }
+
+      onClose(); // Close modal otherwise
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
+
+
   const [codeType, setCodeType] = useState("Single");
   const [discount, setDiscount] = useState(10);
   const [appliesTo, setAppliesTo] = useState("Assessment");
-  const [partnerType, setPartnerType] = useState<"Channel Partner" | "Organisation" | "">("");
-  const [partnerName, setPartnerName] = useState("");
-  const [trackCommission, setTrackCommission] = useState(false);
+  const [partnerType, setPartnerType] = useState("Channel Partner");
+  const [partnerName, setPartnerName] = useState("partner 1");
+  const [trackCommission, setTrackCommission] = useState("No");
 
-  const partnerOptions = {
-    "Channel Partner": ["Channel One", "Channel Two"],
-    "Organisation": ["Org Alpha", "Org Beta"]
-  };
+  const tabList = [
+    "Code Type",
+    "Discount",
+    "Applies To",
+    "Partner Type",
+    "Partner Name",
+    "Track Commission"
+  ];
 
   return (
-    <div className="flex flex-col gap-6 p-6 border rounded-md bg-[var(--background)] text-[var(--text)]">
-      
-      <div className="flex flex-col gap-2">
-        <Label className="text-sm font-semibold">Code Type :</Label>
-        <RadioGroup
-          defaultValue="Single"
-          value={codeType}
-          onValueChange={setCodeType}
-          className="flex gap-6"
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="Single" id="single" />
-            <Label htmlFor="single">Single</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="Group" id="group" />
-            <Label htmlFor="group">Group</Label>
-          </div>
-        </RadioGroup>
-      </div>
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
 
-      
-      <div className="flex flex-col gap-2">
-        <Label className="text-sm font-semibold">Discount: <span className="font-normal">{discount}%</span></Label>
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
+      >
+        <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Form</CardTitle>
+          <Button
+            variant="link"
+            className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
+          >
+            Clear All
+          </Button>
+        </div>
+        {/* Sidebar */}
+        <div className="flex ">
+          <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
+
+            <div className="flex flex-col ">
+              {tabList.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tab Content */}
+
+          <div className="p-6 overflow-y-auto relative w-full">
+
+            {activeTab === "Code Type" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select the Code Type:
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Single",
+                    "Group",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={codeType}
+                      onChange={setCodeType}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Discount" && (
+              <>
+              <div className="flex flex-col gap-4 text-[var(--text)] ">
+                <Label className="text-sm font-semibold text-[var(--text)]">Discount: <span className="font-normal">{discount}%</span></Label>
         <Slider
           defaultValue={[discount]}
-          max={50}
+          max={100}
           step={1}
           onValueChange={([val]) => setDiscount(val)}
         />
-      </div>
+                </div>
+              </>
+            )}
 
-      
-      <div className="flex flex-col gap-2">
-        <Label className="text-sm font-semibold">Applies To</Label>
-        <Select value={appliesTo} onValueChange={setAppliesTo}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Assessment">Assessment</SelectItem>
-            <SelectItem value="Pool Session">Pool Session</SelectItem>
-            <SelectItem value="Masterclass">Masterclass</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+            {activeTab === "Applies To" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select the Applies To :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Assessment",
+                    "Pool Session",
+                    "MasterClasses"
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={appliesTo}
+                      onChange={setAppliesTo}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
 
-      
-      <div className="flex flex-col gap-2">
-        <Label className="text-sm font-semibold">Partner Type</Label>
-        <RadioGroup
-          value={partnerType}
-          onValueChange={(val: "Channel Partner" | "Organisation") => {
-            setPartnerType(val);
-            setPartnerName(""); // reset the name
-          }}
-          className="flex gap-6"
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="Channel Partner" id="channel" />
-            <Label htmlFor="channel">Channel Partner</Label>
+            {activeTab === "Partner Type" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select the partner type :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "Channel Partner",
+                    "Organisation",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={partnerType}
+                      onChange={setPartnerType}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+{activeTab === "Partner Name" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select the partner name :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "partner 1",
+                    "partner 2",
+                    "partner 3",
+                    "partner 4",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={partnerName}
+                      onChange={setPartnerName}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+{activeTab === "Track Commission" && (
+              <>
+                <p className="text-sm text-[var(--text-head)] mb-4">
+                  Select the Track Commission :
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--text)] ">
+                  {[
+                    "No",
+                    "Yes",
+                  ].map((option) => (
+                    <RadioButton
+                      key={option}
+                      label={option}
+                      value={option}
+                      selected={trackCommission}
+                      onChange={setTrackCommission}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+
+
+            {/* Footer */}
           </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="Organisation" id="org" />
-            <Label htmlFor="org">Organisation</Label>
-          </div>
-        </RadioGroup>
-      </div>
-
-      {partnerType && (
-        <div className="flex flex-col gap-2">
-          <Label className="text-sm font-semibold">Partner Name</Label>
-          <Select value={partnerName} onValueChange={setPartnerName}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select partner" />
-            </SelectTrigger>
-            <SelectContent>
-              {partnerOptions[partnerType]?.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {option}
-                </SelectItem>
-              )) ?? null}
-            </SelectContent>
-          </Select>
         </div>
-      )}
-
-      {/* 🔗 Track Commission */}
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="track-commission"
-          checked={trackCommission}
-          onCheckedChange={(val) => setTrackCommission(!!val)}
-        />
-        <Label htmlFor="track-commission" className="text-sm">
-          Track Commission
-        </Label>
+        <div className="relative bottom-0 right-0 w-full px-6 py-4 flex border-t-1 justify-end gap-2">
+          <div className="flex gap-4 absolute left-[50%] -translate-x-[50%]">
+            <Button variant="border" onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="brand" onClick={onClose}>
+              Confirm
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+
 
 
 function CodeTableSection() {
