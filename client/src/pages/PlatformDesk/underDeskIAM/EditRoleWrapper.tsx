@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { EditRole } from "@/pages/PlatformDesk/UnderDeskIAM/EditRole";
+import { EditRole } from "@/pages/PlatformDesk/underDeskIAM/EditRole";
 
 // Mock staff data
 const staffMock = [
