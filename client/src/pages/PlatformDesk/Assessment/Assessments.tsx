@@ -52,7 +52,7 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { assessmentsTable } from "@/data/Data";
+import { assessmentsTable, coachesList } from "@/data/Data";
 import {
   Tooltip,
   TooltipContent,
@@ -114,28 +114,28 @@ const Stats = [
 export function Assessments() {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Assessments
-      </h1>
+      
+      <Topbar />
       <StatCard />
-      <Actionbar />
+      {/* <Actionbar /> */}
 
       <AssessmentTable />
     </div>
   );
 }
 
-function Actionbar() {
+function Topbar() {
   const navigate = useNavigate();
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span className="">Create New Assessment</span>
-      </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+        Assessments
+        </h1>
+      </div>
+      <div className="flex items-center gap-2">
+      <Button
           className="cursor-pointer"
           variant="standard"
           size="new"
@@ -144,7 +144,7 @@ function Actionbar() {
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Manage</span>
         </Button>
-
+        
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Export</span>
@@ -163,6 +163,43 @@ function Actionbar() {
     </div>
   );
 }
+
+
+// function Actionbar() {
+//   const navigate = useNavigate();
+//   const [showFilter, setShowFilter] = useState(false);
+//   return (
+//     <div className="flex justify-end px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      
+//       <div className="flex gap-4 flex-wrap">
+//         <Button
+//           className="cursor-pointer"
+//           variant="standard"
+//           size="new"
+//           onClick={() => navigate("manage")}
+//         >
+//           <BadgeQuestionMark className="h-3 w-3" />
+//           <span className="">Manage</span>
+//         </Button>
+
+//         <Button variant="standard" size="new">
+//           <FileDown className="h-3 w-3" />
+//           <span className="">Export</span>
+//         </Button>
+//         <Button
+//           variant="standard"
+//           size="new"
+//           onClick={() => setShowFilter(true)}
+//         >
+//           <Filter className="h-4 w-4" />
+//           {showFilter ? "Hide Filters" : "Show Filters"}
+//         </Button>
+
+//         {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+//       </div>
+//     </div>
+//   );
+// }
 
 interface FilterProps {
   onClose: () => void;
@@ -377,6 +414,101 @@ function StatCard() {
     </div>
   );
 }
+
+interface CoachAssignmentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  assessmentId: string;
+  currentCoach: string;
+  onAssignCoach: (assessmentId: string, coachId: string) => void;
+}
+
+function CoachAssignmentModal({ 
+  isOpen, 
+  onClose, 
+  assessmentId, 
+  currentCoach, 
+  onAssignCoach 
+}: CoachAssignmentModalProps) {
+  const [selectedCoach, setSelectedCoach] = useState("");
+
+  const handleAssignCoach = () => {
+    if (selectedCoach) {
+      onAssignCoach(assessmentId, selectedCoach);
+    }
+  };
+
+  const handleRemoveCoach = () => {
+    onAssignCoach(assessmentId, "");
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+      <div className="relative w-full max-w-[500px] rounded-xl bg-[var(--background)] p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-[var(--text-head)]">
+            Assign Coach
+          </h2>
+          <Button
+            variant="link"
+            className="text-sm text-[var(--brand-color)] p-0 h-auto"
+            onClick={onClose}
+          >
+            ✕
+          </Button>
+        </div>
+        
+        <div className="mb-4">
+          <label className="text-base text-[var(--text)] mb-2 block">
+            Select Coach:
+          </label>
+          <select
+            value={selectedCoach}
+            onChange={(e) => setSelectedCoach(e.target.value)}
+            className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)] text-sm"
+          >
+            <option value="">Select a coach...</option>
+            {coachesList.map((coach) => (
+              <option key={coach.id} value={coach.id}>
+                {coach.name} - {coach.specialization}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex gap-2 justify-end">
+          {currentCoach && (
+            <Button
+              variant="delete"
+              size="sm"
+              onClick={handleRemoveCoach}
+            >
+              Remove Coach
+            </Button>
+          )}
+          <Button
+            variant="border"
+            size="sm"
+            onClick={onClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="brand"
+            size="sm"
+            onClick={handleAssignCoach}
+            disabled={!selectedCoach}
+          >
+            Assign Coach
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function AssessmentTable() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -385,6 +517,9 @@ function AssessmentTable() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
+  const [isCoachAssignmentOpen, setIsCoachAssignmentOpen] = useState(false);
+  const [selectedAssessmentId, setSelectedAssessmentId] = useState("");
+  const [selectedCurrentCoach, setSelectedCurrentCoach] = useState("");
 
   // Sorting logic
   const sortedData = [...assessmentsTable];
@@ -444,6 +579,23 @@ function AssessmentTable() {
     }
   };
 
+  const handleOpenCoachAssignment = (assessmentId: string, currentCoach: string) => {
+    setSelectedAssessmentId(assessmentId);
+    setSelectedCurrentCoach(currentCoach);
+    setIsCoachAssignmentOpen(true);
+  };
+
+  const handleCloseCoachAssignment = () => {
+    setIsCoachAssignmentOpen(false);
+    setSelectedAssessmentId("");
+    setSelectedCurrentCoach("");
+  };
+
+  const handleAssignCoach = (assessmentId: string, coachId: string) => {
+    // Here you would typically update the assessment data
+    console.log(`Assigning coach ${coachId} to assessment ${assessmentId}`);
+    handleCloseCoachAssignment();
+  };
 
 
   return (
@@ -638,8 +790,9 @@ function AssessmentTable() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">
-                      {user.userName} ({user.userId})
+                    <div className="flex justify-start flex-col">
+                      <div className="font-medium">{user.userName}</div>
+                      <div className="text-xs">{user.userId}</div>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -693,78 +846,120 @@ function AssessmentTable() {
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="text-sm">{user.assignCoach}</div>
+                    <div className="text-sm">
+                      {user.assignCoach ? (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="icon-only"
+
+                            
+                                size="sm"
+                                className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                                }}
+                              >
+                                <span className="flex items-center gap-1">
+
+                                  <Plus className="h-3 w-3" />
+                                </span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="top" className="text-xs">
+                              Click to change coach
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      ) : (
+                        <Button
+                          variant="border"
+                          size="sm"
+                          className="text-[var(--text)] hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)]"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                          }}
+                        >
+                          <span className="flex items-center gap-1">
+                            <Plus className="h-3 w-3" />
+                            <span className="w-2 h-2 bg-[var(--red)] rounded-full"></span>
+                            Assign Coach
+                          </span>
+                        </Button>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div className="text-sm">{user.result || "-"}</div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // navigate(`/user-details/${user.id}`) or your view logic
-                        }}
-                      >
-                        <Bell className="h-4 w-4" />
-                        <span className="sr-only">Remind</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // navigate(`/user-details/${user.id}`) or your view logic
-                        }}
-                      >
-                        <Ban className="h-4 w-4" />
-                        <span className="sr-only">Revoke</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // navigate(`/user-details/${user.id}`) or your view logic
-                        }}
-                      >
-                        <RotateCcw className="h-4 w-4" />
-                        <span className="sr-only">Reset</span>
-                      </Button>
-
-                      {/* <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="noborder"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                            }}
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Actions</span>
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48">
-                          {user.actions?.map((action) => (
-                            <DropdownMenuItem
-                              key={action}
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleAction(action, user.id);
+                                // navigate(`/user-details/${user.id}`) or your view logic
                               }}
-                              className="flex items-center gap-2"
                             >
-                              {action === "Remind" && <Bell className="h-4 w-4" />}
-                              {action === "Revoke" && <Ban className="h-4 w-4" />}
-                              {action === "Reset" && <RotateCcw className="h-4 w-4" />}
-                              {action}
-                            </DropdownMenuItem>
-                          ))}
-                        </DropdownMenuContent>
-                      </DropdownMenu> */}
+                              <Bell className="h-4 w-4" />
+                              <span className="sr-only">Remind</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Remind
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--red2)] hover:text-[var(--red)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // navigate(`/user-details/${user.id}`) or your view logic
+                              }}
+                            >
+                              <Ban className="h-4 w-4" />
+                              <span className="sr-only">Revoke</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Revoke
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // navigate(`/user-details/${user.id}`) or your view logic
+                              }}
+                            >
+                              <RotateCcw className="h-4 w-4" />
+                              <span className="sr-only">Reset</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Reset
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -842,6 +1037,14 @@ function AssessmentTable() {
           </div>
         </div>
       </div>
+      
+      <CoachAssignmentModal
+        isOpen={isCoachAssignmentOpen}
+        onClose={handleCloseCoachAssignment}
+        assessmentId={selectedAssessmentId}
+        currentCoach={selectedCurrentCoach}
+        onAssignCoach={handleAssignCoach}
+      />
     </div>
   );
 }

@@ -7,11 +7,14 @@ import {
   Notebook,
   Plus,
   Search,
-
+  Edit,
   FileDown,
   X,
   FileText,
   BarChart3,
+  RotateCcw,
+  Ban,
+  Download,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -34,7 +37,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { ManageTable } from "@/data/Data";
+import { ManageTable, assessmentsTable, coachesList } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -42,6 +45,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
 import type { DateRange } from "react-day-picker";
 import React from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -73,17 +82,34 @@ export function Manage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Manage Assessments</h1>
+        
+
+        <Topbar/>
         <StatsCards />
-        <Topbar />
+        <ActionBar />
 
         <TableSection />
+        <AssessmentTable />
       </div>
     </div>
   );
 }
-
 function Topbar() {
+
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+        Manage Assessments
+        </h1>
+      </div>
+      <div className="flex items-center gap-2">
+       
+      </div>
+    </div>
+  );
+}
+function ActionBar() {
   const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
@@ -297,6 +323,100 @@ function AdvancedFilters({ onClose }: FilterProps) {
               Apply Filters
             </Button>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface CoachAssignmentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  assessmentId: string;
+  currentCoach: string;
+  onAssignCoach: (assessmentId: string, coachId: string) => void;
+}
+
+function CoachAssignmentModal({ 
+  isOpen, 
+  onClose, 
+  assessmentId, 
+  currentCoach, 
+  onAssignCoach 
+}: CoachAssignmentModalProps) {
+  const [selectedCoach, setSelectedCoach] = useState("");
+
+  const handleAssignCoach = () => {
+    if (selectedCoach) {
+      onAssignCoach(assessmentId, selectedCoach);
+    }
+  };
+
+  const handleRemoveCoach = () => {
+    onAssignCoach(assessmentId, "");
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+      <div className="relative w-full max-w-[500px] rounded-xl bg-[var(--background)] p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-[var(--text-head)]">
+            Assign Coach
+          </h2>
+          <Button
+            variant="link"
+            className="text-sm text-[var(--brand-color)] p-0 h-auto"
+            onClick={onClose}
+          >
+            ✕
+          </Button>
+        </div>
+        
+        <div className="mb-4">
+          <label className="text-sm text-[var(--text)] mb-2 block">
+            Select Coach:
+          </label>
+          <select
+            value={selectedCoach}
+            onChange={(e) => setSelectedCoach(e.target.value)}
+            className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)]"
+          >
+            <option value="">Select a coach...</option>
+            {coachesList.map((coach) => (
+              <option key={coach.id} value={coach.id}>
+                {coach.name} - {coach.specialization}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex gap-2 justify-end">
+          {currentCoach && (
+            <Button
+              variant="delete"
+              size="sm"
+              onClick={handleRemoveCoach}
+            >
+              Remove Coach
+            </Button>
+          )}
+          <Button
+            variant="border"
+            size="sm"
+            onClick={onClose}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="brand"
+            size="sm"
+            onClick={handleAssignCoach}
+            disabled={!selectedCoach}
+          >
+            Assign Coach
+          </Button>
         </div>
       </div>
     </div>
@@ -574,7 +694,10 @@ function TableSection() {
                   onClick={() => requestSort("enrollments")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Enrollments{" "}
+                  <div className="flex items-center gap-2">
+                    Enrollments
+                  
+                  </div>
                   {sortConfig?.key === "enrollments" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
@@ -636,46 +759,101 @@ function TableSection() {
                     <div className="text-low">{user.partnerShare}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.enrollments}</div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-low">{user.enrollments}</span>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--yellow2)] hover:text-[var(--yellow)] transition-all duration-200 p-1 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Handle Edit Enrollment action
+                              }}
+                            >
+                              <Edit className="h-3 w-3" />
+                              <span className="sr-only">Edit Enrollment</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Edit Enrollment
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // Handle Questions action
-                        }}
-                      >
-                        <FileText className="h-4 w-4" />
-                        <span className="sr-only">Questions</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // Handle Results action
-                        }}
-                      >
-                        <BarChart3 className="h-4 w-4" />
-                        <span className="sr-only">Results</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          // Handle Logs action
-                        }}
-                      >
-                        <Eye className="h-4 w-4" />
-                        <span className="sr-only">Logs</span>
-                      </Button>
+                     
+                 
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Handle Questions action
+                              }}
+                            >
+                              <FileText className="h-4 w-4" />
+                              <span className="sr-only">Questions</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Questions
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Handle Results action
+                              }}
+                            >
+                              <BarChart3 className="h-4 w-4" />
+                              <span className="sr-only">Results</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Results
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--blue2)] hover:text-[var(--blue)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Handle Logs action
+                              }}
+                            >
+                              <Edit className="h-4 w-4" />
+                              <span className="sr-only">Logs</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Logs
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -753,6 +931,542 @@ function TableSection() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function AssessmentTable() {
+  const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: "ascending" | "descending";
+  } | null>(null);
+  const [isCoachAssignmentOpen, setIsCoachAssignmentOpen] = useState(false);
+  const [selectedAssessmentId, setSelectedAssessmentId] = useState("");
+  const [selectedCurrentCoach, setSelectedCurrentCoach] = useState("");
+
+  // Sorting logic
+  const sortedData = [...assessmentsTable];
+  if (sortConfig !== null) {
+    sortedData.sort((a, b) => {
+      const aValue = a[sortConfig.key as keyof typeof a];
+      const bValue = b[sortConfig.key as keyof typeof b];
+      if (aValue && bValue) {
+        if (aValue < bValue) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (aValue > bValue) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+      }
+      return 0;
+    });
+  }
+
+  const totalPages = Math.ceil(assessmentsTable.length / recordsPerPage);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = assessmentsTable.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+
+  const requestSort = (key: string) => {
+    let direction: "ascending" | "descending" = "ascending";
+    if (
+      sortConfig &&
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedUsers.length === currentRecords.length) {
+      setSelectedUsers([]);
+    } else {
+      setSelectedUsers(
+        currentRecords
+          .map((user) => user.id)
+          .filter((id): id is string => id !== undefined)
+      );
+    }
+  };
+
+  const toggleSelectUser = (userId: string) => {
+    if (selectedUsers.includes(userId)) {
+      setSelectedUsers(selectedUsers.filter((id) => id !== userId));
+    } else {
+      setSelectedUsers([...selectedUsers, userId]);
+    }
+  };
+
+  const handleOpenCoachAssignment = (assessmentId: string, currentCoach: string) => {
+    setSelectedAssessmentId(assessmentId);
+    setSelectedCurrentCoach(currentCoach);
+    setIsCoachAssignmentOpen(true);
+  };
+
+  const handleCloseCoachAssignment = () => {
+    setIsCoachAssignmentOpen(false);
+    setSelectedAssessmentId("");
+    setSelectedCurrentCoach("");
+  };
+
+  const handleAssignCoach = (assessmentId: string, coachId: string) => {
+    // Here you would typically update the assessment data
+    console.log(`Assigning coach ${coachId} to assessment ${assessmentId}`);
+    handleCloseCoachAssignment();
+  };
+
+  return (
+    <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
+      <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
+        <div className="flex items-center justify-between border-b h-20 p-4 mt-auto">
+          <div className="flex items-center justify-between pl-0 p-4">
+            <div className="flex items-center gap-2 border-none shadow-none">
+              <Checkbox
+                id="select-all"
+                checked={
+                  selectedUsers.length === currentRecords.length &&
+                  currentRecords.length > 0
+                }
+                onCheckedChange={toggleSelectAll}
+              />
+              <label
+                htmlFor="select-all"
+                className="text-sm font-medium text-[var(--text)]"
+              >
+                Select All
+              </label>
+              {selectedUsers.length > 0 && (
+                <Badge variant="border" className="ml-2 ">
+                  {selectedUsers.length} selected
+                </Badge>
+              )}
+            </div>
+
+            {selectedUsers.length > 0 && (
+              <div className="flex gap-2 ml-2">
+                <Button variant="border" size="sm">
+                  <Download className="h-4 w-4" />
+                  Export Pricing Data
+                </Button>
+                <Button variant="border" size="sm">
+                  <Notebook className=" h-4 w-4" />
+                  Update Commission Rules
+                </Button>
+                <Button variant="delete" size="sm">
+                  <X className=" h-4 w-4" />
+                  Mark as Inactive
+                </Button>
+                <Button variant="border" size="sm">
+                  <Edit className=" h-4 w-4" />
+                  Assign Category
+                </Button>
+                <Button variant="border" size="sm">
+                  <Bell className=" h-4 w-4" />
+                  Notify Consultants
+                </Button>
+              </div>
+            )}
+          </div>
+          <div className="flex justify-end items-center gap-4 ">
+            <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
+              <Input
+                placeholder="Search"
+                className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
+              />
+              <Button
+                type="submit"
+                size="icon"
+                variant="standard"
+                className="rounded-none rounded-r-md bg-[var(--button)]"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5 text-[var(--text)]" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto text-[var(--text)] w-full px-0 mx-0 text-low">
+          <Table className="w-full caption-top border-collapse overflow-y-visible">
+            <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
+              <TableRow>
+                <TableHead className="min-w-[40px]"></TableHead>
+                <TableHead
+                  onClick={() => requestSort("assessmentName")}
+                  className="cursor-pointer text-[var(--text)] text-low"
+                >
+                  Assessment Name{" "}
+                  {sortConfig?.key === "assessmentName" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("userName")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  User Name & ID{" "}
+                  {sortConfig?.key === "userName" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("segments")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Segment{" "}
+                  {sortConfig?.key === "segments" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("date")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Date{" "}
+                  {sortConfig?.key === "date" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("source")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Source{" "}
+                  {sortConfig?.key === "source" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("amountPaid")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Amount Paid{" "}
+                  {sortConfig?.key === "amountPaid" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("status")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Status{" "}
+                  {sortConfig?.key === "status" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("assignCoach")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Assign Coach{" "}
+                  {sortConfig?.key === "assignCoach" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
+                  onClick={() => requestSort("result")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Result{" "}
+                  {sortConfig?.key === "result" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead className="text-[var(--text)]">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="overflow-visible relative z-0">
+              {currentRecords.map((user) => (
+                <TableRow
+                  key={user.id}
+                  data-id={user.id}
+                  className={cn(
+                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
+                  )}
+                  onClick={() => {
+                    if (user.id) {
+                      toggleSelectUser(user.id);
+                    }
+                  }}
+                >
+                  <TableCell
+                    className={cn(
+                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]"
+                    )}
+                  >
+                    <Checkbox
+                      checked={
+                        user.id ? selectedUsers.includes(user.id) : false
+                      }
+                      onClick={(e) => e.stopPropagation()}
+                      onCheckedChange={() =>
+                        user.id && toggleSelectUser(user.id)
+                      }
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <div className="flex justify-start items-center">
+                          <div className="font-medium">
+                            {user.assessmentName}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex justify-start flex-col">
+                      <div className="font-medium">{user.userName}</div>
+                      <div className="text-xs">{user.userId}</div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">{user.segments}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm">{user.date}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">
+                      {user.source.type === "Direct" ? (
+                        "Direct"
+                      ) : (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger className="text-left">
+                              <div className="hover:text-[var(--brand-color)]">
+                                {user.source.partnerName}
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="right"
+                              className="p-2 max-w-[200px]"
+                            >
+                              <div className="flex flex-col gap-1 text-xs">
+                                <div>Commission: {user.source.commission}</div>
+                                <div>
+                                  Assessment Price: ₹
+                                  {user.source.assessmentPrice}
+                                </div>
+                                <div>
+                                  Partner Share: ₹{user.source.partnerShare}
+                                </div>
+                                <div>
+                                  Aimshala Share: ₹{user.source.aimshalaShare}
+                                </div>
+                                <div>Access Code: {user.source.accessCode}</div>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">
+                      ₹{user.amountPaid} | {user.amountCode}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="standard">{user.status}</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm">
+                      {user.assignCoach ? (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="standard"
+                                size="sm"
+                                className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                                }}
+                              >
+                                <span className="flex items-center gap-1">
+                                  <Plus className="h-3 w-3" />
+                                </span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="top" className="text-xs">
+                              Click to change coach
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      ) : (
+                        <Button
+                          variant="border"
+                          size="sm"
+                          className="text-[var(--text)] hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)]"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                          }}
+                        >
+                          <span className="flex items-center gap-1">
+                            <Plus className="h-3 w-3" />
+                            <span className="w-2 h-2 bg-[var(--red)] rounded-full"></span>
+                            Assign Coach
+                          </span>
+                        </Button>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm">{user.result || "-"}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // navigate(`/user-details/${user.id}`) or your view logic
+                              }}
+                            >
+                              <Bell className="h-4 w-4" />
+                              <span className="sr-only">Remind</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Remind
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--red2)] hover:text-[var(--red)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // navigate(`/user-details/${user.id}`) or your view logic
+                              }}
+                            >
+                              <Ban className="h-4 w-4" />
+                              <span className="sr-only">Revoke</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Revoke
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="noborder"
+                              size="sm"
+                              className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // navigate(`/user-details/${user.id}`) or your view logic
+                              }}
+                            >
+                              <RotateCcw className="h-4 w-4" />
+                              <span className="sr-only">Reset</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Reset
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="flex items-center justify-between flex-wrap gap-2 p-4">
+          <div className="flex items-center gap-4">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="border"
+                  size="sm"
+                  className="flex items-center gap-2 text-low text-[var(--text-head)]"
+                >
+                  {recordsPerPage}
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
+                {[10, 25, 50, 100].map((size) => (
+                  <DropdownMenuItem
+                    key={size}
+                    onClick={() => {
+                      setRecordsPerPage(size);
+                      setCurrentPage(1);
+                    }}
+                    className="text-[var(--text)] focus:bg-[var(--faded)]"
+                  >
+                    {size}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <span className="text-low text-[var(--text)]">
+              Showing {indexOfFirstRecord + 1}-
+              {Math.min(indexOfLastRecord, sortedData.length)} of{" "}
+              {sortedData.length} explorers
+            </span>
+          </div>
+          <div className="flex items-center gap-2 ">
+            <Button
+              variant="border"
+              size="icon"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Button
+                key={page}
+                variant={page === currentPage ? "brand" : "border"}
+                size="sm"
+                className={`h-8 w-8 p-0 ${
+                  page === currentPage ? "text-white" : "text-[var(--text)]"
+                }`}
+                onClick={() => setCurrentPage(page)}
+              >
+                {page}
+              </Button>
+            ))}
+            <Button
+              variant="border"
+              size="icon"
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      <CoachAssignmentModal
+        isOpen={isCoachAssignmentOpen}
+        onClose={handleCloseCoachAssignment}
+        assessmentId={selectedAssessmentId}
+        currentCoach={selectedCurrentCoach}
+        onAssignCoach={handleAssignCoach}
+      />
     </div>
   );
 }

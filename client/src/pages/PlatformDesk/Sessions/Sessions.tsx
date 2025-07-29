@@ -29,46 +29,36 @@ import { CancelledTable } from "../SessionTables/Cancelled";
 import { CompletedTable } from "../SessionTables/Completed";
 import { DatePickerWithRange } from "@/components/date-picker";
 
-const color = "text-[var(--text)]";
-const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const Stats = [
   {
     title: "Total",
     value: "5,248",
     icon: Users,
-    performance: Up,
   },
   {
     title: "In Pool",
     value: "3,780",
     icon: FileCheck2,
-    performance: Down,
   },
   {
     title: "Live",
     value: "341",
     icon: FileText,
-    performance: Up,
   },
   {
     title: "Upcoming",
     value: "446",
     icon: Clock,
-    performance: Up,
   },
   {
     title: "No-Show",
     value: "12",
     icon: CheckCircle2,
-    performance: Up,
   },
   {
     title: "Refunded",
     value: "298",
     icon: Clock,
-    performance: Up,
   },
 ];
 
@@ -76,7 +66,7 @@ export function Sessions() {
   return (
     <div className="flex flex-col gap-2">
       <Topbar />
-      <StatCard />
+      <SessionStats />
       <Buttonbar />
 
       <SessionTabs />
@@ -85,13 +75,28 @@ export function Sessions() {
 }
 
 function Topbar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
         <h1 className="text-2xl font-bold text-[var(--text-head)]">Sessions</h1>
       </div>
-      <div>
+      <div className="flex gap-4">
         <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+     
+        <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
       </div>
     </div>
   );
@@ -353,19 +358,20 @@ function AssessFilter({ onClose }: FilterProps) {
   );
 }
 
-function StatCard() {
+function SessionStats() {
+const color = "text-[var(--text)]";
+const color2 = "text-[var(--text-head)]";
   return (
     <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-6">
       {Stats.map((stat, index) => (
-        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none flex justify-center  bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
-            <div className="flex justify-between h-full items-center">
+            <div className="flex justify-between items-center">
               <div
                 className={`${color} text-xs uppercase text-light line-clamp-1`}
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

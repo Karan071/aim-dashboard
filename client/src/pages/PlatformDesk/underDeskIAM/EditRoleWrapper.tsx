@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { AddNewRoleorEdit } from "@/pages/PlatformDesk/underDeskIAM/AddNewRoleorEdit";
+import { EditRole } from "@/pages/PlatformDesk/UnderDeskIAM/EditRole";
 
 // Mock staff data
 const staffMock = [
@@ -27,19 +27,19 @@ const staffMock = [
   },
 ];
 
-export function AddNewRoleWrapper() {
+export function EditRoleWrapper() {
   return (
     <div className="flex flex-col xl:flex-row w-full gap-4">
       <div className="w-full xl:w-1/2">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-semibold text-[var(--text-head)]">
-            Add New Role
+            Edit Role
           </h1>
           <Button variant="brand" size="sm">
             New Role
           </Button>
         </div>
-        <AddNewRoleorEdit />
+        <EditRole />
       </div>
 
       <div className="w-full xl:w-1/2 ">
