@@ -194,7 +194,7 @@ const stats = [
 function StatsCards() {
   return (
     <div className="w-full overflow-x-auto">
-      <div className="flex gap-2 min-w-max">
+      <div className="flex gap-1 min-w-max">
         {stats.map((stat, index) => (
           <div
             key={index}
@@ -205,14 +205,14 @@ function StatsCards() {
                 <div className="w-full flex gap-2">
                   {stat.sections?.map((section, idx) => (
                     <div key={idx} className="flex-1">
+                      <div className="flex items-center">
+                        <div className="text-base font-semibold">
+                          {section.value}
+                        </div>
+                      </div>
                       <div className="flex justify-between items-center">
                         <div className="text-[11px] uppercase text-light line-clamp-1">
                           {section.subtitle}
-                        </div>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="text-sm font-semibold">
-                          {section.value}
                         </div>
                       </div>
                     </div>
@@ -220,13 +220,13 @@ function StatsCards() {
                 </div>
               ) : (
                 <div className="w-full">
+                  <div className="flex items-center">
+                    <div className="text-base font-semibold">{stat.value}</div>
+                  </div>
                   <div className="flex justify-between items-center">
                     <div className="text-[11px] uppercase text-light line-clamp-1">
                       {stat.title}
                     </div>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="text-sm font-semibold">{stat.value}</div>
                   </div>
                 </div>
               )}
@@ -621,7 +621,16 @@ function ActivityTable() {
                       onCheckedChange={() => toggleSelectUser(user.id)}
                     />
                   </TableCell>
-                  <TableCell className="font-medium">{user.dateTime}</TableCell>
+                  <TableCell className="font-medium">
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold">
+                        {user.dateTime.split(",")[0]}
+                      </span>
+                      <span className="text-xs text-[var(--text-light)]">
+                        {user.dateTime.split(",")[1]}
+                      </span>
+                    </div>
+                  </TableCell>
                   <TableCell>{user.activityType}</TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.entity}</Badge>
