@@ -20,7 +20,7 @@ import {
   Eye,
   Pen,
 } from "lucide-react";
-import { JobApplicationTable } from "@/data/Data";
+import { jobApplicationTable } from "@/data/Data";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -330,7 +330,7 @@ export function TableSection() {
     direction: "ascending" | "descending";
   } | null>(null);
   const [filterStatus, setFilterStatus] = useState("all");
-  const [jobApplicationData, setJobApplicationData] = useState([...JobApplicationTable] as Array<{
+  const [jobApplicationData, setJobApplicationData] = useState([...jobApplicationTable] as Array<{
     application_id: string;
     company_name: string;
     designation: string;
