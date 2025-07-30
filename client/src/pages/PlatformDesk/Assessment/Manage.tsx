@@ -1,18 +1,17 @@
 import { Button } from "@/components/ui/button";
 import {
-  Eye,
+
   Filter,
   BadgeQuestionMark,
   Bell,
   Notebook,
   Plus,
   Search,
-  Edit,
+  Pencil,
   FileDown,
   X,
   FileText,
   BarChart3,
- 
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -35,8 +34,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { ManageTable   } from "@/data/Data";
-//import { motion, AnimatePresence } from "motion/react";
+import { ManageTable } from "@/data/Data";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -80,68 +78,59 @@ export function Manage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        
-
-        <Topbar/>
+        <Topbar />
         <StatsCards />
-        <ActionBar />
-
+      
         <TableSection />
-       
       </div>
     </div>
   );
 }
-function Topbar() {
 
+function Topbar() {
+  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
         <h1 className="text-xl font-semibold text-[var(--text-head)]">
-    Assessments Manage ACE Test UG  Questions
+          Manage Assessments
         </h1>
       </div>
       <div className="flex items-center gap-2">
-        
+        <Button variant="brand" size="new">
+          <Plus className="h-3 w-3" />
+          
+        </Button>
+        <div className="flex gap-4 flex-wrap">
+          <Button variant="standard" size="new">
+            <BadgeQuestionMark className="h-3 w-3" />
+            <span className="">Categories</span>
+          </Button>
+          {/* <Button variant="standard" size="new">
+            <Eye className="h-3 w-3" />
+            <span className="">Questions</span>
+          </Button> */}
+          
+          <Button variant="standard" size="new">
+            <FileDown className="h-3 w-3" />
+            
+          </Button>
+          <Button
+            variant="standard"
+            onClick={() => setShowFilter(true)}
+            className="flex items-center gap-2 self-end min-h-[40px]"
+          >
+            <Filter className="h-4 w-4" />
+           
+          </Button>
+          {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        </div>
       </div>
     </div>
   );
 }
-function ActionBar() {
-  const [showFilter, setShowFilter] = useState(false);
-  return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span> Create Assessment</span>
-      </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Categories</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Eye className="h-3 w-3" />
-          <span className="">Questions</span>
-        </Button>
-        
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export </span>
-        </Button>
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      </div>
-    </div>
-  );
-}
+
+
 
 interface FilterProps {
   onClose: () => void;
@@ -326,7 +315,6 @@ function AdvancedFilters({ onClose }: FilterProps) {
     </div>
   );
 }
-
 
 function StatsCards() {
   return (
@@ -601,7 +589,6 @@ function TableSection() {
                 >
                   <div className="flex items-center gap-2">
                     Enrollments
-                  
                   </div>
                   {sortConfig?.key === "enrollments" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
@@ -678,7 +665,7 @@ function TableSection() {
                                 // Handle Edit Enrollment action
                               }}
                             >
-                              <Edit className="h-3 w-3" />
+                              <Pencil className="h-3 w-3" />
                               <span className="sr-only">Edit Enrollment</span>
                             </Button>
                           </TooltipTrigger>
@@ -694,8 +681,6 @@ function TableSection() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                     
-                 
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -750,7 +735,7 @@ function TableSection() {
                                 // Handle Logs action
                               }}
                             >
-                              <Edit className="h-4 w-4" />
+                              <Pencil className="h-4 w-4" />
                               <span className="sr-only">Logs</span>
                             </Button>
                           </TooltipTrigger>
@@ -839,4 +824,5 @@ function TableSection() {
     </div>
   );
 }
+
 

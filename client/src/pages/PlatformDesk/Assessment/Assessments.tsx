@@ -40,6 +40,33 @@ import {
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { assessmentsTable, coachesList } from "@/data/Data";
+
+// Define the assessment type to match the data structure
+type AssessmentItem = {
+  id: string;
+  assessmentName: string;
+  userName: string;
+  userId: string;
+  segments: string;
+  date: string;
+  source: {
+    type: "Direct";
+  } | {
+    type: "Partner";
+    partnerName: string;
+    commission: string;
+    assessmentPrice: number;
+    partnerShare: number;
+    aimshalaShare: number;
+    accessCode: string;
+  };
+  amountPaid: number;
+  amountCode: string;
+  status: string;
+  assignCoach: string | null;
+  result: number | null;
+  actions: string[];
+};
 import {
   Tooltip,
   TooltipContent,
@@ -63,37 +90,31 @@ const Stats = [
     title: "Total Enrollments",
     value: "38",
     icon: Users,
-   
   },
   {
     title: "Progress",
     value: "26",
     icon: FileCheck2,
-  
   },
   {
     title: "Completed",
     value: "7",
     icon: FileText,
-  
   },
   {
     title: "Started",
     value: "5",
     icon: Clock,
-   
   },
   {
     title: "Total Revenue",
     value: "6",
     icon: CheckCircle2,
-
   },
   {
     title: "Via Partners",
     value: "6",
     icon: CheckCircle2,
-   
   },
 ];
 
@@ -131,8 +152,7 @@ function Topbar() {
         </Button>
 
         <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export</span>
+          <FileDown className="h-4 w-4" />
         </Button>
         <Button
           variant="standard"
@@ -140,7 +160,6 @@ function Topbar() {
           onClick={() => setShowFilter(true)}
         >
           <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
         </Button>
 
         {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
@@ -383,7 +402,6 @@ function StatCard() {
               >
                 {stat.title}
               </div>
-              
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -402,7 +420,6 @@ interface CoachAssignmentModalProps {
   isOpen: boolean;
   onClose: () => void;
   assessmentId: string;
-  currentCoach: string;
   onAssignCoach: (assessmentId: string, coachId: string) => void;
 }
 
@@ -410,7 +427,6 @@ function CoachAssignmentModal({
   isOpen,
   onClose,
   assessmentId,
-  
   onAssignCoach,
 }: CoachAssignmentModalProps) {
   const [selectedCoach, setSelectedCoach] = useState("");
@@ -419,12 +435,27 @@ function CoachAssignmentModal({
 
   // Filter coaches based on search query
   useEffect(() => {
-    const filtered = coachesList.filter((coach) =>
-      coach.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      coach.specialization.toLowerCase().includes(searchQuery.toLowerCase())
+    const filtered = coachesList.filter(
+      (coach) =>
+        coach.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        coach.specialization.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredCoaches(filtered);
   }, [searchQuery]);
+
+  // Reset state when modal opens/closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedCoach("");
+      setSearchQuery("");
+      setFilteredCoaches(coachesList);
+    } else {
+      // Reset state when modal opens to ensure fresh state
+      setSelectedCoach("");
+      setSearchQuery("");
+      setFilteredCoaches(coachesList);
+    }
+  }, [isOpen]);
 
   const handleAssignCoach = () => {
     if (selectedCoach) {
@@ -463,7 +494,7 @@ function CoachAssignmentModal({
             />
             <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[var(--text)] opacity-50" />
           </div>
-          
+
           {searchQuery && (
             <div className="mt-2 max-h-40 overflow-y-auto border rounded-md">
               {filteredCoaches.length > 0 ? (
@@ -471,7 +502,9 @@ function CoachAssignmentModal({
                   <div
                     key={coach.id}
                     className={`p-2 cursor-pointer hover:bg-[var(--faded)] text-sm ${
-                      selectedCoach === coach.id ? 'bg-[var(--brand-color2)] text-[var(--brand-color)]' : 'text-[var(--text)]'
+                      selectedCoach === coach.id
+                        ? "bg-[var(--brand-color2)] text-[var(--brand-color)]"
+                        : "text-[var(--text)]"
                     }`}
                     onClick={() => setSelectedCoach(coach.id)}
                   >
@@ -485,11 +518,16 @@ function CoachAssignmentModal({
               )}
             </div>
           )}
-          
+
           {selectedCoach && (
             <div className="mt-2 p-2 bg-[var(--faded)] rounded-md">
               <span className="text-sm text-[var(--text)]">
-                Selected: {coachesList.find(c => c.id === selectedCoach)?.name} - {coachesList.find(c => c.id === selectedCoach)?.specialization}
+                Selected:{" "}
+                {coachesList.find((c) => c.id === selectedCoach)?.name} -{" "}
+                {
+                  coachesList.find((c) => c.id === selectedCoach)
+                    ?.specialization
+                }
               </span>
             </div>
           )}
@@ -523,10 +561,11 @@ function AssessmentTable() {
   } | null>(null);
   const [isCoachAssignmentOpen, setIsCoachAssignmentOpen] = useState(false);
   const [selectedAssessmentId, setSelectedAssessmentId] = useState("");
-  const [selectedCurrentCoach, setSelectedCurrentCoach] = useState("");
+
+  const [assessmentsData, setAssessmentsData] = useState<AssessmentItem[]>(assessmentsTable as AssessmentItem[]);
 
   // Sorting logic
-  const sortedData = [...assessmentsTable];
+  const sortedData = [...assessmentsData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -543,10 +582,10 @@ function AssessmentTable() {
     });
   }
 
-  const totalPages = Math.ceil(assessmentsTable.length / recordsPerPage);
+  const totalPages = Math.ceil(sortedData.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = assessmentsTable.slice(
+  const currentRecords = sortedData.slice(
     indexOfFirstRecord,
     indexOfLastRecord
   );
@@ -583,24 +622,31 @@ function AssessmentTable() {
     }
   };
 
-  const handleOpenCoachAssignment = (
-    assessmentId: string,
-    currentCoach: string
-  ) => {
+  const handleOpenCoachAssignment = (assessmentId: string) => {
     setSelectedAssessmentId(assessmentId);
-    setSelectedCurrentCoach(currentCoach);
     setIsCoachAssignmentOpen(true);
   };
 
   const handleCloseCoachAssignment = () => {
     setIsCoachAssignmentOpen(false);
     setSelectedAssessmentId("");
-    setSelectedCurrentCoach("");
   };
 
   const handleAssignCoach = (assessmentId: string, coachId: string) => {
-    // Here you would typically update the assessment data
-    console.log(`Assigning coach ${coachId} to assessment ${assessmentId}`);
+    // Find the coach name from the coach ID
+    const coach = coachesList.find((c) => c.id === coachId);
+    if (coach) {
+      // Update the assessment data with the assigned coach
+      setAssessmentsData((prevData) =>
+        prevData.map((assessment) =>
+          assessment.id === assessmentId
+            ? { ...assessment, assignCoach: coach.name }
+            : assessment
+        )
+      );
+
+      console.log(`Assigned coach ${coach.name} to assessment ${assessmentId}`);
+    }
     handleCloseCoachAssignment();
   };
 
@@ -692,7 +738,7 @@ function AssessmentTable() {
                   onClick={() => requestSort("userName")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  User Name & ID{" "}
+                  Explorer{" "}
                   {sortConfig?.key === "userName" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
@@ -854,6 +900,37 @@ function AssessmentTable() {
                   <TableCell>
                     <div className="text-sm">
                       {user.assignCoach ? (
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1">
+                            <div className="font-medium text-[var(--text)]">
+                              {user.assignCoach}
+                            </div>
+                            <div className="text-xs text-[var(--text)] opacity-70">
+                              Assigned
+                            </div>
+                          </div>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button
+                                  variant="icon-only"
+                                  size="sm"
+                                  className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleOpenCoachAssignment(user.id);
+                                  }}
+                                >
+                                  <Plus className="h-3 w-3" />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent side="top" className="text-xs">
+                                Change coach assignment
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </div>
+                      ) : (
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
@@ -863,41 +940,17 @@ function AssessmentTable() {
                                 className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  handleOpenCoachAssignment(
-                                    user.id,
-                                    user.assignCoach || ""
-                                  );
+                                  handleOpenCoachAssignment(user.id);
                                 }}
                               >
-                                <span className="flex items-center gap-1">
-                                  <Plus className="h-3 w-3" />
-                                </span>
+                                <Plus className="h-3 w-3" />
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent side="top" className="text-xs">
-                              Click to assign coach
+                              Assign coach
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
-                      ) : (
-                        <Button
-                          variant="border"
-                          size="sm"
-                          className="text-[var(--text)] hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)]"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleOpenCoachAssignment(
-                              user.id,
-                              user.assignCoach || ""
-                            );
-                          }}
-                        >
-                          <span className="flex items-center gap-1">
-                            <Plus className="h-3 w-3" />
-                            <span className="w-2 h-2 bg-[var(--red)] rounded-full"></span>
-                            Assign Coach
-                          </span>
-                        </Button>
                       )}
                     </div>
                   </TableCell>
@@ -1077,7 +1130,6 @@ function AssessmentTable() {
         isOpen={isCoachAssignmentOpen}
         onClose={handleCloseCoachAssignment}
         assessmentId={selectedAssessmentId}
-        currentCoach={selectedCurrentCoach}
         onAssignCoach={handleAssignCoach}
       />
     </div>
