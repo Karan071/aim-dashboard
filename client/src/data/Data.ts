@@ -1,11 +1,11 @@
-import picture1 from "@/assets/asset.jpg"
-import picture2 from "@/assets/asset.jpg"
-import picture3 from "@/assets/asset.jpg"
-import picture4 from "@/assets/asset.jpg"
-import assignuser1 from "@/assets/Assignuser/assignuser1.jpeg"
-import assignuser2 from "@/assets/Assignuser/assignuser2.jpg"
-import assignuser3 from "@/assets/Assignuser/assignuser3.jpg"
-import assignuser4 from "@/assets/Assignuser/assignuser4.jpg"
+import picture1 from "@/assets/asset.jpg";
+import picture2 from "@/assets/asset.jpg";
+import picture3 from "@/assets/asset.jpg";
+import picture4 from "@/assets/asset.jpg";
+import assignuser1 from "@/assets/Assignuser/assignuser1.jpeg";
+import assignuser2 from "@/assets/Assignuser/assignuser2.jpg";
+import assignuser3 from "@/assets/Assignuser/assignuser3.jpg";
+import assignuser4 from "@/assets/Assignuser/assignuser4.jpg";
 export const defaultLogo = picture1;
 export const mockUsers = [
   {
@@ -34,13 +34,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Dr. Priya Singh",
-        photo: assignuser1
+        photo: assignuser1,
       },
       {
-        name: "Prof. Rajesh Kumar", 
-        photo: assignuser2
-      }
-    ]
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "2",
@@ -68,13 +68,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Prof. Rajesh Kumar",
-        photo: assignuser2
+        photo: assignuser2,
       },
       {
         name: "Anjali Mehra",
-        photo: assignuser3
-      }
-    ]
+        photo: assignuser3,
+      },
+    ],
   },
   {
     id: "3",
@@ -102,13 +102,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Anjali Mehra",
-        photo: assignuser3
+        photo: assignuser3,
       },
       {
         name: "Dr. Priya Singh",
-        photo: assignuser1
-      }
-    ]
+        photo: assignuser1,
+      },
+    ],
   },
   {
     id: "4",
@@ -136,13 +136,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Vikram Singh",
-        photo: assignuser4
+        photo: assignuser4,
       },
       {
         name: "Dr. Priya Singh",
-        photo: assignuser1
-      }
-    ]
+        photo: assignuser1,
+      },
+    ],
   },
   {
     id: "5",
@@ -170,13 +170,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Neha Sharma",
-        photo: assignuser1
+        photo: assignuser1,
       },
       {
         name: "Prof. Rajesh Kumar",
-        photo: assignuser2
-      }
-    ]
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "6",
@@ -204,13 +204,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Amit Verma",
-        photo: assignuser2
+        photo: assignuser2,
       },
       {
         name: "Anjali Mehra",
-        photo: assignuser3
-      }
-    ]
+        photo: assignuser3,
+      },
+    ],
   },
   {
     id: "7",
@@ -238,13 +238,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Priya Nair",
-        photo: assignuser3
+        photo: assignuser3,
       },
       {
         name: "Vikram Singh",
-        photo: assignuser4
-      }
-    ]
+        photo: assignuser4,
+      },
+    ],
   },
   {
     id: "8",
@@ -272,13 +272,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Manoj Desai",
-        photo: assignuser4
+        photo: assignuser4,
       },
       {
         name: "Dr. Priya Singh",
-        photo: assignuser1
-      }
-    ]
+        photo: assignuser1,
+      },
+    ],
   },
   {
     id: "9",
@@ -306,13 +306,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Sunita Reddy",
-        photo: assignuser1
+        photo: assignuser1,
       },
       {
         name: "Prof. Rajesh Kumar",
-        photo: assignuser2
-      }
-    ]
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "10",
@@ -340,13 +340,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Karan Mehta",
-        photo: assignuser2
+        photo: assignuser2,
       },
       {
         name: "Anjali Mehra",
-        photo: assignuser3
-      }
-    ]
+        photo: assignuser3,
+      },
+    ],
   },
   {
     id: "11",
@@ -374,13 +374,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Ritika Das",
-        photo: assignuser3
+        photo: assignuser3,
       },
       {
         name: "Vikram Singh",
-        photo: assignuser4
-      }
-    ]
+        photo: assignuser4,
+      },
+    ],
   },
   {
     id: "12",
@@ -408,13 +408,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Siddharth Roy",
-        photo: assignuser4
+        photo: assignuser4,
       },
       {
         name: "Dr. Priya Singh",
-        photo: assignuser1
-      }
-    ]
+        photo: assignuser1,
+      },
+    ],
   },
   {
     id: "13",
@@ -442,13 +442,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Meera Joshi",
-        photo: assignuser1
+        photo: assignuser1,
       },
       {
         name: "Prof. Rajesh Kumar",
-        photo: assignuser2
-      }
-    ]
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "14",
@@ -476,13 +476,13 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Arjun Kapoor",
-        photo: assignuser2
+        photo: assignuser2,
       },
       {
         name: "Anjali Mehra",
-        photo: assignuser3
-      }
-    ]
+        photo: assignuser3,
+      },
+    ],
   },
   {
     id: "15",
@@ -510,16 +510,15 @@ export const mockUsers = [
     assignedTo: [
       {
         name: "Divya Malhotra",
-        photo: assignuser3
+        photo: assignuser3,
       },
       {
         name: "Vikram Singh",
-        photo: assignuser4
-      }
-    ]
-  }
-]
-
+        photo: assignuser4,
+      },
+    ],
+  },
+];
 
 export const API = {
   user: {
@@ -913,7 +912,7 @@ export const coachesList = [
     experience: "8 years",
     rating: "4.8",
     status: "Active",
-    photo: assignuser1
+    photo: assignuser1,
   },
   {
     id: "COH002",
@@ -922,7 +921,7 @@ export const coachesList = [
     experience: "12 years",
     rating: "4.9",
     status: "Active",
-    photo: assignuser2
+    photo: assignuser2,
   },
   {
     id: "COH003",
@@ -931,7 +930,7 @@ export const coachesList = [
     experience: "15 years",
     rating: "4.7",
     status: "Active",
-    photo: assignuser3
+    photo: assignuser3,
   },
   {
     id: "COH004",
@@ -940,7 +939,7 @@ export const coachesList = [
     experience: "10 years",
     rating: "4.6",
     status: "Active",
-    photo: assignuser4
+    photo: assignuser4,
   },
   {
     id: "COH005",
@@ -949,7 +948,7 @@ export const coachesList = [
     experience: "9 years",
     rating: "4.8",
     status: "Active",
-    photo: assignuser1
+    photo: assignuser1,
   },
   {
     id: "COH006",
@@ -958,7 +957,7 @@ export const coachesList = [
     experience: "6 years",
     rating: "4.5",
     status: "Active",
-    photo: assignuser2
+    photo: assignuser2,
   },
   {
     id: "COH007",
@@ -967,7 +966,7 @@ export const coachesList = [
     experience: "11 years",
     rating: "4.7",
     status: "Active",
-    photo: assignuser3
+    photo: assignuser3,
   },
   {
     id: "COH008",
@@ -976,7 +975,7 @@ export const coachesList = [
     experience: "13 years",
     rating: "4.6",
     status: "Active",
-    photo: assignuser4
+    photo: assignuser4,
   },
   {
     id: "COH009",
@@ -985,7 +984,7 @@ export const coachesList = [
     experience: "7 years",
     rating: "4.4",
     status: "Active",
-    photo: assignuser1
+    photo: assignuser1,
   },
   {
     id: "COH010",
@@ -994,7 +993,7 @@ export const coachesList = [
     experience: "14 years",
     rating: "4.9",
     status: "Active",
-    photo: assignuser2
+    photo: assignuser2,
   },
   {
     id: "COH011",
@@ -1003,7 +1002,7 @@ export const coachesList = [
     experience: "5 years",
     rating: "4.3",
     status: "Inactive",
-    photo: assignuser3
+    photo: assignuser3,
   },
   {
     id: "COH012",
@@ -1012,7 +1011,7 @@ export const coachesList = [
     experience: "8 years",
     rating: "4.8",
     status: "Active",
-    photo: assignuser4
+    photo: assignuser4,
   },
   {
     id: "COH013",
@@ -1021,7 +1020,7 @@ export const coachesList = [
     experience: "6 years",
     rating: "4.5",
     status: "Active",
-    photo: assignuser1
+    photo: assignuser1,
   },
   {
     id: "COH014",
@@ -1030,7 +1029,7 @@ export const coachesList = [
     experience: "10 years",
     rating: "4.7",
     status: "Active",
-    photo: assignuser2
+    photo: assignuser2,
   },
   {
     id: "COH015",
@@ -1039,31 +1038,31 @@ export const coachesList = [
     experience: "7 years",
     rating: "4.6",
     status: "Active",
-    photo: assignuser3
-  }
+    photo: assignuser3,
+  },
 ];
 export const ManageTable = [
   {
-    "id": "ASS1001",
-    "assessmentName": "JEE Main Mock Test 1",
-    "segments": ["11-12", "UG"],
-    "category": "Engineering",
-    "price": 299,
-    "partnerShare": "[S] 25% | [P] 50%",
-    "enrollments": 1250,
-    "status": "Active",
-    "actions": ["Questions", "Results", "Logs"]
+    id: "ASS1001",
+    assessmentName: "JEE Main Mock Test 1",
+    segments: ["11-12", "UG"],
+    category: "Engineering",
+    price: 299,
+    partnerShare: "[S] 25% | [P] 50%",
+    enrollments: 1250,
+    status: "Active",
+    actions: ["Questions", "Results", "Logs"],
   },
   {
-    "id": "ASS1002",
-    "assessmentName": "NEET Practice Test",
-    "segments": ["11-12", "UG"],
-    "category": "Medical",
-    "price": 399,
-    "partnerShare": "[P] 50%",
-    "enrollments": 890,
-    "status": "Active",
-    "actions": ["Questions", "Results", "Logs"]
+    id: "ASS1002",
+    assessmentName: "NEET Practice Test",
+    segments: ["11-12", "UG"],
+    category: "Medical",
+    price: 399,
+    partnerShare: "[P] 50%",
+    enrollments: 890,
+    status: "Active",
+    actions: ["Questions", "Results", "Logs"],
   },
   {
     id: "ASS1003",
@@ -2084,7 +2083,7 @@ export const testimonialsData = [
     type: "Video",
     contentPreview: "Great collaboration with our school",
     date: "14 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Archive"],
   },
   {
@@ -2136,7 +2135,7 @@ export const testimonialsData = [
     type: "Video",
     contentPreview: "Valuable impact in remote communities",
     date: "10 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Archive"],
   },
   {
@@ -2227,7 +2226,7 @@ export const testimonialsData = [
     type: "Text",
     contentPreview: "Students respond so well to the program",
     date: "03 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Archive"],
   },
   {
@@ -2253,7 +2252,7 @@ export const testimonialsData = [
     type: "Video",
     contentPreview: "Collaboration helps our faculty grow",
     date: "01 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Archive"],
   },
   {
@@ -2660,7 +2659,7 @@ export const coachTableData = [
       email: "anjali@coachhub.org",
       phone: "+91-9876543210",
     },
-    status: "Pending",
+    status: "Applied",
     sessions: {
       total: 32,
       completed: 28,
@@ -2716,7 +2715,7 @@ export const coachTableData = [
       email: "sneha@coachhub.org",
       phone: "+91-9988776655",
     },
-    status: "Pending",
+    status: "Applied",
     sessions: {
       total: 20,
       completed: 18,
@@ -2800,7 +2799,7 @@ export const coachTableData = [
       email: "amit@coachhub.org",
       phone: "+91-9898989898",
     },
-    status: "Pending",
+    status: "Applied",
     sessions: {
       total: 24,
       completed: 22,
@@ -2884,7 +2883,7 @@ export const coachTableData = [
       email: "divya@coachhub.org",
       phone: "+91-9312345678",
     },
-    status: "Pending",
+    status: "Applied",
     sessions: {
       total: 19,
       completed: 15,
@@ -4535,261 +4534,260 @@ export const PoolTableData = [
 
 export const AbuseTableData = [
   {
-    "id": 1,
-    "reportedBy": "Aarav Mehta",
-    "submittedOn": "17 May 2025",
-    "reportedIn": "Chat",
-    "reportedContent": "Offensive language during session chat",
-    "reason": "Harassment",
-    "status": "Under Review",
-    "assignedTo": [
+    id: 1,
+    reportedBy: "Aarav Mehta",
+    submittedOn: "17 May 2025",
+    reportedIn: "Chat",
+    reportedContent: "Offensive language during session chat",
+    reason: "Harassment",
+    status: "Under Review",
+    assignedTo: [
       {
-        "name": "Dr. Priya Singh",
-        "photo": assignuser1
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
       },
       {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
-      }
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
     ],
-    "actions": ["Review", "Escalate"]
+    actions: ["Review", "Escalate"],
   },
   {
-    "id": 2,
-    "reportedBy": "Neha Kapoor",
-    "submittedOn": "16 May 2025",
-    "reportedIn": "Feedback",
-    "reportedContent": "Fake testimonial with misleading claim",
-    "reason": "Misinformation",
-    "status": "Actioned",
-    "assignedTo": [
+    id: 2,
+    reportedBy: "Neha Kapoor",
+    submittedOn: "16 May 2025",
+    reportedIn: "Feedback",
+    reportedContent: "Fake testimonial with misleading claim",
+    reason: "Misinformation",
+    status: "Actioned",
+    assignedTo: [
       {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
       },
       {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
-      }
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
     ],
-    "actions": ["Details", "Archive"]
+    actions: ["Details", "Archive"],
   },
   {
-    "id": 3,
-    "reportedBy": "Rahul Bhagat",
-    "submittedOn": "15 May 2025",
-    "reportedIn": "Public Post",
-    "reportedContent": "Spam link in shared resources section",
-    "reason": "Spam",
-    "status": "Resolved",
-    "assignedTo": [
+    id: 3,
+    reportedBy: "Rahul Bhagat",
+    submittedOn: "15 May 2025",
+    reportedIn: "Public Post",
+    reportedContent: "Spam link in shared resources section",
+    reason: "Spam",
+    status: "Resolved",
+    assignedTo: [
       {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
       },
       {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
-      }
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
     ],
-    "actions": ["View", "Archive"]
+    actions: ["View", "Archive"],
   },
   {
-    "id": 4,
-    "reportedBy": "Sanya Rathi",
-    "submittedOn": "14 May 2025",
-    "reportedIn": "Session",
-    "reportedContent": "Rude behavior by a participant",
-    "reason": "Inappropriate Content",
-    "status": "Archived",
-    "assignedTo": [
+    id: 4,
+    reportedBy: "Sanya Rathi",
+    submittedOn: "14 May 2025",
+    reportedIn: "Session",
+    reportedContent: "Rude behavior by a participant",
+    reason: "Inappropriate Content",
+    status: "Archived",
+    assignedTo: [
       {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
       },
       {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      }
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
     ],
-    "actions": ["Restore"]
+    actions: ["Restore"],
   },
   {
-    "id": 5,
-    "reportedBy": "Ishaan Gupta",
-    "submittedOn": "13 May 2025",
-    "reportedIn": "Chat",
-    "reportedContent": "Threatening message sent during chat",
-    "reason": "Abuse",
-    "status": "Under Review",
-    "assignedTo": [
+    id: 5,
+    reportedBy: "Ishaan Gupta",
+    submittedOn: "13 May 2025",
+    reportedIn: "Chat",
+    reportedContent: "Threatening message sent during chat",
+    reason: "Abuse",
+    status: "Under Review",
+    assignedTo: [
       {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
       },
       {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
-      }
+        name: "Ms. Ritu Gupta",
+        photo: assignuser2,
+      },
     ],
-    "actions": ["Review", "Escalate"]
+    actions: ["Review", "Escalate"],
   },
   {
-    "id": 6,
-    "reportedBy": "Ananya Singh",
-    "submittedOn": "12 May 2025",
-    "reportedIn": "Feedback",
-    "reportedContent": "Copied review from another user",
-    "reason": "Plagiarism",
-    "status": "Actioned",
-    "assignedTo": [
+    id: 6,
+    reportedBy: "Ananya Singh",
+    submittedOn: "12 May 2025",
+    reportedIn: "Feedback",
+    reportedContent: "Copied review from another user",
+    reason: "Plagiarism",
+    status: "Actioned",
+    assignedTo: [
       {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
+        name: "Ms. Ritu Gupta",
+        photo: assignuser2,
       },
       {
-        "name": "Prof. Sunil Kumar",
-        "photo": assignuser3
-      }
+        name: "Prof. Sunil Kumar",
+        photo: assignuser3,
+      },
     ],
-    "actions": ["Details", "Archive"]
+    actions: ["Details", "Archive"],
   },
   {
-    "id": 7,
-    "reportedBy": "Rohit Sinha",
-    "submittedOn": "11 May 2025",
-    "reportedIn": "Session",
-    "reportedContent": "Disruptive behavior during video call",
-    "reason": "Disruption",
-    "status": "Resolved",
-    "assignedTo": [
+    id: 7,
+    reportedBy: "Rohit Sinha",
+    submittedOn: "11 May 2025",
+    reportedIn: "Session",
+    reportedContent: "Disruptive behavior during video call",
+    reason: "Disruption",
+    status: "Resolved",
+    assignedTo: [
       {
-        "name": "Prof. Sunil Kumar",
-        "photo": assignuser3
+        name: "Prof. Sunil Kumar",
+        photo: assignuser3,
       },
       {
-        "name": "Dr. Kavita Rao",
-        "photo": assignuser4
-      }
+        name: "Dr. Kavita Rao",
+        photo: assignuser4,
+      },
     ],
-    "actions": ["View", "Archive"]
+    actions: ["View", "Archive"],
   },
   {
-    "id": 8,
-    "reportedBy": "Kavya Nair",
-    "submittedOn": "10 May 2025",
-    "reportedIn": "Public Post",
-    "reportedContent": "Post contains offensive meme",
-    "reason": "Inappropriate Content",
-    "status": "Archived",
-    "assignedTo": [
+    id: 8,
+    reportedBy: "Kavya Nair",
+    submittedOn: "10 May 2025",
+    reportedIn: "Public Post",
+    reportedContent: "Post contains offensive meme",
+    reason: "Inappropriate Content",
+    status: "Archived",
+    assignedTo: [
       {
-        "name": "Dr. Kavita Rao",
-        "photo": assignuser4
+        name: "Dr. Kavita Rao",
+        photo: assignuser4,
       },
       {
-        "name": "Prof. Rajiv Malhotra",
-        "photo": assignuser1
-      }
+        name: "Prof. Rajiv Malhotra",
+        photo: assignuser1,
+      },
     ],
-    "actions": ["Restore"]
+    actions: ["Restore"],
   },
   {
-    "id": 9,
-    "reportedBy": "Manav Desai",
-    "submittedOn": "9 May 2025",
-    "reportedIn": "Feedback",
-    "reportedContent": "False claim about mentor's credentials",
-    "reason": "Misinformation",
-    "status": "Actioned",
-    "assignedTo": [
+    id: 9,
+    reportedBy: "Manav Desai",
+    submittedOn: "9 May 2025",
+    reportedIn: "Feedback",
+    reportedContent: "False claim about mentor's credentials",
+    reason: "Misinformation",
+    status: "Actioned",
+    assignedTo: [
       {
-        "name": "Prof. Rajiv Malhotra",
-        "photo": assignuser1
+        name: "Prof. Rajiv Malhotra",
+        photo: assignuser1,
       },
       {
-        "name": "Dr. Manoj Sharma",
-        "photo": assignuser2
-      }
+        name: "Dr. Manoj Sharma",
+        photo: assignuser2,
+      },
     ],
-    "actions": ["Details", "Archive"]
+    actions: ["Details", "Archive"],
   },
   {
-    "id": 10,
-    "reportedBy": "Simran Chopra",
-    "submittedOn": "8 May 2025",
-    "reportedIn": "Chat",
-    "reportedContent": "User shared personal contact details",
-    "reason": "Policy Violation",
-    "status": "Resolved",
-    "assignedTo": [
+    id: 10,
+    reportedBy: "Simran Chopra",
+    submittedOn: "8 May 2025",
+    reportedIn: "Chat",
+    reportedContent: "User shared personal contact details",
+    reason: "Policy Violation",
+    status: "Resolved",
+    assignedTo: [
       {
-        "name": "Dr. Manoj Sharma",
-        "photo": assignuser2
+        name: "Dr. Manoj Sharma",
+        photo: assignuser2,
       },
       {
-        "name": "Ms. Neha Joshi",
-        "photo": assignuser3
-      }
+        name: "Ms. Neha Joshi",
+        photo: assignuser3,
+      },
     ],
-    "actions": ["View", "Archive"]
+    actions: ["View", "Archive"],
   },
   {
-    "id": 11,
-    "reportedBy": "Yash Jain",
-    "submittedOn": "7 May 2025",
-    "reportedIn": "Session",
-    "reportedContent": "Participant was shouting and abusive",
-    "reason": "Harassment",
-    "status": "Under Review",
-    "assignedTo": [],
-    "actions": ["Review", "Escalate"]
+    id: 11,
+    reportedBy: "Yash Jain",
+    submittedOn: "7 May 2025",
+    reportedIn: "Session",
+    reportedContent: "Participant was shouting and abusive",
+    reason: "Harassment",
+    status: "Under Review",
+    assignedTo: [],
+    actions: ["Review", "Escalate"],
   },
   {
-    "id": 12,
-    "reportedBy": "Tara Mehta",
-    "submittedOn": "6 May 2025",
-    "reportedIn": "Feedback",
-    "reportedContent": "Review used hate speech",
-    "reason": "Offensive Content",
-    "status": "Actioned",
-    "assignedTo": [],
-    "actions": ["Details", "Archive"]
+    id: 12,
+    reportedBy: "Tara Mehta",
+    submittedOn: "6 May 2025",
+    reportedIn: "Feedback",
+    reportedContent: "Review used hate speech",
+    reason: "Offensive Content",
+    status: "Actioned",
+    assignedTo: [],
+    actions: ["Details", "Archive"],
   },
   {
-    "id": 13,
-    "reportedBy": "Arjun Kapoor",
-    "submittedOn": "5 May 2025",
-    "reportedIn": "Public Post",
-    "reportedContent": "Malicious code shared in post",
-    "reason": "Security Threat",
-    "status": "Resolved",
-    "assignedTo": [],
-    "actions": ["View", "Archive"]
+    id: 13,
+    reportedBy: "Arjun Kapoor",
+    submittedOn: "5 May 2025",
+    reportedIn: "Public Post",
+    reportedContent: "Malicious code shared in post",
+    reason: "Security Threat",
+    status: "Resolved",
+    assignedTo: [],
+    actions: ["View", "Archive"],
   },
   {
-    "id": 14,
-    "reportedBy": "Ritika Ahuja",
-    "submittedOn": "4 May 2025",
-    "reportedIn": "Session",
-    "reportedContent": "Session contained unapproved content",
-    "reason": "Content Violation",
-    "status": "Archived",
-    "assignedTo": [],
-    "actions": ["Restore"]
+    id: 14,
+    reportedBy: "Ritika Ahuja",
+    submittedOn: "4 May 2025",
+    reportedIn: "Session",
+    reportedContent: "Session contained unapproved content",
+    reason: "Content Violation",
+    status: "Archived",
+    assignedTo: [],
+    actions: ["Restore"],
   },
   {
-    "id": 15,
-    "reportedBy": "Dev Mehta",
-    "submittedOn": "3 May 2025",
-    "reportedIn": "Chat",
-    "reportedContent": "User sent unsolicited ads",
-    "reason": "Spam",
-    "status": "Under Review",
-    "assignedTo": [],
-    "actions": ["Review", "Escalate"]
-  }
-  
+    id: 15,
+    reportedBy: "Dev Mehta",
+    submittedOn: "3 May 2025",
+    reportedIn: "Chat",
+    reportedContent: "User sent unsolicited ads",
+    reason: "Spam",
+    status: "Under Review",
+    assignedTo: [],
+    actions: ["Review", "Escalate"],
+  },
 ];
 export const TemplateTableData = [
   {
@@ -4813,7 +4811,7 @@ export const TemplateTableData = [
     name: "Promotion – Masterclass",
     channel: "WhatsApp",
     type: "Marketing",
-    status: "Pending",
+    status: "Applied",
     metaStatus: "Rejected",
   },
   {
@@ -4821,7 +4819,7 @@ export const TemplateTableData = [
     name: "Coach Toolkit Followup",
     channel: "WhatsApp",
     type: "Utility",
-    status: "Pending",
+    status: "Applied",
     metaStatus: "Not Pushed",
   },
 ];
@@ -4845,7 +4843,7 @@ export const ReviewTableData = [
     submittedBy: "Mobile App",
     rating: "★★★★☆",
     content: "More examples would enhance sessions",
-    status: "Pending",
+    status: "Applied",
     actions: ["Respond", "Resolve"],
   },
   {
@@ -4889,7 +4887,7 @@ export const ReviewTableData = [
     submittedBy: "Email",
     rating: "★★☆☆☆",
     content: "Late response from support team",
-    status: "Pending",
+    status: "Applied",
     actions: ["Respond", "Resolve"],
   },
   {
@@ -4933,7 +4931,7 @@ export const ReviewTableData = [
     submittedBy: "Mobile App",
     rating: "★★★☆☆",
     content: "Could use more personalized suggestions",
-    status: "Pending",
+    status: "Applied",
     actions: ["Respond", "Resolve"],
   },
   {
@@ -4977,7 +4975,7 @@ export const ReviewTableData = [
     submittedBy: "Mobile App",
     rating: "★★★★☆",
     content: "Minor bugs but good overall experience",
-    status: "Pending",
+    status: "Applied",
     actions: ["Respond", "Resolve"],
   },
   {
@@ -5002,7 +5000,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Icons are too small on mobile",
     canBeContacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Resolve"],
   },
   {
@@ -5024,7 +5022,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Content overlaps with image slider",
     canBeContacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["Assign", "Resolve"],
   },
   {
@@ -5046,7 +5044,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Timer resets when network reconnects",
     canBeContacted: "No",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Resolve"],
   },
   {
@@ -5057,7 +5055,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Card details cut off on smaller screens",
     canBeContacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["Assign", "Resolve"],
   },
   {
@@ -5079,7 +5077,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Login screen loads slowly on iOS",
     canBeContacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Resolve"],
   },
   {
@@ -5112,7 +5110,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Insights panel is not updating",
     canBeContacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["Assign", "Resolve"],
   },
   {
@@ -5134,7 +5132,7 @@ export const FeedbackTableData = [
     screenshot: "View",
     message: "Card payment failed multiple times",
     canBeContacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Resolve"],
   },
   {
@@ -5302,7 +5300,7 @@ export const instant_sessions = [
     price: "₹270",
     code: "CLT270",
     slots: 2,
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5717,7 +5715,7 @@ export const pending_approvals = [
     price: "₹250",
     code: "TMT250",
     submitted_on: "17 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5728,7 +5726,7 @@ export const pending_approvals = [
     price: "₹300",
     code: "CPIV300",
     submitted_on: "10 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5739,7 +5737,7 @@ export const pending_approvals = [
     price: "₹450",
     code: "INTVH450",
     submitted_on: "12 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5750,7 +5748,7 @@ export const pending_approvals = [
     price: "₹600",
     code: "WCF600",
     submitted_on: "18 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5761,7 +5759,7 @@ export const pending_approvals = [
     price: "₹350",
     code: "SCG350",
     submitted_on: "14 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5772,7 +5770,7 @@ export const pending_approvals = [
     price: "₹280",
     code: "GLCL280",
     submitted_on: "16 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5783,7 +5781,7 @@ export const pending_approvals = [
     price: "₹400",
     code: "FYP400",
     submitted_on: "19 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5794,7 +5792,7 @@ export const pending_approvals = [
     price: "₹700",
     code: "TCOM700",
     submitted_on: "13 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5805,7 +5803,7 @@ export const pending_approvals = [
     price: "₹200",
     code: "CTECH200",
     submitted_on: "15 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5816,7 +5814,7 @@ export const pending_approvals = [
     price: "₹390",
     code: "OSD390",
     submitted_on: "20 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5827,7 +5825,7 @@ export const pending_approvals = [
     price: "₹980",
     code: "INCL980",
     submitted_on: "22 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5838,7 +5836,7 @@ export const pending_approvals = [
     price: "₹310",
     code: "ELM310",
     submitted_on: "23 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5849,7 +5847,7 @@ export const pending_approvals = [
     price: "₹460",
     code: "PRNT460",
     submitted_on: "25 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5860,7 +5858,7 @@ export const pending_approvals = [
     price: "₹810",
     code: "AGCL810",
     submitted_on: "26 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
   {
@@ -5871,592 +5869,631 @@ export const pending_approvals = [
     price: "₹275",
     code: "EXPT275",
     submitted_on: "27 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["Review", "Approve", "Reject"],
   },
 ];
 
 export const ProblemTableData = [
   {
-    "id": 1,
-    "user": "Kavya Sharma",
-    "submittedOn": "18 May 2025",
-    "issueType": "Profile",
-    "description": "Unable to update mobile number",
-    "screenshot": "View",
-    "status": "Under Review",
-    "assignedTo": [
+    id: 1,
+    user: "Kavya Sharma",
+    submittedOn: "18 May 2025",
+    issueType: "Profile",
+    description: "Unable to update mobile number",
+    screenshot: "View",
+    status: "Under Review",
+    assignedTo: [
       {
-        "name": "Dr. Priya Singh",
-        "photo": assignuser1
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
       },
       {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
-      }
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
     ],
-    "actions": ["Assign", "Resolve"]
+    actions: ["Assign", "Resolve"],
   },
   {
-    "id": 2,
-    "user": "Mohit Sinha",
-    "submittedOn": "17 May 2025",
-    "issueType": "Booking",
-    "description": "Session got cancelled but still charged",
-    "screenshot": "View",
-    "status": "New",
-    "assignedTo": [
+    id: 2,
+    user: "Mohit Sinha",
+    submittedOn: "17 May 2025",
+    issueType: "Booking",
+    description: "Session got cancelled but still charged",
+    screenshot: "View",
+    status: "New",
+    assignedTo: [
       {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
       },
       {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
-      }
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
     ],
-    "actions": ["Review", "Refund"]
+    actions: ["Review", "Refund"],
   },
   {
-    "id": 3,
-    "user": "Priya Tiwari",
-    "submittedOn": "16 May 2025",
-    "issueType": "Assessment",
-    "description": "Test screen froze midway",
-    "screenshot": "No",
-    "status": "Resolved",
-    "assignedTo": [
+    id: 3,
+    user: "Priya Tiwari",
+    submittedOn: "16 May 2025",
+    issueType: "Assessment",
+    description: "Test screen froze midway",
+    screenshot: "No",
+    status: "Resolved",
+    assignedTo: [
       {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
       },
       {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
-      }
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
     ],
-    "actions": ["Confirm", "Archive"]
+    actions: ["Confirm", "Archive"],
   },
   {
-    "id": 4,
-    "user": "Akhil Ranjan",
-    "submittedOn": "15 May 2025",
-    "issueType": "Access",
-    "description": "Unable to login after OTP",
-    "screenshot": "No",
-    "status": "Archived",
-    "assignedTo": [
+    id: 4,
+    user: "Akhil Ranjan",
+    submittedOn: "15 May 2025",
+    issueType: "Access",
+    description: "Unable to login after OTP",
+    screenshot: "No",
+    status: "Archived",
+    assignedTo: [
       {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
       },
       {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      }
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
     ],
-    "actions": ["Restore"]
+    actions: ["Restore"],
   },
   {
-    "id": 5,
-    "user": "Sneha Kapoor",
-    "submittedOn": "14 May 2025",
-    "issueType": "Payment",
-    "description": "Transaction failed but amount deducted",
-    "screenshot": "View",
-    "status": "New",
-    "assignedTo": [
+    id: 5,
+    user: "Sneha Kapoor",
+    submittedOn: "14 May 2025",
+    issueType: "Payment",
+    description: "Transaction failed but amount deducted",
+    screenshot: "View",
+    status: "New",
+    assignedTo: [
       {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
       },
       {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
-      }
+        name: "Ms. Ritu Gupta",
+        photo: assignuser2,
+      },
     ],
-    "actions": ["Investigate", "Refund"]
+    actions: ["Investigate", "Refund"],
   },
   {
-    "id": 6,
-    "user": "Rajat Mehta",
-    "submittedOn": "13 May 2025",
-    "issueType": "Profile",
-    "description": "Name not updating after edit",
-    "screenshot": "No",
-    "status": "Under Review",
-    "assignedTo": [{
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "actions": ["Assign", "Resolve"]
+    id: 6,
+    user: "Rajat Mehta",
+    submittedOn: "13 May 2025",
+    issueType: "Profile",
+    description: "Name not updating after edit",
+    screenshot: "No",
+    status: "Under Review",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Ms. Ritu Gupta",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Assign", "Resolve"],
   },
   {
-    "id": 7,
-    "user": "Pooja Arora",
-    "submittedOn": "12 May 2025",
-    "issueType": "Booking",
-    "description": "Double booking confirmed",
-    "screenshot": "View",
-    "status": "Resolved",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Confirm", "Archive"]
+    id: 7,
+    user: "Pooja Arora",
+    submittedOn: "12 May 2025",
+    issueType: "Booking",
+    description: "Double booking confirmed",
+    screenshot: "View",
+    status: "Resolved",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Confirm", "Archive"],
   },
   {
-    "id": 8,
-    "user": "Ankit Verma",
-    "submittedOn": "11 May 2025",
-    "issueType": "Access",
-    "description": "OTP not received",
-    "screenshot": "No",
-    "status": "New",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Send OTP", "Contact"]
+    id: 8,
+    user: "Ankit Verma",
+    submittedOn: "11 May 2025",
+    issueType: "Access",
+    description: "OTP not received",
+    screenshot: "No",
+    status: "New",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Send OTP", "Contact"],
   },
   {
-    "id": 9,
-    "user": "Divya Nair",
-    "submittedOn": "10 May 2025",
-    "issueType": "Assessment",
-    "description": "Result not displayed",
-    "screenshot": "View",
-    "status": "Under Review",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Assign", "Resolve"]
+    id: 9,
+    user: "Divya Nair",
+    submittedOn: "10 May 2025",
+    issueType: "Assessment",
+    description: "Result not displayed",
+    screenshot: "View",
+    status: "Under Review",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Assign", "Resolve"],
   },
   {
-    "id": 10,
-    "user": "Rohan Bhatia",
-    "submittedOn": "09 May 2025",
-    "issueType": "Payment",
-    "description": "Charged twice for the same session",
-    "screenshot": "View",
-    "status": "Resolved",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Confirm", "Refund"]
+    id: 10,
+    user: "Rohan Bhatia",
+    submittedOn: "09 May 2025",
+    issueType: "Payment",
+    description: "Charged twice for the same session",
+    screenshot: "View",
+    status: "Resolved",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Confirm", "Refund"],
   },
   {
-    "id": 11,
-    "user": "Tanvi Saxena",
-    "submittedOn": "08 May 2025",
-    "issueType": "Booking",
-    "description": "Booking confirmation not received",
-    "screenshot": "No",
-    "status": "New",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Resend Confirmation"]
+    id: 11,
+    user: "Tanvi Saxena",
+    submittedOn: "08 May 2025",
+    issueType: "Booking",
+    description: "Booking confirmation not received",
+    screenshot: "No",
+    status: "New",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Resend Confirmation"],
   },
   {
-    "id": 12,
-    "user": "Yash Rajput",
-    "submittedOn": "07 May 2025",
-    "issueType": "Access",
-    "description": "Email login failed repeatedly",
-    "screenshot": "No",
-    "status": "Under Review",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Assign", "Debug"]
+    id: 12,
+    user: "Yash Rajput",
+    submittedOn: "07 May 2025",
+    issueType: "Access",
+    description: "Email login failed repeatedly",
+    screenshot: "No",
+    status: "Under Review",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Assign", "Debug"],
   },
   {
-    "id": 13,
-    "user": "Nisha Jain",
-    "submittedOn": "06 May 2025",
-    "issueType": "Assessment",
-    "description": "MCQs not loading in test",
-    "screenshot": "View",
-    "status": "Resolved",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Confirm", "Archive"]
+    id: 13,
+    user: "Nisha Jain",
+    submittedOn: "06 May 2025",
+    issueType: "Assessment",
+    description: "MCQs not loading in test",
+    screenshot: "View",
+    status: "Resolved",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Confirm", "Archive"],
   },
   {
-    "id": 14,
-    "user": "Gaurav Singh",
-    "submittedOn": "05 May 2025",
-    "issueType": "Profile",
-    "description": "Photo upload fails",
-    "screenshot": "View",
-    "status": "New",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Assign", "Resolve"]
+    id: 14,
+    user: "Gaurav Singh",
+    submittedOn: "05 May 2025",
+    issueType: "Profile",
+    description: "Photo upload fails",
+    screenshot: "View",
+    status: "New",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Assign", "Resolve"],
   },
   {
-    "id": 15,
-    "user": "Ayesha Khan",
-    "submittedOn": "04 May 2025",
-    "issueType": "Payment",
-    "description": "No invoice generated",
-    "screenshot": "No",
-    "status": "Archived",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "actions": ["Restore", "Notify"]
-  }
-    
+    id: 15,
+    user: "Ayesha Khan",
+    submittedOn: "04 May 2025",
+    issueType: "Payment",
+    description: "No invoice generated",
+    screenshot: "No",
+    status: "Archived",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    actions: ["Restore", "Notify"],
+  },
 ];
 
 export const BugsTableData = [
   {
-    "id": 1,
-    "user": "Akanksha Verma",
-    "submittedOn": "18 May 2025",
-    "module": "Notifications",
-    "priority": "High",
-    "description": "Push alerts not showing in mobile",
-    "assignedTo": [
+    id: 1,
+    user: "Akanksha Verma",
+    submittedOn: "18 May 2025",
+    module: "Notifications",
+    priority: "High",
+    description: "Push alerts not showing in mobile",
+    assignedTo: [
       {
-        "name": "Dr. Priya Singh",
-        "photo": assignuser1
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
       },
       {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
-      }
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
     ],
-    "screenshot": "View",
-    "status": "In Progress",
-    "actions": ["Fix", "Verify", "Comment"]
+    screenshot: "View",
+    status: "In Progress",
+    actions: ["Fix", "Verify", "Comment"],
   },
   {
-    "id": 2,
-    "user": "Devansh Patel",
-    "submittedOn": "17 May 2025",
-    "module": "Assessments",
-    "priority": "Critical",
-    "description": "Timer resets during ACE test",
-    "assignedTo": [
+    id: 2,
+    user: "Devansh Patel",
+    submittedOn: "17 May 2025",
+    module: "Assessments",
+    priority: "Critical",
+    description: "Timer resets during ACE test",
+    assignedTo: [
       {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
       },
       {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
-      }
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
     ],
-    "screenshot": "View",
-    "status": "New",
-    "actions": ["Assign", "Debug"]
+    screenshot: "View",
+    status: "New",
+    actions: ["Assign", "Debug"],
   },
   {
-    "id": 3,
-    "user": "Sneha Chatterji",
-    "submittedOn": "16 May 2025",
-    "module": "Platform",
-    "priority": "Medium",
-    "description": "Dashboard layout breaks in Safari",
-    "assignedTo": [
+    id: 3,
+    user: "Sneha Chatterji",
+    submittedOn: "16 May 2025",
+    module: "Platform",
+    priority: "Medium",
+    description: "Dashboard layout breaks in Safari",
+    assignedTo: [
       {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
       },
       {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
-      }
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
     ],
-    "screenshot": "No",
-    "status": "Fixed",
-    "actions": ["Confirm", "Archive"]
+    screenshot: "No",
+    status: "Fixed",
+    actions: ["Confirm", "Archive"],
   },
   {
-    "id": 4,
-    "user": "Harshit Meena",
-    "submittedOn": "15 May 2025",
-    "module": "Sessions",
-    "priority": "Low",
-    "description": "Coach details don't update instantly",
-    "assignedTo": [
+    id: 4,
+    user: "Harshit Meena",
+    submittedOn: "15 May 2025",
+    module: "Sessions",
+    priority: "Low",
+    description: "Coach details don't update instantly",
+    assignedTo: [
       {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
       },
       {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      }
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
     ],
-    "screenshot": "No",
-    "status": "Verified",
-    "actions": ["Close", "Archive"]
+    screenshot: "No",
+    status: "Verified",
+    actions: ["Close", "Archive"],
   },
   {
-    "id": 5,
-    "user": "Megha Yadav",
-    "submittedOn": "14 May 2025",
-    "module": "Payments",
-    "priority": "Critical",
-    "description": "Invoice generation fails on bulk export",
-    "assignedTo": [
+    id: 5,
+    user: "Megha Yadav",
+    submittedOn: "14 May 2025",
+    module: "Payments",
+    priority: "Critical",
+    description: "Invoice generation fails on bulk export",
+    assignedTo: [
       {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
       },
       {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
-      }
+        name: "Ms. Ritu Gupta",
+        photo: assignuser2,
+      },
     ],
-    "screenshot": "View",
-    "status": "New",
-    "actions": ["Assign", "Fix"]
+    screenshot: "View",
+    status: "New",
+    actions: ["Assign", "Fix"],
   },
   {
-    "id": 6,
-    "user": "Aditya Rawal",
-    "submittedOn": "13 May 2025",
-    "module": "Login",
-    "priority": "High",
-    "description": "OTP screen not responsive on iOS",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "View",
-    "status": "In Progress",
-    "actions": ["Fix", "Verify"]
+    id: 6,
+    user: "Aditya Rawal",
+    submittedOn: "13 May 2025",
+    module: "Login",
+    priority: "High",
+    description: "OTP screen not responsive on iOS",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "View",
+    status: "In Progress",
+    actions: ["Fix", "Verify"],
   },
   {
-    "id": 7,
-    "user": "Tanya Malhotra",
-    "submittedOn": "12 May 2025",
-    "module": "Assessments",
-    "priority": "Medium",
-    "description": "MCQ options not selectable on Firefox",
-    "assignedTo": [ {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    },
-    {
-      "name": "Dr. Meera Iyer",
-      "photo": assignuser3
-    }],
-    "screenshot": "No",
-    "status": "Fixed",
-    "actions": ["Confirm", "Comment"]
+    id: 7,
+    user: "Tanya Malhotra",
+    submittedOn: "12 May 2025",
+    module: "Assessments",
+    priority: "Medium",
+    description: "MCQ options not selectable on Firefox",
+    assignedTo: [
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+      {
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
+    ],
+    screenshot: "No",
+    status: "Fixed",
+    actions: ["Confirm", "Comment"],
   },
   {
-    "id": 8,
-    "user": "Rohit Singh",
-    "submittedOn": "11 May 2025",
-    "module": "Platform",
-    "priority": "Low",
-    "description": "Dropdown menu overlaps on zoom",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "No",
-    "status": "Verified",
-    "actions": ["Close"]
+    id: 8,
+    user: "Rohit Singh",
+    submittedOn: "11 May 2025",
+    module: "Platform",
+    priority: "Low",
+    description: "Dropdown menu overlaps on zoom",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "No",
+    status: "Verified",
+    actions: ["Close"],
   },
   {
-    "id": 9,
-    "user": "Neha Dubey",
-    "submittedOn": "10 May 2025",
-    "module": "Notifications",
-    "priority": "High",
-    "description": "Email alerts delayed by hours",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "View",
-    "status": "In Progress",
-    "actions": ["Fix", "Comment"]
+    id: 9,
+    user: "Neha Dubey",
+    submittedOn: "10 May 2025",
+    module: "Notifications",
+    priority: "High",
+    description: "Email alerts delayed by hours",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "View",
+    status: "In Progress",
+    actions: ["Fix", "Comment"],
   },
   {
-    "id": 10,
-    "user": "Arjun Vyas",
-    "submittedOn": "09 May 2025",
-    "module": "Sessions",
-    "priority": "Medium",
-    "description": "Session summary not saving edits",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "No",
-    "status": "New",
-    "actions": ["Assign", "Debug"]
+    id: 10,
+    user: "Arjun Vyas",
+    submittedOn: "09 May 2025",
+    module: "Sessions",
+    priority: "Medium",
+    description: "Session summary not saving edits",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "No",
+    status: "New",
+    actions: ["Assign", "Debug"],
   },
   {
-    "id": 11,
-    "user": "Sanya Bedi",
-    "submittedOn": "08 May 2025",
-    "module": "Login",
-    "priority": "Critical",
-    "description": "Password reset fails for new users",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "View",
-    "status": "New",
-    "actions": ["Assign", "Fix"]
+    id: 11,
+    user: "Sanya Bedi",
+    submittedOn: "08 May 2025",
+    module: "Login",
+    priority: "Critical",
+    description: "Password reset fails for new users",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "View",
+    status: "New",
+    actions: ["Assign", "Fix"],
   },
   {
-    "id": 12,
-    "user": "Vivek Chauhan",
-    "submittedOn": "07 May 2025",
-    "module": "Payments",
-    "priority": "Low",
-    "description": "Currency mismatch on international cards",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "No",
-    "status": "Verified",
-    "actions": ["Close", "Archive"]
+    id: 12,
+    user: "Vivek Chauhan",
+    submittedOn: "07 May 2025",
+    module: "Payments",
+    priority: "Low",
+    description: "Currency mismatch on international cards",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "No",
+    status: "Verified",
+    actions: ["Close", "Archive"],
   },
   {
-    "id": 13,
-    "user": "Ritika Joshi",
-    "submittedOn": "06 May 2025",
-    "module": "Platform",
-    "priority": "Medium",
-    "description": "White screen on logout",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "View",
-    "status": "Fixed",
-    "actions": ["Confirm", "Archive"]
+    id: 13,
+    user: "Ritika Joshi",
+    submittedOn: "06 May 2025",
+    module: "Platform",
+    priority: "Medium",
+    description: "White screen on logout",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "View",
+    status: "Fixed",
+    actions: ["Confirm", "Archive"],
   },
   {
-    "id": 14,
-    "user": "Ishaan Desai",
-    "submittedOn": "05 May 2025",
-    "module": "Notifications",
-    "priority": "High",
-    "description": "Repeated push notifications",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "No",
-    "status": "In Progress",
-    "actions": ["Fix", "Comment"]
+    id: 14,
+    user: "Ishaan Desai",
+    submittedOn: "05 May 2025",
+    module: "Notifications",
+    priority: "High",
+    description: "Repeated push notifications",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "No",
+    status: "In Progress",
+    actions: ["Fix", "Comment"],
   },
   {
-    "id": 15,
-    "user": "Palak Mahajan",
-    "submittedOn": "04 May 2025",
-    "module": "Assessments",
-    "priority": "Low",
-    "description": "Hints not loading in test view",
-    "assignedTo": [ {
-      "name": "Dr. Priya Singh",
-      "photo": assignuser1
-    },
-    {
-      "name": "Prof. Rajesh Kumar",
-      "photo": assignuser2
-    }],
-    "screenshot": "View",
-    "status": "New",
-    "actions": ["Assign", "Debug"]
-  }
-]
+    id: 15,
+    user: "Palak Mahajan",
+    submittedOn: "04 May 2025",
+    module: "Assessments",
+    priority: "Low",
+    description: "Hints not loading in test view",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+    screenshot: "View",
+    status: "New",
+    actions: ["Assign", "Debug"],
+  },
+];
 export const Upcoming = [
   {
     id: 1,
@@ -8980,7 +9017,7 @@ export const CommissionTable = [
     linkedSessionOrOrder: "ORD230518122",
     amount: "₹850",
     dateEarned: "18 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View"],
   },
   {
@@ -9002,7 +9039,7 @@ export const CommissionTable = [
     linkedSessionOrOrder: "ORD230518124",
     amount: "₹640",
     dateEarned: "19 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View"],
   },
   {
@@ -9024,7 +9061,7 @@ export const CommissionTable = [
     linkedSessionOrOrder: "ORD230518126",
     amount: "₹990",
     dateEarned: "20 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View"],
   },
   {
@@ -9046,7 +9083,7 @@ export const CommissionTable = [
     linkedSessionOrOrder: "ORD230518128",
     amount: "₹810",
     dateEarned: "21 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View"],
   },
   {
@@ -9068,7 +9105,7 @@ export const CommissionTable = [
     linkedSessionOrOrder: "ORD230518130",
     amount: "₹600",
     dateEarned: "22 May 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View"],
   },
 ];
@@ -9968,7 +10005,7 @@ export const CustomInputTable = [
     formName: "Explorer Sign-Up",
     submittedBy: "Aayush Kapoor",
     date: "20 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Add to Degree List", "Reject"],
   },
   {
@@ -9988,7 +10025,7 @@ export const CustomInputTable = [
     formName: "Certification Upload",
     submittedBy: "Rahul Jain",
     date: "18 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Add to Certificates", "Reject"],
   },
   {
@@ -10018,7 +10055,7 @@ export const CustomInputTable = [
     formName: "Design Portfolio Form",
     submittedBy: "Priya Iyer",
     date: "15 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Open Link", "Reject"],
   },
   {
@@ -10038,7 +10075,7 @@ export const CustomInputTable = [
     formName: "Social Info Form",
     submittedBy: "Ritu Chopra",
     date: "13 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Verify Link", "Reject"],
   },
   {
@@ -10048,7 +10085,7 @@ export const CustomInputTable = [
     formName: "Explorer Sign-Up",
     submittedBy: "Kabir Joshi",
     date: "12 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Add to Degree List", "Reject"],
   },
   {
@@ -10078,7 +10115,7 @@ export const CustomInputTable = [
     formName: "Experience Form",
     submittedBy: "Sneha Kulkarni",
     date: "09 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Review Details", "Reject"],
   },
   {
@@ -10088,7 +10125,7 @@ export const CustomInputTable = [
     formName: "Explorer Sign-Up",
     submittedBy: "Aarav Nanda",
     date: "08 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Add to Degree List", "Reject"],
   },
   {
@@ -10108,7 +10145,7 @@ export const CustomInputTable = [
     formName: "PG Enrollment Form",
     submittedBy: "Raghav Khurana",
     date: "06 Jul 2025",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Add to Degree List", "Reject"],
   },
 ];
@@ -10350,7 +10387,7 @@ export const SurveysTable = [
     for: ["9–10", "11–12"],
     questions: 11,
     responses: 1420,
-    status: "Pending",
+    status: "Applied",
     lastUpdated: "06 May 2025",
     actions: ["Edit", "Activate", "Delete"],
   },
@@ -10410,7 +10447,7 @@ export const CommentTable = [
     comment: "PDF not loading",
     by: "internal_note",
     on: "Article: Assessment Steps",
-    status: "Pending",
+    status: "Applied",
     action: ["Approve", "Reject"],
   },
   {
@@ -10434,7 +10471,7 @@ export const CommentTable = [
     comment: "Can we get the session recording?",
     by: "sunita@email",
     on: "Live Q&A: Career Guidance",
-    status: "Pending",
+    status: "Applied",
     action: ["Approve", "Reject"],
   },
   {
@@ -10466,7 +10503,7 @@ export const CommentTable = [
     comment: "Link was broken on mobile view.",
     by: "support_team",
     on: "Page: Feedback Form",
-    status: "Pending",
+    status: "Applied",
     action: ["Approve", "Reject"],
   },
 ];
@@ -10493,7 +10530,7 @@ export const CareerTable = [
     career_name: "Animation Designer",
     industry: "Creative",
     tags: ["Future Prediction"],
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Trending", "Future", "Approve"],
   },
   {
@@ -10517,7 +10554,7 @@ export const CareerTable = [
     career_name: "AI Ethicist",
     industry: "Ethics & Technology",
     tags: ["Future Prediction"],
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Trending", "Future", "Approve"],
   },
   {
@@ -10533,7 +10570,7 @@ export const CareerTable = [
     career_name: "Urban Farmer",
     industry: "Agriculture",
     tags: ["Sustainable"],
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Trending", "Future", "Approve"],
   },
   {
@@ -10549,7 +10586,7 @@ export const CareerTable = [
     career_name: "Voice Interface Designer",
     industry: "Creative Tech",
     tags: ["Innovative"],
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Trending", "Future", "Approve"],
   },
   {
@@ -10573,7 +10610,7 @@ export const CareerTable = [
     career_name: "Metaverse Architect",
     industry: "Virtual Reality",
     tags: ["Future Prediction"],
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Trending", "Future", "Approve"],
   },
   {
@@ -10589,7 +10626,7 @@ export const CareerTable = [
     career_name: "Digital Wellness Coach",
     industry: "Health & Lifestyle",
     tags: ["Innovative"],
-    status: "Pending",
+    status: "Applied",
     actions: ["Edit", "Trending", "Future", "Approve"],
   },
 ];
@@ -11024,381 +11061,381 @@ export const ScholarshipsTable = [
     actions: ["Edit", "View"],
   },
   {
-    "id": "SCH115",
-    "scholarship_name": "World Education Foundation Support Fund",
-    "type": "NGO",
-    "level": "PG",
-    "eligibility": "Merit + Global South",
-    "status": "Pending Review",
-    "created_on": "25 Jul 2025",
-    "actions": ["Edit", "Approve"]
-  }
-]
+    id: "SCH115",
+    scholarship_name: "World Education Foundation Support Fund",
+    type: "NGO",
+    level: "PG",
+    eligibility: "Merit + Global South",
+    status: "Pending Review",
+    created_on: "25 Jul 2025",
+    actions: ["Edit", "Approve"],
+  },
+];
 export const LeadOrganisationTable = [
   {
-    "id": "LOR0001",
-    "organisation_name": "Springdale Public",
-    "type": "School",
-    "objective": "Career Counseling",
-    "status": "Contacted",
-    "lead_score": "High",
-    "assigned_to": "Ajay Mehta",
-    "source": "Web Form",
-    "created_on": "18 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0001",
+    organisation_name: "Springdale Public",
+    type: "School",
+    objective: "Career Counseling",
+    status: "Contacted",
+    lead_score: "High",
+    assigned_to: "Ajay Mehta",
+    source: "Web Form",
+    created_on: "18 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0002",
-    "organisation_name": "St. Xavier's College",
-    "type": "College",
-    "objective": "Internship Program",
-    "status": "Contacted",
-    "lead_score": "Medium",
-    "assigned_to": "Riya Sharma",
-    "source": "LinkedIn",
-    "created_on": "17 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0002",
+    organisation_name: "St. Xavier's College",
+    type: "College",
+    objective: "Internship Program",
+    status: "Contacted",
+    lead_score: "Medium",
+    assigned_to: "Riya Sharma",
+    source: "LinkedIn",
+    created_on: "17 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0003",
-    "organisation_name": "Bright Future Institute",
-    "type": "Institute",
-    "objective": "Skill Development",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Verma",
-    "source": "Referral",
-    "created_on": "16 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0003",
+    organisation_name: "Bright Future Institute",
+    type: "Institute",
+    objective: "Skill Development",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Karan Verma",
+    source: "Referral",
+    created_on: "16 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0004",
-    "organisation_name": "Green Valley School",
-    "type": "School",
-    "objective": "Student Orientation",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Neha Dutt",
-    "source": "Email Campaign",
-    "created_on": "15 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0004",
+    organisation_name: "Green Valley School",
+    type: "School",
+    objective: "Student Orientation",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Neha Dutt",
+    source: "Email Campaign",
+    created_on: "15 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0005",
-    "organisation_name": "Excel Academy",
-    "type": "Institute",
-    "objective": "Workshop Collaboration",
-    "status": "Contacted",
-    "lead_score": "High",
-    "assigned_to": "Sanjay Patel",
-    "source": "Instagram",
-    "created_on": "14 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0005",
+    organisation_name: "Excel Academy",
+    type: "Institute",
+    objective: "Workshop Collaboration",
+    status: "Contacted",
+    lead_score: "High",
+    assigned_to: "Sanjay Patel",
+    source: "Instagram",
+    created_on: "14 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0006",
-    "organisation_name": "National Public School",
-    "type": "School",
-    "objective": "Career Fair",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Ajay Mehta",
-    "source": "Web Form",
-    "created_on": "13 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0006",
+    organisation_name: "National Public School",
+    type: "School",
+    objective: "Career Fair",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Ajay Mehta",
+    source: "Web Form",
+    created_on: "13 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0007",
-    "organisation_name": "Wisdom College",
-    "type": "College",
-    "objective": "Career Counseling",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Riya Sharma",
-    "source": "LinkedIn",
-    "created_on": "12 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0007",
+    organisation_name: "Wisdom College",
+    type: "College",
+    objective: "Career Counseling",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Riya Sharma",
+    source: "LinkedIn",
+    created_on: "12 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0008",
-    "organisation_name": "Skyline High",
-    "type": "School",
-    "objective": "Career Roadmap",
-    "status": "Contacted",
-    "lead_score": "Low",
-    "assigned_to": "Neha Dutt",
-    "source": "Cold Call",
-    "created_on": "11 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0008",
+    organisation_name: "Skyline High",
+    type: "School",
+    objective: "Career Roadmap",
+    status: "Contacted",
+    lead_score: "Low",
+    assigned_to: "Neha Dutt",
+    source: "Cold Call",
+    created_on: "11 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0009",
-    "organisation_name": "Modern Academy",
-    "type": "Institute",
-    "objective": "Teacher Training",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanjay Patel",
-    "source": "WhatsApp",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0009",
+    organisation_name: "Modern Academy",
+    type: "Institute",
+    objective: "Teacher Training",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Sanjay Patel",
+    source: "WhatsApp",
+    created_on: "10 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0010",
-    "organisation_name": "Elite International School",
-    "type": "School",
-    "objective": "Career Guidance",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Karan Verma",
-    "source": "Facebook",
-    "created_on": "09 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0010",
+    organisation_name: "Elite International School",
+    type: "School",
+    objective: "Career Guidance",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Karan Verma",
+    source: "Facebook",
+    created_on: "09 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0011",
-    "organisation_name": "Achievers College",
-    "type": "College",
-    "objective": "Placement Partnership",
-    "status": "Engaged",
-      "lead_score": "High",
-    "assigned_to": "Riya Sharma",
-    "source": "Email Campaign",
-    "created_on": "08 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0011",
+    organisation_name: "Achievers College",
+    type: "College",
+    objective: "Placement Partnership",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Riya Sharma",
+    source: "Email Campaign",
+    created_on: "08 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0012",
-    "organisation_name": "Smart Learn School",
-    "type": "School",
-    "objective": "Counseling Collaboration",
-    "status": "Contacted",
-    "lead_score": "Medium",
-    "assigned_to": "Ajay Mehta",
-    "source": "Web Form",
-    "created_on": "07 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0012",
+    organisation_name: "Smart Learn School",
+    type: "School",
+    objective: "Counseling Collaboration",
+    status: "Contacted",
+    lead_score: "Medium",
+    assigned_to: "Ajay Mehta",
+    source: "Web Form",
+    created_on: "07 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0013",
-    "organisation_name": "FutureEdge Academy",
-    "type": "Institute",
-    "objective": "Skill Development",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Karan Verma",
-    "source": "YouTube",
-    "created_on": "06 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0013",
+    organisation_name: "FutureEdge Academy",
+    type: "Institute",
+    objective: "Skill Development",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Karan Verma",
+    source: "YouTube",
+    created_on: "06 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0014",
-    "organisation_name": "Rising Star School",
-    "type": "School",
-    "objective": "Career Roadmap",
-    "status": "Contacted",
-    "lead_score": "High",
-    "assigned_to": "Neha Dutt",
-    "source": "Referral",
-    "created_on": "05 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LOR0014",
+    organisation_name: "Rising Star School",
+    type: "School",
+    objective: "Career Roadmap",
+    status: "Contacted",
+    lead_score: "High",
+    assigned_to: "Neha Dutt",
+    source: "Referral",
+    created_on: "05 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LOR0015",
-    "organisation_name": "Bright Minds College",
-    "type": "College",
-    "objective": "Internship Program",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Riya Sharma",
-    "source": "LinkedIn",
-    "created_on": "04 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  }
-]
-export const LeadExplorersTable= [
+    id: "LOR0015",
+    organisation_name: "Bright Minds College",
+    type: "College",
+    objective: "Internship Program",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Riya Sharma",
+    source: "LinkedIn",
+    created_on: "04 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
+  },
+];
+export const LeadExplorersTable = [
   {
-    "id": "LEX0001",
-    "name": "Aayush Kapoor",
-    "segment": "UG",
-    "objective": "Investment Banking",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Riya Sinha",
-    "source": "Website",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0001",
+    name: "Aayush Kapoor",
+    segment: "UG",
+    objective: "Investment Banking",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Riya Sinha",
+    source: "Website",
+    created_on: "10 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0002",
-    "name": "Neha Sharma",
-    "segment": "PG",
-    "objective": "Data Science",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Aditya Mehra",
-    "source": "LinkedIn",
-    "created_on": "11 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0002",
+    name: "Neha Sharma",
+    segment: "PG",
+    objective: "Data Science",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Aditya Mehra",
+    source: "LinkedIn",
+    created_on: "11 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0003",
-    "name": "Rahul Verma",
-    "segment": "Professional",
-    "objective": "Project Management",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Riya Sinha",
-    "source": "Referral",
-    "created_on": "09 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0003",
+    name: "Rahul Verma",
+    segment: "Professional",
+    objective: "Project Management",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Riya Sinha",
+    source: "Referral",
+    created_on: "09 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0004",
-    "name": "Simran Kaur",
-    "segment": "UG",
-    "objective": "Marketing",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "Instagram",
-    "created_on": "12 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0004",
+    name: "Simran Kaur",
+    segment: "UG",
+    objective: "Marketing",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Karan Yadav",
+    source: "Instagram",
+    created_on: "12 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0005",
-    "name": "Anuj Deshmukh",
-    "segment": "PG",
-    "objective": "Finance",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "Email Campaign",
-    "created_on": "08 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0005",
+    name: "Anuj Deshmukh",
+    segment: "PG",
+    objective: "Finance",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Sanya Singh",
+    source: "Email Campaign",
+    created_on: "08 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0006",
-    "name": "Tanya Chhabra",
-    "segment": "UG",
-    "objective": "Consulting",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Riya Sinha",
-    "source": "Website",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0006",
+    name: "Tanya Chhabra",
+    segment: "UG",
+    objective: "Consulting",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Riya Sinha",
+    source: "Website",
+    created_on: "10 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0007",
-    "name": "Vikram Jain",
-    "segment": "Professional",
-    "objective": "Software Development",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Aditya Mehra",
-    "source": "Webinar",
-    "created_on": "07 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0007",
+    name: "Vikram Jain",
+    segment: "Professional",
+    objective: "Software Development",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Aditya Mehra",
+    source: "Webinar",
+    created_on: "07 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0008",
-    "name": "Nikita Dube",
-    "segment": "PG",
-    "objective": "HR Management",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "YouTube",
-    "created_on": "06 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0008",
+    name: "Nikita Dube",
+    segment: "PG",
+    objective: "HR Management",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Karan Yadav",
+    source: "YouTube",
+    created_on: "06 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0009",
-    "name": "Aman Singh",
-    "segment": "UG",
-    "objective": "Analytics",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "WhatsApp",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0009",
+    name: "Aman Singh",
+    segment: "UG",
+    objective: "Analytics",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Sanya Singh",
+    source: "WhatsApp",
+    created_on: "10 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0010",
-    "name": "Rekha Rao",
-    "segment": "Professional",
-    "objective": "Entrepreneurship",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Aditya Mehra",
-    "source": "Offline Event",
-    "created_on": "05 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0010",
+    name: "Rekha Rao",
+    segment: "Professional",
+    objective: "Entrepreneurship",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Aditya Mehra",
+    source: "Offline Event",
+    created_on: "05 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0011",
-    "name": "Zaid Qureshi",
-    "segment": "PG",
-    "objective": "Cybersecurity",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "LinkedIn",
-    "created_on": "04 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0011",
+    name: "Zaid Qureshi",
+    segment: "PG",
+    objective: "Cybersecurity",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Karan Yadav",
+    source: "LinkedIn",
+    created_on: "04 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0012",
-    "name": "Meera Joshi",
-    "segment": "UG",
-    "objective": "Design",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "Instagram",
-    "created_on": "03 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0012",
+    name: "Meera Joshi",
+    segment: "UG",
+    objective: "Design",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Sanya Singh",
+    source: "Instagram",
+    created_on: "03 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0013",
-    "name": "Deepak Nair",
-    "segment": "Professional",
-    "objective": "Law",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Aditya Mehra",
-    "source": "Website",
-    "created_on": "02 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0013",
+    name: "Deepak Nair",
+    segment: "Professional",
+    objective: "Law",
+    status: "Follow-up",
+    lead_score: "Low",
+    assigned_to: "Aditya Mehra",
+    source: "Website",
+    created_on: "02 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0014",
-    "name": "Sonal Bhatt",
-    "segment": "PG",
-    "objective": "Teaching",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "Referral",
-    "created_on": "01 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
+    id: "LEX0014",
+    name: "Sonal Bhatt",
+    segment: "PG",
+    objective: "Teaching",
+    status: "Engaged",
+    lead_score: "High",
+    assigned_to: "Karan Yadav",
+    source: "Referral",
+    created_on: "01 Jul 2025",
+    actions: ["📞 Call", "💬 Message"],
   },
   {
-    "id": "LEX0015",
-    "name": "Rohit Goyal",
-    "segment": "UG",
-    "objective": "Hospitality",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "Website",
-    "created_on": "30 Jun 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  }
-]
-export const SkillsTable=[
+    id: "LEX0015",
+    name: "Rohit Goyal",
+    segment: "UG",
+    objective: "Hospitality",
+    status: "New",
+    lead_score: "Medium",
+    assigned_to: "Sanya Singh",
+    source: "Website",
+    created_on: "30 Jun 2025",
+    actions: ["📞 Call", "💬 Message"],
+  },
+];
+export const SkillsTable = [
   {
     id: "SKL101",
     skill_name: "Data Visualization",
@@ -11559,7 +11596,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Icons are too small on mobile",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11581,7 +11618,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Content overlaps with image slider",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11603,7 +11640,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Forgot password link not working",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11625,7 +11662,7 @@ export const FeedbackTable = [
     screenshot: "No",
     message: "Playback speed option missing",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11647,7 +11684,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Messages not loading properly",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11669,7 +11706,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Unable to upload profile picture",
     can_be_contacted: "No",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11691,7 +11728,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Notifications are repeated multiple times",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
   {
@@ -11713,7 +11750,7 @@ export const FeedbackTable = [
     screenshot: "View",
     message: "Join button doesn't work after 5 mins delay",
     can_be_contacted: "Yes",
-    status: "Pending",
+    status: "Applied",
     actions: ["View", "Archive"],
   },
 ];
@@ -12340,361 +12377,231 @@ export const CurrenOpeningsTable = [
     actions: ["👁 View", "✏️ Edit", "❌ Close"],
   },
 ];
-export const jobApplicationTable = [
+
+export const applicationData = [
   {
-    "application_id": "JBA0001",
-    "company_name": "Capgemini",
-    "designation": "Product Manager",
-    "apply_date": "22 May 2025",
-    "contacts": "John",
-    "type": "Contract",
-    "status": "New",
-    "assignedTo": [
-      {
-        "name": "Dr. Priya Singh",
-        "photo": assignuser1
-      },
-      {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
-      }
+    applicationId: "JBA0015",
+    role: "Psychologist",
+    name: "Anushka Rajput",
+    lastCompany: "MindPeers",
+    appliedOn: "18 May 2025",
+    type: "Full-time",
+    status: "Applied",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Prof. Anita Desai", photo: assignuser1 },
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0002",
-    "company_name": "Capgemini",
-    "designation": "Product Manager",
-    "apply_date": "05 Mar 2025",
-    "contacts": "John",
-    "type": "Contract",
-    "status": "New",
-    "assignedTo": [
-      {
-        "name": "Prof. Rajesh Kumar",
-        "photo": assignuser2
-      },
-      {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
-      }
+    applicationId: "JBA0016",
+    role: "Child Psychologist",
+    name: "Riya Kapoor",
+    lastCompany: "Fortis",
+    appliedOn: "17 May 2025",
+    type: "Part-time",
+    status: "In Screening",
+    assign: "Reassign",
+    action: "View",
+    assignedTo: [
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
+      { name: "Prof. Anita Desai", photo: assignuser4 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0003",
-    "company_name": "Microsoft",
-    "designation": "Data Analyst",
-    "apply_date": "08 Feb 2025",
-    "contacts": "Amit",
-    "type": "Internship",
-    "status": "Approved",
-    "assignedTo": [
-      {
-        "name": "Dr. Meera Iyer",
-        "photo": assignuser3
-      },
-      {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
-      }
+    applicationId: "JBA0017",
+    role: "Therapist",
+    name: "Ishita Singh",
+    lastCompany: "YourDost",
+    appliedOn: "16 May 2025",
+    type: "Internship",
+    status: "Shortlisted",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0004",
-    "company_name": "Microsoft",
-    "designation": "DevOps Engineer",
-    "apply_date": "31 Jan 2025",
-    "contacts": "John",
-    "type": "Internship",
-    "status": "New",
-    "assignedTo": [
-      {
-        "name": "Adv. Sanjay Verma",
-        "photo": assignuser4
-      },
-      {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      }
+    applicationId: "JBA0018",
+    role: "School Counsellor",
+    name: "Aarti Mehta",
+    lastCompany: "Suncity School",
+    appliedOn: "14 May 2025",
+    type: "Full-time",
+    status: "Rejected",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Prof. Anita Desai", photo: assignuser1 },
+      { name: "Dr. Meenal Sharma", photo: assignuser4 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0005",
-    "company_name": "Flipkart",
-    "designation": "Data Analyst",
-    "apply_date": "30 Apr 2025",
-    "contacts": "Priya",
-    "type": "Full-time",
-    "status": "Pending",
-    "assignedTo": [
-      {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      },
-      {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
-      }
+    applicationId: "JBA0019",
+    role: "Mental Health Coach",
+    name: "Sanya Arora",
+    lastCompany: "BetterHelp",
+    appliedOn: "13 May 2025",
+    type: "Remote",
+    status: "Applied",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0006",
-    "company_name": "Deloitte",
-    "designation": "UX Designer",
-    "apply_date": "16 Mar 2025",
-    "contacts": "John",
-    "type": "Internship",
-    "status": "Rejected",
-    "assignedTo": [  {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
-  },
-  {
-    "application_id": "JBA0007",
-    "company_name": "Infosys",
-    "designation": "Consultant",
-    "apply_date": "13 Jun 2025",
-    "contacts": "John",
-    "type": "Contract",
-    "status": "New",
-    "assignedTo": [
-      {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      },
-      {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
-      }
+    applicationId: "JBA0020",
+    role: "Behaviour Analyst",
+    name: "Neha Joshi",
+    lastCompany: "Apollo Clinic",
+    appliedOn: "12 May 2025",
+    type: "Contract",
+    status: "In Screening",
+    assign: "Reassign",
+    action: "View",
+    assignedTo: [
+      { name: "Prof. Anita Desai", photo: assignuser1 },
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0008",
-    "company_name": "Infosys",
-    "designation": "Consultant",
-    "apply_date": "13 Mar 2025",
-    "contacts": "Amit",
-    "type": "Internship",
-    "status": "New",
-    "assignedTo": [
-      {
-        "name": "Prof. Anita Desai",
-        "photo": assignuser1
-      },
-      {
-        "name": "Ms. Ritu Gupta",
-        "photo": assignuser2
-      }
+    applicationId: "JBA0021",
+    role: "Cognitive Therapist",
+    name: "Kritika Sharma",
+    lastCompany: "InnerHour",
+    appliedOn: "11 May 2025",
+    type: "Part-time",
+    status: "Shortlisted",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
+      { name: "Prof. Anita Desai", photo: assignuser4 },
     ],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
-    "application_id": "JBA0009",
-    "company_name": "Deloitte",
-    "designation": "UX Designer",
-    "apply_date": "28 Mar 2025",
-    "contacts": "Liam",
-    "type": "Internship",
-    "status": "Approved",
-    "assignedTo": [ {
-      "name": "Dr. Meera Iyer",
-      "photo": assignuser3
-    },
-    {
-      "name": "Adv. Sanjay Verma",
-      "photo": assignuser4
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0022",
+    role: "Clinical Psychologist",
+    name: "Priya Deshmukh",
+    lastCompany: "Mindscape",
+    appliedOn: "10 May 2025",
+    type: "Full-time",
+    status: "Applied",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+      { name: "Dr. Meenal Sharma", photo: assignuser4 },
+    ],
   },
   {
-    "application_id": "JBA0010",
-    "company_name": "TCS",
-    "designation": "Data Analyst",
-    "apply_date": "02 Jul 2025",
-    "contacts": "Meena",
-    "type": "Full-time",
-    "status": "Rejected",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0023",
+    role: "Adolescent Counsellor",
+    name: "Tanvi Verma",
+    lastCompany: "Jeevan Jyoti",
+    appliedOn: "09 May 2025",
+    type: "Internship",
+    status: "In Screening",
+    assign: "Reassign",
+    action: "View",
+    assignedTo: [
+      { name: "Prof. Anita Desai", photo: assignuser1 },
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+    ],
   },
   {
-    "application_id": "JBA0011",
-    "company_name": "Google",
-    "designation": "Data Analyst",
-    "apply_date": "20 May 2025",
-    "contacts": "Suresh",
-    "type": "Internship",
-    "status": "Pending",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0024",
+    role: "Crisis Intervention Expert",
+    name: "Shruti Nair",
+    lastCompany: "iCall",
+    appliedOn: "08 May 2025",
+    type: "Remote",
+    status: "Rejected",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
+      { name: "Prof. Anita Desai", photo: assignuser4 },
+    ],
   },
   {
-    "application_id": "JBA0012",
-    "company_name": "Infosys",
-    "designation": "Data Analyst",
-    "apply_date": "08 Jun 2025",
-    "contacts": "Suresh",
-    "type": "Contract",
-    "status": "Rejected",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0025",
+    role: "Family Therapist",
+    name: "Anjali Taneja",
+    lastCompany: "Hope Trust",
+    appliedOn: "07 May 2025",
+    type: "Full-time",
+    status: "Applied",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+      { name: "Dr. Meenal Sharma", photo: assignuser4 },
+    ],
   },
   {
-    "application_id": "JBA0013",
-    "company_name": "Wipro",
-    "designation": "DevOps Engineer",
-    "apply_date": "28 Apr 2025",
-    "contacts": "Liam",
-    "type": "Contract",
-    "status": "New",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0026",
+    role: "Peer Support Coach",
+    name: "Ira Patel",
+    lastCompany: "Samaritans",
+    appliedOn: "06 May 2025",
+    type: "Part-time",
+    status: "Shortlisted",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Prof. Anita Desai", photo: assignuser1 },
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+    ],
   },
   {
-    "application_id": "JBA0014",
-    "company_name": "EY",
-    "designation": "DevOps Engineer",
-    "apply_date": "13 Jul 2025",
-    "contacts": "Nina",
-    "type": "Full-time",
-    "status": "Pending",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0027",
+    role: "Rehabilitation Specialist",
+    name: "Sneha Kulkarni",
+    lastCompany: "NIMHANS",
+    appliedOn: "05 May 2025",
+    type: "Contract",
+    status: "In Screening",
+    assign: "Reassign",
+    action: "View",
+    assignedTo: [
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
+      { name: "Prof. Anita Desai", photo: assignuser4 },
+    ],
   },
   {
-    "application_id": "JBA0015",
-    "company_name": "Microsoft",
-    "designation": "Data Analyst",
-    "apply_date": "21 Jul 2025",
-    "contacts": "Amit",
-    "type": "Contract",
-    "status": "Approved",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0028",
+    role: "Career Counsellor",
+    name: "Mitali Bhatt",
+    lastCompany: "Vedantu",
+    appliedOn: "04 May 2025",
+    type: "Full-time",
+    status: "Applied",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Ms. Ritu Gupta", photo: assignuser2 },
+      { name: "Dr. Meenal Sharma", photo: assignuser3 },
+    ],
   },
   {
-    "application_id": "JBA0016",
-    "company_name": "Amazon",
-    "designation": "DevOps Engineer",
-    "apply_date": "12 Apr 2025",
-    "contacts": "Priya",
-    "type": "Internship",
-    "status": "Approved",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
+    applicationId: "JBA0029",
+    role: "Emotional Wellness Coach",
+    name: "Sakshi Rawat",
+    lastCompany: "YourDost",
+    appliedOn: "03 May 2025",
+    type: "Remote",
+    status: "Shortlisted",
+    assign: "Assign",
+    action: "View",
+    assignedTo: [
+      { name: "Prof. Anita Desai", photo: assignuser1 },
+      { name: "Dr. Meenal Sharma", photo: assignuser4 },
+    ],
   },
-  {
-    "application_id": "JBA0017",
-    "company_name": "Infosys",
-    "designation": "Consultant",
-    "apply_date": "08 Apr 2025",
-    "contacts": "Liam",
-    "type": "Contract",
-    "status": "Pending",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
-  },
-  {
-    "application_id": "JBA0018",
-    "company_name": "EY",
-    "designation": "Consultant",
-    "apply_date": "01 May 2025",
-    "contacts": "Nina",
-    "type": "Internship",
-    "status": "Pending",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
-  },
-  {
-    "application_id": "JBA0019",
-    "company_name": "EY",
-    "designation": "Data Analyst",
-    "apply_date": "25 Feb 2025",
-    "contacts": "Suresh",
-    "type": "Internship",
-    "status": "Approved",
-    "assignedTo": [ {
-      "name": "Prof. Anita Desai",
-      "photo": assignuser1
-    },
-    {
-      "name": "Ms. Ritu Gupta",
-      "photo": assignuser2
-    }],
-    "action": ["👁 View", "✏️ Edit", "❌ Delete"]
-  },
-]
+];

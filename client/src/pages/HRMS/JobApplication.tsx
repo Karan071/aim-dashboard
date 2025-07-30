@@ -14,13 +14,12 @@ import {
   ChevronRight,
   ChevronLeft,
   PenSquare,
- 
   Bell,
   FileDown,
   Eye,
   Pen,
 } from "lucide-react";
-import { jobApplicationTable } from "@/data/Data";
+import { applicationData, coachesList } from "@/data/Data";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -33,10 +32,49 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import { coachesList } from "@/data/Data";
 import React from "react";
 
-const statusTabs = [{ label: "All Applications", value: "all" }];
+// Types
+type ApplicationStatus =
+  | "Applied"
+  | "In Screening"
+  | "Shortlisted"
+  | "Interview Scheduled"
+  | "Interviewed"
+  | "Final Review"
+  | "Selected - Aimshala Team"
+  | "Onboarded - Channel Partner"
+  | "Onboarded - Career Consultant"
+  | "Enrolled - ACT"
+  | "Rejected";
+
+interface JobApplication {
+  applicationId: string;
+  role: string;
+  name: string;
+  lastCompany: string;
+  appliedOn: string;
+  type: string;
+  status: ApplicationStatus;
+  assign: string;
+  action: string;
+  assignedTo: Array<{
+    name: string;
+    photo: string;
+  }>;
+}
+
+// Extending the Coach interface to include specialization
+interface AssignedUser {
+  name: string;
+  photo: string;
+}
+
+interface Coach extends AssignedUser {
+  specialization: string;
+}
+
+// Application statuses are now handled through search functionality
 
 export function JobApplication() {
   return (
@@ -115,12 +153,7 @@ function AssessFilter({ onClose }: FilterProps) {
   const [status, setStatus] = useState("New");
   const [type, setType] = useState("Full-time");
 
-  const tabList = [
-    "General",
-    "Application Type",
-    "Status",
-    "Date Range",
-  ];
+  const tabList = ["General", "Application Type", "Status", "Date Range"];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
@@ -192,7 +225,10 @@ function AssessFilter({ onClose }: FilterProps) {
                         onChange={(e) => setStatus(e.target.value)}
                         className="text-[var(--brand-color)] focus:ring-[var(--brand-color)]"
                       />
-                      <label htmlFor={option} className="text-sm text-[var(--text)]">
+                      <label
+                        htmlFor={option}
+                        className="text-sm text-[var(--text)]"
+                      >
                         {option}
                       </label>
                     </div>
@@ -207,22 +243,27 @@ function AssessFilter({ onClose }: FilterProps) {
                   Select the Application Type:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Full-time", "Part-time", "Contract", "Internship"].map((option) => (
-                    <div key={option} className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id={option}
-                        name="type"
-                        value={option}
-                        checked={type === option}
-                        onChange={(e) => setType(e.target.value)}
-                        className="text-[var(--brand-color)] focus:ring-[var(--brand-color)]"
-                      />
-                      <label htmlFor={option} className="text-sm text-[var(--text)]">
-                        {option}
-                      </label>
-                    </div>
-                  ))}
+                  {["Full-time", "Part-time", "Contract", "Internship"].map(
+                    (option) => (
+                      <div key={option} className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          id={option}
+                          name="type"
+                          value={option}
+                          checked={type === option}
+                          onChange={(e) => setType(e.target.value)}
+                          className="text-[var(--brand-color)] focus:ring-[var(--brand-color)]"
+                        />
+                        <label
+                          htmlFor={option}
+                          className="text-sm text-[var(--text)]"
+                        >
+                          {option}
+                        </label>
+                      </div>
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -326,34 +367,46 @@ export function TableSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
-    key: string;
+    key: keyof JobApplication;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [filterStatus, setFilterStatus] = useState("all");
-  const [jobApplicationData, setJobApplicationData] = useState([...jobApplicationTable] as Array<{
-    application_id: string;
-    company_name: string;
-    designation: string;
-    apply_date: string;
-    contacts: string;
-    type: string;
-    status: string;
-    assignedTo: Array<{ name: string; photo: string }>;
-    action: string[];
-  }>);
+  // Removed filterStatus state as we're using unified search
+  const [searchQuery, setSearchQuery] = useState("");
+  const [jobApplicationData, setJobApplicationData] = useState<
+    JobApplication[]
+  >(applicationData as JobApplication[]);
   const [showAssignmentModal, setShowAssignmentModal] = useState(false);
-  const [currentApplicationForAssignment, setCurrentApplicationForAssignment] = useState<string | null>(null);
+  const [currentApplicationForAssignment, setCurrentApplicationForAssignment] =
+    useState<string | null>(null);
   const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
-  const filteredData = jobApplicationData.filter((item) =>
-    filterStatus === "all" ? true : item.status === filterStatus
-  );
+  // Filter by search query only
+  const filteredData = jobApplicationData.filter((item) => {
+    const searchTerm = searchQuery.toLowerCase();
+    return searchTerm === ""
+      ? true
+      : item.name.toLowerCase().includes(searchTerm) ||
+          item.role.toLowerCase().includes(searchTerm) ||
+          item.lastCompany.toLowerCase().includes(searchTerm) ||
+          item.applicationId.toLowerCase().includes(searchTerm) ||
+          item.status.toLowerCase().includes(searchTerm) ||
+          item.type.toLowerCase().includes(searchTerm);
+  });
 
+  // Sort data
   const sortedData = [...filteredData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
-      const aValue = a[sortConfig.key as keyof typeof a];
-      const bValue = b[sortConfig.key as keyof typeof b];
+      const aValue = a[sortConfig.key];
+      const bValue = b[sortConfig.key];
+
+      if (Array.isArray(aValue) || Array.isArray(bValue)) {
+        // Handle array fields (like assignedTo)
+        return sortConfig.direction === "ascending"
+          ? (aValue?.length || 0) - (bValue?.length || 0)
+          : (bValue?.length || 0) - (aValue?.length || 0);
+      }
+
       if (aValue < bValue) return sortConfig.direction === "ascending" ? -1 : 1;
       if (aValue > bValue) return sortConfig.direction === "ascending" ? 1 : -1;
       return 0;
@@ -368,7 +421,7 @@ export function TableSection() {
   );
   const totalPages = Math.ceil(sortedData.length / recordsPerPage);
 
-  const requestSort = (key: string) => {
+  const requestSort = (key: keyof JobApplication) => {
     let direction: "ascending" | "descending" = "ascending";
     if (
       sortConfig &&
@@ -384,7 +437,7 @@ export function TableSection() {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(currentRecords.map((user) => user.application_id));
+      setSelectedUsers(currentRecords.map((user) => user.applicationId));
     }
   };
 
@@ -398,9 +451,13 @@ export function TableSection() {
 
   const handleAssignUsers = (applicationId: string) => {
     setCurrentApplicationForAssignment(applicationId);
-    const application = jobApplicationData.find(a => a.application_id === applicationId);
+    const application = jobApplicationData.find(
+      (a) => a.applicationId === applicationId
+    );
     if (application && application.assignedTo) {
-      setSelectedAssignees(application.assignedTo.map(assignee => assignee.name));
+      setSelectedAssignees(
+        application.assignedTo.map((assignee) => assignee.name)
+      );
     } else {
       setSelectedAssignees([]);
     }
@@ -409,23 +466,23 @@ export function TableSection() {
 
   const handleSaveAssignment = () => {
     if (currentApplicationForAssignment) {
-      const updatedApplications = jobApplicationData.map(application => {
-        if (application.application_id === currentApplicationForAssignment) {
-          const selectedCoaches = coachesList.filter(coach => 
-            selectedAssignees.includes(coach.name)
-          ).map(coach => ({
-            name: coach.name,
-            photo: coach.photo
-          }));
-          
+      const updatedApplications = jobApplicationData.map((application) => {
+        if (application.applicationId === currentApplicationForAssignment) {
+          const selectedCoaches = coachesList
+            .filter((coach) => selectedAssignees.includes(coach.name))
+            .map((coach) => ({
+              name: coach.name,
+              photo: coach.photo,
+            }));
+
           return {
             ...application,
-            assignedTo: selectedCoaches
+            assignedTo: selectedCoaches,
           };
         }
         return application;
       });
-      
+
       setJobApplicationData(updatedApplications);
       setShowAssignmentModal(false);
       setCurrentApplicationForAssignment(null);
@@ -435,7 +492,9 @@ export function TableSection() {
 
   const toggleAssignee = (assigneeName: string) => {
     if (selectedAssignees.includes(assigneeName)) {
-      setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+      setSelectedAssignees(
+        selectedAssignees.filter((name) => name !== assigneeName)
+      );
     } else {
       setSelectedAssignees([...selectedAssignees, assigneeName]);
     }
@@ -445,17 +504,22 @@ export function TableSection() {
   const AssignmentModal = () => {
     if (!showAssignmentModal) return null;
 
-    const currentApplication = jobApplicationData.find(a => a.application_id === currentApplicationForAssignment);
-    const currentApplicationAssignedImages = currentApplication?.assignedTo || [];
+    const currentApplication = jobApplicationData.find(
+      (a) => a.applicationId === currentApplicationForAssignment
+    );
+    const currentApplicationAssignedImages =
+      currentApplication?.assignedTo || [];
 
-    const availableAssignees = coachesList.map(coach => {
-      const currentAssignment = currentApplicationAssignedImages.find(assigned => assigned.name === coach.name);
-      
+    const availableAssignees = coachesList.map((coach: Coach) => {
+      const currentAssignment = currentApplicationAssignedImages.find(
+        (assigned) => assigned.name === coach.name
+      );
+
       return {
         name: coach.name,
         photo: currentAssignment ? currentAssignment.photo : coach.photo,
         specialization: coach.specialization,
-        isCurrentlyAssigned: currentAssignment !== undefined
+        isCurrentlyAssigned: currentAssignment !== undefined,
       };
     });
 
@@ -474,15 +538,17 @@ export function TableSection() {
               <X className="h-4 w-4" />
             </Button>
           </div>
-          
+
           <div className="p-6">
             <p className="text-sm text-[var(--text)] mb-4">
               Select users to assign to this job application:
             </p>
-            
+
             {currentApplicationAssignedImages.length > 0 && (
               <div className="mb-4">
-                <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                <p className="text-xs text-[var(--text)] mb-2">
+                  Currently Assigned:
+                </p>
                 <div className="flex -space-x-2">
                   {currentApplicationAssignedImages.map((assigned, index) => (
                     <div
@@ -500,7 +566,7 @@ export function TableSection() {
                 </div>
               </div>
             )}
-            
+
             <div className="space-y-2 max-h-60 overflow-y-auto">
               {availableAssignees.map((assignee) => (
                 <div
@@ -519,14 +585,18 @@ export function TableSection() {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-sm text-[var(--text)]">{assignee.name}</span>
-                    <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
+                    <span className="text-sm text-[var(--text)]">
+                      {assignee.name}
+                    </span>
+                    <span className="text-xs text-[var(--text)] opacity-70">
+                      {assignee.specialization}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          
+
           <div className="flex justify-end gap-2 p-6 border-t">
             <Button
               variant="border"
@@ -534,10 +604,7 @@ export function TableSection() {
             >
               Cancel
             </Button>
-            <Button
-              variant="brand"
-              onClick={handleSaveAssignment}
-            >
+            <Button variant="brand" onClick={handleSaveAssignment}>
               Save Assignment
             </Button>
           </div>
@@ -548,27 +615,6 @@ export function TableSection() {
 
   return (
     <div className="flex flex-col w-full">
-      {/* Filter Tabs */}
-      <div className="flex  text-sm font-medium ">
-        {statusTabs.map((tab) => (
-          <button
-            key={tab.value}
-            onClick={() => {
-              setFilterStatus(tab.value);
-              setCurrentPage(1);
-            }}
-            className={cn(
-              "px-4 py-2 rounded-t-sm border",
-              filterStatus === tab.value
-                ? "text-white bg-[var(--brand-color)]"
-                : "text-[var(--text)] bg-[var(--background)]"
-            )}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
       {/* Table Wrapper */}
       <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
         <div className="flex-1 rounded-md rounded-tl-none border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
@@ -615,8 +661,10 @@ export function TableSection() {
             </div>
             <div className="flex items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
               <Input
-                placeholder="Search"
-                className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
+                placeholder="Search by name, role, company, status, or type..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-60 sm:w-80"
               />
               <Button
                 type="submit"
@@ -624,6 +672,7 @@ export function TableSection() {
                 variant="standard"
                 className="rounded-none rounded-r-md bg-[var(--button)]"
                 aria-label="Search"
+                onClick={() => setCurrentPage(1)} // Reset to first page when searching
               >
                 <Search className="h-5 w-5 text-[var(--text)]" />
               </Button>
@@ -637,43 +686,43 @@ export function TableSection() {
                 <TableRow>
                   <TableHead className="min-w-[40px]"></TableHead>
                   <TableHead
-                    onClick={() => requestSort("application_id")}
+                    onClick={() => requestSort("applicationId")}
                     className="cursor-pointer text-[var(--text)]"
                   >
                     Application ID{" "}
-                    {sortConfig?.key === "application_id" &&
+                    {sortConfig?.key === "applicationId" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("company_name")}
+                    onClick={() => requestSort("name")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Company Name{" "}
-                    {sortConfig?.key === "company_name" &&
+                    Name{" "}
+                    {sortConfig?.key === "name" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("designation")}
+                    onClick={() => requestSort("role")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Designation{" "}
-                    {sortConfig?.key === "designation" &&
+                    Role{" "}
+                    {sortConfig?.key === "role" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("apply_date")}
+                    onClick={() => requestSort("lastCompany")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Apply Date{" "}
-                    {sortConfig?.key === "apply_date" &&
+                    Last Company{" "}
+                    {sortConfig?.key === "lastCompany" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("contacts")}
+                    onClick={() => requestSort("appliedOn")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Contacts{" "}
-                    {sortConfig?.key === "contacts" &&
+                    Applied On{" "}
+                    {sortConfig?.key === "appliedOn" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
@@ -706,13 +755,13 @@ export function TableSection() {
               <TableBody>
                 {currentRecords.map((application) => (
                   <TableRow
-                    key={application.application_id}
-                    data-id={application.application_id}
+                    key={application.applicationId}
+                    data-id={application.applicationId}
                     className={cn(
                       "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
                     )}
                     onClick={() => {
-                      toggleSelectUser(application.application_id);
+                      toggleSelectUser(application.applicationId);
                     }}
                   >
                     <TableCell
@@ -721,56 +770,71 @@ export function TableSection() {
                       )}
                     >
                       <Checkbox
-                        checked={selectedUsers.includes(application.application_id)}
+                        checked={selectedUsers.includes(
+                          application.applicationId
+                        )}
                         onClick={(e) => e.stopPropagation()}
-                        onCheckedChange={() => toggleSelectUser(application.application_id)}
+                        onCheckedChange={() =>
+                          toggleSelectUser(application.applicationId)
+                        }
                       />
                     </TableCell>
                     <TableCell className="font-medium">
-                      {application.application_id}
+                      {application.applicationId}
                     </TableCell>
-                    <TableCell>{application.company_name}</TableCell>
-                    <TableCell>{application.designation}</TableCell>
-                    <TableCell>{application.apply_date}</TableCell>
-                    <TableCell>{application.contacts}</TableCell>
+                    <TableCell>{application.name}</TableCell>
+                    <TableCell>{application.role}</TableCell>
+                    <TableCell>{application.lastCompany}</TableCell>
+                    <TableCell>{application.appliedOn}</TableCell>
                     <TableCell>
                       <Badge variant="standard">{application.type}</Badge>
                     </TableCell>
-                                         <TableCell>
-                       <div className="flex items-center gap-2">
-                         <div className="flex -space-x-2">
-                           {application.assignedTo?.map((assigned, index) => (
-                             <div
-                               key={index}
-                               className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
-                               title={assigned.name}
-                             >
-                               <img
-                                 src={assigned.photo}
-                                 alt={assigned.name}
-                                 className="h-8 w-8 object-cover"
-                               />
-                             </div>
-                           ))}
-                           {/* Plus icon in circle */}
-                           <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleAssignUsers(application.application_id);
-                                }}
-                                title="Assign Users">
-                             <Plus className="h-4 w-4 text-[var(--brand-color)]" />
-                           </div>
-                         </div>
-                       </div>
-                     </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <div className="flex -space-x-2">
+                          {application.assignedTo?.map((assigned, index) => (
+                            <div
+                              key={index}
+                              className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                              title={assigned.name}
+                            >
+                              <img
+                                src={assigned.photo}
+                                alt={assigned.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                          ))}
+                          {/* Plus icon in circle */}
+                          <div
+                            className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleAssignUsers(application.applicationId);
+                            }}
+                            title="Assign Users"
+                          >
+                            <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
                     <TableCell>
                       <Badge
                         variant={
-                          application.status === "Approved"
+                          application.status === "Selected - Aimshala Team" ||
+                          application.status ===
+                            "Onboarded - Channel Partner" ||
+                          application.status ===
+                            "Onboarded - Career Consultant" ||
+                          application.status === "Enrolled - ACT"
                             ? "success"
                             : application.status === "Rejected"
                             ? "destructive"
+                            : application.status === "Shortlisted" ||
+                              application.status === "Interview Scheduled" ||
+                              application.status === "Interviewed"
+                            ? "brand"
                             : "secondary"
                         }
                       >
@@ -840,19 +904,21 @@ export function TableSection() {
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <Button
-                  key={page}
-                  variant={page === currentPage ? "brand" : "border"}
-                  size="sm"
-                  className={`h-8 w-8 p-0 ${
-                    page === currentPage ? "text-white" : "text-[var(--text)]"
-                  }`}
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {page}
-                </Button>
-              ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <Button
+                    key={page}
+                    variant={page === currentPage ? "brand" : "border"}
+                    size="sm"
+                    className={`h-8 w-8 p-0 ${
+                      page === currentPage ? "text-white" : "text-[var(--text)]"
+                    }`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </Button>
+                )
+              )}
               <Button
                 variant="border"
                 size="icon"
