@@ -1,7 +1,13 @@
-import { Clock, Search, Plus, FileUp, Calendar, X } from "lucide-react";
+import { Clock, Search, FileUp, Calendar } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -19,7 +25,7 @@ import {
   Eye,
   Pen,
 } from "lucide-react";
-import { applicationData, coachesList } from "@/data/Data";
+import { applicationData } from "@/data/Data";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -64,23 +70,13 @@ interface JobApplication {
 }
 
 // Extending the Coach interface to include specialization
-interface AssignedUser {
-  name: string;
-  photo: string;
-}
-
-interface Coach extends AssignedUser {
-  specialization: string;
-}
 
 // Application statuses are now handled through search functionality
 
 export function FollowUp() {
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Follow Ups
-      </h1>
+      <h1 className="text-2xl font-bold text-[var(--text-head)]">Follow Ups</h1>
       <StatCard />
       <Buttonbar />
       <TableSection />
@@ -93,7 +89,6 @@ function Buttonbar() {
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
         <span className="">Follow Up</span>
       </Button>
       <div className="flex gap-4">
@@ -371,13 +366,10 @@ export function TableSection() {
   } | null>(null);
   // Removed filterStatus state as we're using unified search
   const [searchQuery, setSearchQuery] = useState("");
-  const [jobApplicationData, setJobApplicationData] = useState<
-    JobApplication[]
-  >(applicationData as JobApplication[]);
-  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
-  const [currentApplicationForAssignment, setCurrentApplicationForAssignment] =
-    useState<string | null>(null);
-  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
+  const [jobApplicationData] = useState<JobApplication[]>(
+    applicationData as JobApplication[]
+  );
+  // No assignment state needed as assignments are read-only
 
   // Filter by search query only
   const filteredData = jobApplicationData.filter((item) => {
@@ -448,169 +440,7 @@ export function TableSection() {
     );
   };
 
-  const handleAssignUsers = (applicationId: string) => {
-    setCurrentApplicationForAssignment(applicationId);
-    const application = jobApplicationData.find(
-      (a) => a.applicationId === applicationId
-    );
-    if (application && application.assignedTo) {
-      setSelectedAssignees(
-        application.assignedTo.map((assignee) => assignee.name)
-      );
-    } else {
-      setSelectedAssignees([]);
-    }
-    setShowAssignmentModal(true);
-  };
-
-  const handleSaveAssignment = () => {
-    if (currentApplicationForAssignment) {
-      const updatedApplications = jobApplicationData.map((application) => {
-        if (application.applicationId === currentApplicationForAssignment) {
-          const selectedCoaches = coachesList
-            .filter((coach) => selectedAssignees.includes(coach.name))
-            .map((coach) => ({
-              name: coach.name,
-              photo: coach.photo,
-            }));
-
-          return {
-            ...application,
-            assignedTo: selectedCoaches,
-          };
-        }
-        return application;
-      });
-
-      setJobApplicationData(updatedApplications);
-      setShowAssignmentModal(false);
-      setCurrentApplicationForAssignment(null);
-      setSelectedAssignees([]);
-    }
-  };
-
-  const toggleAssignee = (assigneeName: string) => {
-    if (selectedAssignees.includes(assigneeName)) {
-      setSelectedAssignees(
-        selectedAssignees.filter((name) => name !== assigneeName)
-      );
-    } else {
-      setSelectedAssignees([...selectedAssignees, assigneeName]);
-    }
-  };
-
-  // Assignment Modal Component
-  const AssignmentModal = () => {
-    if (!showAssignmentModal) return null;
-
-    const currentApplication = jobApplicationData.find(
-      (a) => a.applicationId === currentApplicationForAssignment
-    );
-    const currentApplicationAssignedImages =
-      currentApplication?.assignedTo || [];
-
-    const availableAssignees = coachesList.map((coach: Coach) => {
-      const currentAssignment = currentApplicationAssignedImages.find(
-        (assigned) => assigned.name === coach.name
-      );
-
-      return {
-        name: coach.name,
-        photo: currentAssignment ? currentAssignment.photo : coach.photo,
-        specialization: coach.specialization,
-        isCurrentlyAssigned: currentAssignment !== undefined,
-      };
-    });
-
-    return (
-      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-        <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
-          <div className="flex items-center justify-between p-6 border-b">
-            <h2 className="text-xl font-semibold text-[var(--text-head)]">
-              Assign Users
-            </h2>
-            <Button
-              variant="link"
-              onClick={() => setShowAssignmentModal(false)}
-              className="text-sm text-[var(--text)] p-0 h-auto"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <div className="p-6">
-            <p className="text-sm text-[var(--text)] mb-4">
-              Select users to assign to this job application:
-            </p>
-
-            {currentApplicationAssignedImages.length > 0 && (
-              <div className="mb-4">
-                <p className="text-xs text-[var(--text)] mb-2">
-                  Currently Assigned:
-                </p>
-                <div className="flex -space-x-2">
-                  {currentApplicationAssignedImages.map((assigned, index) => (
-                    <div
-                      key={index}
-                      className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
-                      title={assigned.name}
-                    >
-                      <img
-                        src={assigned.photo}
-                        alt={assigned.name}
-                        className="h-8 w-8 object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="space-y-2 max-h-60 overflow-y-auto">
-              {availableAssignees.map((assignee) => (
-                <div
-                  key={assignee.name}
-                  className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
-                >
-                  <Checkbox
-                    checked={selectedAssignees.includes(assignee.name)}
-                    onCheckedChange={() => toggleAssignee(assignee.name)}
-                  />
-                  <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
-                    <img
-                      src={assignee.photo}
-                      alt={assignee.name}
-                      className="h-8 w-8 object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm text-[var(--text)]">
-                      {assignee.name}
-                    </span>
-                    <span className="text-xs text-[var(--text)] opacity-70">
-                      {assignee.specialization}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-end gap-2 p-6 border-t">
-            <Button
-              variant="border"
-              onClick={() => setShowAssignmentModal(false)}
-            >
-              Cancel
-            </Button>
-            <Button variant="brand" onClick={handleSaveAssignment}>
-              Save Assignment
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  // No assignment-related functions needed as assignments are read-only
 
   return (
     <div className="flex flex-col w-full">
@@ -791,30 +621,24 @@ export function TableSection() {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <div className="flex -space-x-2">
-                          {application.assignedTo?.map((assigned, index) => (
-                            <div
-                              key={index}
-                              className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
-                              title={assigned.name}
-                            >
-                              <img
-                                src={assigned.photo}
-                                alt={assigned.name}
-                                className="h-8 w-8 object-cover"
-                              />
-                            </div>
-                          ))}
-                          {/* Plus icon in circle */}
-                          <div
-                            className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleAssignUsers(application.applicationId);
-                            }}
-                            title="Assign Users"
-                          >
-                            <Plus className="h-4 w-4 text-[var(--brand-color)]" />
-                          </div>
+                          <TooltipProvider>
+                            {application.assignedTo?.map((assigned, index) => (
+                              <Tooltip key={index}>
+                                <TooltipTrigger asChild>
+                                  <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm relative">
+                                    <img
+                                      src={assigned.photo}
+                                      alt={assigned.name}
+                                      className="h-8 w-8 object-cover"
+                                    />
+                                  </div>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>{assigned.name}</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            ))}
+                          </TooltipProvider>
                         </div>
                       </div>
                     </TableCell>
@@ -932,7 +756,6 @@ export function TableSection() {
           </div>
         </div>
       </div>
-      <AssignmentModal />
     </div>
   );
 }
