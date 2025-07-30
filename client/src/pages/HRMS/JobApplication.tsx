@@ -38,7 +38,7 @@ import {
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { JobApplicationTable } from "@/data/Data";
+import { jobApplicationTable } from "@/data/Data";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
@@ -287,20 +287,21 @@ export function TableSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [sortConfig, setSortConfig] = useState<{
-    key: string;
+    key: keyof (typeof jobApplicationTable)[0];
     direction: "ascending" | "descending";
   } | null>(null);
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const filteredData = JobApplicationTable.filter((item) =>
+  const filteredData = jobApplicationTable.filter((item) =>
     filterStatus === "all" ? true : item.status === filterStatus
   );
 
   const sortedData = [...filteredData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
-      const aValue = a[sortConfig.key as keyof typeof a];
-      const bValue = b[sortConfig.key as keyof typeof b];
+      const aValue = a[sortConfig.key];
+      const bValue = b[sortConfig.key];
+      if (!aValue || !bValue) return 0;
       if (aValue < bValue) return sortConfig.direction === "ascending" ? -1 : 1;
       if (aValue > bValue) return sortConfig.direction === "ascending" ? 1 : -1;
       return 0;
@@ -315,7 +316,7 @@ export function TableSection() {
   );
   const totalPages = Math.ceil(sortedData.length / recordsPerPage);
 
-  const requestSort = (key: string) => {
+  const requestSort = (key: keyof (typeof jobApplicationTable)[0]) => {
     let direction: "ascending" | "descending" = "ascending";
     if (
       sortConfig &&
@@ -331,7 +332,10 @@ export function TableSection() {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(currentRecords.map((user) => user.application_id));
+      const validIds = currentRecords
+        .map((user) => user.applicationId)
+        .filter((id): id is string => id !== undefined);
+      setSelectedUsers(validIds);
     }
   };
 
@@ -443,43 +447,43 @@ export function TableSection() {
                 <TableRow>
                   <TableHead className="min-w-[40px]"></TableHead>
                   <TableHead
-                    onClick={() => requestSort("application_id")}
+                    onClick={() => requestSort("applicationId")}
                     className="cursor-pointer text-[var(--text)] text-low"
                   >
                     Application ID{" "}
-                    {sortConfig?.key === "application_id" &&
+                    {sortConfig?.key === "applicationId" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("company_name")}
+                    onClick={() => requestSort("name")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Company Name{" "}
-                    {sortConfig?.key === "company_name" &&
+                    Name{" "}
+                    {sortConfig?.key === "name" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("designation")}
+                    onClick={() => requestSort("lastCompany")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Designation{" "}
-                    {sortConfig?.key === "designation" &&
+                    Last Company{" "}
+                    {sortConfig?.key === "lastCompany" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("apply_date")}
+                    onClick={() => requestSort("role")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Apply Date{" "}
-                    {sortConfig?.key === "apply_date" &&
+                    Role{" "}
+                    {sortConfig?.key === "role" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
-                    onClick={() => requestSort("contacts")}
+                    onClick={() => requestSort("appliedOn")}
                     className="cursor-pointer text-[var(--text)]"
                   >
-                    Contacts{" "}
-                    {sortConfig?.key === "contacts" &&
+                    Applied On{" "}
+                    {sortConfig?.key === "appliedOn" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
@@ -498,19 +502,29 @@ export function TableSection() {
                     {sortConfig?.key === "status" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
+                  <TableHead
+                    onClick={() => requestSort("assign")}
+                    className="cursor-pointer text-[var(--text)]"
+                  >
+                    Assigned To{" "}
+                    {sortConfig?.key === "assign" &&
+                      (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  </TableHead>
                   <TableHead className="text-[var(--text)]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className="overflow-visible relative z-0">
                 {currentRecords.map((user) => (
                   <TableRow
-                    key={user.application_id}
-                    data-id={user.application_id}
+                    key={user.applicationId}
+                    data-id={user.applicationId}
                     className={cn(
                       "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
                     )}
                     onClick={() => {
-                      toggleSelectUser(user.application_id);
+                      if (user.applicationId !== undefined) {
+                        toggleSelectUser(user.applicationId);
+                      }
                     }}
                   >
                     <TableCell
@@ -519,28 +533,29 @@ export function TableSection() {
                       )}
                     >
                       <Checkbox
-                        checked={selectedUsers.includes(user.application_id)}
+                        checked={user.applicationId !== undefined && selectedUsers.includes(user.applicationId)}
                         onClick={(e) => e.stopPropagation()}
-                        onCheckedChange={() =>
-                          toggleSelectUser(user.application_id)
-                        }
+                        onCheckedChange={() => {
+                          if (user.applicationId !== undefined) {
+                            toggleSelectUser(user.applicationId);
+                          }
+                        }}
                       />
                     </TableCell>
                     <TableCell>
-                      <div className="text-low">{user.application_id}</div>
+                      <div className="text-low">{user.applicationId}</div>
                     </TableCell>
                     <TableCell>
-                      <div className="text-low">{user.company_name}</div>
+                      <div className="text-low">{user.name}</div>
                     </TableCell>
                     <TableCell>
-                      <div className="text-low">{user.designation}</div>
-                    </TableCell>
-
-                    <TableCell>
-                      <div className="text-low">{user.apply_date}</div>
+                      <div className="text-low">{user.lastCompany}</div>
                     </TableCell>
                     <TableCell>
-                      <div className="text-low">{user.contacts}</div>
+                      <div className="text-low">{user.role}</div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-low">{user.appliedOn}</div>
                     </TableCell>
                     <TableCell>
                       <div className="text-low">
@@ -549,6 +564,9 @@ export function TableSection() {
                     </TableCell>
                     <TableCell>
                       <Badge variant="standard">{user.status}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-low">{user.assign}</div>
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">

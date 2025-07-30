@@ -1,16 +1,46 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, } from "@/components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { CurrenOpeningsTable } from "@/data/Data";
 import { cn } from "@/lib/utils";
-import { Bell, Calendar,  ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Eye, FileDown, Filter,Pen, PenSquare, Pin, Plus, Search, UserCheck, Users, UserX, X } from "lucide-react";
-import {  useState } from "react";
-
-
+import {
+  Bell,
+  Calendar,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  CircleArrowDown,
+  CircleArrowUp,
+  Eye,
+  FileDown,
+  Filter,
+  Pen,
+  PenSquare,
+  Pin,
+  Plus,
+  Search,
+  UserCheck,
+  Users,
+  UserX,
+  X,
+} from "lucide-react";
+import { useState } from "react";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -38,23 +68,27 @@ const stats = [
   },
 ];
 
-export function CurrenOpenings(){
-    return(
-       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Current Openings</h1>
-            <StatsCards/>
-            <Buttonbar/>
-            <TableSection/>
-        </div>
-    );
+export function CurrenOpenings() {
+  return (
+    <div className="flex flex-col gap-2">
+      <h1 className="text-2xl font-bold text-[var(--text-head)]">
+        Current Openings
+      </h1>
+      <StatsCards />
+      <Buttonbar />
+      <TableSection />
+    </div>
+  );
 }
-
 
 function StatsCards() {
   return (
     <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
       {stats.map((stat, index) => (
-        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
+        <Card
+          key={index}
+          className="rounded-sm shadow-none bg-[var(--background)]"
+        >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -77,39 +111,34 @@ function StatsCards() {
   );
 }
 
-
 function Buttonbar() {
   const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-        <div className="flex gap-4">
-      <Button variant="brand" size="new" 
-     >
-        <Plus className="h-3 w-3" />
-        <span className="">Add New Opening</span>
-      </Button>
-        </div>
+      <div className="flex gap-4">
+        <Button variant="brand" size="new">
+          <Plus className="h-3 w-3" />
+          <span className="">Add New Opening</span>
+        </Button>
+      </div>
       <div className="flex gap-4">
         <Button variant="standard" size="new">
           <Calendar className="h-3 w-3" />
           <span className="">Posted Within</span>
         </Button>
         <Button
-        variant="standard" size="new" 
-        onClick={() => setShowFilter(true)}
-        className="flex items-center gap-2 self-end"
-      >
-        <Filter className="h-3 w-3" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
-
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+          className="flex items-center gap-2 self-end"
+        >
+          <Filter className="h-3 w-3" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
       </div>
     </div>
   );
 }
-
-
-
 
 function TableSection() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
@@ -120,7 +149,7 @@ function TableSection() {
     direction: "ascending" | "descending";
   } | null>(null);
   // Sorting logic
-    const sortedData = [...CurrenOpeningsTable];
+  const sortedData = [...CurrenOpeningsTable];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -155,17 +184,13 @@ function TableSection() {
     setSortConfig({ key, direction });
   };
 
-
   const toggleSelectAll = () => {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(
-        currentRecords.map((user): string => user.id)
-      );
+      setSelectedUsers(currentRecords.map((user): string => user.id));
     }
   };
-
 
   const toggleSelectUser = (userId: string) => {
     if (selectedUsers.includes(userId)) {
@@ -183,10 +208,16 @@ function TableSection() {
             <div className="flex items-center gap-2 border-none shadow-none">
               <Checkbox
                 id="select-all"
-                checked={selectedUsers.length === currentRecords.length && currentRecords.length > 0}
+                checked={
+                  selectedUsers.length === currentRecords.length &&
+                  currentRecords.length > 0
+                }
                 onCheckedChange={toggleSelectAll}
               />
-              <label htmlFor="select-all" className="text-sm font-medium text-[var(--text)]">
+              <label
+                htmlFor="select-all"
+                className="text-sm font-medium text-[var(--text)]"
+              >
                 Select All
               </label>
               {selectedUsers.length > 0 && (
@@ -197,7 +228,9 @@ function TableSection() {
             </div>
 
             {selectedUsers.length > 0 && (
-              <div className="flex gap-2">        {/*wrap */}
+              <div className="flex gap-2">
+                {" "}
+                {/*wrap */}
                 <Button variant="border" size="sm">
                   <PenSquare className="h-4 w-4" />
                   Change status
@@ -222,7 +255,6 @@ function TableSection() {
             )}
           </div>
           <div className="flex justify-end items-center gap-4 ">
-
             <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
               <Input
                 placeholder="Search"
@@ -238,7 +270,6 @@ function TableSection() {
                 <Search className="h-5 w-5 text-[var(--text)]" />
               </Button>
             </div>
-
           </div>
         </div>
 
@@ -259,8 +290,8 @@ function TableSection() {
                   onClick={() => requestSort("category")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Category{" "}
-                  {sortConfig?.key === "category" &&
+                  Department{" "}
+                  {sortConfig?.key === "department" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
@@ -301,37 +332,34 @@ function TableSection() {
             <TableBody className="overflow-visible relative z-0">
               {currentRecords.map((user) => (
                 <TableRow
-                                  key={user.id}
-                                  data-id={user.id}
-                                  className={cn(
-                                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-                                  )}
-                                  onClick={() => {
-                                    toggleSelectUser(user.id);
-                                  }}
-                                >
-                                  <TableCell
-                                    className={cn(
-                                      "pl-3 transition-all duration-200 border-l-4 border-l-[var(--background)] group-hover:border-[var(--brand-color)]",
-                                    )}
-                                  >
-                                    <Checkbox
-                                      checked={selectedUsers.includes(user.id)}
-                                      onClick={(e) => e.stopPropagation()}
-                                      onCheckedChange={() => toggleSelectUser(user.id)}
-                                    />
-                                  </TableCell>
-                  <TableCell>
-                            <div className="text-low">{user.title}</div>
-                                      <div className="text-xs text-[var(--text)]">
-                                        {user.id}
-                                      </div>
+                  key={user.id}
+                  data-id={user.id}
+                  className={cn(
+                    "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
+                  )}
+                  onClick={() => {
+                    toggleSelectUser(user.id);
+                  }}
+                >
+                  <TableCell
+                    className={cn(
+                      "pl-3 transition-all duration-200 border-l-4 border-l-[var(--background)] group-hover:border-[var(--brand-color)]"
+                    )}
+                  >
+                    <Checkbox
+                      checked={selectedUsers.includes(user.id)}
+                      onClick={(e) => e.stopPropagation()}
+                      onCheckedChange={() => toggleSelectUser(user.id)}
+                    />
                   </TableCell>
                   <TableCell>
-                                      <div className="text-low">{user.category}</div>
+                    <div className="text-low">{user.title}</div>
+                    <div className="text-xs text-[var(--text)]">{user.id}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">{user.department}</div>
+                  </TableCell>
 
-                                    </TableCell>
-                                    
                   <TableCell>
                     <div className="text-low">{user.location}</div>
                   </TableCell>
@@ -340,7 +368,7 @@ function TableSection() {
                   </TableCell>
                   <TableCell>
                     <div className="text-low">
-                    <Badge variant="standard">{user.status}</Badge>
+                      <Badge variant="standard">{user.status}</Badge>
                     </div>
                   </TableCell>
                   <TableCell>
@@ -348,7 +376,6 @@ function TableSection() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      
                       <Button
                         variant="noborder"
                         size="sm"
@@ -429,7 +456,9 @@ function TableSection() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"}`}
+                className={`h-8 w-8 p-0 ${
+                  page === currentPage ? "text-white" : "text-[var(--text)]"
+                }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
