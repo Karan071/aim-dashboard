@@ -19,10 +19,12 @@ import {
   FileDown,
   CircleArrowUp,
   CircleArrowDown,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AbuseTableData } from "@/data/Data";
 import { Badge } from "@/components/ui/badge";
+import { coachesList } from "@/data/Data";
 
 import {
   DropdownMenu,
@@ -342,8 +344,22 @@ function AbuseTable() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
+  const [abuseData, setAbuseData] = useState([...AbuseTableData] as Array<{
+    id: number;
+    reportedBy: string;
+    submittedOn: string;
+    reportedIn: string;
+    reportedContent: string;
+    reason: string;
+    status: string;
+    assignedTo: Array<{ name: string; photo: string }>;
+    actions: string[];
+  }>);
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [currentAbuseForAssignment, setCurrentAbuseForAssignment] = useState<number | null>(null);
+  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
-  const sortedData = [...AbuseTableData];
+  const sortedData = [...abuseData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -394,6 +410,156 @@ function AbuseTable() {
         currentRecords.map((user): number => user.id)
       );
     }
+  };
+
+  const handleAssignUsers = (abuseId: number) => {
+    setCurrentAbuseForAssignment(abuseId);
+    const abuse = abuseData.find(a => a.id === abuseId);
+    if (abuse && abuse.assignedTo) {
+      setSelectedAssignees(abuse.assignedTo.map(assignee => assignee.name));
+    } else {
+      setSelectedAssignees([]);
+    }
+    setShowAssignmentModal(true);
+  };
+
+  const handleSaveAssignment = () => {
+    if (currentAbuseForAssignment) {
+      const updatedAbuses = abuseData.map(abuse => {
+        if (abuse.id === currentAbuseForAssignment) {
+          const selectedCoaches = coachesList.filter(coach => 
+            selectedAssignees.includes(coach.name)
+          ).map(coach => ({
+            name: coach.name,
+            photo: coach.photo
+          }));
+          
+          return {
+            ...abuse,
+            assignedTo: selectedCoaches
+          };
+        }
+        return abuse;
+      });
+      
+      setAbuseData(updatedAbuses);
+      setShowAssignmentModal(false);
+      setCurrentAbuseForAssignment(null);
+      setSelectedAssignees([]);
+    }
+  };
+
+  const toggleAssignee = (assigneeName: string) => {
+    if (selectedAssignees.includes(assigneeName)) {
+      setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+    } else {
+      setSelectedAssignees([...selectedAssignees, assigneeName]);
+    }
+  };
+
+  // Assignment Modal Component
+  const AssignmentModal = () => {
+    if (!showAssignmentModal) return null;
+
+    const currentAbuse = abuseData.find(a => a.id === currentAbuseForAssignment);
+    const currentAbuseAssignedImages = currentAbuse?.assignedTo || [];
+
+    const availableAssignees = coachesList.map(coach => {
+      const currentAssignment = currentAbuseAssignedImages.find(assigned => assigned.name === coach.name);
+      
+      return {
+        name: coach.name,
+        photo: currentAssignment ? currentAssignment.photo : coach.photo,
+        specialization: coach.specialization,
+        isCurrentlyAssigned: currentAssignment !== undefined
+      };
+    });
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+        <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+          <div className="flex items-center justify-between p-6 border-b">
+            <h2 className="text-xl font-semibold text-[var(--text-head)]">
+              Assign Users
+            </h2>
+            <Button
+              variant="link"
+              onClick={() => setShowAssignmentModal(false)}
+              className="text-sm text-[var(--text)] p-0 h-auto"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+          
+          <div className="p-6">
+            <p className="text-sm text-[var(--text)] mb-4">
+              Select users to assign to this abuse report:
+            </p>
+            
+            {currentAbuseAssignedImages.length > 0 && (
+              <div className="mb-4">
+                <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                <div className="flex -space-x-2">
+                  {currentAbuseAssignedImages.map((assigned, index) => (
+                    <div
+                      key={index}
+                      className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                      title={assigned.name}
+                    >
+                      <img
+                        src={assigned.photo}
+                        alt={assigned.name}
+                        className="h-8 w-8 object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {availableAssignees.map((assignee) => (
+                <div
+                  key={assignee.name}
+                  className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                >
+                  <Checkbox
+                    checked={selectedAssignees.includes(assignee.name)}
+                    onCheckedChange={() => toggleAssignee(assignee.name)}
+                  />
+                  <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                    <img
+                      src={assignee.photo}
+                      alt={assignee.name}
+                      className="h-8 w-8 object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-[var(--text)]">{assignee.name}</span>
+                    <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 p-6 border-t">
+            <Button
+              variant="border"
+              onClick={() => setShowAssignmentModal(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="brand"
+              onClick={handleSaveAssignment}
+            >
+              Save Assignment
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -503,6 +669,14 @@ function AbuseTable() {
                   (sortConfig.direction === "ascending" ? "↑" : "↓")}
               </TableHead>
               <TableHead
+                onClick={() => requestSort("assignedTo")}
+                className="cursor-pointer text-[var(--text)]"
+              >
+                Assigned To{" "}
+                {sortConfig?.key === "assignedTo" &&
+                  (sortConfig.direction === "ascending" ? "↑" : "↓")}
+              </TableHead>
+              <TableHead
                 onClick={() => requestSort("status")}
                 className="cursor-pointer text-[var(--text)]"
               >
@@ -547,6 +721,34 @@ function AbuseTable() {
                 <TableCell>{abuse.reportedIn}</TableCell>
                 <TableCell>{abuse.reportedContent}</TableCell>
                 <TableCell>{abuse.reason}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2">
+                      {abuse.assignedTo?.map((assigned, index) => (
+                        <div
+                          key={index}
+                          className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                          title={assigned.name}
+                        >
+                          <img
+                            src={assigned.photo}
+                            alt={assigned.name}
+                            className="h-8 w-8 object-cover"
+                          />
+                        </div>
+                      ))}
+                      {/* Plus icon in circle */}
+                      <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                           onClick={(e) => {
+                             e.stopPropagation();
+                             handleAssignUsers(abuse.id);
+                           }}
+                           title="Assign Users">
+                        <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                      </div>
+                    </div>
+                  </div>
+                </TableCell>
                 <TableCell>
                   <Badge
                     variant={abuse.status === "Resolved" ? "brand" : "standard"}
@@ -641,6 +843,7 @@ function AbuseTable() {
           </Button>
         </div>
       </div>
+      <AssignmentModal />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Clock, Search, Plus, FileUp, Calendar } from "lucide-react";
+import { Clock, Search, Plus, FileUp, Calendar, X } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -14,19 +14,14 @@ import {
   ChevronRight,
   ChevronLeft,
   PenSquare,
-  Pin,
+ 
   Bell,
   FileDown,
   Eye,
   Pen,
-  X,
-  Users,
-  FileCheck2,
-  FileText,
-  CheckCircle2,
-  CircleArrowUp,
-  CircleArrowDown,
 } from "lucide-react";
+import { JobApplicationTable } from "@/data/Data";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -35,57 +30,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Badge } from "@/components/ui/badge";
-import { JobApplicationTable } from "@/data/Data";
-import * as React from "react";
 import { cn } from "@/lib/utils";
-import { useEffect } from "react";
-import RadioButton from "@/components/ui/Radiobutton";
+import { useState, useEffect } from "react";
+import { coachesList } from "@/data/Data";
+import React from "react";
 
-const color = "text-[var(--text)]";
-const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
-const Stats = [
-  {
-    title: "Total",
-    value: "240",
-    icon: Users,
-    performance: Up,
-  },
-  {
-    title: "New",
-    value: "18",
-    icon: FileCheck2,
-    performance: Down,
-  },
-  {
-    title: "Approved",
-    value: "112",
-    icon: FileText,
-    performance: Up,
-  },
-  {
-    title: "Rejected",
-    value: "47",
-    icon: Clock,
-    performance: Up,
-  },
-  {
-    title: "Pending",
-    value: "63",
-    icon: CheckCircle2,
-    performance: Up,
-  },
-];
+const statusTabs = [{ label: "All Applications", value: "all" }];
 
 export function JobApplication() {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Job Application{" "}
+        Job Applications
       </h1>
       <StatCard />
       <Buttonbar />
@@ -100,27 +57,28 @@ function Buttonbar() {
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
         <Plus className="h-3 w-3" />
-        <span className=""> Create Application</span>
+        <span className="">Add Application</span>
       </Button>
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="standard" size="new">
-          <FileUp className="h-3 w-3" />
-          <span className="">Import (CSV)</span>
-        </Button>
-        <Button variant="standard" size="new">
-          <Calendar className="h-3 w-3" />
-          <span className="">Date Filter</span>
-        </Button>
+      <div className="flex gap-4">
         <Button
           variant="standard"
           size="new"
           onClick={() => setShowFilter(true)}
+          className="flex items-center gap-2 self-end"
         >
-          <Filter className="h-4 w-4" />
+          <Filter className="h-3 w-3" />
           {showFilter ? "Hide Filters" : "Show Filters"}
         </Button>
 
         {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+
+        <Button variant="delete" size="new">
+          <PenSquare className="h-4 w-4" />
+        </Button>
+        <Button variant="standard" size="new">
+          <FileUp className="h-4 w-4" />
+          <span className="">Import</span>
+        </Button>
       </div>
     </div>
   );
@@ -132,34 +90,43 @@ interface FilterProps {
 
 function AssessFilter({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  const [activeTab, setActiveTab] = useState("Application Status");
+  const [activeTab, setActiveTab] = useState("General");
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
+      // Do nothing if clicking inside modal
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
         return;
       }
+
+      // Do nothing if clicking inside dropdown (Radix renders it in a portal)
       const target = e.target as HTMLElement;
       if (target.closest("[data-radix-popper-content-wrapper]")) {
         return;
       }
-      onClose();
+
+      onClose(); // Close modal otherwise
     }
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const [applicationStatus, setApplicationStatus] = useState("All");
-  const [applicationType, setApplicationType] = useState("Full Time");
+  const [status, setStatus] = useState("New");
+  const [type, setType] = useState("Full-time");
 
-  const tabList = ["Application Status", "Application Type"];
+  const tabList = [
+    "General",
+    "Application Type",
+    "Status",
+    "Date Range",
+  ];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
       <div
         ref={modalRef}
-        className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
+        className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
           <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
@@ -172,6 +139,7 @@ function AssessFilter({ onClose }: FilterProps) {
             Clear All
           </Button>
         </div>
+        {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
             <div className="flex flex-col ">
@@ -181,7 +149,7 @@ function AssessFilter({ onClose }: FilterProps) {
                   onClick={() => setActiveTab(tab)}
                   className={`text-left text-sm px-3 py-3 border-l-3  ${
                     activeTab === tab
-                      ? "bg-[var(--brand-color3)] text-[var(--brand-color)] border-[var(--brand-color)]"
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
                       : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
                   }`}
                 >
@@ -191,24 +159,44 @@ function AssessFilter({ onClose }: FilterProps) {
             </div>
           </div>
 
+          {/* Tab Content */}
           <div className="p-6 overflow-y-auto relative w-full">
-            {activeTab === "Application Status" && (
+            {activeTab === "General" && (
+              <>
+                <label htmlFor="Gen" className="text-[var(--text)]">
+                  Search by Company / Designation :
+                </label>
+                <Input
+                  id="Gen"
+                  placeholder="Enter .."
+                  type="text"
+                  className="mt-4 w-full "
+                />
+              </>
+            )}
+
+            {activeTab === "Status" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Application Status:
+                  Select from the Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["All", "New", "Approved", "Rejected", "Pending"].map(
-                    (option) => (
-                      <RadioButton
-                        key={option}
-                        label={option}
+                  {["New", "Pending", "Approved", "Rejected"].map((option) => (
+                    <div key={option} className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id={option}
+                        name="status"
                         value={option}
-                        selected={applicationStatus}
-                        onChange={setApplicationStatus}
+                        checked={status === option}
+                        onChange={(e) => setStatus(e.target.value)}
+                        className="text-[var(--brand-color)] focus:ring-[var(--brand-color)]"
                       />
-                    )
-                  )}
+                      <label htmlFor={option} className="text-sm text-[var(--text)]">
+                        {option}
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </>
             )}
@@ -216,20 +204,36 @@ function AssessFilter({ onClose }: FilterProps) {
             {activeTab === "Application Type" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
-                  Select the Application Type :
+                  Select the Application Type:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {["Full Time", "Part Time", "Internship", "Freelance"].map(
-                    (option) => (
-                      <RadioButton
-                        key={option}
-                        label={option}
+                  {["Full-time", "Part-time", "Contract", "Internship"].map((option) => (
+                    <div key={option} className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id={option}
+                        name="type"
                         value={option}
-                        selected={applicationType}
-                        onChange={setApplicationType}
+                        checked={type === option}
+                        onChange={(e) => setType(e.target.value)}
+                        className="text-[var(--brand-color)] focus:ring-[var(--brand-color)]"
                       />
-                    )
-                  )}
+                      <label htmlFor={option} className="text-sm text-[var(--text)]">
+                        {option}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+
+            {activeTab === "Date Range" && (
+              <>
+                <label htmlFor="act" className="text-[var(--text)]">
+                  Enter the Date Range:
+                </label>
+                <div className="mt-4 min-w-full">
+                  <Calendar className="h-4 w-4" />
                 </div>
               </>
             )}
@@ -252,35 +256,70 @@ function AssessFilter({ onClose }: FilterProps) {
 
 function StatCard() {
   return (
-    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
-      {Stats.map((stat, index) => (
-        <Card
-          key={index}
-          className="rounded-sm shadow-none bg-[var(--background)]"
-        >
-          <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
-            <div className="flex justify-between h-full items-center">
-              <div
-                className={`${color} text-xs uppercase text-light line-clamp-1`}
-              >
-                {stat.title}
-              </div>
-              {stat.performance}
+    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+      <Card className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
+          <div className="flex justify-between h-full items-center">
+            <div className="text-[var(--text)] text-xs uppercase text-light line-clamp-1">
+              Total Applications
             </div>
-            <div className="flex  items-center gap-4">
-              <div className={`rounded-full `}>
-                <stat.icon className={`h-8 w-8 ${color2}`} />
-              </div>
-              <div className={`${color2} text-2xl`}>{stat.value}</div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full">
+              <Clock className="h-8 w-8 text-[var(--text-head)]" />
             </div>
-          </CardHeader>
-        </Card>
-      ))}
+            <div className="text-[var(--text-head)] text-2xl">1,234</div>
+          </div>
+        </CardHeader>
+      </Card>
+      <Card className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
+          <div className="flex justify-between h-full items-center">
+            <div className="text-[var(--text)] text-xs uppercase text-light line-clamp-1">
+              Pending Review
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full">
+              <Bell className="h-8 w-8 text-[var(--text-head)]" />
+            </div>
+            <div className="text-[var(--text-head)] text-2xl">567</div>
+          </div>
+        </CardHeader>
+      </Card>
+      <Card className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
+          <div className="flex justify-between h-full items-center">
+            <div className="text-[var(--text)] text-xs uppercase text-light line-clamp-1">
+              Approved
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full">
+              <PenSquare className="h-8 w-8 text-[var(--text-head)]" />
+            </div>
+            <div className="text-[var(--text-head)] text-2xl">89</div>
+          </div>
+        </CardHeader>
+      </Card>
+      <Card className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
+          <div className="flex justify-between h-full items-center">
+            <div className="text-[var(--text)] text-xs uppercase text-light line-clamp-1">
+              Rejected
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="rounded-full">
+              <FileDown className="h-8 w-8 text-[var(--text-head)]" />
+            </div>
+            <div className="text-[var(--text-head)] text-2xl">12</div>
+          </div>
+        </CardHeader>
+      </Card>
     </div>
   );
 }
-
-const statusTabs = [{ label: "All Applications", value: "all" }];
 
 export function TableSection() {
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
@@ -291,8 +330,22 @@ export function TableSection() {
     direction: "ascending" | "descending";
   } | null>(null);
   const [filterStatus, setFilterStatus] = useState("all");
+  const [jobApplicationData, setJobApplicationData] = useState([...JobApplicationTable] as Array<{
+    application_id: string;
+    company_name: string;
+    designation: string;
+    apply_date: string;
+    contacts: string;
+    type: string;
+    status: string;
+    assignedTo: Array<{ name: string; photo: string }>;
+    action: string[];
+  }>);
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [currentApplicationForAssignment, setCurrentApplicationForAssignment] = useState<string | null>(null);
+  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
-  const filteredData = JobApplicationTable.filter((item) =>
+  const filteredData = jobApplicationData.filter((item) =>
     filterStatus === "all" ? true : item.status === filterStatus
   );
 
@@ -340,6 +393,156 @@ export function TableSection() {
       prev.includes(userId)
         ? prev.filter((id) => id !== userId)
         : [...prev, userId]
+    );
+  };
+
+  const handleAssignUsers = (applicationId: string) => {
+    setCurrentApplicationForAssignment(applicationId);
+    const application = jobApplicationData.find(a => a.application_id === applicationId);
+    if (application && application.assignedTo) {
+      setSelectedAssignees(application.assignedTo.map(assignee => assignee.name));
+    } else {
+      setSelectedAssignees([]);
+    }
+    setShowAssignmentModal(true);
+  };
+
+  const handleSaveAssignment = () => {
+    if (currentApplicationForAssignment) {
+      const updatedApplications = jobApplicationData.map(application => {
+        if (application.application_id === currentApplicationForAssignment) {
+          const selectedCoaches = coachesList.filter(coach => 
+            selectedAssignees.includes(coach.name)
+          ).map(coach => ({
+            name: coach.name,
+            photo: coach.photo
+          }));
+          
+          return {
+            ...application,
+            assignedTo: selectedCoaches
+          };
+        }
+        return application;
+      });
+      
+      setJobApplicationData(updatedApplications);
+      setShowAssignmentModal(false);
+      setCurrentApplicationForAssignment(null);
+      setSelectedAssignees([]);
+    }
+  };
+
+  const toggleAssignee = (assigneeName: string) => {
+    if (selectedAssignees.includes(assigneeName)) {
+      setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+    } else {
+      setSelectedAssignees([...selectedAssignees, assigneeName]);
+    }
+  };
+
+  // Assignment Modal Component
+  const AssignmentModal = () => {
+    if (!showAssignmentModal) return null;
+
+    const currentApplication = jobApplicationData.find(a => a.application_id === currentApplicationForAssignment);
+    const currentApplicationAssignedImages = currentApplication?.assignedTo || [];
+
+    const availableAssignees = coachesList.map(coach => {
+      const currentAssignment = currentApplicationAssignedImages.find(assigned => assigned.name === coach.name);
+      
+      return {
+        name: coach.name,
+        photo: currentAssignment ? currentAssignment.photo : coach.photo,
+        specialization: coach.specialization,
+        isCurrentlyAssigned: currentAssignment !== undefined
+      };
+    });
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+        <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+          <div className="flex items-center justify-between p-6 border-b">
+            <h2 className="text-xl font-semibold text-[var(--text-head)]">
+              Assign Users
+            </h2>
+            <Button
+              variant="link"
+              onClick={() => setShowAssignmentModal(false)}
+              className="text-sm text-[var(--text)] p-0 h-auto"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+          
+          <div className="p-6">
+            <p className="text-sm text-[var(--text)] mb-4">
+              Select users to assign to this job application:
+            </p>
+            
+            {currentApplicationAssignedImages.length > 0 && (
+              <div className="mb-4">
+                <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                <div className="flex -space-x-2">
+                  {currentApplicationAssignedImages.map((assigned, index) => (
+                    <div
+                      key={index}
+                      className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                      title={assigned.name}
+                    >
+                      <img
+                        src={assigned.photo}
+                        alt={assigned.name}
+                        className="h-8 w-8 object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {availableAssignees.map((assignee) => (
+                <div
+                  key={assignee.name}
+                  className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                >
+                  <Checkbox
+                    checked={selectedAssignees.includes(assignee.name)}
+                    onCheckedChange={() => toggleAssignee(assignee.name)}
+                  />
+                  <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                    <img
+                      src={assignee.photo}
+                      alt={assignee.name}
+                      className="h-8 w-8 object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-[var(--text)]">{assignee.name}</span>
+                    <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 p-6 border-t">
+            <Button
+              variant="border"
+              onClick={() => setShowAssignmentModal(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="brand"
+              onClick={handleSaveAssignment}
+            >
+              Save Assignment
+            </Button>
+          </div>
+        </div>
+      </div>
     );
   };
 
@@ -396,47 +599,38 @@ export function TableSection() {
               {selectedUsers.length > 0 && (
                 <div className="flex gap-2">
                   <Button variant="border" size="sm">
-                    <PenSquare className="h-4 w-4" />
-                    Change status
+                    <Eye className="h-4 w-4" />
+                    View Selected
                   </Button>
                   <Button variant="border" size="sm">
-                    <Eye className=" h-4 w-4" />
-                    View applicants
-                  </Button>
-                  <Button variant="border" size="sm">
-                    <FileDown className=" h-4 w-4 " />
-                    Export
-                  </Button>
-                  <Button variant="border" size="sm">
-                    <Pin className=" h-4 w-4 " />
-                    Feature
+                    <Pen className="h-4 w-4" />
+                    Edit Selected
                   </Button>
                   <Button variant="delete" size="sm">
-                    <Bell className=" h-4 w-4 " />
-                    Send follow-up
+                    <FileDown className=" h-4 w-4 text-[var(--red)]" />
+                    Delete Selected
                   </Button>
                 </div>
               )}
             </div>
-            <div className="flex justify-end items-center gap-4 ">
-              <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
-                <Input
-                  placeholder="Search"
-                  className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
-                />
-                <Button
-                  type="submit"
-                  size="icon"
-                  variant="standard"
-                  className="rounded-none rounded-r-md bg-[var(--button)]"
-                  aria-label="Search"
-                >
-                  <Search className="h-5 w-5 text-[var(--text)]" />
-                </Button>
-              </div>
+            <div className="flex items-center border-1 rounded-md overflow-hidden bg-[var(--faded)]">
+              <Input
+                placeholder="Search"
+                className="border-none focus:ring-0 focus-visible:ring-0 focus:outline-none px-2 py-1 w-40 sm:w-45"
+              />
+              <Button
+                type="submit"
+                size="icon"
+                variant="standard"
+                className="rounded-none rounded-r-md bg-[var(--button)]"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5 text-[var(--text)]" />
+              </Button>
             </div>
           </div>
 
+          {/* Table */}
           <div className="overflow-x-auto text-[var(--text)] w-full px-0 mx-0 text-low">
             <Table className="w-full caption-top border-collapse overflow-y-visible">
               <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
@@ -444,7 +638,7 @@ export function TableSection() {
                   <TableHead className="min-w-[40px]"></TableHead>
                   <TableHead
                     onClick={() => requestSort("application_id")}
-                    className="cursor-pointer text-[var(--text)] text-low"
+                    className="cursor-pointer text-[var(--text)]"
                   >
                     Application ID{" "}
                     {sortConfig?.key === "application_id" &&
@@ -491,6 +685,14 @@ export function TableSection() {
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
                   <TableHead
+                    onClick={() => requestSort("assignedTo")}
+                    className="cursor-pointer text-[var(--text)]"
+                  >
+                    Assigned To{" "}
+                    {sortConfig?.key === "assignedTo" &&
+                      (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  </TableHead>
+                  <TableHead
                     onClick={() => requestSort("status")}
                     className="cursor-pointer text-[var(--text)]"
                   >
@@ -501,80 +703,90 @@ export function TableSection() {
                   <TableHead className="text-[var(--text)]">Actions</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody className="overflow-visible relative z-0">
-                {currentRecords.map((user) => (
+              <TableBody>
+                {currentRecords.map((application) => (
                   <TableRow
-                    key={user.application_id}
-                    data-id={user.application_id}
+                    key={application.application_id}
+                    data-id={application.application_id}
                     className={cn(
                       "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
                     )}
                     onClick={() => {
-                      toggleSelectUser(user.application_id);
+                      toggleSelectUser(application.application_id);
                     }}
                   >
                     <TableCell
                       className={cn(
-                        "pl-3 transition-all duration-200 border-l-4 border-l-[var(--background)] group-hover:border-[var(--brand-color)]"
+                        "pl-3 transition-all duration-200 border-l-4 border-[var(--background)] group-hover:border-[var(--brand-color)]"
                       )}
                     >
                       <Checkbox
-                        checked={selectedUsers.includes(user.application_id)}
+                        checked={selectedUsers.includes(application.application_id)}
                         onClick={(e) => e.stopPropagation()}
-                        onCheckedChange={() =>
-                          toggleSelectUser(user.application_id)
-                        }
+                        onCheckedChange={() => toggleSelectUser(application.application_id)}
                       />
                     </TableCell>
+                    <TableCell className="font-medium">
+                      {application.application_id}
+                    </TableCell>
+                    <TableCell>{application.company_name}</TableCell>
+                    <TableCell>{application.designation}</TableCell>
+                    <TableCell>{application.apply_date}</TableCell>
+                    <TableCell>{application.contacts}</TableCell>
                     <TableCell>
-                      <div className="text-low">{user.application_id}</div>
+                      <Badge variant="standard">{application.type}</Badge>
+                    </TableCell>
+                                         <TableCell>
+                       <div className="flex items-center gap-2">
+                         <div className="flex -space-x-2">
+                           {application.assignedTo?.map((assigned, index) => (
+                             <div
+                               key={index}
+                               className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                               title={assigned.name}
+                             >
+                               <img
+                                 src={assigned.photo}
+                                 alt={assigned.name}
+                                 className="h-8 w-8 object-cover"
+                               />
+                             </div>
+                           ))}
+                           {/* Plus icon in circle */}
+                           <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleAssignUsers(application.application_id);
+                                }}
+                                title="Assign Users">
+                             <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                           </div>
+                         </div>
+                       </div>
+                     </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          application.status === "Approved"
+                            ? "success"
+                            : application.status === "Rejected"
+                            ? "destructive"
+                            : "secondary"
+                        }
+                      >
+                        {application.status}
+                      </Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="text-low">{user.company_name}</div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-low">{user.designation}</div>
-                    </TableCell>
-
-                    <TableCell>
-                      <div className="text-low">{user.apply_date}</div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-low">{user.contacts}</div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-low">
-                        <Badge variant="standard">{user.type}</Badge>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="standard">{user.status}</Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Button
-                          variant="noborder"
-                          size="sm"
-                          className="border-0 shadow-none"
-                        >
-                          <Eye className="h-4 w-3" />
-                          <span className="sr-only">View</span>
+                      <div className="flex gap-2">
+                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Eye className="h-4 w-4" />
                         </Button>
-                        <Button
-                          variant="noborder"
-                          size="sm"
-                          className="border-0 shadow-none"
-                        >
-                          <Pen className="h-4 w-3" />
-                          <span className="sr-only">Edit</span>
+                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Pen className="h-4 w-4" />
                         </Button>
-                        <Button
-                          variant="noborder"
-                          size="sm"
-                          className="border-0 shadow-none"
-                        >
-                          <X className="h-4 w-3" />
-                          <span className="sr-only">Delete</span>
+                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <FileDown className="h-4 w-4" />
                         </Button>
                       </div>
                     </TableCell>
@@ -584,6 +796,7 @@ export function TableSection() {
             </Table>
           </div>
 
+          {/* Pagination */}
           <div className="flex items-center justify-between flex-wrap gap-2 p-4">
             <div className="flex items-center gap-4">
               <DropdownMenu>
@@ -597,7 +810,7 @@ export function TableSection() {
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="text-[var(--text] dark:bg-[var(--background)]">
+                <DropdownMenuContent className="text-[var(--text)] dark:bg-[var(--background)]">
                   {[10, 25, 50, 100].map((size) => (
                     <DropdownMenuItem
                       key={size}
@@ -615,10 +828,10 @@ export function TableSection() {
               <span className="text-low text-[var(--text)]">
                 Showing {indexOfFirstRecord + 1}-
                 {Math.min(indexOfLastRecord, sortedData.length)} of{" "}
-                {sortedData.length} explorers
+                {sortedData.length} applications
               </span>
             </div>
-            <div className="flex items-center gap-2 ">
+            <div className="flex items-center gap-2">
               <Button
                 variant="border"
                 size="icon"
@@ -627,21 +840,19 @@ export function TableSection() {
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <Button
-                    key={page}
-                    variant={page === currentPage ? "brand" : "border"}
-                    size="sm"
-                    className={`h-8 w-8 p-0 ${
-                      page === currentPage ? "text-white" : "text-[var(--text)]"
-                    }`}
-                    onClick={() => setCurrentPage(page)}
-                  >
-                    {page}
-                  </Button>
-                )
-              )}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <Button
+                  key={page}
+                  variant={page === currentPage ? "brand" : "border"}
+                  size="sm"
+                  className={`h-8 w-8 p-0 ${
+                    page === currentPage ? "text-white" : "text-[var(--text)]"
+                  }`}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </Button>
+              ))}
               <Button
                 variant="border"
                 size="icon"
@@ -656,6 +867,7 @@ export function TableSection() {
           </div>
         </div>
       </div>
+      <AssignmentModal />
     </div>
   );
 }

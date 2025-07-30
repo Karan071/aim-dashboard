@@ -4486,6 +4486,16 @@ export const AbuseTableData = [
     "reportedContent": "Offensive language during session chat",
     "reason": "Harassment",
     "status": "Under Review",
+    "assignedTo": [
+      {
+        "name": "Dr. Priya Singh",
+        "photo": assignuser1
+      },
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      }
+    ],
     "actions": ["Review", "Escalate"]
   },
   {
@@ -4496,6 +4506,16 @@ export const AbuseTableData = [
     "reportedContent": "Fake testimonial with misleading claim",
     "reason": "Misinformation",
     "status": "Actioned",
+    "assignedTo": [
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      },
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      }
+    ],
     "actions": ["Details", "Archive"]
   },
   {
@@ -4506,6 +4526,16 @@ export const AbuseTableData = [
     "reportedContent": "Spam link in shared resources section",
     "reason": "Spam",
     "status": "Resolved",
+    "assignedTo": [
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      },
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      }
+    ],
     "actions": ["View", "Archive"]
   },
   {
@@ -4516,6 +4546,16 @@ export const AbuseTableData = [
     "reportedContent": "Rude behavior by a participant",
     "reason": "Inappropriate Content",
     "status": "Archived",
+    "assignedTo": [
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      },
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      }
+    ],
     "actions": ["Restore"]
   },
   {
@@ -4526,6 +4566,16 @@ export const AbuseTableData = [
     "reportedContent": "Threatening message sent during chat",
     "reason": "Abuse",
     "status": "Under Review",
+    "assignedTo": [
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      },
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      }
+    ],
     "actions": ["Review", "Escalate"]
   },
   {
@@ -4536,6 +4586,16 @@ export const AbuseTableData = [
     "reportedContent": "Copied review from another user",
     "reason": "Plagiarism",
     "status": "Actioned",
+    "assignedTo": [
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      },
+      {
+        "name": "Prof. Sunil Kumar",
+        "photo": assignuser3
+      }
+    ],
     "actions": ["Details", "Archive"]
   },
   {
@@ -4546,6 +4606,16 @@ export const AbuseTableData = [
     "reportedContent": "Disruptive behavior during video call",
     "reason": "Disruption",
     "status": "Resolved",
+    "assignedTo": [
+      {
+        "name": "Prof. Sunil Kumar",
+        "photo": assignuser3
+      },
+      {
+        "name": "Dr. Kavita Rao",
+        "photo": assignuser4
+      }
+    ],
     "actions": ["View", "Archive"]
   },
   {
@@ -4556,6 +4626,16 @@ export const AbuseTableData = [
     "reportedContent": "Post contains offensive meme",
     "reason": "Inappropriate Content",
     "status": "Archived",
+    "assignedTo": [
+      {
+        "name": "Dr. Kavita Rao",
+        "photo": assignuser4
+      },
+      {
+        "name": "Prof. Rajiv Malhotra",
+        "photo": assignuser1
+      }
+    ],
     "actions": ["Restore"]
   },
   {
@@ -4566,6 +4646,16 @@ export const AbuseTableData = [
     "reportedContent": "False claim about mentor's credentials",
     "reason": "Misinformation",
     "status": "Actioned",
+    "assignedTo": [
+      {
+        "name": "Prof. Rajiv Malhotra",
+        "photo": assignuser1
+      },
+      {
+        "name": "Dr. Manoj Sharma",
+        "photo": assignuser2
+      }
+    ],
     "actions": ["Details", "Archive"]
   },
   {
@@ -4576,6 +4666,16 @@ export const AbuseTableData = [
     "reportedContent": "User shared personal contact details",
     "reason": "Policy Violation",
     "status": "Resolved",
+    "assignedTo": [
+      {
+        "name": "Dr. Manoj Sharma",
+        "photo": assignuser2
+      },
+      {
+        "name": "Ms. Neha Joshi",
+        "photo": assignuser3
+      }
+    ],
     "actions": ["View", "Archive"]
   },
   {
@@ -4586,6 +4686,7 @@ export const AbuseTableData = [
     "reportedContent": "Participant was shouting and abusive",
     "reason": "Harassment",
     "status": "Under Review",
+    "assignedTo": [],
     "actions": ["Review", "Escalate"]
   },
   {
@@ -4596,6 +4697,7 @@ export const AbuseTableData = [
     "reportedContent": "Review used hate speech",
     "reason": "Offensive Content",
     "status": "Actioned",
+    "assignedTo": [],
     "actions": ["Details", "Archive"]
   },
   {
@@ -4606,6 +4708,7 @@ export const AbuseTableData = [
     "reportedContent": "Malicious code shared in post",
     "reason": "Security Threat",
     "status": "Resolved",
+    "assignedTo": [],
     "actions": ["View", "Archive"]
   },
   {
@@ -4616,6 +4719,7 @@ export const AbuseTableData = [
     "reportedContent": "Session contained unapproved content",
     "reason": "Content Violation",
     "status": "Archived",
+    "assignedTo": [],
     "actions": ["Restore"]
   },
   {
@@ -4626,6 +4730,7 @@ export const AbuseTableData = [
     "reportedContent": "User sent unsolicited ads",
     "reason": "Spam",
     "status": "Under Review",
+    "assignedTo": [],
     "actions": ["Review", "Escalate"]
   }
 ];
@@ -5724,6 +5829,16 @@ export const ProblemTableData = [
     "description": "Unable to update mobile number",
     "screenshot": "View",
     "status": "Under Review",
+    "assignedTo": [
+      {
+        "name": "Dr. Priya Singh",
+        "photo": assignuser1
+      },
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      }
+    ],
     "actions": ["Assign", "Resolve"]
   },
   {
@@ -5734,6 +5849,16 @@ export const ProblemTableData = [
     "description": "Session got cancelled but still charged",
     "screenshot": "View",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      },
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      }
+    ],
     "actions": ["Review", "Refund"]
   },
   {
@@ -5744,6 +5869,16 @@ export const ProblemTableData = [
     "description": "Test screen froze midway",
     "screenshot": "No",
     "status": "Resolved",
+    "assignedTo": [
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      },
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      }
+    ],
     "actions": ["Confirm", "Archive"]
   },
   {
@@ -5754,6 +5889,16 @@ export const ProblemTableData = [
     "description": "Unable to login after OTP",
     "screenshot": "No",
     "status": "Archived",
+    "assignedTo": [
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      },
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      }
+    ],
     "actions": ["Restore"]
   },
   {
@@ -5764,6 +5909,16 @@ export const ProblemTableData = [
     "description": "Transaction failed but amount deducted",
     "screenshot": "View",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      },
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      }
+    ],
     "actions": ["Investigate", "Refund"]
   },
   {
@@ -5774,6 +5929,14 @@ export const ProblemTableData = [
     "description": "Name not updating after edit",
     "screenshot": "No",
     "status": "Under Review",
+    "assignedTo": [{
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "actions": ["Assign", "Resolve"]
   },
   {
@@ -5784,6 +5947,14 @@ export const ProblemTableData = [
     "description": "Double booking confirmed",
     "screenshot": "View",
     "status": "Resolved",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Confirm", "Archive"]
   },
   {
@@ -5794,6 +5965,14 @@ export const ProblemTableData = [
     "description": "OTP not received",
     "screenshot": "No",
     "status": "New",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Send OTP", "Contact"]
   },
   {
@@ -5804,6 +5983,14 @@ export const ProblemTableData = [
     "description": "Result not displayed",
     "screenshot": "View",
     "status": "Under Review",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Assign", "Resolve"]
   },
   {
@@ -5814,6 +6001,14 @@ export const ProblemTableData = [
     "description": "Charged twice for the same session",
     "screenshot": "View",
     "status": "Resolved",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Confirm", "Refund"]
   },
   {
@@ -5824,6 +6019,14 @@ export const ProblemTableData = [
     "description": "Booking confirmation not received",
     "screenshot": "No",
     "status": "New",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Resend Confirmation"]
   },
   {
@@ -5834,6 +6037,14 @@ export const ProblemTableData = [
     "description": "Email login failed repeatedly",
     "screenshot": "No",
     "status": "Under Review",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Assign", "Debug"]
   },
   {
@@ -5844,6 +6055,14 @@ export const ProblemTableData = [
     "description": "MCQs not loading in test",
     "screenshot": "View",
     "status": "Resolved",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Confirm", "Archive"]
   },
   {
@@ -5854,6 +6073,14 @@ export const ProblemTableData = [
     "description": "Photo upload fails",
     "screenshot": "View",
     "status": "New",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Assign", "Resolve"]
   },
   {
@@ -5864,6 +6091,14 @@ export const ProblemTableData = [
     "description": "No invoice generated",
     "screenshot": "No",
     "status": "Archived",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "actions": ["Restore", "Notify"]
   }
 ];
@@ -5877,7 +6112,16 @@ export const BugsTableData = [
     "module": "Notifications",
     "priority": "High",
     "description": "Push alerts not showing in mobile",
-    "assignedTo": [""],
+    "assignedTo": [
+      {
+        "name": "Dr. Priya Singh",
+        "photo": assignuser1
+      },
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      }
+    ],
     "screenshot": "View",
     "status": "In Progress",
     "actions": ["Fix", "Verify", "Comment"]
@@ -5889,6 +6133,16 @@ export const BugsTableData = [
     "module": "Assessments",
     "priority": "Critical",
     "description": "Timer resets during ACE test",
+    "assignedTo": [
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      },
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      }
+    ],
     "screenshot": "View",
     "status": "New",
     "actions": ["Assign", "Debug"]
@@ -5900,6 +6154,16 @@ export const BugsTableData = [
     "module": "Platform",
     "priority": "Medium",
     "description": "Dashboard layout breaks in Safari",
+    "assignedTo": [
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      },
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      }
+    ],
     "screenshot": "No",
     "status": "Fixed",
     "actions": ["Confirm", "Archive"]
@@ -5911,6 +6175,16 @@ export const BugsTableData = [
     "module": "Sessions",
     "priority": "Low",
     "description": "Coach details don't update instantly",
+    "assignedTo": [
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      },
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      }
+    ],
     "screenshot": "No",
     "status": "Verified",
     "actions": ["Close", "Archive"]
@@ -5922,6 +6196,16 @@ export const BugsTableData = [
     "module": "Payments",
     "priority": "Critical",
     "description": "Invoice generation fails on bulk export",
+    "assignedTo": [
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      },
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      }
+    ],
     "screenshot": "View",
     "status": "New",
     "actions": ["Assign", "Fix"]
@@ -5933,6 +6217,14 @@ export const BugsTableData = [
     "module": "Login",
     "priority": "High",
     "description": "OTP screen not responsive on iOS",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "View",
     "status": "In Progress",
     "actions": ["Fix", "Verify"]
@@ -5944,6 +6236,14 @@ export const BugsTableData = [
     "module": "Assessments",
     "priority": "Medium",
     "description": "MCQ options not selectable on Firefox",
+    "assignedTo": [ {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    },
+    {
+      "name": "Dr. Meera Iyer",
+      "photo": assignuser3
+    }],
     "screenshot": "No",
     "status": "Fixed",
     "actions": ["Confirm", "Comment"]
@@ -5955,6 +6255,14 @@ export const BugsTableData = [
     "module": "Platform",
     "priority": "Low",
     "description": "Dropdown menu overlaps on zoom",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "No",
     "status": "Verified",
     "actions": ["Close"]
@@ -5966,6 +6274,14 @@ export const BugsTableData = [
     "module": "Notifications",
     "priority": "High",
     "description": "Email alerts delayed by hours",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "View",
     "status": "In Progress",
     "actions": ["Fix", "Comment"]
@@ -5977,6 +6293,14 @@ export const BugsTableData = [
     "module": "Sessions",
     "priority": "Medium",
     "description": "Session summary not saving edits",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "No",
     "status": "New",
     "actions": ["Assign", "Debug"]
@@ -5988,6 +6312,14 @@ export const BugsTableData = [
     "module": "Login",
     "priority": "Critical",
     "description": "Password reset fails for new users",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "View",
     "status": "New",
     "actions": ["Assign", "Fix"]
@@ -5999,6 +6331,14 @@ export const BugsTableData = [
     "module": "Payments",
     "priority": "Low",
     "description": "Currency mismatch on international cards",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "No",
     "status": "Verified",
     "actions": ["Close", "Archive"]
@@ -6010,6 +6350,14 @@ export const BugsTableData = [
     "module": "Platform",
     "priority": "Medium",
     "description": "White screen on logout",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "View",
     "status": "Fixed",
     "actions": ["Confirm", "Archive"]
@@ -6021,6 +6369,14 @@ export const BugsTableData = [
     "module": "Notifications",
     "priority": "High",
     "description": "Repeated push notifications",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "No",
     "status": "In Progress",
     "actions": ["Fix", "Comment"]
@@ -6032,6 +6388,14 @@ export const BugsTableData = [
     "module": "Assessments",
     "priority": "Low",
     "description": "Hints not loading in test view",
+    "assignedTo": [ {
+      "name": "Dr. Priya Singh",
+      "photo": assignuser1
+    },
+    {
+      "name": "Prof. Rajesh Kumar",
+      "photo": assignuser2
+    }],
     "screenshot": "View",
     "status": "New",
     "actions": ["Assign", "Debug"]
@@ -11997,6 +12361,16 @@ export const JobApplicationTable = [
     "contacts": "John",
     "type": "Contract",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Dr. Priya Singh",
+        "photo": assignuser1
+      },
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12007,6 +12381,16 @@ export const JobApplicationTable = [
     "contacts": "John",
     "type": "Contract",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Prof. Rajesh Kumar",
+        "photo": assignuser2
+      },
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12017,6 +12401,16 @@ export const JobApplicationTable = [
     "contacts": "Amit",
     "type": "Internship",
     "status": "Approved",
+    "assignedTo": [
+      {
+        "name": "Dr. Meera Iyer",
+        "photo": assignuser3
+      },
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12027,6 +12421,16 @@ export const JobApplicationTable = [
     "contacts": "John",
     "type": "Internship",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Adv. Sanjay Verma",
+        "photo": assignuser4
+      },
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12037,6 +12441,16 @@ export const JobApplicationTable = [
     "contacts": "Priya",
     "type": "Full-time",
     "status": "Pending",
+    "assignedTo": [
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      },
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12047,6 +12461,14 @@ export const JobApplicationTable = [
     "contacts": "John",
     "type": "Internship",
     "status": "Rejected",
+    "assignedTo": [  {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12057,6 +12479,16 @@ export const JobApplicationTable = [
     "contacts": "John",
     "type": "Contract",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      },
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12067,6 +12499,16 @@ export const JobApplicationTable = [
     "contacts": "Amit",
     "type": "Internship",
     "status": "New",
+    "assignedTo": [
+      {
+        "name": "Prof. Anita Desai",
+        "photo": assignuser1
+      },
+      {
+        "name": "Ms. Ritu Gupta",
+        "photo": assignuser2
+      }
+    ],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12077,6 +12519,14 @@ export const JobApplicationTable = [
     "contacts": "Liam",
     "type": "Internship",
     "status": "Approved",
+    "assignedTo": [ {
+      "name": "Dr. Meera Iyer",
+      "photo": assignuser3
+    },
+    {
+      "name": "Adv. Sanjay Verma",
+      "photo": assignuser4
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12087,6 +12537,14 @@ export const JobApplicationTable = [
     "contacts": "Meena",
     "type": "Full-time",
     "status": "Rejected",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12097,6 +12555,14 @@ export const JobApplicationTable = [
     "contacts": "Suresh",
     "type": "Internship",
     "status": "Pending",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12107,6 +12573,14 @@ export const JobApplicationTable = [
     "contacts": "Suresh",
     "type": "Contract",
     "status": "Rejected",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12117,6 +12591,14 @@ export const JobApplicationTable = [
     "contacts": "Liam",
     "type": "Contract",
     "status": "New",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12127,6 +12609,14 @@ export const JobApplicationTable = [
     "contacts": "Nina",
     "type": "Full-time",
     "status": "Pending",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12137,6 +12627,14 @@ export const JobApplicationTable = [
     "contacts": "Amit",
     "type": "Contract",
     "status": "Approved",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12147,6 +12645,14 @@ export const JobApplicationTable = [
     "contacts": "Priya",
     "type": "Internship",
     "status": "Approved",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12157,6 +12663,14 @@ export const JobApplicationTable = [
     "contacts": "Liam",
     "type": "Contract",
     "status": "Pending",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12167,6 +12681,14 @@ export const JobApplicationTable = [
     "contacts": "Nina",
     "type": "Internship",
     "status": "Pending",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12177,6 +12699,14 @@ export const JobApplicationTable = [
     "contacts": "Suresh",
     "type": "Internship",
     "status": "Approved",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   },
   {
@@ -12187,6 +12717,14 @@ export const JobApplicationTable = [
     "contacts": "Meena",
     "type": "Internship",
     "status": "Rejected",
+    "assignedTo": [ {
+      "name": "Prof. Anita Desai",
+      "photo": assignuser1
+    },
+    {
+      "name": "Ms. Ritu Gupta",
+      "photo": assignuser2
+    }],
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
   }
 ]

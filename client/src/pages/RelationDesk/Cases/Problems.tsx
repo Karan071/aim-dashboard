@@ -19,6 +19,7 @@ import {
   FileDown,
   CircleArrowUp,
   CircleArrowDown,
+  X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,6 +46,7 @@ import DatePicker from "@/components/ui/DatePicker";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { coachesList } from "@/data/Data";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -318,8 +320,22 @@ function ProblemTable() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
+  const [problemData, setProblemData] = useState([...ProblemTableData] as Array<{
+    id: number;
+    user: string;
+    submittedOn: string;
+    issueType: string;
+    description: string;
+    screenshot: string;
+    status: string;
+    assignedTo: Array<{ name: string; photo: string }>;
+    actions: string[];
+  }>);
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [currentProblemForAssignment, setCurrentProblemForAssignment] = useState<number | null>(null);
+  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
-  const sortedData = [...ProblemTableData];
+  const sortedData = [...problemData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
@@ -371,6 +387,157 @@ function ProblemTable() {
       );
     }
   };
+
+  const handleAssignUsers = (problemId: number) => {
+    setCurrentProblemForAssignment(problemId);
+    const problem = problemData.find(p => p.id === problemId);
+    if (problem && problem.assignedTo) {
+      setSelectedAssignees(problem.assignedTo.map(assignee => assignee.name));
+    } else {
+      setSelectedAssignees([]);
+    }
+    setShowAssignmentModal(true);
+  };
+
+  const handleSaveAssignment = () => {
+    if (currentProblemForAssignment) {
+      const updatedProblems = problemData.map(problem => {
+        if (problem.id === currentProblemForAssignment) {
+          const selectedCoaches = coachesList.filter(coach => 
+            selectedAssignees.includes(coach.name)
+          ).map(coach => ({
+            name: coach.name,
+            photo: coach.photo
+          }));
+          
+          return {
+            ...problem,
+            assignedTo: selectedCoaches
+          };
+        }
+        return problem;
+      });
+      
+      setProblemData(updatedProblems);
+      setShowAssignmentModal(false);
+      setCurrentProblemForAssignment(null);
+      setSelectedAssignees([]);
+    }
+  };
+
+  const toggleAssignee = (assigneeName: string) => {
+    if (selectedAssignees.includes(assigneeName)) {
+      setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+    } else {
+      setSelectedAssignees([...selectedAssignees, assigneeName]);
+    }
+  };
+
+  // Assignment Modal Component
+  const AssignmentModal = () => {
+    if (!showAssignmentModal) return null;
+
+    const currentProblem = problemData.find(p => p.id === currentProblemForAssignment);
+    const currentProblemAssignedImages = currentProblem?.assignedTo || [];
+
+    const availableAssignees = coachesList.map(coach => {
+      const currentAssignment = currentProblemAssignedImages.find(assigned => assigned.name === coach.name);
+      
+      return {
+        name: coach.name,
+        photo: currentAssignment ? currentAssignment.photo : coach.photo,
+        specialization: coach.specialization,
+        isCurrentlyAssigned: currentAssignment !== undefined
+      };
+    });
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+        <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+          <div className="flex items-center justify-between p-6 border-b">
+            <h2 className="text-xl font-semibold text-[var(--text-head)]">
+              Assign Users
+            </h2>
+            <Button
+              variant="link"
+              onClick={() => setShowAssignmentModal(false)}
+              className="text-sm text-[var(--text)] p-0 h-auto"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+          
+          <div className="p-6">
+            <p className="text-sm text-[var(--text)] mb-4">
+              Select users to assign to this problem:
+            </p>
+            
+            {currentProblemAssignedImages.length > 0 && (
+              <div className="mb-4">
+                <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                <div className="flex -space-x-2">
+                  {currentProblemAssignedImages.map((assigned, index) => (
+                    <div
+                      key={index}
+                      className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                      title={assigned.name}
+                    >
+                      <img
+                        src={assigned.photo}
+                        alt={assigned.name}
+                        className="h-8 w-8 object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {availableAssignees.map((assignee) => (
+                <div
+                  key={assignee.name}
+                  className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                >
+                  <Checkbox
+                    checked={selectedAssignees.includes(assignee.name)}
+                    onCheckedChange={() => toggleAssignee(assignee.name)}
+                  />
+                  <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                    <img
+                      src={assignee.photo}
+                      alt={assignee.name}
+                      className="h-8 w-8 object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-[var(--text)]">{assignee.name}</span>
+                    <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 p-6 border-t">
+            <Button
+              variant="border"
+              onClick={() => setShowAssignmentModal(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="brand"
+              onClick={handleSaveAssignment}
+            >
+              Save Assignment
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto shadow-none">
       <div className="flex-1 rounded-md bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full"></div>
@@ -464,6 +631,14 @@ function ProblemTable() {
               <TableHead className="text-[var(--text)]">Description</TableHead>
               <TableHead className="text-[var(--text)]">Screenshot</TableHead>
               <TableHead
+                onClick={() => requestSort("assignedTo")}
+                className="cursor-pointer text-[var(--text)]"
+              >
+                Assigned To{" "}
+                {sortConfig?.key === "assignedTo" &&
+                  (sortConfig.direction === "ascending" ? "↑" : "↓")}
+              </TableHead>
+              <TableHead
                 onClick={() => requestSort("status")}
                 className="cursor-pointer text-[var(--text)]"
               >
@@ -504,6 +679,34 @@ function ProblemTable() {
                 <TableCell>{problem.issueType}</TableCell>
                 <TableCell>{problem.description}</TableCell>
                 <TableCell>{problem.screenshot}</TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2">
+                      {problem.assignedTo?.map((assigned, index) => (
+                        <div
+                          key={index}
+                          className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                          title={assigned.name}
+                        >
+                          <img
+                            src={assigned.photo}
+                            alt={assigned.name}
+                            className="h-8 w-8 object-cover"
+                          />
+                        </div>
+                      ))}
+                      {/* Plus icon in circle */}
+                      <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                           onClick={(e) => {
+                             e.stopPropagation();
+                             handleAssignUsers(problem.id);
+                           }}
+                           title="Assign Users">
+                        <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                      </div>
+                    </div>
+                  </div>
+                </TableCell>
                 <TableCell>
                   <Badge
                     variant={problem.status === "Resolved" ? "brand" : "standard"}
@@ -598,6 +801,7 @@ function ProblemTable() {
           </Button>
         </div>
       </div>
+      <AssignmentModal />
     </div>
   );
 }
