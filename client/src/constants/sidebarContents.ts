@@ -605,12 +605,12 @@ export const SidebarData = {
         },
         {
           title: "Current Openings",
-          url: "/desk/review/current-openings",
+          url: "/desk/hr/current-opening",
           icon: getNextIcon(),
         },
         {
           title: "Job Application",
-          url: "/desk/review/job-application",
+          url: "/desk/hr/job-application",
           icon: getNextIcon(),
         },
       ],
