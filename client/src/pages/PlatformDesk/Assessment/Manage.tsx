@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -50,27 +50,26 @@ import {
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
+
 
 const stats = [
   {
     title: "Total Assessments",
     value: "10",
     icon: Notebook,
-    performance: Up,
+ 
   },
   {
     title: "Published",
     value: "17",
     icon: Notebook,
-    performance: Up,
+   
   },
   {
     title: "Drafts",
     value: "13",
     icon: Notebook,
-    performance: Down,
+   
   },
 ];
 
@@ -331,7 +330,7 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
+             
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
