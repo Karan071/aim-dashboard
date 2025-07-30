@@ -851,7 +851,7 @@ export const ManageTable = [
     "segments": ["11-12", "UG"],
     "category": "Engineering",
     "price": 299,
-    "partnerShare": "25% Standard",
+    "partnerShare": "[S] 25% | [P] 50%",
     "enrollments": 1250,
     "status": "Active",
     "actions": ["Questions", "Results", "Logs"]
@@ -862,7 +862,7 @@ export const ManageTable = [
     "segments": ["11-12", "UG"],
     "category": "Medical",
     "price": 399,
-    "partnerShare": "50% Premium",
+    "partnerShare": "[P] 50%",
     "enrollments": 890,
     "status": "Active",
     "actions": ["Questions", "Results", "Logs"]
