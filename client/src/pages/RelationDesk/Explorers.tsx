@@ -661,14 +661,6 @@ function ExplorerTable() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("assessments")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Assessments{" "}
-                  {sortConfig?.key === "assessments" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
                   onClick={() => requestSort("Sessions")}
                   className="cursor-pointer text-[var(--text)]"
                 >
@@ -759,12 +751,7 @@ function ExplorerTable() {
                   <TableCell>
                     <Badge variant="standard">{user.profileStage}</Badge>
                   </TableCell>
-                  <TableCell>
-                    <div className="text-sm">
-                      {user.assessments.completed}/{user.assessments.total}{" "}
-                      Complete
-                    </div>
-                  </TableCell>
+                  
                   <TableCell>{user.source}</TableCell>
                   <TableCell>
                     <div className="text-sm">{user.joinDate}</div>

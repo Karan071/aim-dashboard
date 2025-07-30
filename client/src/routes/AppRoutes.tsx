@@ -27,8 +27,7 @@ import { ChannelPartners as ReviewChannelPartner } from "@/pages/ReviewDesk/Chan
 import { Libraries as ReviewLibraries } from "@/pages/ReviewDesk/Libraries";
 import { MapListing as ReviewMapListing } from "@/pages/ReviewDesk/MapListing";
 import { CustomInput as ReviewCustomInput } from "@/pages/ReviewDesk/CustomInput";
-import { CurrenOpenings as ReviewCurrenOpenings } from "@/pages/ReviewDesk/CurrenOpenings";
-import { JobApplication as ReviewJobApplication } from "@/pages/ReviewDesk/JobApplication";
+
 
 // Relations Desk
 import { Desk as RelationDesk } from "@/pages/RelationDesk/Desk";
@@ -96,8 +95,9 @@ import { Leaderboard as DevopsLeaderboard } from "@/pages/DevopsDesk/Leaderboard
 // HRMS Desk
 import { Desk as HRMSDesk } from "@/pages/HRMS/Desk";
 import { FollowUp as HRMSFollowUp } from "@/pages/HRMS/FollowUp";
-import { Application as HRMSApplication } from "@/pages/HRMS/Application";
-import { Opening as HRMSOpening } from "@/pages/HRMS/Opening";
+import { CurrenOpenings as HRMSCurrentOpening } from "@/pages/HRMS/CurrenOpenings";
+import { JobApplication as HRMSJobApplication } from "@/pages/HRMS/JobApplication";
+
 
 export default function AppRoutes() {
   return (
@@ -157,11 +157,7 @@ export default function AppRoutes() {
       <Route path="review/libraries" element={<ReviewLibraries />} />
       <Route path="review/map-listing" element={<ReviewMapListing />} />
       <Route path="review/custom-inputs" element={<ReviewCustomInput />} />
-      <Route
-        path="review/current-openings"
-        element={<ReviewCurrenOpenings />}
-      />
-      <Route path="review/job-application" element={<ReviewJobApplication />} />
+     
 
       {/* Relations Desk Routes */}
       <Route path="relation/desk" element={<RelationDesk />} />
@@ -268,8 +264,8 @@ export default function AppRoutes() {
       {/* HRMS Routes */}
       <Route path="hr/desk" element={<HRMSDesk />} />
       <Route path="hr/follow-ups" element={<HRMSFollowUp />} />
-      <Route path="hr/applications" element={<HRMSApplication />} />
-      <Route path="hr/opening" element={<HRMSOpening />} />
+      <Route path="hr/job-application" element={<HRMSJobApplication />} />
+      <Route path="hr/current-opening" element={<HRMSCurrentOpening />} />
     </Routes>
   );
 }

@@ -9,21 +9,15 @@ import {
   CheckCircle2,
   Trash,
   FileDown,
- 
   BadgeQuestionMark,
-
   Plus,
   Download,
   MessageCircle,
   NotebookPen,
   Pen,
- 
   Bell,
   RotateCcw,
   Ban,
- 
-
- 
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,13 +29,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
-import {
-  ChevronDown,
-  Filter,
-  ChevronRight,
-  ChevronLeft,
- 
-} from "lucide-react";
+import { ChevronDown, Filter, ChevronRight, ChevronLeft } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -114,7 +102,6 @@ const Stats = [
 export function Assessments() {
   return (
     <div className="flex flex-col gap-2">
-      
       <Topbar />
       <StatCard />
       {/* <Actionbar /> */}
@@ -131,11 +118,11 @@ function Topbar() {
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
         <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Assessments
+          Assessments
         </h1>
       </div>
       <div className="flex items-center gap-2">
-      <Button
+        <Button
           className="cursor-pointer"
           variant="standard"
           size="new"
@@ -144,7 +131,7 @@ function Topbar() {
           <BadgeQuestionMark className="h-3 w-3" />
           <span className="">Manage</span>
         </Button>
-        
+
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
           <span className="">Export</span>
@@ -164,13 +151,12 @@ function Topbar() {
   );
 }
 
-
 // function Actionbar() {
 //   const navigate = useNavigate();
 //   const [showFilter, setShowFilter] = useState(false);
 //   return (
 //     <div className="flex justify-end px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      
+
 //       <div className="flex gap-4 flex-wrap">
 //         <Button
 //           className="cursor-pointer"
@@ -384,7 +370,6 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
-
 function StatCard() {
   return (
     <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-6">
@@ -423,12 +408,12 @@ interface CoachAssignmentModalProps {
   onAssignCoach: (assessmentId: string, coachId: string) => void;
 }
 
-function CoachAssignmentModal({ 
-  isOpen, 
-  onClose, 
-  assessmentId, 
-  currentCoach, 
-  onAssignCoach 
+function CoachAssignmentModal({
+  isOpen,
+  onClose,
+  assessmentId,
+  currentCoach,
+  onAssignCoach,
 }: CoachAssignmentModalProps) {
   const [selectedCoach, setSelectedCoach] = useState("");
 
@@ -459,7 +444,7 @@ function CoachAssignmentModal({
             ✕
           </Button>
         </div>
-        
+
         <div className="mb-4">
           <label className="text-base text-[var(--text)] mb-2 block">
             Select Coach:
@@ -480,19 +465,11 @@ function CoachAssignmentModal({
 
         <div className="flex gap-2 justify-end">
           {currentCoach && (
-            <Button
-              variant="delete"
-              size="sm"
-              onClick={handleRemoveCoach}
-            >
+            <Button variant="delete" size="sm" onClick={handleRemoveCoach}>
               Remove Coach
             </Button>
           )}
-          <Button
-            variant="border"
-            size="sm"
-            onClick={onClose}
-          >
+          <Button variant="border" size="sm" onClick={onClose}>
             Cancel
           </Button>
           <Button
@@ -579,7 +556,10 @@ function AssessmentTable() {
     }
   };
 
-  const handleOpenCoachAssignment = (assessmentId: string, currentCoach: string) => {
+  const handleOpenCoachAssignment = (
+    assessmentId: string,
+    currentCoach: string
+  ) => {
     setSelectedAssessmentId(assessmentId);
     setSelectedCurrentCoach(currentCoach);
     setIsCoachAssignmentOpen(true);
@@ -596,7 +576,6 @@ function AssessmentTable() {
     console.log(`Assigning coach ${coachId} to assessment ${assessmentId}`);
     handleCloseCoachAssignment();
   };
-
 
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
@@ -853,17 +832,17 @@ function AssessmentTable() {
                             <TooltipTrigger asChild>
                               <Button
                                 variant="icon-only"
-
-                            
                                 size="sm"
                                 className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                                  handleOpenCoachAssignment(
+                                    user.id,
+                                    user.assignCoach || ""
+                                  );
                                 }}
                               >
                                 <span className="flex items-center gap-1">
-
                                   <Plus className="h-3 w-3" />
                                 </span>
                               </Button>
@@ -880,7 +859,10 @@ function AssessmentTable() {
                           className="text-[var(--text)] hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)]"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                            handleOpenCoachAssignment(
+                              user.id,
+                              user.assignCoach || ""
+                            );
                           }}
                         >
                           <span className="flex items-center gap-1">
@@ -1037,7 +1019,7 @@ function AssessmentTable() {
           </div>
         </div>
       </div>
-      
+
       <CoachAssignmentModal
         isOpen={isCoachAssignmentOpen}
         onClose={handleCloseCoachAssignment}

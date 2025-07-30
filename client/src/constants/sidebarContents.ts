@@ -230,16 +230,6 @@ export const SidebarData = {
           url: "/desk/review/custom-inputs",
           icon: getNextIcon(),
         },
-        {
-          title: "Current Openings",
-          url: "/desk/review/current-openings",
-          icon: getNextIcon(),
-        },
-        {
-          title: "Job Application",
-          url: "/desk/review/job-application",
-          icon: getNextIcon(),
-        },
       ],
     },
     // Relations Desk
@@ -614,13 +604,13 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
-          title: "Applications",
-          url: "/desk/hr/applications",
+          title: "Current Openings",
+          url: "/desk/hr/current-opening",
           icon: getNextIcon(),
         },
         {
-          title: "Opening",
-          url: "/desk/hr/opening",
+          title: "Job Application",
+          url: "/desk/hr/job-application",
           icon: getNextIcon(),
         },
       ],

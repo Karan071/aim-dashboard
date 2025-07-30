@@ -5708,6 +5708,7 @@ export const BugsTableData = [
     "module": "Notifications",
     "priority": "High",
     "description": "Push alerts not showing in mobile",
+    "assignedTo": [""],
     "screenshot": "View",
     "status": "In Progress",
     "actions": ["Fix", "Verify", "Comment"]
