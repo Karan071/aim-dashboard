@@ -434,6 +434,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
 }
 
 function ExplorerTable() {
+  const [usersData, setUsersData] = useState(mockUsers);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -441,18 +442,18 @@ function ExplorerTable() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedStack, setSelectedStack] = useState<typeof mockUsers>(
-    mockUsers[0] ? [mockUsers[0]] : []
+  const [selectedStack, setSelectedStack] = useState<typeof usersData>(
+    usersData[0] ? [usersData[0]] : []
   );
   const [focusedId, setFocusedId] = useState<string | null>(
-    mockUsers[0]?.id || null
+    usersData[0]?.id || null
   );
   const [showAssignmentModal, setShowAssignmentModal] = useState(false);
   const [currentUserForAssignment, setCurrentUserForAssignment] = useState<string | null>(null);
   const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
   // Sorting logic
-  const sortedData = [...mockUsers];
+  const sortedData = [...usersData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
       let aValue: any = a[sortConfig.key as keyof typeof a];
@@ -572,7 +573,7 @@ function ExplorerTable() {
 
   const handleAssignUsers = (userId: string) => {
     setCurrentUserForAssignment(userId);
-    const user = mockUsers.find(u => u.id === userId);
+    const user = usersData.find(u => u.id === userId);
     if (user && user.assignedTo) {
       setSelectedAssignees(user.assignedTo.map(assignee => assignee.name));
     } else {
@@ -583,8 +584,30 @@ function ExplorerTable() {
 
   const handleSaveAssignment = () => {
     if (currentUserForAssignment) {
+      // Update the usersData with new assignments
+      const updatedUsers = usersData.map(user => {
+        if (user.id === currentUserForAssignment) {
+          const selectedCoaches = coachesList.filter(coach => 
+            selectedAssignees.includes(coach.name)
+          ).map(coach => ({
+            name: coach.name,
+            photo: coach.photo
+          }));
+          
+          return {
+            ...user,
+            assignedTo: selectedCoaches
+          };
+        }
+        return user;
+      });
+      
+      // Update the state with new data
+      setUsersData(updatedUsers);
+      
       // In a real app, you would update the backend here
-      // For now, we'll just close the modal
+      console.log('Updated assignments:', updatedUsers);
+      
       setShowAssignmentModal(false);
       setCurrentUserForAssignment(null);
       setSelectedAssignees([]);
@@ -604,14 +627,21 @@ function ExplorerTable() {
     if (!showAssignmentModal) return null;
 
     // Get the current user's assigned coaches to show their images
-    const currentUser = mockUsers.find(u => u.id === currentUserForAssignment);
+    const currentUser = usersData.find(u => u.id === currentUserForAssignment);
     const currentUserAssignedImages = currentUser?.assignedTo || [];
 
-    const availableAssignees = coachesList.map(coach => ({
-      name: coach.name,
-      photo: coach.photo,
-      specialization: coach.specialization
-    }));
+    // Create a list of all available assignees with their current assignment status and correct images
+    const availableAssignees = coachesList.map(coach => {
+      // Check if this coach is currently assigned to get the correct image
+      const currentAssignment = currentUserAssignedImages.find(assigned => assigned.name === coach.name);
+      
+      return {
+        name: coach.name,
+        photo: currentAssignment ? currentAssignment.photo : coach.photo, // Use assigned image if available
+        specialization: coach.specialization,
+        isCurrentlyAssigned: currentAssignment !== undefined
+      };
+    });
 
     return (
       <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
@@ -629,58 +659,59 @@ function ExplorerTable() {
             </Button>
           </div>
           
-                     <div className="p-6">
-             <p className="text-sm text-[var(--text)] mb-4">
-               Select users to assign to this explorer:
-             </p>
-             
-             {/* Show current assigned images */}
-             {currentUserAssignedImages.length > 0 && (
-               <div className="mb-4">
-                 <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
-                 <div className="flex -space-x-2">
-                   {currentUserAssignedImages.map((assigned, index) => (
-                     <div
-                       key={index}
-                       className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
-                       title={assigned.name}
-                     >
-                       <img
-                         src={assigned.photo}
-                         alt={assigned.name}
-                         className="h-8 w-8 object-cover"
-                       />
-                     </div>
-                   ))}
-                 </div>
-               </div>
-             )}
-             
-             <div className="space-y-2 max-h-60 overflow-y-auto">
-              {availableAssignees.map((assignee) => (
-                <div
-                  key={assignee.name}
-                  className="flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]"
-                  onClick={() => toggleAssignee(assignee.name)}
-                >
-                  <Checkbox
-                    checked={selectedAssignees.includes(assignee.name)}
-                    onCheckedChange={() => toggleAssignee(assignee.name)}
-                  />
-                  <div className="h-8 w-8 rounded-full overflow-hidden">
-                    <img
-                      src={assignee.photo}
-                      alt={assignee.name}
-                      className="h-8 w-8 object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-sm text-[var(--text)]">{assignee.name}</span>
-                    <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
-                  </div>
+          <div className="p-6">
+            <p className="text-sm text-[var(--text)] mb-4">
+              Select users to assign to this explorer:
+            </p>
+            
+            {/* Show current assigned images */}
+            {currentUserAssignedImages.length > 0 && (
+              <div className="mb-4">
+                <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                <div className="flex -space-x-2">
+                  {currentUserAssignedImages.map((assigned, index) => (
+                    <div
+                      key={index}
+                      className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                      title={assigned.name}
+                    >
+                      <img
+                        src={assigned.photo}
+                        alt={assigned.name}
+                        className="h-8 w-8 object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+            
+                         <div className="space-y-2 max-h-60 overflow-y-auto">
+               {availableAssignees.map((assignee) => (
+                 <div
+                   key={assignee.name}
+                   className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                
+                 >
+                   <Checkbox
+                     checked={selectedAssignees.includes(assignee.name)}
+                     onCheckedChange={() => toggleAssignee(assignee.name)}
+                   />
+                   <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                     <img
+                       src={assignee.photo}
+                       alt={assignee.name}
+                       className="h-8 w-8 object-cover"
+                     />
+                   </div>
+                   <div className="flex flex-col">
+                     <span className="text-sm text-[var(--text)]">{assignee.name}</span>
+                     <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
+                   </div>
+                 
+                 </div>
+               ))}
+             </div>
           </div>
           
           <div className="flex justify-end gap-2 p-6 border-t">
