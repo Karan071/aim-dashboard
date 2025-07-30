@@ -416,15 +416,22 @@ function CoachAssignmentModal({
   onAssignCoach,
 }: CoachAssignmentModalProps) {
   const [selectedCoach, setSelectedCoach] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredCoaches, setFilteredCoaches] = useState(coachesList);
+
+  // Filter coaches based on search query
+  useEffect(() => {
+    const filtered = coachesList.filter((coach) =>
+      coach.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      coach.specialization.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredCoaches(filtered);
+  }, [searchQuery]);
 
   const handleAssignCoach = () => {
     if (selectedCoach) {
       onAssignCoach(assessmentId, selectedCoach);
     }
-  };
-
-  const handleRemoveCoach = () => {
-    onAssignCoach(assessmentId, "");
   };
 
   if (!isOpen) return null;
@@ -447,28 +454,50 @@ function CoachAssignmentModal({
 
         <div className="mb-4">
           <label className="text-base text-[var(--text)] mb-2 block">
-            Select Coach:
+            Search Coach:
           </label>
-          <select
-            value={selectedCoach}
-            onChange={(e) => setSelectedCoach(e.target.value)}
-            className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)] text-sm"
-          >
-            <option value="">Select a coach...</option>
-            {coachesList.map((coach) => (
-              <option key={coach.id} value={coach.id}>
-                {coach.name} - {coach.specialization}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <Input
+              placeholder="Search coaches by name or specialization..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)] text-sm"
+            />
+            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[var(--text)] opacity-50" />
+          </div>
+          
+          {searchQuery && (
+            <div className="mt-2 max-h-40 overflow-y-auto border rounded-md">
+              {filteredCoaches.length > 0 ? (
+                filteredCoaches.map((coach) => (
+                  <div
+                    key={coach.id}
+                    className={`p-2 cursor-pointer hover:bg-[var(--faded)] text-sm ${
+                      selectedCoach === coach.id ? 'bg-[var(--brand-color2)] text-[var(--brand-color)]' : 'text-[var(--text)]'
+                    }`}
+                    onClick={() => setSelectedCoach(coach.id)}
+                  >
+                    {coach.name} - {coach.specialization}
+                  </div>
+                ))
+              ) : (
+                <div className="p-2 text-sm text-[var(--text)] opacity-70">
+                  No coaches found
+                </div>
+              )}
+            </div>
+          )}
+          
+          {selectedCoach && (
+            <div className="mt-2 p-2 bg-[var(--faded)] rounded-md">
+              <span className="text-sm text-[var(--text)]">
+                Selected: {coachesList.find(c => c.id === selectedCoach)?.name} - {coachesList.find(c => c.id === selectedCoach)?.specialization}
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="flex gap-2 justify-end">
-          {currentCoach && (
-            <Button variant="delete" size="sm" onClick={handleRemoveCoach}>
-              Remove Coach
-            </Button>
-          )}
           <Button variant="border" size="sm" onClick={onClose}>
             Cancel
           </Button>
