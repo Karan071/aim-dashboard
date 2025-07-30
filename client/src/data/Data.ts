@@ -2,6 +2,10 @@ import picture1 from "@/assets/asset.jpg"
 import picture2 from "@/assets/asset.jpg"
 import picture3 from "@/assets/asset.jpg"
 import picture4 from "@/assets/asset.jpg"
+import assignuser1 from "@/assets/Assignuser/assignuser1.jpeg"
+import assignuser2 from "@/assets/Assignuser/assignuser2.jpg"
+import assignuser3 from "@/assets/Assignuser/assignuser3.jpg"
+import assignuser4 from "@/assets/Assignuser/assignuser4.jpg"
 export const defaultLogo = picture1;
 export const mockUsers = [
   {
@@ -25,6 +29,16 @@ export const mockUsers = [
     joinDate: "15 May 2023",
     lastLogin: "17 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1
+      },
+      {
+        name: "Prof. Rajesh Kumar", 
+        photo: assignuser2
+      }
+    ]
   },
   {
     id: "2",
@@ -47,6 +61,16 @@ export const mockUsers = [
     joinDate: "10 May 2023",
     lastLogin: "16 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2
+      },
+      {
+        name: "Anjali Mehra",
+        photo: assignuser3
+      }
+    ]
   },
   {
     id: "3",
@@ -69,6 +93,16 @@ export const mockUsers = [
     joinDate: "5 May 2023",
     lastLogin: "15 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Anjali Mehra",
+        photo: assignuser3
+      },
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1
+      }
+    ]
   },
   {
     id: "4",
@@ -91,6 +125,16 @@ export const mockUsers = [
     joinDate: "12 May 2023",
     lastLogin: "12 May 2023",
     status: "Inactive",
+    assignedTo: [
+      {
+        name: "Vikram Singh",
+        photo: assignuser4
+      },
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1
+      }
+    ]
   },
   {
     id: "5",
@@ -113,6 +157,16 @@ export const mockUsers = [
     joinDate: "8 May 2023",
     lastLogin: "14 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Neha Sharma",
+        photo: assignuser1
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2
+      }
+    ]
   },
   {
     id: "6",
@@ -135,6 +189,16 @@ export const mockUsers = [
     joinDate: "9 May 2023",
     lastLogin: "10 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Amit Verma",
+        photo: assignuser2
+      },
+      {
+        name: "Anjali Mehra",
+        photo: assignuser3
+      }
+    ]
   },
   {
     id: "7",
@@ -157,6 +221,16 @@ export const mockUsers = [
     joinDate: "6 May 2023",
     lastLogin: "8 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Priya Nair",
+        photo: assignuser3
+      },
+      {
+        name: "Vikram Singh",
+        photo: assignuser4
+      }
+    ]
   },
   {
     id: "8",
@@ -179,6 +253,16 @@ export const mockUsers = [
     joinDate: "7 May 2023",
     lastLogin: "9 May 2023",
     status: "Inactive",
+    assignedTo: [
+      {
+        name: "Manoj Desai",
+        photo: assignuser4
+      },
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1
+      }
+    ]
   },
   {
     id: "9",
@@ -201,6 +285,16 @@ export const mockUsers = [
     joinDate: "10 May 2023",
     lastLogin: "11 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Sunita Reddy",
+        photo: assignuser1
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2
+      }
+    ]
   },
   {
     id: "10",
@@ -223,6 +317,16 @@ export const mockUsers = [
     joinDate: "11 May 2023",
     lastLogin: "13 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Karan Mehta",
+        photo: assignuser2
+      },
+      {
+        name: "Anjali Mehra",
+        photo: assignuser3
+      }
+    ]
   },
   {
     id: "11",
@@ -245,6 +349,16 @@ export const mockUsers = [
     joinDate: "13 May 2023",
     lastLogin: "13 May 2023",
     status: "Inactive",
+    assignedTo: [
+      {
+        name: "Ritika Das",
+        photo: assignuser3
+      },
+      {
+        name: "Vikram Singh",
+        photo: assignuser4
+      }
+    ]
   },
   {
     id: "12",
@@ -267,6 +381,16 @@ export const mockUsers = [
     joinDate: "14 May 2023",
     lastLogin: "15 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Siddharth Roy",
+        photo: assignuser4
+      },
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1
+      }
+    ]
   },
   {
     id: "13",
@@ -289,6 +413,16 @@ export const mockUsers = [
     joinDate: "6 May 2023",
     lastLogin: "6 May 2023",
     status: "Inactive",
+    assignedTo: [
+      {
+        name: "Meera Joshi",
+        photo: assignuser1
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2
+      }
+    ]
   },
   {
     id: "14",
@@ -311,6 +445,16 @@ export const mockUsers = [
     joinDate: "4 May 2023",
     lastLogin: "6 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Arjun Kapoor",
+        photo: assignuser2
+      },
+      {
+        name: "Anjali Mehra",
+        photo: assignuser3
+      }
+    ]
   },
   {
     id: "15",
@@ -333,6 +477,16 @@ export const mockUsers = [
     joinDate: "3 May 2023",
     lastLogin: "5 May 2023",
     status: "Active",
+    assignedTo: [
+      {
+        name: "Divya Malhotra",
+        photo: assignuser3
+      },
+      {
+        name: "Vikram Singh",
+        photo: assignuser4
+      }
+    ]
   }
 ]
 
@@ -729,7 +883,8 @@ export const coachesList = [
     specialization: "Career Counseling",
     experience: "8 years",
     rating: "4.8",
-    status: "Active"
+    status: "Active",
+    photo: picture1
   },
   {
     id: "COH002",
@@ -737,7 +892,8 @@ export const coachesList = [
     specialization: "Engineering Guidance",
     experience: "12 years",
     rating: "4.9",
-    status: "Active"
+    status: "Active",
+    photo: picture2
   },
   {
     id: "COH003",
@@ -745,7 +901,8 @@ export const coachesList = [
     specialization: "Medical Counseling",
     experience: "15 years",
     rating: "4.7",
-    status: "Active"
+    status: "Active",
+    photo: picture3
   },
   {
     id: "COH004",
@@ -753,7 +910,8 @@ export const coachesList = [
     specialization: "Law Entrance Prep",
     experience: "10 years",
     rating: "4.6",
-    status: "Active"
+    status: "Active",
+    photo: picture4
   },
   {
     id: "COH005",
@@ -761,7 +919,8 @@ export const coachesList = [
     specialization: "MBA Preparation",
     experience: "9 years",
     rating: "4.8",
-    status: "Active"
+    status: "Active",
+    photo: picture1
   },
   {
     id: "COH006",
@@ -769,7 +928,8 @@ export const coachesList = [
     specialization: "Design & Arts",
     experience: "6 years",
     rating: "4.5",
-    status: "Active"
+    status: "Active",
+    photo: picture2
   },
   {
     id: "COH007",
@@ -777,7 +937,8 @@ export const coachesList = [
     specialization: "Commerce & Finance",
     experience: "11 years",
     rating: "4.7",
-    status: "Active"
+    status: "Active",
+    photo: picture3
   },
   {
     id: "COH008",
@@ -785,7 +946,8 @@ export const coachesList = [
     specialization: "Humanities & Arts",
     experience: "13 years",
     rating: "4.6",
-    status: "Active"
+    status: "Active",
+    photo: picture4
   },
   {
     id: "COH009",
@@ -793,7 +955,8 @@ export const coachesList = [
     specialization: "General Knowledge",
     experience: "7 years",
     rating: "4.4",
-    status: "Active"
+    status: "Active",
+    photo: picture1
   },
   {
     id: "COH010",
@@ -801,7 +964,8 @@ export const coachesList = [
     specialization: "Logical Reasoning",
     experience: "14 years",
     rating: "4.9",
-    status: "Active"
+    status: "Active",
+    photo: picture2
   },
   {
     id: "COH011",
@@ -809,7 +973,8 @@ export const coachesList = [
     specialization: "Psychology",
     experience: "5 years",
     rating: "4.3",
-    status: "Inactive"
+    status: "Inactive",
+    photo: picture3
   },
   {
     id: "COH012",
@@ -817,7 +982,8 @@ export const coachesList = [
     specialization: "Data Science",
     experience: "8 years",
     rating: "4.8",
-    status: "Active"
+    status: "Active",
+    photo: picture4
   },
   {
     id: "COH013",
@@ -825,7 +991,8 @@ export const coachesList = [
     specialization: "Digital Marketing",
     experience: "6 years",
     rating: "4.5",
-    status: "Active"
+    status: "Active",
+    photo: picture1
   },
   {
     id: "COH014",
@@ -833,7 +1000,8 @@ export const coachesList = [
     specialization: "AI & Machine Learning",
     experience: "10 years",
     rating: "4.7",
-    status: "Active"
+    status: "Active",
+    photo: picture2
   },
   {
     id: "COH015",
@@ -841,7 +1009,8 @@ export const coachesList = [
     specialization: "UX/UI Design",
     experience: "7 years",
     rating: "4.6",
-    status: "Active"
+    status: "Active",
+    photo: picture3
   }
 ];
 export const ManageTable = [
@@ -10513,6 +10682,370 @@ export const ScholarshipsTable=[
     "actions": ["Edit", "Approve"]
   }
 ]
+export const LeadOrganisationTable = [
+  {
+    "id": "LOR0001",
+    "organisation_name": "Springdale Public",
+    "type": "School",
+    "objective": "Career Counseling",
+    "status": "Contacted",
+    "lead_score": "High",
+    "assigned_to": "Ajay Mehta",
+    "source": "Web Form",
+    "created_on": "18 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0002",
+    "organisation_name": "St. Xavier's College",
+    "type": "College",
+    "objective": "Internship Program",
+    "status": "Contacted",
+    "lead_score": "Medium",
+    "assigned_to": "Riya Sharma",
+    "source": "LinkedIn",
+    "created_on": "17 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0003",
+    "organisation_name": "Bright Future Institute",
+    "type": "Institute",
+    "objective": "Skill Development",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Karan Verma",
+    "source": "Referral",
+    "created_on": "16 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0004",
+    "organisation_name": "Green Valley School",
+    "type": "School",
+    "objective": "Student Orientation",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Neha Dutt",
+    "source": "Email Campaign",
+    "created_on": "15 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0005",
+    "organisation_name": "Excel Academy",
+    "type": "Institute",
+    "objective": "Workshop Collaboration",
+    "status": "Contacted",
+    "lead_score": "High",
+    "assigned_to": "Sanjay Patel",
+    "source": "Instagram",
+    "created_on": "14 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0006",
+    "organisation_name": "National Public School",
+    "type": "School",
+    "objective": "Career Fair",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Ajay Mehta",
+    "source": "Web Form",
+    "created_on": "13 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0007",
+    "organisation_name": "Wisdom College",
+    "type": "College",
+    "objective": "Career Counseling",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Riya Sharma",
+    "source": "LinkedIn",
+    "created_on": "12 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0008",
+    "organisation_name": "Skyline High",
+    "type": "School",
+    "objective": "Career Roadmap",
+    "status": "Contacted",
+    "lead_score": "Low",
+    "assigned_to": "Neha Dutt",
+    "source": "Cold Call",
+    "created_on": "11 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0009",
+    "organisation_name": "Modern Academy",
+    "type": "Institute",
+    "objective": "Teacher Training",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Sanjay Patel",
+    "source": "WhatsApp",
+    "created_on": "10 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0010",
+    "organisation_name": "Elite International School",
+    "type": "School",
+    "objective": "Career Guidance",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Karan Verma",
+    "source": "Facebook",
+    "created_on": "09 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0011",
+    "organisation_name": "Achievers College",
+    "type": "College",
+    "objective": "Placement Partnership",
+    "status": "Engaged",
+      "lead_score": "High",
+    "assigned_to": "Riya Sharma",
+    "source": "Email Campaign",
+    "created_on": "08 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0012",
+    "organisation_name": "Smart Learn School",
+    "type": "School",
+    "objective": "Counseling Collaboration",
+    "status": "Contacted",
+    "lead_score": "Medium",
+    "assigned_to": "Ajay Mehta",
+    "source": "Web Form",
+    "created_on": "07 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0013",
+    "organisation_name": "FutureEdge Academy",
+    "type": "Institute",
+    "objective": "Skill Development",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Karan Verma",
+    "source": "YouTube",
+    "created_on": "06 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0014",
+    "organisation_name": "Rising Star School",
+    "type": "School",
+    "objective": "Career Roadmap",
+    "status": "Contacted",
+    "lead_score": "High",
+    "assigned_to": "Neha Dutt",
+    "source": "Referral",
+    "created_on": "05 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LOR0015",
+    "organisation_name": "Bright Minds College",
+    "type": "College",
+    "objective": "Internship Program",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Riya Sharma",
+    "source": "LinkedIn",
+    "created_on": "04 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  }
+]
+export const LeadExplorersTable= [
+  {
+    "id": "LEX0001",
+    "name": "Aayush Kapoor",
+    "segment": "UG",
+    "objective": "Investment Banking",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Riya Sinha",
+    "source": "Website",
+    "created_on": "10 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0002",
+    "name": "Neha Sharma",
+    "segment": "PG",
+    "objective": "Data Science",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Aditya Mehra",
+    "source": "LinkedIn",
+    "created_on": "11 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0003",
+    "name": "Rahul Verma",
+    "segment": "Professional",
+    "objective": "Project Management",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Riya Sinha",
+    "source": "Referral",
+    "created_on": "09 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0004",
+    "name": "Simran Kaur",
+    "segment": "UG",
+    "objective": "Marketing",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Karan Yadav",
+    "source": "Instagram",
+    "created_on": "12 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0005",
+    "name": "Anuj Deshmukh",
+    "segment": "PG",
+    "objective": "Finance",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Sanya Singh",
+    "source": "Email Campaign",
+    "created_on": "08 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0006",
+    "name": "Tanya Chhabra",
+    "segment": "UG",
+    "objective": "Consulting",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Riya Sinha",
+    "source": "Website",
+    "created_on": "10 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0007",
+    "name": "Vikram Jain",
+    "segment": "Professional",
+    "objective": "Software Development",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Aditya Mehra",
+    "source": "Webinar",
+    "created_on": "07 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0008",
+    "name": "Nikita Dube",
+    "segment": "PG",
+    "objective": "HR Management",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Karan Yadav",
+    "source": "YouTube",
+    "created_on": "06 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0009",
+    "name": "Aman Singh",
+    "segment": "UG",
+    "objective": "Analytics",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Sanya Singh",
+    "source": "WhatsApp",
+    "created_on": "10 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0010",
+    "name": "Rekha Rao",
+    "segment": "Professional",
+    "objective": "Entrepreneurship",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Aditya Mehra",
+    "source": "Offline Event",
+    "created_on": "05 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0011",
+    "name": "Zaid Qureshi",
+    "segment": "PG",
+    "objective": "Cybersecurity",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Karan Yadav",
+    "source": "LinkedIn",
+    "created_on": "04 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0012",
+    "name": "Meera Joshi",
+    "segment": "UG",
+    "objective": "Design",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Sanya Singh",
+    "source": "Instagram",
+    "created_on": "03 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0013",
+    "name": "Deepak Nair",
+    "segment": "Professional",
+    "objective": "Law",
+    "status": "Follow-up",
+    "lead_score": "Low",
+    "assigned_to": "Aditya Mehra",
+    "source": "Website",
+    "created_on": "02 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0014",
+    "name": "Sonal Bhatt",
+    "segment": "PG",
+    "objective": "Teaching",
+    "status": "Engaged",
+    "lead_score": "High",
+    "assigned_to": "Karan Yadav",
+    "source": "Referral",
+    "created_on": "01 Jul 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  },
+  {
+    "id": "LEX0015",
+    "name": "Rohit Goyal",
+    "segment": "UG",
+    "objective": "Hospitality",
+    "status": "New",
+    "lead_score": "Medium",
+    "assigned_to": "Sanya Singh",
+    "source": "Website",
+    "created_on": "30 Jun 2025",
+    "actions": ["📞 Call", "💬 Message"]
+  }
+]
 export const SkillsTable=[
   {
     "id": "SKL101",
@@ -11655,538 +12188,5 @@ export const JobApplicationTable = [
     "type": "Internship",
     "status": "Rejected",
     "action": ["👁 View", "✏️ Edit", "❌ Delete"]
-  }
-]
-
-export const LeadExplorersTable= [
-  {
-    "id": "LEX0001",
-    "name": "Aayush Kapoor",
-    "segment": "UG",
-    "objective": "Investment Banking",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Riya Sinha",
-    "source": "Website",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0002",
-    "name": "Neha Sharma",
-    "segment": "PG",
-    "objective": "Data Science",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Aditya Mehra",
-    "source": "LinkedIn",
-    "created_on": "11 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0003",
-    "name": "Rahul Verma",
-    "segment": "Professional",
-    "objective": "Project Management",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Riya Sinha",
-    "source": "Referral",
-    "created_on": "09 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0004",
-    "name": "Simran Kaur",
-    "segment": "UG",
-    "objective": "Marketing",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "Instagram",
-    "created_on": "12 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0005",
-    "name": "Anuj Deshmukh",
-    "segment": "PG",
-    "objective": "Finance",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "Email Campaign",
-    "created_on": "08 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0006",
-    "name": "Tanya Chhabra",
-    "segment": "UG",
-    "objective": "Consulting",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Riya Sinha",
-    "source": "Website",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0007",
-    "name": "Vikram Jain",
-    "segment": "Professional",
-    "objective": "Software Development",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Aditya Mehra",
-    "source": "Webinar",
-    "created_on": "07 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0008",
-    "name": "Nikita Dube",
-    "segment": "PG",
-    "objective": "HR Management",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "YouTube",
-    "created_on": "06 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0009",
-    "name": "Aman Singh",
-    "segment": "UG",
-    "objective": "Analytics",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "WhatsApp",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0010",
-    "name": "Rekha Rao",
-    "segment": "Professional",
-    "objective": "Entrepreneurship",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Aditya Mehra",
-    "source": "Offline Event",
-    "created_on": "05 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0011",
-    "name": "Zaid Qureshi",
-    "segment": "PG",
-    "objective": "Cybersecurity",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "LinkedIn",
-    "created_on": "04 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0012",
-    "name": "Meera Joshi",
-    "segment": "UG",
-    "objective": "Design",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "Instagram",
-    "created_on": "03 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0013",
-    "name": "Deepak Nair",
-    "segment": "Professional",
-    "objective": "Law",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Aditya Mehra",
-    "source": "Website",
-    "created_on": "02 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0014",
-    "name": "Sonal Bhatt",
-    "segment": "PG",
-    "objective": "Teaching",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Yadav",
-    "source": "Referral",
-    "created_on": "01 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LEX0015",
-    "name": "Rohit Goyal",
-    "segment": "UG",
-    "objective": "Hospitality",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanya Singh",
-    "source": "Website",
-    "created_on": "30 Jun 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  }
-]
-export const LeadOrganisationTable = [
-  {
-    "id": "LOR0001",
-    "organisation_name": "Springdale Public",
-    "type": "School",
-    "objective": "Career Counseling",
-    "status": "Contacted",
-    "lead_score": "High",
-    "assigned_to": "Ajay Mehta",
-    "source": "Web Form",
-    "created_on": "18 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0002",
-    "organisation_name": "St. Xavier's College",
-    "type": "College",
-    "objective": "Internship Program",
-    "status": "Contacted",
-    "lead_score": "Medium",
-    "assigned_to": "Riya Sharma",
-    "source": "LinkedIn",
-    "created_on": "17 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0003",
-    "organisation_name": "Bright Future Institute",
-    "type": "Institute",
-    "objective": "Skill Development",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Karan Verma",
-    "source": "Referral",
-    "created_on": "16 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0004",
-    "organisation_name": "Green Valley School",
-    "type": "School",
-    "objective": "Student Orientation",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Neha Dutt",
-    "source": "Email Campaign",
-    "created_on": "15 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0005",
-    "organisation_name": "Excel Academy",
-    "type": "Institute",
-    "objective": "Workshop Collaboration",
-    "status": "Contacted",
-    "lead_score": "High",
-    "assigned_to": "Sanjay Patel",
-    "source": "Instagram",
-    "created_on": "14 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0006",
-    "organisation_name": "National Public School",
-    "type": "School",
-    "objective": "Career Fair",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Ajay Mehta",
-    "source": "Web Form",
-    "created_on": "13 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0007",
-    "organisation_name": "Wisdom College",
-    "type": "College",
-    "objective": "Career Counseling",
-    "status": "Engaged",
-    "lead_score": "High",
-    "assigned_to": "Riya Sharma",
-    "source": "LinkedIn",
-    "created_on": "12 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0008",
-    "organisation_name": "Skyline High",
-    "type": "School",
-    "objective": "Career Roadmap",
-    "status": "Contacted",
-    "lead_score": "Low",
-    "assigned_to": "Neha Dutt",
-    "source": "Cold Call",
-    "created_on": "11 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0009",
-    "organisation_name": "Modern Academy",
-    "type": "Institute",
-    "objective": "Teacher Training",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Sanjay Patel",
-    "source": "WhatsApp",
-    "created_on": "10 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0010",
-    "organisation_name": "Elite International School",
-    "type": "School",
-    "objective": "Career Guidance",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Karan Verma",
-    "source": "Facebook",
-    "created_on": "09 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0011",
-    "organisation_name": "Achievers College",
-    "type": "College",
-    "objective": "Placement Partnership",
-    "status": "Engaged",
-      "lead_score": "High",
-    "assigned_to": "Riya Sharma",
-    "source": "Email Campaign",
-    "created_on": "08 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0012",
-    "organisation_name": "Smart Learn School",
-    "type": "School",
-    "objective": "Counseling Collaboration",
-    "status": "Contacted",
-    "lead_score": "Medium",
-    "assigned_to": "Ajay Mehta",
-    "source": "Web Form",
-    "created_on": "07 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0013",
-    "organisation_name": "FutureEdge Academy",
-    "type": "Institute",
-    "objective": "Skill Development",
-    "status": "Follow-up",
-    "lead_score": "Low",
-    "assigned_to": "Karan Verma",
-    "source": "YouTube",
-    "created_on": "06 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0014",
-    "organisation_name": "Rising Star School",
-    "type": "School",
-    "objective": "Career Roadmap",
-    "status": "Contacted",
-    "lead_score": "High",
-    "assigned_to": "Neha Dutt",
-    "source": "Referral",
-    "created_on": "05 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  },
-  {
-    "id": "LOR0015",
-    "organisation_name": "Bright Minds College",
-    "type": "College",
-    "objective": "Internship Program",
-    "status": "New",
-    "lead_score": "Medium",
-    "assigned_to": "Riya Sharma",
-    "source": "LinkedIn",
-    "created_on": "04 Jul 2025",
-    "actions": ["📞 Call", "💬 Message"]
-  }
-]
-
-export const PoolTable = [
-  {
-    "id": "LD301",
-    "type": "Lead",
-    "concern": "Abandoned Cart",
-    "objective": "Upsell",
-    "for": "Assessment",
-    "source": "Web",
-    "age": "1 hr ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD302",
-    "type": "Lead",
-    "concern": "Course Inquiry",
-    "objective": "Enrollment",
-    "for": "UG Program",
-    "source": "Email",
-    "age": "2 hrs ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD303",
-    "type": "Lead",
-    "concern": "Career Confusion",
-    "objective": "Guidance",
-    "for": "UG Student",
-    "source": "Web",
-    "age": "4 hrs ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD304",
-    "type": "Lead",
-    "concern": "Abandoned Cart",
-    "objective": "Re-engagement",
-    "for": "Assessment",
-    "source": "Social Media",
-    "age": "6 hrs ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD305",
-    "type": "Lead",
-    "concern": "Exam Confusion",
-    "objective": "Clarification",
-    "for": "PG Aspirant",
-    "source": "Web",
-    "age": "8 hrs ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD306",
-    "type": "Lead",
-    "concern": "Abandoned Cart",
-    "objective": "Follow-up",
-    "for": "Mentorship",
-    "source": "App",
-    "age": "10 hrs ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD307",
-    "type": "Lead",
-    "concern": "Career Change",
-    "objective": "Transition",
-    "for": "Working Professional",
-    "source": "Referral",
-    "age": "12 hrs ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD308",
-    "type": "Lead",
-    "concern": "Course Inquiry",
-    "objective": "Upskill",
-    "for": "PG Program",
-    "source": "Web",
-    "age": "1 day ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD309",
-    "type": "Lead",
-    "concern": "Assessment Delay",
-    "objective": "Resolve",
-    "for": "Student",
-    "source": "Email",
-    "age": "2 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD310",
-    "type": "Lead",
-    "concern": "Abandoned Cart",
-    "objective": "Upsell",
-    "for": "Course Bundle",
-    "source": "App",
-    "age": "2 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD311",
-    "type": "Lead",
-    "concern": "Refund Request",
-    "objective": "Retention",
-    "for": "Coaching",
-    "source": "Web",
-    "age": "3 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD312",
-    "type": "Lead",
-    "concern": "No Show",
-    "objective": "Rebook",
-    "for": "Mentorship",
-    "source": "Call",
-    "age": "3 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD313",
-    "type": "Lead",
-    "concern": "Payment Failure",
-    "objective": "Recovery",
-    "for": "Subscription",
-    "source": "App",
-    "age": "4 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD314",
-    "type": "Lead",
-    "concern": "Unsubscribed",
-    "objective": "Retention",
-    "for": "Newsletter",
-    "source": "Email",
-    "age": "4 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
-  },
-  {
-    "id": "LD315",
-    "type": "Lead",
-    "concern": "Abandoned Cart",
-    "objective": "Upsell",
-    "for": "Assessment",
-    "source": "Web",
-    "age": "5 days ago",
-    "status": "🆕 New",
-    "action": "🔒 Assign"
   }
 ]
