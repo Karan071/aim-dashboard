@@ -18,6 +18,7 @@ import {
   Bell,
   RotateCcw,
   Ban,
+  Eye,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -58,44 +59,43 @@ import type { DateRange } from "react-day-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
+
 const Stats = [
   {
     title: "Total Enrollments",
     value: "38",
     icon: Users,
-    performance: Up,
+   
   },
   {
     title: "Progress",
     value: "26",
     icon: FileCheck2,
-    performance: Down,
+  
   },
   {
     title: "Completed",
     value: "7",
     icon: FileText,
-    performance: Up,
+  
   },
   {
     title: "Started",
     value: "5",
     icon: Clock,
-    performance: Up,
+   
   },
   {
     title: "Total Revenue",
     value: "6",
     icon: CheckCircle2,
-    performance: Up,
+
   },
   {
     title: "Via Partners",
     value: "6",
     icon: CheckCircle2,
-    performance: Up,
+   
   },
 ];
 
@@ -385,7 +385,7 @@ function StatCard() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
+              
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -848,7 +848,7 @@ function AssessmentTable() {
                               </Button>
                             </TooltipTrigger>
                             <TooltipContent side="top" className="text-xs">
-                              Click to change coach
+                              Click to assign coach
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
@@ -875,7 +875,33 @@ function AssessmentTable() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-sm">{user.result || "-"}</div>
+                    <div className="text-sm flex justify-center items-center">
+                      {user.result ? (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="noborder"
+                                size="sm"
+                                className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  // navigate(`/result-details/${user.id}`) or your view logic
+                                }}
+                              >
+                                <Eye className="h-4 w-4" />
+                                <span className="sr-only">View Result</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="top" className="text-xs">
+                              View Result
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      ) : (
+                        <span className="text-center">-</span>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
