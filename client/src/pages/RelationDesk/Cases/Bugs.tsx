@@ -78,37 +78,39 @@ export function Bugs() {
       <h1 className="text-2xl font-bold text-[var(--text-head)]">Bugs</h1>
       <StatsCards />
       <Buttonbar />
-      
       <BugTable />
     </div>
   );
 }
 
 function StatsCards() {
-    return (
-        <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-3">
-            {stats.map((stat, index) => (
-                <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
-                    <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
-                        <div className="flex justify-between h-full items-center">
-                            <div
-                                className={`${color} text-xs uppercase text-light line-clamp-1`}
-                            >
-                                {stat.title}
-                            </div>
-                            {stat.performance}
-                        </div>
-                        <div className="flex  items-center gap-4">
-                            <div className={`rounded-full `}>
-                                <stat.icon className={`h-8 w-8 ${color2}`} />
-                            </div>
-                            <div className={`${color2} text-2xl`}>{stat.value}</div>
-                        </div>
-                    </CardHeader>
-                </Card>
-            ))}
-        </div>
-    );
+  return (
+    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-3">
+      {stats.map((stat, index) => (
+        <Card
+          key={index}
+          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+        >
+          <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
+            <div className="flex justify-between h-full items-center">
+              <div
+                className={`${color} text-xs uppercase text-light line-clamp-1`}
+              >
+                {stat.title}
+              </div>
+              {stat.performance}
+            </div>
+            <div className="flex  items-center gap-4">
+              <div className={`rounded-full `}>
+                <stat.icon className={`h-8 w-8 ${color2}`} />
+              </div>
+              <div className={`${color2} text-2xl`}>{stat.value}</div>
+            </div>
+          </CardHeader>
+        </Card>
+      ))}
+    </div>
+  );
 }
 
 function Buttonbar() {
@@ -121,21 +123,22 @@ function Buttonbar() {
       </Button>
       <div className="flex gap-4">
         {/*<Buttonbar />*/}
-      <Button
-        variant="standard" size="new" 
-        onClick={() => setShowFilter(true)}
-        className="flex items-center gap-2 self-end"
-      >
-        <Filter className="h-3 w-3" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
+        <Button
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+          className="flex items-center gap-2 self-end"
+        >
+          <Filter className="h-3 w-3" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
 
-      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
         <Button variant="delete" size="new">
           <Trash2 className="h-4 w-4" />
         </Button>
         <Button variant="standard" size="new">
-          <FileUp className="h-4 w-4"/>
+          <FileUp className="h-4 w-4" />
           <span className="">Import</span>
         </Button>
       </div>
@@ -175,23 +178,18 @@ function AdvancedFilters({ onClose }: FilterProps) {
   const [module, setModule] = useState("Sessions");
   const [priority, setPriority] = useState("Low");
 
-  const tabList = [
-    "General",
-    "Module",
-    "Priority",
-    "Status",
-    "Date Range",
-  ];
+  const tabList = ["General", "Module", "Priority", "Status", "Date Range"];
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-
       <div
         ref={modalRef}
         className="relative w-full max-w-[700px] h-[500px] rounded-xl bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Filters
+          </CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
@@ -202,16 +200,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${
+                    activeTab === tab
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -224,9 +222,15 @@ function AdvancedFilters({ onClose }: FilterProps) {
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Search by User / Keyword :</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
-
+                <label htmlFor="Gen" className="text-[var(--text)]">
+                  Search by User / Keyword :
+                </label>
+                <Input
+                  id="Gen"
+                  placeholder="Enter .."
+                  type="text"
+                  className="mt-4 w-full "
+                />
               </>
             )}
 
@@ -236,12 +240,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Select from the Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "New",
-                    "In Progress",
-                    "Fixed",
-                    "Verified",
-                  ].map((option) => (
+                  {["New", "In Progress", "Fixed", "Verified"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -260,20 +259,17 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Select the Module :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Sessions",
-                    "Assessments",
-                    "Platform",
-                    "Notifications",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={module}
-                      onChange={setModule}
-                    />
-                  ))}
+                  {["Sessions", "Assessments", "Platform", "Notifications"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={module}
+                        onChange={setModule}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -284,12 +280,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Select the Priority:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Low",
-                    "Medium",
-                    "High",
-                    "Critical"
-                  ].map((option) => (
+                  {["Low", "Medium", "High", "Critical"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -302,11 +293,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
               </>
             )}
 
-
-
             {activeTab === "Date Range" && (
               <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter the Date Range:</label>
+                <label htmlFor="act" className="text-[var(--text)]">
+                  Enter the Date Range:
+                </label>
                 <div className="mt-4 min-w-full">
                   <DatePicker />
                 </div>
@@ -331,7 +322,6 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
-
 function BugTable() {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -346,10 +336,19 @@ function BugTable() {
     sortedData.sort((a, b) => {
       const aValue = a[sortConfig.key as keyof typeof a];
       const bValue = b[sortConfig.key as keyof typeof b];
-      if (aValue < bValue) {
+
+      // Handle undefined or null values
+      if (aValue === undefined || aValue === null) return 1;
+      if (bValue === undefined || bValue === null) return -1;
+
+      // Convert to strings for consistent comparison
+      const aString = String(aValue);
+      const bString = String(bValue);
+
+      if (aString < bString) {
         return sortConfig.direction === "ascending" ? -1 : 1;
       }
-      if (aValue > bValue) {
+      if (aString > bString) {
         return sortConfig.direction === "ascending" ? 1 : -1;
       }
       return 0;
@@ -388,9 +387,7 @@ function BugTable() {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(
-        currentRecords.map((user): number => user.id)
-      );
+      setSelectedUsers(currentRecords.map((user): number => user.id));
     }
   };
 
@@ -401,10 +398,16 @@ function BugTable() {
           <div className="flex items-center gap-2 border-none shadow-none">
             <Checkbox
               id="select-all"
-              checked={selectedUsers.length === currentRecords.length && currentRecords.length > 0}
+              checked={
+                selectedUsers.length === currentRecords.length &&
+                currentRecords.length > 0
+              }
               onCheckedChange={toggleSelectAll}
             />
-            <label htmlFor="select-all" className="text-sm font-medium text-[var(--text)]">
+            <label
+              htmlFor="select-all"
+              className="text-sm font-medium text-[var(--text)]"
+            >
               Select All
             </label>
             {selectedUsers.length > 0 && (
@@ -415,7 +418,9 @@ function BugTable() {
           </div>
 
           {selectedUsers.length > 0 && (
-            <div className="flex gap-2">        {/*wrap */}
+            <div className="flex gap-2">
+              {" "}
+              {/*wrap */}
               <Button variant="border" size="sm">
                 <FileWarning className="h-4 w-4" />
                 Mark In Progress
@@ -498,6 +503,14 @@ function BugTable() {
                 {sortConfig?.key === "description" &&
                   (sortConfig.direction === "ascending" ? "↑" : "↓")}
               </TableHead>
+              <TableHead
+                onClick={() => requestSort("assignTo")}
+                className="cursor-pointer text-[var(--text)]"
+              >
+                Assigned To{" "}
+                {sortConfig?.key === "assignedTo" &&
+                  (sortConfig.direction === "ascending" ? "↑" : "↓")}
+              </TableHead>
               <TableHead className="text-[var(--text)]">Screenshot</TableHead>
               <TableHead
                 onClick={() => requestSort("status")}
@@ -516,8 +529,7 @@ function BugTable() {
                 key={bugs.id}
                 data-id={bugs.id}
                 className={cn(
-                  "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
-
+                  "relative z-10 cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]"
                 )}
                 onClick={() => {
                   toggleSelectUser(bugs.id);
@@ -525,8 +537,7 @@ function BugTable() {
               >
                 <TableCell
                   className={cn(
-                    "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
-
+                    "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]"
                   )}
                 >
                   <Checkbox
@@ -584,7 +595,7 @@ function BugTable() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="text-[var(--text)] dark:bg-[var(--background)]">
-              {[ 10, 25, 50, 100].map((size) => (
+              {[10, 25, 50, 100].map((size) => (
                 <DropdownMenuItem
                   key={size}
                   onClick={() => {
@@ -618,8 +629,9 @@ function BugTable() {
               key={page}
               variant={page === currentPage ? "brand" : "border"}
               size="sm"
-              className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"
-                }`}
+              className={`h-8 w-8 p-0 ${
+                page === currentPage ? "text-white" : "text-[var(--text)]"
+              }`}
               onClick={() => setCurrentPage(page)}
             >
               {page}

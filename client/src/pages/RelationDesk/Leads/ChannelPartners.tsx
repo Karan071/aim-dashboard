@@ -1,9 +1,3 @@
-// export function ChannelPartners() {
-//   return <div>ChannelPartners</div>;
-// }
-// export function Explorers() {
-//   return <div>Explorers</div>;
-// }
 import { Button } from "@/components/ui/button";
 import {
   Filter,
@@ -647,14 +641,6 @@ function TableSection() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
-                  onClick={() => requestSort("Commission")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Commission{" "}
-                  {sortConfig?.key === "Commission" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
-                </TableHead>
-                <TableHead
                   onClick={() => requestSort("AssignedTo")}
                   className="cursor-pointer text-[var(--text)]"
                 >
@@ -723,9 +709,6 @@ function TableSection() {
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.Status}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-low">{user.Commission}</div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="standard">{user.AssignedTo}</Badge>
