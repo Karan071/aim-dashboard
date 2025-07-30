@@ -1,7 +1,5 @@
 import {
   Clock,
-  CircleArrowUp,
-  CircleArrowDown,
   Search,
   Users,
   FileCheck2,
