@@ -905,9 +905,9 @@ function AssessmentTable() {
                             <div className="font-medium text-[var(--text)]">
                               {user.assignCoach}
                             </div>
-                            <div className="text-xs text-[var(--text)] opacity-70">
+                            {/* <div className="text-xs text-[var(--text)] opacity-70">
                               Assigned
-                            </div>
+                            </div> */}
                           </div>
                           <TooltipProvider>
                             <Tooltip>
