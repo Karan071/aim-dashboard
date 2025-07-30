@@ -410,7 +410,7 @@ function CoachAssignmentModal({
   isOpen,
   onClose,
   assessmentId,
-  currentCoach,
+  
   onAssignCoach,
 }: CoachAssignmentModalProps) {
   const [selectedCoach, setSelectedCoach] = useState("");
