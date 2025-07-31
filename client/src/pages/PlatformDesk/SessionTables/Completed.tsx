@@ -1,4 +1,4 @@
-import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle } from "lucide-react";
+import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle, PenBox } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -10,19 +10,20 @@ import { Badge } from "@/components/ui/badge";
 
 import { cn } from "@/lib/utils"
 import { useEffect } from "react";
+import asset from "@/assets/asset.jpg";
 
 
 const tableData =[
     {
       "id": "SES2001",
       "explorer": {
-        "photo": "/avatars/explorer1.jpg",
+        "photo": asset,
         "fullName": "Aayush Kapoor",
         "explorerId": "EXP001",
         "UG": "B.Com (Hons)"
       },
       "coach": {
-        "photo": "/avatars/coach1.jpg",
+        "photo": asset,
         "fullName": "Riya Sinha",
         "coachId": "COA001",
         "careerType": "Consultant"
@@ -50,13 +51,13 @@ const tableData =[
     {
       "id": "SES2002",
       "explorer": {
-        "photo": "/avatars/explorer2.jpg",
+        "photo": asset,
         "fullName": "Neha Sharma",
         "explorerId": "EXP002",
         "UG": "B.Sc Physics"
       },
       "coach": {
-        "photo": "/avatars/coach2.jpg",
+        "photo": asset,
         "fullName": "Raj Mehta",
         "coachId": "COA002",
         "careerType": "Mentor"
@@ -84,13 +85,13 @@ const tableData =[
     {
       "id": "SES2003",
       "explorer": {
-        "photo": "/avatars/explorer3.jpg",
+        "photo": asset,
         "fullName": "Yuvraj Singh",
         "explorerId": "EXP003",
         "UG": "B.A. History"
       },
       "coach": {
-        "photo": "/avatars/coach3.jpg",
+          "photo": asset,
         "fullName": "Sneha Verma",
         "coachId": "COA003",
         "careerType": "Educator"
@@ -430,9 +431,9 @@ export function CompletedTable(){
                           <div className="text-xs">{user.explorer.explorerId}</div>
                           <div className="text-xs">{user.explorer.UG}</div>
                           <div className="flex items-center gap-1">
-                          <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" />Call</button>
+                          <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" /></button>
                         <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" />Message</button>
+                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" /></button>
                       
                           </div>
                         </div>
@@ -450,15 +451,15 @@ export function CompletedTable(){
                       </div>
                       <div>
                         <div className="flex justify-start flex-col">
-                          <div className="font-medium">{user.coach.fullName}</div>
+                          <div className="font-medium flex items-center gap-1">{user.coach.fullName} 
+                            <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><PenBox className="h-3 w-3" /></button>
+                          </div>
                           <div className="text-xs">{user.coach.coachId}</div>
                           <div className="text-xs">{user.coach.careerType}</div>
                           <div className="flex items-center gap-1">
-                          <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">Change Coach</button>
+                          <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" /></button>
                         <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                          <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" />Call</button>
-                        <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" />Message</button>
+                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" /></button>
                       
                           </div> </div>
                       </div>
