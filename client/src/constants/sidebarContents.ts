@@ -229,6 +229,11 @@ export const SidebarData = {
           title: "Custom Inputs",
           url: "/desk/review/custom-inputs",
           icon: getNextIcon(),
+        },        
+        {
+          title: "Follow Ups",
+          url: "/desk/review/follow-ups",
+          icon: getNextIcon(),
         },
       ],
     },
