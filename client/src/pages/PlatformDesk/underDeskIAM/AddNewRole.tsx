@@ -11,14 +11,19 @@ import {
 
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function AddRole() {
+export function AddNewRole() {
   return (
+    <div className="flex flex-col gap-4">
+        <h1 className="text-xl font-semibold text-[var(--text-head)]">
+            Add New Role
+          </h1>
     <div className="flex gap-4 flex-row">
-      <div className="flex flex-col w-[55%]">
+      <div className="flex flex-col p-6 gap-2 bg-[var(--background)] rounded-sm">
         <div className="space-y-4 text-[var(--text)] flex flex-col">
-        <div className="flex flex-col pb-4 w-full gap-4">
+          <div className="flex flex-col pb-4 w-full gap-4">
           <div className="col-span-1 w-full flex flex-col gap-2">
             <Label className="text-sm font-semibold">Role Name</Label>
             <Input placeholder="Enter Role Name" className="" />
@@ -43,11 +48,17 @@ export default function AddRole() {
         <Roles />
       </div>
     </div>
+    <div className="flex justify-end">
+        <Button variant="brand" size="new">
+            Save
+          </Button>
+        </div>
+    </div>
   );
 }
 
 const HeaderRow = () => (
-  <div className="grid grid-cols-8 gap-2 px-4 py-2 items-center rounded-t-sm text-sm font-medium">
+  <div className="grid grid-cols-8 gap-2 px-4 pt-0 mt-0 py-2 items-center rounded-t-sm text-sm font-medium">
     <span className="col-span-2">Roles & Permissions</span>
     <span className="text-center">Edit</span>
     <span className="text-center">Add</span>

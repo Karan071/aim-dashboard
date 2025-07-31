@@ -1,4 +1,4 @@
-import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle } from "lucide-react";
+import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle, Plus, PenBox } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -10,16 +10,17 @@ import { Badge } from "@/components/ui/badge";
 
 import { cn } from "@/lib/utils"
 import { useEffect } from "react";
+import { coachesList } from "@/data/Data";
+import asset from "@/assets/asset.jpg";
 
-
-const tableData = [
+const tData = [
     {
       "id": "APP0001",
-      "photo": "/avatars/1.jpg",
+      "photo": asset,
       "fullName": "Aayush Kapoor",
       "explorerId": "EX12345",
       "ug": "B.Com",
-      "assignCoach": "Riya Sinha",
+      "assignCoach": "",
       "date": "2025-07-30",
       "time": "10:00 AM",
       "type": "Instant - Phone",
@@ -32,11 +33,11 @@ const tableData = [
     },
     {
       "id": "APP0002",
-      "photo": "/avatars/2.jpg",
+      "photo": asset,
       "fullName": "Tanya Mehra",
       "explorerId": "EX12346",
       "ug": "BA Psychology",
-      "assignCoach": "Amit Roy",
+      "assignCoach": "",
       "date": "2025-07-29",
       "time": "12:30 PM",
       "type": "Introductory - Video",
@@ -49,11 +50,11 @@ const tableData = [
     },
     {
       "id": "APP0003",
-      "photo": "/avatars/3.jpg",
+      "photo": asset,
       "fullName": "Harshdeep Kaur",
       "explorerId": "EX12347",
       "ug": "B.Tech",
-      "assignCoach": "Divya Sharma",
+      "assignCoach": "",
       "date": "2025-07-28",
       "time": "2:00 PM",
       "type": "Phone",
@@ -66,11 +67,11 @@ const tableData = [
     },
     {
       "id": "APP0004",
-      "photo": "/avatars/4.jpg",
+      "photo": asset,
       "fullName": "Manav Khanna",
       "explorerId": "EX12348",
       "ug": "B.Sc",
-      "assignCoach": "Sneha Kapoor",
+      "assignCoach": "",
       "date": "2025-08-01",
       "time": "4:30 PM",
       "type": "B2B - Video",
@@ -83,11 +84,11 @@ const tableData = [
     },
     {
       "id": "APP0005",
-      "photo": "/avatars/5.jpg",
+      "photo": asset,
       "fullName": "Nikhil Sharma",
       "explorerId": "EX12349",
       "ug": "BBA",
-      "assignCoach": "Riya Sinha",
+      "assignCoach": "",
       "date": "2025-08-03",
       "time": "11:00 AM",
       "type": "AskQ",
@@ -99,9 +100,137 @@ const tableData = [
       "actions": ["View", "Logs"]
     }
   ]
+
   
+  interface CoachAssignmentModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    assessmentId: string;
+    currentCoach: string;
+    onAssignCoach: (assessmentId: string, coachId: string) => void;
+  }
+
+function CoachAssignmentModal({ 
+  isOpen, 
+  onClose, 
+  assessmentId, 
+  currentCoach, 
+  onAssignCoach 
+}: CoachAssignmentModalProps) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCoach, setSelectedCoach] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // 🔁 Reset inputs on modal open
+  useEffect(() => {
+    if (isOpen) {
+      setSearchTerm("");
+      setSelectedCoach("");
+      setShowSuggestions(false);
+    }
+  }, [isOpen]);
+
+  const filteredCoaches = coachesList.filter(
+    (coach) =>
+      coach.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      coach.id.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSelect = (coach: any) => {
+    setSearchTerm(`${coach.name} - ${coach.id}`);
+    setSelectedCoach(coach.id);
+    setShowSuggestions(false);
+  };
+
+  const handleAssignCoach = () => {
+    if (selectedCoach) {
+      onAssignCoach(assessmentId, selectedCoach);
+      onClose(); // ✅ close modal after assigning
+    }
+  };
+
+  const handleRemoveCoach = () => {
+    onAssignCoach(assessmentId, ""); // ✅ set to empty string
+    onClose(); // ✅ close modal right away
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+      <div className="relative w-full max-w-[500px] rounded-xl bg-[var(--background)] p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-[var(--text-head)]">
+            Assign Coach
+          </h2>
+          <button
+            className="text-sm text-[var(--brand-color)] p-0 h-auto hover:text-[var(--brand-color2)]"
+            onClick={onClose}
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="mb-4 relative">
+          <label className="text-base text-[var(--text)] mb-2 block">Select Coach:</label>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setShowSuggestions(true);
+            }}
+            className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)] text-sm"
+            placeholder="Type coach name or ID..."
+          />
+          {showSuggestions && searchTerm && (
+            <ul className="absolute z-10 w-full bg-[var(--background)] border rounded-md mt-1 max-h-48 overflow-auto">
+              {filteredCoaches.length > 0 ? (
+                filteredCoaches.map((coach) => (
+                  <li
+                    key={coach.id}
+                    className="px-4 py-2 cursor-pointer hover:bg-[var(--faded)] text-sm text-[var(--text)]"
+                    onClick={() => handleSelect(coach)}
+                  >
+                    {coach.name} - {coach.id} ({coach.specialization})
+                  </li>
+                ))
+              ) : (
+                <li className="px-4 py-2 text-[var(--text)] text-sm">No matches found</li>
+              )}
+            </ul>
+          )}
+        </div>
+
+        <div className="flex gap-2 justify-end">
+          {currentCoach && (
+            <Button variant="delete" size="sm" onClick={handleRemoveCoach}>
+              Remove Coach
+            </Button>
+          )}
+          <Button variant="border" size="sm" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button
+            variant="brand"
+            size="sm"
+            onClick={handleAssignCoach}
+            disabled={!selectedCoach}
+          >
+            Assign Coach
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+ 
 
 export function InPoolTable(){
+  
+  const [data, setData] = useState(tData);
         const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
         const [currentPage, setCurrentPage] = useState(1);
         const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -110,12 +239,16 @@ export function InPoolTable(){
           direction: "ascending" | "descending";
         } | null>(null);
         const [selectedStack, setSelectedStack] = useState<
-          typeof tableData
-        >(tableData[0] ? [tableData[0]] : []);
-        const [focusedId, setFocusedId] = useState<string | null>(tableData[0]?.id || null);
+          typeof data
+        >(data[0] ? [data[0]] : []);
+        const [focusedId, setFocusedId] = useState<string | null>(data[0]?.id || null);
+        
+  const [isCoachAssignmentOpen, setIsCoachAssignmentOpen] = useState(false);
+  const [selectedAssessmentId, setSelectedAssessmentId] = useState("");
+  const [selectedCurrentCoach, setSelectedCurrentCoach] = useState("");
       
         // Sorting logic
-        const sortedData = [...tableData];
+        const sortedData = [...data];
         if (sortConfig !== null) {
           sortedData.sort((a, b) => {
             const aValue = a[sortConfig.key as keyof typeof a];
@@ -196,7 +329,7 @@ export function InPoolTable(){
         }, [selectedStack, focusedId]);
       
       
-        const handleRowClick = (user: (typeof tableData)[0]) => {
+        const handleRowClick = (user: (typeof data)[0]) => {
           // Double-click detected
           const exists = selectedStack.find((c) => c.id === user.id);
           if (!exists) {
@@ -217,7 +350,44 @@ export function InPoolTable(){
             setSelectedUsers([...selectedUsers, userId]);
           }
         };
+
+        const handleOpenCoachAssignment = (assessmentId: string, currentCoach: string) => {
+          setSelectedAssessmentId(assessmentId);
+          setSelectedCurrentCoach(currentCoach);
+          setIsCoachAssignmentOpen(true);
+        };
       
+        const handleCloseCoachAssignment = () => {
+          setIsCoachAssignmentOpen(false);
+          setSelectedAssessmentId("");
+          setSelectedCurrentCoach("");
+        };
+      
+        const handleAssignCoach = (assessmentId: string, coachId: string) => {
+          // Handle REMOVE separately
+          if (!coachId) {
+            setData((prev: any) =>
+              prev.map((row: any) =>
+                row.id === assessmentId ? { ...row, assignCoach: "" } : row
+              )
+            );
+            handleCloseCoachAssignment();
+            return;
+          }
+        
+          // Normal coach assignment
+          const coach = coachesList.find((c) => c.id === coachId);
+          if (!coach) return;
+        
+          setData((prev: any) =>
+            prev.map((row: any) =>
+              row.id === assessmentId ? { ...row, assignCoach: coach.id } : row
+            )
+          );
+        
+          handleCloseCoachAssignment();
+        };
+
         return (
           <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
             <div className="flex-1 rounded-md rounded-tl-none border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
@@ -411,22 +581,73 @@ export function InPoolTable(){
                           <div className="text-xs">{user.explorerId}</div>
                           <div className="text-xs">{user.ug}</div>
                           <div className="flex items-center gap-1">
-                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" />Call</button>
+                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" /></button>
                         <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" />Message</button>
+                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" /></button>
                       </div>
                         </div>
                       </div>
                       
                     </div>
                   </TableCell>
-                        <TableCell>
-                            <div>
-                          <div className="text-low">{user.assignCoach}</div>
-                          
-                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">Confirmation</button>
-                            </div>
-                        </TableCell>
+                  <TableCell className="">
+  <div className="w-full max-w-full text-sm">
+    {user.assignCoach ? (() => {
+      const coach = coachesList.find(
+        (c) => c.id.toLowerCase() === user.assignCoach.toLowerCase()
+      );
+
+      return coach ? (
+              <div className="flex items-start justify-between gap-4 min-w-[250px]">
+                {/* Coach Display */}
+                <div className="flex items-center gap-3">
+                  <img
+                    src={coach.photo || asset}
+                    alt={coach.name}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
+                  <div className="flex flex-col justify-center">
+                    <div className="font-semibold text-[var(--text)] flex items-center gap-2">{coach.name}
+                    <button
+                    className="text-xs hidden group-hover:inline-flex"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenCoachAssignment(user.id, user.assignCoach);
+                    }}
+                  >
+                    <PenBox className="text-xs h-3 w-3" />
+                  </button>
+                    </div>
+                    <div className="text-xs text-[var(--text)]">{coach.id}</div>
+                    <div className="text-xs text-[var(--text)]">{coach.specialization}</div>
+                  </div>
+                </div>
+                
+              </div>
+      ) : (
+        <div className="text-[var(--red)] text-xs">Coach not found</div>
+      );
+    })() : (
+      <Button
+        variant="noborder"
+        size="sm"
+        className="text-[var(--text)] hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)]"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleOpenCoachAssignment(user.id, "");
+        }}
+      >
+        <span className="flex items-center gap-1">
+          <Plus className="h-3 w-3" />
+        </span>
+      </Button>
+    )}
+  </div>
+</TableCell>
+
+
+
+
                             <TableCell>
                                 <div className="text-sm flex flex-col">
                                     <div>{`${user.date}`}</div>
@@ -574,6 +795,14 @@ export function InPoolTable(){
                   >
                     <ChevronRight className="h-4 w-4" />
                   </Button>
+
+                  <CoachAssignmentModal
+        isOpen={isCoachAssignmentOpen}
+        onClose={handleCloseCoachAssignment}
+        assessmentId={selectedAssessmentId}
+        currentCoach={selectedCurrentCoach}
+        onAssignCoach={handleAssignCoach}
+      />
                 </div>
               </div>
             </div>

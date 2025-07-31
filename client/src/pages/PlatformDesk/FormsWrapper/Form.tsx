@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils"
 import { useEffect } from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import DatePick from "@/components/ui/DatePicker"
+import { DatePickerWithRange } from "@/components/date-picker";
 
 
 
@@ -63,23 +64,27 @@ const orgStats = [
 ];
 
 
-export function Formbar() {
+export function FormTopbar() {
+  
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-        <div className="flex gap-4">
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Forms
+        </h1>
       </div>
       <div className="flex gap-4">
+        <DatePickerWithRange />
         <Button
-          variant="standard" size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
 
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );

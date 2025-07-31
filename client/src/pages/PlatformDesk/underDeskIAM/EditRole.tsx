@@ -11,6 +11,7 @@ import {
 
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 
 export function EditRole() {
   return (
@@ -31,12 +32,16 @@ export function EditRole() {
           </div>
         </div>
         <div className="space-y-4 text-[var(--text)] flex flex-col">
-          <div className="grid grid-cols-2 pb-4">
+        <div className="flex flex-col pb-4 w-full gap-4">
+          <div className="col-span-1 w-full flex flex-col gap-2">
+            <Label className="text-sm font-semibold">Role Name</Label>
+            <Input placeholder="Enter Role Name" className="" />
+          </div>
             <div className="col-span-2 flex flex-col gap-2">
-              <Label className="text-sm font-semibold">Role Name</Label>
+              <Label className="text-sm font-semibold">Department</Label>
               <Select>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select User Role" />
+                  <SelectValue placeholder="Select Department" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Admin">Admin</SelectItem>

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FormsTable } from "@/pages/PlatformDesk/FormsWrapper/Form";
 import { FormStats } from "@/pages/PlatformDesk/FormsWrapper/Form";
-import { Formbar } from "@/pages/PlatformDesk/FormsWrapper/Form";
+import { FormTopbar } from "@/pages/PlatformDesk/FormsWrapper/Form";
 import { EXCustomInputTable } from "@/pages/PlatformDesk/FormsWrapper/CustomForm";
 import { CustomInputStats } from "@/pages/PlatformDesk/FormsWrapper/CustomForm";
-import { CustomInputbar } from "@/pages/PlatformDesk/FormsWrapper/CustomForm";
+import { CustomFormTopbar } from "@/pages/PlatformDesk/FormsWrapper/CustomForm";
 
 export function FormTabsWrapper() {
   const [activeTab, setActiveTab] = useState("forms");
@@ -13,9 +13,8 @@ export function FormTabsWrapper() {
     <div className="flex flex-col gap-6">
       {activeTab === "forms" && (
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold text-[var(--text-head)]">Forms</h1>
+          <FormTopbar/>
           <FormStats />
-          <Formbar />
           <div className="">
             <div className="inline-flex items-center justify-center rounded-b-none rounded-l-sm  rounded-r-sm bg-[var(--background)] border text-[var(--text)]">
               <button
@@ -42,9 +41,8 @@ export function FormTabsWrapper() {
 
       {activeTab === "custom-input" && (
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold text-[var(--text-head)]">Custom Input</h1>
+          <CustomFormTopbar/>
           <CustomInputStats />
-          <CustomInputbar/>
           <div className="">
             <div className="inline-flex items-center justify-center rounded-b-none rounded-l-sm  rounded-r-sm bg-[var(--background)] border text-[var(--text)]">
               <button

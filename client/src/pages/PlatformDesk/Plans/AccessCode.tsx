@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Bell, Check, ChevronDown, ChevronLeft, ChevronRight, Eye, Funnel, Search, SquarePen, X, } from "lucide-react";
+import { Bell, Check, ChevronDown, ChevronLeft, ChevronRight, Eye, Funnel, Plus, Search, SquarePen, X, } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -32,18 +32,18 @@ function Topbar() {
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
         <h1 className="text-2xl font-bold text-[var(--text-head)]">
-          Recent Activities
+          Access Codes
         </h1>
       </div>
       <div className="flex items-center gap-2">
       <div className="flex items-center gap-2">
       <Button
-          variant="standard"
+          variant="brand"
           size="new"
           onClick={() => setShowForm(true)}
           aria-label={showForm ? "Hide Form" : "Show Form"}
         >
-          Form
+          <Plus className="h-4 w-4" />
         </Button>
         {showForm && <Form onClose={() => setShowForm(false)} />}
       </div>

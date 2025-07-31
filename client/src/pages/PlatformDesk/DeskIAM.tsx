@@ -1,3 +1,4 @@
+import { DatePickerWithRange } from "@/components/date-picker";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +9,7 @@ import RadioButton from "@/components/ui/Radiobutton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DeskIAMtable } from "@/data/Data";
 import { cn } from "@/lib/utils";
-import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp, Eye, FileDown, Filter,Pen, Plus, Search, SquarePen, UserCheck, Users, UserX, X } from "lucide-react";
+import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp,  FileDown, Filter,Pen, Plus, Search, UserCheck, Users, UserX, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -41,7 +42,7 @@ const stats = [
 export function DeskIAM(){
     return(
        <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">DeskIAM</h1>
+        <DeskIAMTopbar/>
             <StatsCards/>
             <Buttonbar/>
             <TableSection/>
@@ -49,6 +50,35 @@ export function DeskIAM(){
     );
 }
 
+function DeskIAMTopbar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          DeskIAM
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+     
+        <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
 
 function StatsCards() {
   return (
@@ -79,7 +109,6 @@ function StatsCards() {
 
 
 function Buttonbar() {
-  const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
@@ -96,21 +125,7 @@ function Buttonbar() {
           <BookAIcon className="h-3 w-3" />
           <span className="">Manage Roles</span>
         </Button>
-        <Button
-        variant="standard" size="new" 
-        onClick={() => setShowFilter(true)}
-        className="flex items-center gap-2 self-end"
-      >
-        <Filter className="h-3 w-3" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
-
-      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export</span>
-        </Button>
+       
       </div>
     </div>
   );
@@ -553,24 +568,8 @@ function TableSection() {
                         size="sm"
                         className="border-0 shadow-none"
                       >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="border-0 shadow-none"
-                      >
                         <Pen className="h-4 w-3" />
                         <span className="sr-only">Edit</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="border-0 shadow-none"
-                      >
-                        <SquarePen className="h-4 w-3" />
-                        <span className="sr-only">Reset Password</span>
                       </Button>
                     </div>
                   </TableCell>

@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import AddRole from "@/pages/PlatformDesk/underDeskIAM/Permissions";
+import AddRole from "@/pages/PlatformDesk/UnderDeskIAM/Permissions";
 import { useNavigate } from "react-router-dom";
 
 export function AddTeamMember() {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { EditRole } from "@/pages/PlatformDesk/underDeskIAM/EditRole";
+import { EditRole } from "@/pages/PlatformDesk/UnderDeskIAM/EditRole";
 
 // Mock staff data
 const staffMock = [
@@ -35,16 +35,20 @@ export function EditRoleWrapper() {
           <h1 className="text-xl font-semibold text-[var(--text-head)]">
             Edit Role
           </h1>
-          <Button variant="brand" size="sm">
-            New Role
-          </Button>
         </div>
         <EditRole />
+        <div className="flex justify-end">
+        <Button variant="brand" size="new">
+            Update
+          </Button>
+        </div>
       </div>
 
       <div className="w-full xl:w-1/2 ">
         <StaffListBox />
       </div>
+
+      
     </div>
   );
 }

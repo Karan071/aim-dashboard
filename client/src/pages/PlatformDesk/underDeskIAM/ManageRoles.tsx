@@ -49,7 +49,7 @@ export function ManageRoles() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-      <Button variant="brand" onClick={() => navigate("editRole")}>+ Add New Role</Button>
+      <Button variant="brand" onClick={() => navigate("addNewRole")}>+ Add New Role</Button>
       </div>
 
       {/* Table */}
