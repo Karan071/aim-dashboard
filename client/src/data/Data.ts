@@ -13639,3 +13639,172 @@ export const applicationData = [
     ],
   },
 ];
+
+
+export const MyPipelineTable= [
+  {
+    id: "PIP0001",
+    Name: "Ritika Sharma",
+    Type: "Explorer",
+    Objective: "Lead",
+    Concern: "Guide",
+    Source: "Web",
+    NextFollowup: "12 July",
+    Stage: "⏳ Open",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0002",
+    Name: "Aman Verma",
+    Type: "Explorer",
+    Objective: "Enrollment",
+    Concern: "Counseling",
+    Source: "Instagram",
+    NextFollowup: "14 July",
+    Stage: "📞 Contacted",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0003",
+    Name: "Neha Joshi",
+    Type: "Explorer",
+    Objective: "Career Support",
+    Concern: "Anxiety",
+    Source: "Referral",
+    NextFollowup: "15 July",
+    Stage: "🕒 Pending",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0004",
+    Name: "Rohit Mehta",
+    Type: "Explorer",
+    Objective: "Lead",
+    Concern: "Motivation",
+    Source: "LinkedIn",
+    NextFollowup: "16 July",
+    Stage: "✅ Engaged",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0005",
+    Name: "Tanvi Desai",
+    Type: "Explorer",
+    Objective: "Support",
+    Concern: "Family Issues",
+    Source: "Web",
+    NextFollowup: "17 July",
+    Stage: "⏳ Open",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0006",
+    Name: "Karan Bhatia",
+    Type: "Explorer",
+    Objective: "Guidance",
+    Concern: "Career Block",
+    Source: "YouTube",
+    NextFollowup: "18 July",
+    Stage: "🕒 Pending",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0007",
+    Name: "Isha Kapoor",
+    Type: "Explorer",
+    Objective: "Lead",
+    Concern: "Motivation",
+    Source: "WhatsApp",
+    NextFollowup: "19 July",
+    Stage: "✅ Engaged",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0008",
+    Name: "Dev Sharma",
+    Type: "Explorer",
+    Objective: "Enrollment",
+    Concern: "Transition",
+    Source: "Web",
+    NextFollowup: "20 July",
+    Stage: "📞 Contacted",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0009",
+    Name: "Sanya Nair",
+    Type: "Explorer",
+    Objective: "Support",
+    Concern: "Confusion",
+    Source: "Instagram",
+    NextFollowup: "21 July",
+    Stage: "⏳ Open",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0010",
+    Name: "Rahul Singh",
+    Type: "Explorer",
+    Objective: "Lead",
+    Concern: "Career Shift",
+    Source: "Referral",
+    NextFollowup: "22 July",
+    Stage: "🕒 Pending",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0011",
+    Name: "Meera Das",
+    Type: "Explorer",
+    Objective: "Career Guidance",
+    Concern: "Job Loss",
+    Source: "LinkedIn",
+    NextFollowup: "23 July",
+    Stage: "✅ Engaged",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0012",
+    Name: "Arjun Iyer",
+    Type: "Explorer",
+    Objective: "Support",
+    Concern: "Uncertainty",
+    Source: "Web",
+    NextFollowup: "24 July",
+    Stage: "⏳ Open",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0013",
+    Name: "Priya Malhotra",
+    Type: "Explorer",
+    Objective: "Lead",
+    Concern: "Low Confidence",
+    Source: "WhatsApp",
+    NextFollowup: "25 July",
+    Stage: "📞 Contacted",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0014",
+    Name: "Nikhil Jain",
+    Type: "Explorer",
+    Objective: "Enrollment",
+    Concern: "Clarity",
+    Source: "Instagram",
+    NextFollowup: "26 July",
+    Stage: "🕒 Pending",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  },
+  {
+    id: "PIP0015",
+    Name: "Sneha Reddy",
+    Type: "Explorer",
+    Objective: "Lead",
+    Concern: "Fear of Failure",
+    Source: "YouTube",
+    NextFollowup: "27 July",
+    Stage: "⏳ Open",
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+  }
+];
