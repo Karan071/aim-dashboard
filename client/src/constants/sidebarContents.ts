@@ -116,7 +116,7 @@ export const SidebarData = {
           url: "/desk/platform/activities",
           icon: getNextIcon(),
         },
-         {
+        {
           title: "Assessment",
           url: "/desk/platform/assessment",
           icon: getNextIcon(),
@@ -124,20 +124,7 @@ export const SidebarData = {
         {
           title: "Sessions",
           icon: getNextIcon(),
-          url: "#",
-          isCollapsible: true,
-          items: [
-            {
-              title: "Sessions",
-              url: "/desk/platform/products/sessions",
-              icon: getNextIcon(),
-            },
-            {
-              title: "Session Pool",
-              url: "/desk/platform/products/session-pool",
-              icon: getNextIcon(),
-            },
-          ],
+          url: "/desk/platform/products/sessions",
         },
         {
           title: "Masterclasses",
@@ -145,13 +132,13 @@ export const SidebarData = {
           icon: getNextIcon(),
         },
         {
-          title: "Engage",
-          url: "/desk/platform/engage",
+          title: "Events",
+          url: "/desk/platform/events",
           icon: getNextIcon(),
         },
         {
-          title: "Prepare",
-          url: "/desk/platform/prepare",
+          title: "Courses",
+          url: "/desk/platform/courses",
           icon: getNextIcon(),
         },
         {
@@ -229,7 +216,7 @@ export const SidebarData = {
           title: "Custom Inputs",
           url: "/desk/review/custom-inputs",
           icon: getNextIcon(),
-        },        
+        },
         {
           title: "Follow Ups",
           url: "/desk/review/follow-ups",

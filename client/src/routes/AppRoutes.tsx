@@ -8,8 +8,8 @@ import { Manage as PlatformAssessmentManage } from "@/pages/PlatformDesk/Assessm
 import { Sessions as PlatformSessions } from "@/pages/PlatformDesk/Sessions/Sessions";
 import { SessionPool as PlatformSessionPool } from "@/pages/PlatformDesk/Sessions/SessionPool";
 import { Masterclass as PlatformMasterclass } from "@/pages/PlatformDesk/Sessions/Masterclass";
-import { Engage as PlatformEngage } from "@/pages/PlatformDesk/Engage";
-import { Prepare as PlatformPrepare } from "@/pages/PlatformDesk/Prepare";
+import { Events as PlatformEvents } from "@/pages/PlatformDesk/Events";
+import { Courses as PlatformCourses } from "@/pages/PlatformDesk/Courses";
 import { Contribute as PlatformContribute } from "@/pages/PlatformDesk/Contribute";
 import { AccessCode as PlatformAccessCode } from "@/pages/PlatformDesk/Plans/AccessCode";
 import { ConsultantPremium as PlatformConsultantPremium } from "@/pages/PlatformDesk/Plans/ConsultantPremium";
@@ -124,8 +124,8 @@ export default function AppRoutes() {
         path="platform/products/masterclasses"
         element={<PlatformMasterclass />}
       />
-      <Route path="platform/engage" element={<PlatformEngage />} />
-      <Route path="platform/prepare" element={<PlatformPrepare />} />
+      <Route path="platform/events" element={<PlatformEvents />} />
+      <Route path="platform/courses" element={<PlatformCourses />} />
       <Route path="platform/contribute" element={<PlatformContribute />} />
       <Route
         path="platform/plans/access-code"
