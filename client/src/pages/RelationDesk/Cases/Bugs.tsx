@@ -46,6 +46,12 @@ import DatePicker from "@/components/ui/DatePicker";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { coachesList } from "@/data/Data";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -687,7 +693,7 @@ function BugTable() {
                 {sortConfig?.key === "status" &&
                   (sortConfig.direction === "ascending" ? "↑" : "↓")}
               </TableHead>
-              <TableHead className="text-[var(--text)]">Actions</TableHead>
+              <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -757,16 +763,44 @@ function BugTable() {
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <Eye className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <MessageCircle className="h-4 w-4" />
-                    </Button>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <Flag className="h-4 w-4" />
-                    </Button>
+                  <div className="flex items-center justify-end pr-4 ">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="actionIcon" size="actionIcon">
+                            <Eye className="h-3 w-3" />
+                            <span className="sr-only">View</span>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>View Details</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="actionIcon" size="actionIcon">
+                            <MessageCircle className="h-3 w-3" />
+                            <span className="sr-only">Message</span>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Send Message</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="actionIcon" size="actionIcon">
+                            <Flag className="h-3 w-3" />
+                            <span className="sr-only">Flag</span>
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Flag Issue</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
                 </TableCell>
               </TableRow>

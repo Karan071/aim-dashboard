@@ -45,6 +45,12 @@ import { Badge } from "@/components/ui/badge";
 import { mockUsers, coachesList } from "@/data/Data";
 import { cn } from "@/lib/utils";
 import CountUp from "@/components/ui/countup";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -865,7 +871,7 @@ function ExplorerTable() {
                   {sortConfig?.key === "Status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -984,33 +990,44 @@ function ExplorerTable() {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-white border-0 shadow-none"
-                        // onClick={() => navigate(`/user-details/${user.id}`)}
-                      >
-                        <Eye className="h-4 w-4" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-[var(--background)] border-0 shadow-none"
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        <span className="sr-only">Chat</span>
-                      </Button>
+                    <div className="flex items-center justify-end pr-4 ">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Eye className="h-3 w-3" />
+                              <span className="sr-only">View</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View Details</p>
+                          </TooltipContent>
+                        </Tooltip>
 
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-[var(--background)] border-0 shadow-none"
-                      >
-                        <Flag className="h-4 w-4" />
-                        <span className="sr-only">Flag</span>
-                      </Button>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <MessageCircle className="h-3 w-3" />
+                              <span className="sr-only">Chat</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Send Message</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Flag className="h-3 w-3" />
+                              <span className="sr-only">Flag</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Flag User</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>

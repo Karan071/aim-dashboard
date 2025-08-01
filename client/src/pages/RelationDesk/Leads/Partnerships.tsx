@@ -14,6 +14,12 @@ import {
   PenSquare,
   Tag,
 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { CircleArrowDown, CircleArrowUp } from "lucide-react";
@@ -669,7 +675,7 @@ function TableSection() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
 
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -730,24 +736,32 @@ function TableSection() {
                     <div className="text-low">{user.CreatedOn}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-white border-0 shadow-none"
-                      >
-                        <Phone className="h-4 w-3" />
-                        <span className="sr-only">Call</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-white border-0 shadow-none"
-                      >
-                        <MessageSquare className="h-4 w-3" />
-                        <span className="sr-only">Message</span>
-                      </Button>
+                    <div className="flex items-center justify-end pr-4">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Phone className="h-3 w-3" />
+                              <span className="sr-only">Call</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Call</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <MessageSquare className="h-3 w-3" />
+                              <span className="sr-only">Message</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Message</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>

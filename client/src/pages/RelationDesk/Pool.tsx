@@ -679,7 +679,7 @@ function TableSection() {
                     {sortConfig?.key === "Status" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
-                  <TableHead className="text-[var(--text)]">Actions</TableHead>
+                  <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
                 </TableRow>
               </TableHeader>
               <TableBody className="overflow-visible relative z-0">
@@ -746,7 +746,7 @@ function TableSection() {
                         <TableCell>
                             <div className="text-sm">{user.Status}</div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell> 
                       <div className="flex items-center gap-2">
                         <Button
                           variant="noborder"

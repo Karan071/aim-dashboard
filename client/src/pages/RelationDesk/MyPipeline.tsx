@@ -41,6 +41,12 @@ import { DatePickerWithRange } from "@/components/application-component/date-ran
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import { CardTitle } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 
 
@@ -573,9 +579,9 @@ function MyPipelineTable() {
                 >
                   Stage{" "}
                   {sortConfig?.key === "Stage" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")} 
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -642,39 +648,80 @@ function MyPipelineTable() {
                           <div className="text-sm"><Badge variant="border" className="text-sm">{user.Stage}</Badge></div>
                       </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                      >
-                        <Eye className="h-4 w-4" />
-                        <span className="sr-only">View</span>
-                      </Button>
+                    <div className="flex items-center justify-end pr-4 ">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Eye className="h-3 w-3" />
+                              <span className="sr-only">View</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View Details</p>
+                          </TooltipContent>
+                        </Tooltip>
 
-                      <Button variant="border" size="sm">
-                  <Phone className="h-4 w-4 text-[var(--green)]" />
-                        <span className="sr-only">Call Now</span>
-                </Button>
-                <Button variant="border" size="sm">
-                  <MessageCircle className=" h-4 w-4 " />
-                  <span className="sr-only">Message</span>
-                </Button>
-                
-                <Button variant="border" size="sm">
-                  <Clock className=" h-4 w-4" />
-                  <span className="sr-only">Followup</span>
-                </Button>
-                <Button variant="border" size="sm">
-                  <Notebook className=" h-4 w-4" />
-                  <span className="sr-only">Pass</span>
-                </Button>
-                <Button variant="border" size="sm">
-                  <Plus className=" h-4 w-4" />
-                  <span className="sr-only">Add Member</span>
-                </Button>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Phone className="h-3 w-3 text-[var(--green)]" />
+                              <span className="sr-only">Call Now</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Call Now</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <MessageCircle className="h-3 w-3" />
+                              <span className="sr-only">Message</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Send Message</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Clock className="h-3 w-3" />
+                              <span className="sr-only">Followup</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Schedule Followup</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Notebook className="h-3 w-3" />
+                              <span className="sr-only">Pass</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Pass to Team</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Plus className="h-3 w-3" />
+                              <span className="sr-only">Add Member</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Add Member</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
 

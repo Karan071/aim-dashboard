@@ -7,6 +7,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { ChevronDown, ChevronRight, ChevronLeft, Eye, Search, X, Bell, Check, Notebook, ArrowBigLeft, BadgeQuestionMark, Calendar, Filter } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DatePickerWithRange } from "@/components/date-picker";
 import React from "react";
@@ -442,7 +448,7 @@ function AccountTableComponent() {
                                 >
                                     Days Left {sortConfig?.key === "daysLeft" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
                                 </TableHead>
-                                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -477,40 +483,65 @@ function AccountTableComponent() {
                                     <TableCell className="text-[var(--text)]">{account.stage}</TableCell>
                                     <TableCell className="text-[var(--text)]">{account.daysLeft}</TableCell>
                                     <TableCell>
-                                        <div className="flex items-center gap-2">
-                                            <Button
-                                                variant="noborder"
-                                                size="sm"
-                                                className="bg-[var(--background)]"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    // view logic
-                                                }}
-                                            >
-                                                <Eye className="h-4 w-4" />
-                                            </Button>
-                                            <Button
-                                                variant="noborder"
-                                                size="sm"
-                                                className="bg-[var(--background)]"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    // done logic
-                                                }}
-                                            >
-                                                <Check className="h-4 w-4 text-[var(--green)]" />
-                                            </Button>
-                                            <Button
-                                                variant="noborder"
-                                                size="sm"
-                                                className="bg-[var(--background)]"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    // note logic
-                                                }}
-                                            >
-                                                <span className="text-sm"><Notebook /></span>
-                                            </Button>
+                                        <div className="flex items-center justify-end pr-4">
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Button
+                                                            variant="actionIcon"
+                                                            size="actionIcon"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                // view logic
+                                                            }}
+                                                        >
+                                                            <Eye className="h-3 w-3" />
+                                                            <span className="sr-only">View</span>
+                                                        </Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <p>View</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Button
+                                                            variant="actionIcon"
+                                                            size="actionIcon"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                // done logic
+                                                            }}
+                                                        >
+                                                            <Check className="h-3 w-3 text-[var(--green)]" />
+                                                            <span className="sr-only">Done</span>
+                                                        </Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <p>Done</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Button
+                                                            variant="actionIcon"
+                                                            size="actionIcon"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                // note logic
+                                                            }}
+                                                        >
+                                                            <Notebook className="h-3 w-3" />
+                                                            <span className="sr-only">Note</span>
+                                                        </Button>
+                                                    </TooltipTrigger>
+                                                    <TooltipContent>
+                                                        <p>Note</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
                                         </div>
                                     </TableCell>
                                 </TableRow>

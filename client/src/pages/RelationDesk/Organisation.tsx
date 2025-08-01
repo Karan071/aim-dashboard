@@ -1,4 +1,10 @@
 import { Building2, UserCheck, Globe, Clock, Link, CircleArrowUp, CircleArrowDown, Search, Bell, Check, X, Flag } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -606,7 +612,7 @@ function OrganisationTable() {
                                         {sortConfig?.key === "registered" &&
                                             (sortConfig.direction === "ascending" ? "↑" : "↓")}
                                     </TableHead>
-                                    <TableHead className="text-[var(--text)]">Actions</TableHead>
+                                    <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
                                 </TableRow>
                             </TableHeader>
                             <TableBody className="overflow-visible relative z-0">
@@ -683,45 +689,65 @@ function OrganisationTable() {
                                             <div className="text-xs text-[var(--text)]">{user.lastActive}</div>
                                         </TableCell>
                                         <TableCell>
-                                            <div className="flex items-center gap-2">
-                                                <Button
-                                                    variant="noborder"
-                                                    size="sm"
-                                                    className="bg-white border-0 shadow-none"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        // navigate(`/user-details/${user.id}`) or your view logic
-                                                    }}
-                                                >
-                                                    <Eye className="h-4 w-4" />
-                                                    <span className="sr-only">View</span>
-                                                </Button>
+                                            <div className="flex items-center justify-end pr-4">
+                                                <TooltipProvider>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="actionIcon"
+                                                                size="actionIcon"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    // navigate(`/user-details/${user.id}`) or your view logic
+                                                                }}
+                                                            >
+                                                                <Eye className="h-3 w-3" />
+                                                                <span className="sr-only">View</span>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <p>View</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
 
-                                                <Button
-                                                    variant="noborder"
-                                                    size="sm"
-                                                    className="bg-[var(--background)] border-0 shadow-none"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        // approve logic
-                                                    }}
-                                                >
-                                                    <Check className="h-4 w-3 text-[var(--green)]" />
-                                                    <span className="sr-only">Approve</span>
-                                                </Button>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="actionIcon"
+                                                                size="actionIcon"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    // approve logic
+                                                                }}
+                                                            >
+                                                                <Check className="h-3 w-3 text-[var(--green)]" />
+                                                                <span className="sr-only">Approve</span>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <p>Approve</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
 
-                                                <Button
-                                                    variant="noborder"
-                                                    size="sm"
-                                                    className="bg-[var(--background)] border-0 shadow-none"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        // block logic
-                                                    }}
-                                                >
-                                                    <Flag className="h-4 w-3" />
-                                                    <span className="sr-only">Flagk</span>
-                                                </Button>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Button
+                                                                variant="actionIcon"
+                                                                size="actionIcon"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    // block logic
+                                                                }}
+                                                            >
+                                                                <Flag className="h-3 w-3" />
+                                                                <span className="sr-only">Flag</span>
+                                                            </Button>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <p>Flag</p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
+                                                </TooltipProvider>
                                             </div>
                                         </TableCell>
 

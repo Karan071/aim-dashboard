@@ -8,6 +8,12 @@ import {
   X,
   Bell,
 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Users,
@@ -600,7 +606,7 @@ function CoachTableSection() {
                   {sortConfig?.key === "lastActive" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -680,23 +686,44 @@ function CoachTableSection() {
                     <div className="text-xs text-[var(--text)]">{user.joined}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                      >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button variant="noborder" size="sm" className="bg-[var(--background)] border-0 shadow-none">
-                        <Check className="h-4 w-3 text-[var(--green)]" />
-                        <span className="sr-only">Approve</span>
-                      </Button>
+                    <div className="flex items-center justify-end pr-4">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Eye className="h-3 w-3" />
+                              <span className="sr-only">View</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View</p>
+                          </TooltipContent>
+                        </Tooltip>
 
-                      <Button variant="noborder" size="sm" className="bg-[var(--background)] border-0 shadow-none">
-                        <X className="h-4 w-3 text-[var(--red)]" />
-                        <span className="sr-only">Block</span>
-                      </Button>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Check className="h-3 w-3 text-[var(--green)]" />
+                              <span className="sr-only">Approve</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Approve</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <X className="h-3 w-3 text-[var(--red)]" />
+                              <span className="sr-only">Block</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Block</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>

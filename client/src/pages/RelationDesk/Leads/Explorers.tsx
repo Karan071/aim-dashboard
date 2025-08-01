@@ -42,6 +42,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DateRangePicker } from "@/components/ui/RangeCalender";
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -693,7 +699,7 @@ function TableSection() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
 
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -759,23 +765,32 @@ function TableSection() {
                     <div className="text-low">{user.created_on}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-white border-0 shadow-none"
-                      >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                        className="bg-white border-0 shadow-none"
-                      >
-                        <Pen className="h-4 w-3" />
-                        <span className="sr-only">Edit</span>
-                      </Button>
+                    <div className="flex items-center justify-end pr-4 ">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Eye className="h-3 w-3" />
+                              <span className="sr-only">View</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View Details</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Pen className="h-3 w-3" />
+                              <span className="sr-only">Edit</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Edit Lead</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
