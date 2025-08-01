@@ -116,18 +116,18 @@ export default function Navbar({}: NavbarProps) {
               variant="faded"
               className="flex items-center h-full md:pt-4  md:pb-4  md:px-5 p-0 rounded-0"
             >
-              <Avatar className="md:h-8 md:w-8">
+              <Avatar className="md:h-10 md:w-10">
                 <AvatarImage
-                  src={user?.image || "https://github.com/shadcn.png"}
-                  alt={user?.name || "Anynamous"}
+                  src={`https://a.aimshala.com/${user?.image}`}
+                  alt={user?.name || "name"}
                 />
               </Avatar>
               <div>
                 <span className="hidden md:block text-[var(--text-head)]">
                   {user?.name || "User"}
                 </span>
-                <span className="hidden md:block text-left text-[var(--text)] font-light">
-                  {user?.role || "Guest"}
+                <span className="text-xs font-light">
+                  @{user?.username || "username"}
                 </span>
               </div>
             </Button>

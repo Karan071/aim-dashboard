@@ -18,7 +18,7 @@ export default function Login() {
 
   useEffect(() => {
     if (authState.token) {
-      navigate("/desk/platform");
+      navigate("/desk/platform/activities");
     }
     if (authState.error) {
       toast.error(authState.error);

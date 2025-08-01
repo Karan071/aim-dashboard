@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "@/auth/ProtectedRoute";
+import Login from "@/pages/Login";
 
 // Platform Desk Components
 import { Desk as PlatformDesk } from "@/pages/PlatformDesk/Desk";
@@ -29,9 +31,8 @@ import { Libraries as ReviewLibraries } from "@/pages/ReviewDesk/Libraries";
 import { CustomInput as ReviewCustomInput } from "@/pages/ReviewDesk/CustomInput";
 import { ReviewFollowUps } from "@/pages/ReviewDesk/ReviewFollowUps";
 
-
 // Relations Desk
-import { Organisation as RelationOuterOrganisation} from "@/pages/RelationDesk/Organisation"
+import { Organisation as RelationOuterOrganisation } from "@/pages/RelationDesk/Organisation";
 import { Desk as RelationDesk } from "@/pages/RelationDesk/Desk";
 import { MyPipeline as RelationPipeline } from "@/pages/RelationDesk/MyPipeline";
 import { Pool as RelationPool } from "@/pages/RelationDesk/Pool";
@@ -100,92 +101,108 @@ import { FollowUp as HRMSFollowUp } from "@/pages/HRMS/FollowUp";
 import { CurrenOpenings as HRMSCurrentOpening } from "@/pages/HRMS/CurrenOpenings";
 import { JobApplication as HRMSJobApplication } from "@/pages/HRMS/JobApplication";
 
-
 export default function AppRoutes() {
   return (
     <Routes>
-      {/* Platform Desk Routes */}
-      <Route path="platform/desk" element={<PlatformDesk />} />
+      {/* Public Routes */}
+      <Route path="/login" element={<Login />} />
 
-      <Route
-        path="platform/activities"
-        element={<PlatformRecentActivities />}
-      />
-      <Route path="platform/assessment" element={<PlatformAssessment />} />
-      <Route
-        path="platform/assessment/manage"
-        element={<PlatformAssessmentManage />}
-      />
-      <Route path="platform/products/sessions" element={<PlatformSessions />} />
-      <Route
-        path="platform/products/session-pool"
-        element={<PlatformSessionPool />}
-      />
-      <Route
-        path="platform/products/masterclasses"
-        element={<PlatformMasterclass />}
-      />
-      <Route path="platform/events" element={<PlatformEvents />} />
-      <Route path="platform/courses" element={<PlatformCourses />} />
-      <Route path="platform/contribute" element={<PlatformContribute />} />
-      <Route
-        path="platform/plans/access-code"
-        element={<PlatformAccessCode />}
-      />
-      <Route
-        path="platform/plans/consultants-premium"
-        element={<PlatformConsultantPremium />}
-      />
-      <Route path="platform/forms" element={<PlatformForms />} />
-      <Route path="platform/desk-iam" element={<PlatformDeskIAM />} />
-      <Route
-        path="platform/desk-iam/addTeamMember"
-        element={<PlatformAddTeamMember />}
-      />
-      <Route
-        path="platform/desk-iam/manageRole"
-        element={<PlatformManageRoles />}
-      />
-      <Route path="platform/desk-iam/manageRole/editRole" element={<PlatformEditRoleWrapper />} />
+      {/* Protected Routes */}
+      <Route element={<ProtectedRoute />}>
+        {/* Platform Desk Routes */}
+        <Route path="platform/desk" element={<PlatformDesk />} />
 
-      {/* Review Desk Routes */}
-      <Route path="review/desk" element={<ReviewDesk />} />
-      {/* <Route path="review/coaches" element={<ReviewCoaches />} /> */}
-      {/* <Route path="review/organisations" element={<ReviewOrganization />} /> */}
-      <Route
-        path="review/channel-partners"
-        element={<ReviewChannelPartner />}
-      />
-      <Route path="review/libraries" element={<ReviewLibraries />} />
-      {/* <Route path="review/map-listing" element={<ReviewMapListing />} /> */}
-      <Route path="review/custom-inputs" element={<ReviewCustomInput />} />
-      <Route path="review/follow-ups" element={<ReviewFollowUps />} />
+        <Route
+          path="platform/activities"
+          element={<PlatformRecentActivities />}
+        />
+        <Route path="platform/assessment" element={<PlatformAssessment />} />
+        <Route
+          path="platform/assessment/manage"
+          element={<PlatformAssessmentManage />}
+        />
+        <Route
+          path="platform/products/sessions"
+          element={<PlatformSessions />}
+        />
+        <Route
+          path="platform/products/session-pool"
+          element={<PlatformSessionPool />}
+        />
+        <Route
+          path="platform/products/masterclasses"
+          element={<PlatformMasterclass />}
+        />
+        <Route path="platform/events" element={<PlatformEvents />} />
+        <Route path="platform/courses" element={<PlatformCourses />} />
+        <Route path="platform/contribute" element={<PlatformContribute />} />
+        <Route
+          path="platform/plans/access-code"
+          element={<PlatformAccessCode />}
+        />
+        <Route
+          path="platform/plans/consultants-premium"
+          element={<PlatformConsultantPremium />}
+        />
+        <Route path="platform/forms" element={<PlatformForms />} />
+        <Route path="platform/desk-iam" element={<PlatformDeskIAM />} />
+        <Route
+          path="platform/desk-iam/addTeamMember"
+          element={<PlatformAddTeamMember />}
+        />
+        <Route
+          path="platform/desk-iam/manageRole"
+          element={<PlatformManageRoles />}
+        />
+        <Route
+          path="platform/desk-iam/manageRole/editRole"
+          element={<PlatformEditRoleWrapper />}
+        />
 
-      {/* Relations Desk Routes */}
-      <Route path="relation/desk" element={<RelationDesk />} />
-      <Route path="relation/pipeline" element={<RelationPipeline />} />
-      <Route path="relation/pool" element={<RelationPool />} />
-      <Route path="relation/leads/explorers" element={<RelationExplorers />} />
-      <Route path="relation/leads/coaches" element={<RelationCoaches />} />
-      <Route
-        path="relation/leads/organisations"
-        element={<RelationOrganisation />}
-      />
-      <Route
-        path="relation/leads/channel-partner"
-        element={<RelationChannelPartners />}
-      />
-      <Route
-        path="relation/leads/partnerships-requests"
-        element={<RelationPartnerships />}
-      />
-      <Route path="relation/cases/problems" element={<RelationProblems />} />
-      <Route path="relation/cases/bugs" element={<RelationBugs />} />
-      <Route path="relation/cases/abuses" element={<RelationAbuses />} />
-      <Route path="relation/explorers" element={<RelationExplorersList />} />
-      <Route path="relation/coaches" element={<RelationCoachesList />} />
-      <Route path="relation/organisations" element={<RelationOuterOrganisation />} />
-      {/* <Route
+        {/* Review Desk Routes */}
+        <Route path="review/desk" element={<ReviewDesk />} />
+        {/* <Route path="review/coaches" element={<ReviewCoaches />} /> */}
+        {/* <Route path="review/organisations" element={<ReviewOrganization />} /> */}
+        <Route
+          path="review/channel-partners"
+          element={<ReviewChannelPartner />}
+        />
+        <Route path="review/libraries" element={<ReviewLibraries />} />
+        {/* <Route path="review/map-listing" element={<ReviewMapListing />} /> */}
+        <Route path="review/custom-inputs" element={<ReviewCustomInput />} />
+        <Route path="review/follow-ups" element={<ReviewFollowUps />} />
+
+        {/* Relations Desk Routes */}
+        <Route path="relation/desk" element={<RelationDesk />} />
+        <Route path="relation/pipeline" element={<RelationPipeline />} />
+        <Route path="relation/pool" element={<RelationPool />} />
+        <Route
+          path="relation/leads/explorers"
+          element={<RelationExplorers />}
+        />
+        <Route path="relation/leads/coaches" element={<RelationCoaches />} />
+        <Route
+          path="relation/leads/organisations"
+          element={<RelationOrganisation />}
+        />
+        <Route
+          path="relation/leads/channel-partner"
+          element={<RelationChannelPartners />}
+        />
+        <Route
+          path="relation/leads/partnerships-requests"
+          element={<RelationPartnerships />}
+        />
+        <Route path="relation/cases/problems" element={<RelationProblems />} />
+        <Route path="relation/cases/bugs" element={<RelationBugs />} />
+        <Route path="relation/cases/abuses" element={<RelationAbuses />} />
+        <Route path="relation/explorers" element={<RelationExplorersList />} />
+        <Route path="relation/coaches" element={<RelationCoachesList />} />
+        <Route
+          path="relation/organisations"
+          element={<RelationOuterOrganisation />}
+        />
+        {/* <Route
         path="relation/organisations/institutes"
         element={<RelationInstitute />}
       />
@@ -205,70 +222,71 @@ export default function AppRoutes() {
         path="relation/organisations/universities"
         element={<RelationUniversities />}
       /> */}
-      <Route path="relation/organisations/ngos" element={<RelationNgo />} />
-      <Route path="relation/my-accounts" element={<MyAccounts />} />
-      <Route path="relation/leaderboard" element={<RelationLeaderboard />} />
+        <Route path="relation/organisations/ngos" element={<RelationNgo />} />
+        <Route path="relation/my-accounts" element={<MyAccounts />} />
+        <Route path="relation/leaderboard" element={<RelationLeaderboard />} />
 
-      {/* Digital Desk Routes */}
-      <Route path="digital/desk" element={<DigitalDesk />} />
-      <Route path="digital/campaigns" element={<DigitalCampaigns />} />
-      <Route path="digital/surveys" element={<DigitalSurveys />} />
-      <Route path="digital/cms/insights" element={<DigitalInsights />} />
-      <Route path="digital/cms/video" element={<DigitalVideo />} />
-      <Route path="digital/cms/faqs" element={<DigitalFaq />} />
-      <Route
-        path="digital/cms/help-articles"
-        element={<DigitalHelpArticles />}
-      />
-      <Route path="digital/cms/in-the-news" element={<DigitalInTheNews />} />
-      <Route
-        path="digital/cms/testimonials"
-        element={<DigitalTestimonials />}
-      />
-      <Route
-        path="digital/cms/teams-directory"
-        element={<DigitalTeamDirectory />}
-      />
-      <Route path="digital/libraries/exams" element={<DigitalExams />} />
-      <Route path="digital/libraries/careers" element={<DigitalCareers />} />
-      <Route path="digital/libraries/degrees" element={<DigitalDegrees />} />
-      <Route path="digital/libraries/courses" element={<DigitalCourses />} />
-      <Route
-        path="digital/libraries/scholarships"
-        element={<DigitalScholarships />}
-      />
-      <Route path="digital/libraries/skills" element={<DigitalSkills />} />
-      <Route path="digital/engage/review" element={<DigitalReview />} />
-      <Route path="digital/engage/comments" element={<DigitalComments />} />
-      <Route path="digital/engage/feedback" element={<DigitalFeedback />} />
-      <Route path="digital/engage/helpful" element={<DigitalHelpful />} />
-      <Route path="digital/file-manager" element={<DigitalFileManager />} />
-      <Route
-        path="digital/meta-information"
-        element={<DigitalMetaInformation />}
-      />
+        {/* Digital Desk Routes */}
+        <Route path="digital/desk" element={<DigitalDesk />} />
+        <Route path="digital/campaigns" element={<DigitalCampaigns />} />
+        <Route path="digital/surveys" element={<DigitalSurveys />} />
+        <Route path="digital/cms/insights" element={<DigitalInsights />} />
+        <Route path="digital/cms/video" element={<DigitalVideo />} />
+        <Route path="digital/cms/faqs" element={<DigitalFaq />} />
+        <Route
+          path="digital/cms/help-articles"
+          element={<DigitalHelpArticles />}
+        />
+        <Route path="digital/cms/in-the-news" element={<DigitalInTheNews />} />
+        <Route
+          path="digital/cms/testimonials"
+          element={<DigitalTestimonials />}
+        />
+        <Route
+          path="digital/cms/teams-directory"
+          element={<DigitalTeamDirectory />}
+        />
+        <Route path="digital/libraries/exams" element={<DigitalExams />} />
+        <Route path="digital/libraries/careers" element={<DigitalCareers />} />
+        <Route path="digital/libraries/degrees" element={<DigitalDegrees />} />
+        <Route path="digital/libraries/courses" element={<DigitalCourses />} />
+        <Route
+          path="digital/libraries/scholarships"
+          element={<DigitalScholarships />}
+        />
+        <Route path="digital/libraries/skills" element={<DigitalSkills />} />
+        <Route path="digital/engage/review" element={<DigitalReview />} />
+        <Route path="digital/engage/comments" element={<DigitalComments />} />
+        <Route path="digital/engage/feedback" element={<DigitalFeedback />} />
+        <Route path="digital/engage/helpful" element={<DigitalHelpful />} />
+        <Route path="digital/file-manager" element={<DigitalFileManager />} />
+        <Route
+          path="digital/meta-information"
+          element={<DigitalMetaInformation />}
+        />
 
-      {/* Finance Desk Routes */}
-      <Route path="finance/desk" element={<FinanceDesk />} />
-      <Route path="finance/payments" element={<FinancePayments />} />
-      <Route path="finance/commissions" element={<FinanceCommission />} />
-      <Route path="finance/withdrawal" element={<FinanceWithdrawal />} />
-      <Route path="finance/payouts" element={<FinancePayout />} />
-      <Route path="finance/platform" element={<FinancePlatform />} />
-      <Route path="finance/earnings" element={<FinanceEarning />} />
-      <Route path="finance/reports" element={<FinanceReports />} />
+        {/* Finance Desk Routes */}
+        <Route path="finance/desk" element={<FinanceDesk />} />
+        <Route path="finance/payments" element={<FinancePayments />} />
+        <Route path="finance/commissions" element={<FinanceCommission />} />
+        <Route path="finance/withdrawal" element={<FinanceWithdrawal />} />
+        <Route path="finance/payouts" element={<FinancePayout />} />
+        <Route path="finance/platform" element={<FinancePlatform />} />
+        <Route path="finance/earnings" element={<FinanceEarning />} />
+        <Route path="finance/reports" element={<FinanceReports />} />
 
-      {/* DevOps Desk Routes */}
-      <Route path="devops/desk" element={<DevopsDesk />} />
-      <Route path="devops/my-cases" element={<DevopsMycases />} />
-      <Route path="devops/cases" element={<DevopsCases />} />
-      <Route path="devops/leaderboard" element={<DevopsLeaderboard />} />
+        {/* DevOps Desk Routes */}
+        <Route path="devops/desk" element={<DevopsDesk />} />
+        <Route path="devops/my-cases" element={<DevopsMycases />} />
+        <Route path="devops/cases" element={<DevopsCases />} />
+        <Route path="devops/leaderboard" element={<DevopsLeaderboard />} />
 
-      {/* HRMS Routes */}
-      <Route path="hr/desk" element={<HRMSDesk />} />
-      <Route path="hr/follow-ups" element={<HRMSFollowUp />} />
-      <Route path="hr/job-application" element={<HRMSJobApplication />} />
-      <Route path="hr/current-opening" element={<HRMSCurrentOpening />} />
+        {/* HRMS Routes */}
+        <Route path="hr/desk" element={<HRMSDesk />} />
+        <Route path="hr/follow-ups" element={<HRMSFollowUp />} />
+        <Route path="hr/job-application" element={<HRMSJobApplication />} />
+        <Route path="hr/current-opening" element={<HRMSCurrentOpening />} />
+      </Route>
     </Routes>
   );
 }
