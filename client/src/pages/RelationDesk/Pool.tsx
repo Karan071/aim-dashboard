@@ -1,6 +1,3 @@
-// export function Pool() {
-//   return <div>Pool</div>;
-// }
 import { Button } from "@/components/ui/button";
 import {
   Eye,
