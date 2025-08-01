@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ChevronRight, type LucideIcon } from "lucide-react";
-
 import {
   Sidebar as SidebarRoot,
   SidebarContent,
@@ -55,7 +54,6 @@ function AppSidebar(props: React.ComponentProps<typeof SidebarRoot>) {
   const [openSection, setOpenSection] = React.useState<string | null>(
     "Platform"
   );
-
   return (
     <SidebarRoot
       collapsible="icon"
@@ -98,6 +96,7 @@ function NavSection({
         title: string;
         url: string;
         icon?: LucideIcon;
+        isActive?: boolean;
       }[];
     }[];
   };
@@ -156,7 +155,8 @@ function NavSection({
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton
                         tooltip={item.title}
-                        className="text-[var(--text)] "
+                        className={`text-[var(--text)] transition-all duration-300 ease-in-out ${item.isActive === false ? 'cursor-not-allowed opacity-60' : ''}`}
+                        disabled={item.isActive === false}
                       >
                         {item.icon && (
                           <item.icon className="size-4 text-[var(--text)]" />
@@ -166,21 +166,31 @@ function NavSection({
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="transition-all duration-300 ease-in-out">
-                      <SidebarMenuSub className="">
+                      <SidebarMenuSub>
                         {item.items.map((subItem) => (
                           <SidebarMenuSubItem
                             key={subItem.title}
                             className="text-[var(--text)]"
                           >
-                            <SidebarMenuSubButton asChild>
-                              <Link to={subItem.url}>
-                                {subItem.icon && (
-                                  <subItem.icon className="size-4 text-[var(--text)] transition-all duration-300 ease-in-out" />
-                                )}
-                                <span className="text-[var(--text)]">
-                                  {subItem.title}
+                            <SidebarMenuSubButton
+                              asChild
+                              className={subItem.isActive === false ? "cursor-not-allowed opacity-60" : ""}
+                            >
+                              {subItem.isActive === false ? (
+                                <span>
+                                  {subItem.icon && (
+                                    <subItem.icon className="size-4 text-[var(--text)] transition-all duration-300 ease-in-out" />
+                                  )}
+                                  <span className="text-[var(--text)]">{subItem.title}</span>
                                 </span>
-                              </Link>
+                              ) : (
+                                <Link to={subItem.url}>
+                                  {subItem.icon && (
+                                    <subItem.icon className="size-4 text-[var(--text)] transition-all duration-300 ease-in-out" />
+                                  )}
+                                  <span className="text-[var(--text)]">{subItem.title}</span>
+                                </Link>
+                              )}
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}
@@ -193,14 +203,24 @@ function NavSection({
                   <SidebarMenuButton
                     tooltip={item.title}
                     asChild
-                    className="text-[var(--text)] transition-all duration-300 ease-in-out"
+                    className={`text-[var(--text)] transition-all duration-300 ease-in-out ${item.isActive === false ? 'cursor-not-allowed opacity-60' : ''}`}
+                    disabled={item.isActive === false}
                   >
-                    <Link to={item.url}>
-                      {item.icon && (
-                        <item.icon className="size-4 text-[var(--text)]" />
-                      )}
-                      <span className="text-[var(--text)]">{item.title}</span>
-                    </Link>
+                    {item.isActive === false ? (
+                      <span>
+                        {item.icon && (
+                          <item.icon className="size-4 text-[var(--text)]" />
+                        )}
+                        <span className="text-[var(--text)]">{item.title}</span>
+                      </span>
+                    ) : (
+                      <Link to={item.url}>
+                        {item.icon && (
+                          <item.icon className="size-4 text-[var(--text)]" />
+                        )}
+                        <span className="text-[var(--text)]">{item.title}</span>
+                      </Link>
+                    )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               )

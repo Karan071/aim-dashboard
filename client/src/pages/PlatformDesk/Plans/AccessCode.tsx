@@ -750,7 +750,7 @@ function CodeTableSection() {
                   {sortConfig?.key === "Status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] text-center pr-4 w-[10px]">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -820,7 +820,8 @@ function CodeTableSection() {
                     <Badge variant="standard">{user.Status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center pr-4">
+                      
                       <Button
                         variant="noborder"
                         size="sm"

@@ -8,8 +8,8 @@ import { Manage as PlatformAssessmentManage } from "@/pages/PlatformDesk/Assessm
 import { Sessions as PlatformSessions } from "@/pages/PlatformDesk/Sessions/Sessions";
 import { SessionPool as PlatformSessionPool } from "@/pages/PlatformDesk/Sessions/SessionPool";
 import { Masterclass as PlatformMasterclass } from "@/pages/PlatformDesk/Sessions/Masterclass";
-import { Engage as PlatformEngage } from "@/pages/PlatformDesk/Engage";
-import { Prepare as PlatformPrepare } from "@/pages/PlatformDesk/Prepare";
+import { Events as PlatformEvents } from "@/pages/PlatformDesk/Events";
+import { Courses as PlatformCourses } from "@/pages/PlatformDesk/Courses";
 import { Contribute as PlatformContribute } from "@/pages/PlatformDesk/Contribute";
 import { AccessCode as PlatformAccessCode } from "@/pages/PlatformDesk/Plans/AccessCode";
 import { ConsultantPremium as PlatformConsultantPremium } from "@/pages/PlatformDesk/Plans/ConsultantPremium";
@@ -31,9 +31,10 @@ import { ReviewFollowUps } from "@/pages/ReviewDesk/ReviewFollowUps";
 
 
 // Relations Desk
+import { Organisation as RelationOuterOrganisation} from "@/pages/RelationDesk/Organisation"
 import { Desk as RelationDesk } from "@/pages/RelationDesk/Desk";
 import { MyPipeline as RelationPipeline } from "@/pages/RelationDesk/MyPipeline";
-// import { Pool as RelationPool } from "@/pages/RelationDesk/Pool";
+import { Pool as RelationPool } from "@/pages/RelationDesk/Pool";
 import { Explorers as RelationExplorers } from "@/pages/RelationDesk/Leads/Explorers";
 import { Coaches as RelationCoaches } from "@/pages/RelationDesk/Leads/Coaches";
 import { Organisation as RelationOrganisation } from "@/pages/RelationDesk/Leads/Organisation";
@@ -44,11 +45,11 @@ import { Bugs as RelationBugs } from "@/pages/RelationDesk/Cases/Bugs";
 import { Abuses as RelationAbuses } from "@/pages/RelationDesk/Cases/Abuses";
 import { Explorers as RelationExplorersList } from "@/pages/RelationDesk/Explorers";
 import { Coaches as RelationCoachesList } from "@/pages/RelationDesk/Coaches";
-import { Institute as RelationInstitute } from "@/pages/RelationDesk/Organisation/Institute";
-import { Schools as RelationSchools } from "@/pages/RelationDesk/Organisation/Schools";
-import { Colleges as RelationColleges } from "@/pages/RelationDesk/Organisation/Colleges";
-import { Companies as RelationCompanies } from "@/pages/RelationDesk/Organisation/Companies";
-import { Universities as RelationUniversities } from "@/pages/RelationDesk/Organisation/Universities";
+// import { Institute as RelationInstitute } from "@/pages/RelationDesk/Organisation/Institute";
+// import { Schools as RelationSchools } from "@/pages/RelationDesk/Organisation/Schools";
+// import { Colleges as RelationColleges } from "@/pages/RelationDesk/Organisation/Colleges";
+// import { Companies as RelationCompanies } from "@/pages/RelationDesk/Organisation/Companies";
+// import { Universities as RelationUniversities } from "@/pages/RelationDesk/Organisation/Universities";
 import { Ngo as RelationNgo } from "@/pages/RelationDesk/Organisation/Ngo";
 import { MyAccounts } from "@/pages/RelationDesk/MyAccount";
 import { Leaderboard as RelationLeaderboard } from "@/pages/RelationDesk/Leaderboard";
@@ -124,8 +125,8 @@ export default function AppRoutes() {
         path="platform/products/masterclasses"
         element={<PlatformMasterclass />}
       />
-      <Route path="platform/engage" element={<PlatformEngage />} />
-      <Route path="platform/prepare" element={<PlatformPrepare />} />
+      <Route path="platform/events" element={<PlatformEvents />} />
+      <Route path="platform/courses" element={<PlatformCourses />} />
       <Route path="platform/contribute" element={<PlatformContribute />} />
       <Route
         path="platform/plans/access-code"
@@ -163,7 +164,7 @@ export default function AppRoutes() {
       {/* Relations Desk Routes */}
       <Route path="relation/desk" element={<RelationDesk />} />
       <Route path="relation/pipeline" element={<RelationPipeline />} />
-      {/* <Route path="relation/pool" element={<RelationPool />} /> */}
+      <Route path="relation/pool" element={<RelationPool />} />
       <Route path="relation/leads/explorers" element={<RelationExplorers />} />
       <Route path="relation/leads/coaches" element={<RelationCoaches />} />
       <Route
@@ -183,7 +184,8 @@ export default function AppRoutes() {
       <Route path="relation/cases/abuses" element={<RelationAbuses />} />
       <Route path="relation/explorers" element={<RelationExplorersList />} />
       <Route path="relation/coaches" element={<RelationCoachesList />} />
-      <Route
+      <Route path="relation/organisations" element={<RelationOuterOrganisation />} />
+      {/* <Route
         path="relation/organisations/institutes"
         element={<RelationInstitute />}
       />
@@ -202,7 +204,7 @@ export default function AppRoutes() {
       <Route
         path="relation/organisations/universities"
         element={<RelationUniversities />}
-      />
+      /> */}
       <Route path="relation/organisations/ngos" element={<RelationNgo />} />
       <Route path="relation/my-accounts" element={<MyAccounts />} />
       <Route path="relation/leaderboard" element={<RelationLeaderboard />} />

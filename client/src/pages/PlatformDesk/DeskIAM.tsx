@@ -7,6 +7,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Input } from "@/components/ui/input";
 import RadioButton from "@/components/ui/Radiobutton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DeskIAMtable } from "@/data/Data";
 import { cn } from "@/lib/utils";
 import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp,  FileDown, Filter,Pen, Plus, Search, UserCheck, Users, UserX, X } from "lucide-react";
@@ -504,7 +505,7 @@ function TableSection() {
                   {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] text-center pr-4 w-[10px]">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -561,16 +562,26 @@ function TableSection() {
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      
+                    <div className="flex items-center justify-center pr-4">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
-                        className="border-0 shadow-none"
+                        variant="actionIcon"
+                        size="actionIcon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                       >
                         <Pen className="h-4 w-3" />
                         <span className="sr-only">Edit</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Edit
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>

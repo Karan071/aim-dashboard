@@ -7,7 +7,6 @@ import {
   FileDown,
   Plus,
   ChartArea,
-  Download,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -101,7 +100,6 @@ function Topbar() {
 }
 
 function Buttonbar() {
-  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -117,21 +115,7 @@ function Buttonbar() {
           <ChartArea className="h-3 w-3" />
           <span className="">Categories</span>
         </Button>
-        <Button variant="standard" size="new">
-          <Download className="h-3 w-3" />
-          <span className="">Export</span>
-        </Button>
-        <Button
-          variant="standard"
-          size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
-      </div>
+        </div>
     </div>
   );
 }
