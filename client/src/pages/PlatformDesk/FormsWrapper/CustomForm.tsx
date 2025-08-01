@@ -1,4 +1,4 @@
-import { Building2, UserCheck, Globe, Clock, CircleArrowUp, CircleArrowDown, Search, Check, X, FileDown, Newspaper } from "lucide-react";
+import { Building2, UserCheck, Globe, Clock, Search, Check, X, FileDown, Newspaper } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -16,45 +16,41 @@ import { useEffect } from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import { DateRangePicker } from "@/components/ui/RangeCalender";
 import { DatePickerWithRange } from "@/components/date-picker";
+import { TooltipContent } from "@/components/ui/tooltip";
+import { TooltipProvider, Tooltip, TooltipTrigger } from "@/components/ui/tooltip";
 
 
 
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const orgStats = [
   {
     title: "Pending Inputs",
     value: "38",
     icon: Building2,
-    performance: Up,
   },
   {
     title: "Approved",
     value: "94",
     icon: UserCheck,
-    performance: Down,
   },
   {
     title: "Rejected",
     value: "17",
     icon: Globe,
-    performance: Down,
   },
   {
     title: "New This Week",
     value: "12",
     icon: Clock,
-    performance: Up,
   },
 ];
 
 
 
 export function CustomFormTopbar() {
-
+  
   const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
@@ -66,14 +62,14 @@ export function CustomFormTopbar() {
       <div className="flex gap-4">
         <DatePickerWithRange />
         <Button
-          variant="standard"
-          size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-3 w-3" />
-        </Button>
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
 
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -278,7 +274,6 @@ export function CustomInputStats() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -525,11 +520,11 @@ export function EXCustomInputTable() {
                   onClick={() => requestSort("status")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Status{" "}
+                  	Status{" "}
                   {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)] flex justify-center items-center">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -577,63 +572,91 @@ export function EXCustomInputTable() {
                   <TableCell>
                     <div className="text-low">{user.submittedValue}</div>
                   </TableCell>
-                  <TableCell>
-                    <div className="text-sm">
-                      <div>{`${user.formName}`}</div>
-                    </div>
-                  </TableCell>
-
-                  <TableCell>
-                    <div className="text-sm">{user.submittedBy}</div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-sm">{user.date}</div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      className={
-                        user.status === "Approved"
-                          ? "bg-[var(--green2)] text-[var(--green)]"
-                          : "bg-[var(--yellow2)] text-[var(--yellow)]"
-                      }
-                    >
-                      {user.status}
-                    </Badge>
+                      <TableCell>
+                          <div className="text-sm">
+                              <div>{`${user.formName}`}</div>
+                          </div>
+                      </TableCell>
+                      
+                      <TableCell>
+                          <div className="text-sm">{user.submittedBy}</div>
+                      </TableCell>
+                      <TableCell>
+                          <div className="text-sm">{user.date}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center justify-center gap-2">
+                          <Badge
+                              className={
+                                  user.status === "Approved"
+                                      ? "bg-[var(--green2)] text-[var(--green)]"
+                                      : "bg-[var(--yellow2)] text-[var(--yellow)]"
+                              }
+                          >
+                            {user.status}
+                          </Badge>
+                      </TableCell>
+                  <TableCell>
+                    <div className="flex items-center justify-end pr-4">
+                    <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
+                        className="hover:text-[var(--brand-color)]"
                       >
                         <Eye className="h-4 w-4" />
                         <span className="sr-only">View</span>
                       </Button>
-
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
+                        className="hover:text-[var(--green)]"
                       >
-                        <Check className="h-4 w-3 text-[var(--green)]" />
+                        <Check className="h-4 w-4 "/>
                         <span className="sr-only">Add to Degree List</span>
                       </Button>
-
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
+                        className="hover:text-[var(--red)]"
                       >
-                        <X className="h-4 w-3 text-[var(--red)]" />
+                        <X className="h-4 w-4 " />
                         <span className="sr-only">Reject</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
 

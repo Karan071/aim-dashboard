@@ -16,6 +16,8 @@ import { useEffect } from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import DatePick from "@/components/ui/DatePicker"
 import { DatePickerWithRange } from "@/components/date-picker";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { TooltipContent } from "@/components/ui/tooltip";
 
 
 
@@ -560,8 +562,7 @@ export function FormsTable() {
                   {sortConfig?.key === "createdOn" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)] flex justify-center items-center">Actions</TableHead>
-              </TableRow>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead></TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
               {currentRecords.map((user) => (
@@ -631,21 +632,34 @@ export function FormsTable() {
                           <div className="text-sm">{user.createdOn}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-end pr-4">
+                    <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
                       >
+
                         <Eye className="h-4 w-4" />
                         <span className="sr-only">View</span>
-                      </Button>
 
+                      </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -653,10 +667,18 @@ export function FormsTable() {
                         <Pen className="h-4 w-3"/>
                         <span className="sr-only">Edit</span>
                       </Button>
-
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Edit
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -664,10 +686,18 @@ export function FormsTable() {
                         <FileDown className="h-4 w-3" />
                         <span className="sr-only">Export</span>
                       </Button>
-
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Export
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -675,6 +705,12 @@ export function FormsTable() {
                         <X className="h-4 w-3" />
                         <span className="sr-only">Deactivate</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Deactivate
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
 
