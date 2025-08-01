@@ -809,7 +809,7 @@ function AssessmentTable() {
                   {sortConfig?.key === "result" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)] flex items-center justify-center">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -995,67 +995,41 @@ function AssessmentTable() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center justify-center gap-2">
+                    <div className="flex items-center justify-end pr-4 ">
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // navigate(`/user-details/${user.id}`) or your view logic
-                              }}
-                            >
-                              <Bell className="h-4 w-4" />
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Bell className="h-3 w-3" />
                               <span className="sr-only">Remind</span>
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent side="top" className="text-xs">
-                            Remind
+                          <TooltipContent>
+                            <p>Remind</p>
                           </TooltipContent>
                         </Tooltip>
-                      </TooltipProvider>
-                      <TooltipProvider>
+
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              className="hover:bg-[var(--red2)] hover:text-[var(--red)] transition-all duration-200 p-2 rounded-md"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // navigate(`/user-details/${user.id}`) or your view logic
-                              }}
-                            >
-                              <Ban className="h-4 w-4" />
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Ban className="h-3 w-3 text-[var(--red)]" />
                               <span className="sr-only">Revoke</span>
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent side="top" className="text-xs">
-                            Revoke
+                          <TooltipContent>
+                            <p>Revoke</p>
                           </TooltipContent>
                         </Tooltip>
-                      </TooltipProvider>
-                      <TooltipProvider>
+
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // navigate(`/user-details/${user.id}`) or your view logic
-                              }}
-                            >
-                              <RotateCcw className="h-4 w-4" />
+                            <Button variant="actionIcon" size="actionIcon">
+                              <RotateCcw className="h-3 w-3" />
                               <span className="sr-only">Reset</span>
                             </Button>
                           </TooltipTrigger>
-                          <TooltipContent side="top" className="text-xs">
-                            Reset
+                          <TooltipContent>
+                            <p>Reset</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
