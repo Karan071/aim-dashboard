@@ -598,7 +598,7 @@ function ActivityTable() {
                   {sortConfig?.key === "description" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actionable</TableHead>
+                <TableHead className="text-[var(--text)] flex items-center justify-center ">Actionable</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -637,12 +637,12 @@ function ActivityTable() {
                   </TableCell>
                   <TableCell>{user.description}</TableCell>
                   <TableCell>
-                    <div className="flex items-center">
+                    <div className="flex items-center justify-center ">
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="icon-only" size="icon">
-                              <Eye className="h-4 w-3" />
+                              <Eye className="h-3 w-3" />
                               <span className="sr-only">View</span>
                             </Button>
                           </TooltipTrigger>
@@ -654,7 +654,7 @@ function ActivityTable() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="icon-only" size="icon">
-                              <Check className="h-4 w-3 text-[var(--green)]" />
+                              <Check className="h-3 w-3 text-[var(--green)]" />
                               <span className="sr-only">Verify</span>
                             </Button>
                           </TooltipTrigger>
@@ -666,7 +666,7 @@ function ActivityTable() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="icon-only" size="icon">
-                              <Star className="h-4 w-3" />
+                              <Star className="h-3 w-3" />
                               <span className="sr-only">Review</span>
                             </Button>
                           </TooltipTrigger>
@@ -678,7 +678,7 @@ function ActivityTable() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="icon-only" size="icon">
-                              <User className="h-4 w-3" />
+                              <User className="h-3 w-3" />
                               <span className="sr-only">Assign</span>
                             </Button>
                           </TooltipTrigger>
@@ -690,7 +690,7 @@ function ActivityTable() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="icon-only" size="icon">
-                              <Newspaper className="h-4 w-3" />
+                              <Newspaper className="h-3 w-3" />
                               <span className="sr-only">Followups</span>
                             </Button>
                           </TooltipTrigger>
