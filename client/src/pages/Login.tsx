@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,36 +5,39 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import asset from "@/assets/asset.jpg";
 import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../store/slices/authSlice";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authState = useSelector((state: any) => state.auth);
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Optional: Show toast on error
+  if (authState.error) {
+    toast.error(authState.error);
+  }
+
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-
-    try {
-      const response = await axios.post(
-        "https://a.aimshala.com/api/admin/login",
-        { email, password },
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      if (response.data.token) {
-        localStorage.setItem("jwt", response.data.token);
-        navigate("/dashboard/explorers");
-      }
-    } catch (error) {
-      toast("Login Failed");
-      console.error("Login failed:", error);
-    }
+    dispatch(loginUser({ email, password }));
   };
 
   return (
     <div className="h-screen flex justify-center items-center">
-      <LoginForm onSubmit={handleLogin} />
+      <LoginForm onSubmit={handleLogin} loading={authState.loading} />
+      {authState.error && (
+        <div className="absolute top-4 right-4 text-red-500">
+          Error: {authState.error}
+        </div>
+      )}
+      {authState.user && (
+        <div className="absolute top-4 left-4 text-green-600">
+          Welcome, {authState.user.name || "Admin"}!
+        </div>
+      )}
     </div>
   );
 }
@@ -44,9 +45,11 @@ export default function Login() {
 function LoginForm({
   className,
   onSubmit,
+  loading,
   ...props
 }: React.ComponentProps<"form"> & {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  loading?: boolean;
 }) {
   return (
     <form
@@ -86,8 +89,8 @@ function LoginForm({
                   required
                 />
               </div>
-              <Button type="submit" className="w-full mt-8">
-                Login
+              <Button type="submit" className="w-full mt-8" disabled={loading}>
+                {loading ? "Logging in..." : "Login"}
               </Button>
             </div>
           </div>

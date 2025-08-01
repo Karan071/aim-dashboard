@@ -27,7 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, } from "lucide-react";
 import { RecentActivityTable } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
@@ -260,8 +260,8 @@ function Topbar() {
       <div className="flex items-center gap-2">
         <DatePickerWithRange />
         <Button
-          variant="noborder"
-          size="icon"
+          variant="standard"
+          size="new"
           onClick={() => setShowFilter(true)}
           aria-label={showFilter ? "Hide Filters" : "Show Filters"}
         >
@@ -332,19 +332,16 @@ function AdvanceFilter({ onClose }: FilterProps) {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${
-                    activeTab === tab
-                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                  }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
               ))}
             </div>
           </div>
-
-          {/* Tab Content */}
 
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "Entity Type" && (
@@ -570,9 +567,18 @@ function ActivityTable() {
                   onClick={() => requestSort("dateTime")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  Date & Time{" "}
-                  {sortConfig?.key === "dateTime" &&
-                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  <div className="flex items-center justify-between gap-1">
+                    <span>Date & Time</span>
+                    {sortConfig?.key === "dateTime" ? (
+                      sortConfig.direction === "ascending" ? (
+                        <ChevronUp className="h-4 w-4 text-[var(--brand-color)]" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-[var(--brand-color)]" />
+                      )
+                    ) : (
+                      <ChevronsUpDown className="h-4 w-4 text-[var(--text-light)]" />
+                    )}
+                  </div>
                 </TableHead>
                 <TableHead
                   onClick={() => requestSort("activityType")}
@@ -598,7 +604,7 @@ function ActivityTable() {
                   {sortConfig?.key === "description" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actionable</TableHead>
+                <TableHead className="text-[var(--text)] flex justify-center items-center">Actionable</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -637,7 +643,7 @@ function ActivityTable() {
                   </TableCell>
                   <TableCell>{user.description}</TableCell>
                   <TableCell>
-                    <div className="flex items-center">
+                    <div className="flex items-center justify-center ">
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -755,9 +761,8 @@ function ActivityTable() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${
-                  page === currentPage ? "text-white" : "text-[var(--text)]"
-                }`}
+                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"
+                  }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}

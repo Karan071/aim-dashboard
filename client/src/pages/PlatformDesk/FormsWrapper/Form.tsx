@@ -560,7 +560,7 @@ export function FormsTable() {
                   {sortConfig?.key === "createdOn" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] flex justify-center items-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -631,7 +631,7 @@ export function FormsTable() {
                           <div className="text-sm">{user.createdOn}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center gap-2">
                       <Button
                         variant="noborder"
                         size="sm"

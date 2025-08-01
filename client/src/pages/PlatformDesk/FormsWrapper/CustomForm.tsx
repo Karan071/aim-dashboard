@@ -54,7 +54,7 @@ const orgStats = [
 
 
 export function CustomFormTopbar() {
-  
+
   const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
@@ -66,14 +66,14 @@ export function CustomFormTopbar() {
       <div className="flex gap-4">
         <DatePickerWithRange />
         <Button
-        variant="standard"
-        size="new"
-        onClick={() => setShowFilter(true)}
-      >
-        <Filter className="h-3 w-3" />
-      </Button>
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-3 w-3" />
+        </Button>
 
-      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -525,11 +525,11 @@ export function EXCustomInputTable() {
                   onClick={() => requestSort("status")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  	Status{" "}
+                  Status{" "}
                   {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] flex justify-center items-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -577,31 +577,31 @@ export function EXCustomInputTable() {
                   <TableCell>
                     <div className="text-low">{user.submittedValue}</div>
                   </TableCell>
-                      <TableCell>
-                          <div className="text-sm">
-                              <div>{`${user.formName}`}</div>
-                          </div>
-                      </TableCell>
-                      
-                      <TableCell>
-                          <div className="text-sm">{user.submittedBy}</div>
-                      </TableCell>
-                      <TableCell>
-                          <div className="text-sm">{user.date}</div>
+                  <TableCell>
+                    <div className="text-sm">
+                      <div>{`${user.formName}`}</div>
+                    </div>
+                  </TableCell>
+
+                  <TableCell>
+                    <div className="text-sm">{user.submittedBy}</div>
                   </TableCell>
                   <TableCell>
-                          <Badge
-                              className={
-                                  user.status === "Approved"
-                                      ? "bg-[var(--green2)] text-[var(--green)]"
-                                      : "bg-[var(--yellow2)] text-[var(--yellow)]"
-                              }
-                          >
-                            {user.status}
-                          </Badge>
-                      </TableCell>
+                    <div className="text-sm">{user.date}</div>
+                  </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <Badge
+                      className={
+                        user.status === "Approved"
+                          ? "bg-[var(--green2)] text-[var(--green)]"
+                          : "bg-[var(--yellow2)] text-[var(--yellow)]"
+                      }
+                    >
+                      {user.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center justify-center gap-2">
                       <Button
                         variant="noborder"
                         size="sm"
@@ -620,7 +620,7 @@ export function EXCustomInputTable() {
                           e.stopPropagation();
                         }}
                       >
-                        <Check className="h-4 w-3 text-[var(--green)]"/>
+                        <Check className="h-4 w-3 text-[var(--green)]" />
                         <span className="sr-only">Add to Degree List</span>
                       </Button>
 

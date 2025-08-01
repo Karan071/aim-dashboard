@@ -40,6 +40,7 @@ import {
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { assessmentsTable, coachesList } from "@/data/Data";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 
 // Define the assessment type to match the data structure
 type AssessmentItem = {
@@ -136,9 +137,21 @@ function Topbar() {
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">
-          Assessments
-        </h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/" className="text-2xl">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
       <div className="flex items-center gap-2">
         <Button
@@ -267,11 +280,10 @@ function AdvancedFilters({ onClose }: FilterProps) {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${
-                    activeTab === tab
-                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                  }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
+                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                    }`}
                 >
                   {tab}
                 </button>
@@ -501,11 +513,10 @@ function CoachAssignmentModal({
                 filteredCoaches.map((coach) => (
                   <div
                     key={coach.id}
-                    className={`p-2 cursor-pointer hover:bg-[var(--faded)] text-sm ${
-                      selectedCoach === coach.id
-                        ? "bg-[var(--brand-color2)] text-[var(--brand-color)]"
-                        : "text-[var(--text)]"
-                    }`}
+                    className={`p-2 cursor-pointer hover:bg-[var(--faded)] text-sm ${selectedCoach === coach.id
+                      ? "bg-[var(--brand-color2)] text-[var(--brand-color)]"
+                      : "text-[var(--text)]"
+                      }`}
                     onClick={() => setSelectedCoach(coach.id)}
                   >
                     {coach.name} - {coach.specialization}
@@ -798,7 +809,7 @@ function AssessmentTable() {
                   {sortConfig?.key === "result" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] flex items-center justify-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -984,7 +995,7 @@ function AssessmentTable() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center gap-2">
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -1104,9 +1115,8 @@ function AssessmentTable() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${
-                  page === currentPage ? "text-white" : "text-[var(--text)]"
-                }`}
+                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"
+                  }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
