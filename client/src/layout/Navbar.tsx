@@ -13,13 +13,24 @@ import AimshalaLogoDark from "@/assets/logos/aimshala_dark.png";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "@/components/theme-provider";
 import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {}
 
 export default function Navbar({}: NavbarProps) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { theme } = useTheme();
   const dark = theme === "dark";
+  const { user } = useSelector((state: any) => state.auth);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -96,7 +107,7 @@ export default function Navbar({}: NavbarProps) {
           <div className="w-4 h-4 py-0.5 rounded-full bg-[var(--red)] text-white text-[8px] text-center absolute -top-2 -right-1">
             3
           </div>
-            <Bell className=" text-[var(--text)] h-5 w-5" />
+          <Bell className=" text-[var(--text)] h-5 w-5" />
         </div>
 
         <DropdownMenu>
@@ -107,14 +118,16 @@ export default function Navbar({}: NavbarProps) {
             >
               <Avatar className="md:h-8 md:w-8">
                 <AvatarImage
-                  src="https://github.com/leerob.png"
-                  alt="@evilrabbit"
+                  src={user?.image || "https://github.com/shadcn.png"}
+                  alt={user?.name || "Anynamous"}
                 />
               </Avatar>
               <div>
-                <span className="hidden md:block text-[var(--text-head)]">Anna Adame</span>
+                <span className="hidden md:block text-[var(--text-head)]">
+                  {user?.name || "User"}
+                </span>
                 <span className="hidden md:block text-left text-[var(--text)] font-light">
-                  Founder
+                  {user?.role || "Guest"}
                 </span>
               </div>
             </Button>
@@ -122,7 +135,7 @@ export default function Navbar({}: NavbarProps) {
           <DropdownMenuContent className="p-2" align="end">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
