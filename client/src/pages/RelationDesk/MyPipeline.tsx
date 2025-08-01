@@ -58,7 +58,7 @@ export function MyPipeline() {
 }
 
 
-export function MyPipelineTopbar() {
+function MyPipelineTopbar() {
   
   const [showFilter, setShowFilter] = useState(false);
   return (
@@ -111,7 +111,6 @@ interface FilterProps {
   onClose: () => void;
 }
 
-
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState("Type");
@@ -152,13 +151,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-      
       <div
         ref={modalRef}
         className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Filters
+          </CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
@@ -169,16 +169,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${
+                    activeTab === tab
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -188,8 +188,8 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
           {/* Tab Content */}
 
-          
-            {activeTab === "Type" && (
+          <div className="p-6 overflow-y-auto relative w-full">
+          {activeTab === "Type" && (
               <>
                 <p className="text-sm text-[var(--text-head)] mb-4">
                   Search by Type:
@@ -310,7 +310,6 @@ function AdvancedFilters({ onClose }: FilterProps) {
                 </div>
               </>
             )}
-
             {/* Footer */}
           </div>
         </div>
@@ -325,8 +324,12 @@ function AdvancedFilters({ onClose }: FilterProps) {
           </div>
         </div>
       </div>
+    </div>
   );
 }
+
+
+
 
 
 function MyPipelineTable() {

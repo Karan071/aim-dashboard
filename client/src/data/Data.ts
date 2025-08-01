@@ -13808,3 +13808,171 @@ export const MyPipelineTable= [
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   }
 ];
+
+export const PoolTableRelation = [
+  {
+    id: "#LD301",
+    Type: "Lead",
+    Concern: "Abandoned Cart",
+    Objective: "Upsell",
+    for: "Assessment",
+    Source: "Web",
+    Age: "1 hr ago",
+    Status: "New",
+    Action: "Assign"
+  },
+  {
+    id: "#LD302",
+    Type: "Lead",
+    Concern: "No Response",
+    Objective: "Enroll",
+    for: "Career Program",
+    Source: "Instagram",
+    Age: "2 hrs ago",
+    Status: "New",
+    Action: "Assign"
+  },
+  {
+    id: "#LD303",
+    Type: "Lead",
+    Concern: "Left Midway",
+    Objective: "Convert",
+    for: "Intro Call",
+    Source: "LinkedIn",
+    Age: "3 hrs ago",
+    Status: "Waiting",
+    Action: "Assign"
+  },
+  {
+    id: "#LD304",
+    Type: "Lead",
+    Concern: "Stopped Replying",
+    Objective: "Upsell",
+    for: "Support Plan",
+    Source: "Referral",
+    Age: "5 hrs ago",
+    Status: "Waiting",
+    Action: "Assign"
+  },
+  {
+    id: "#LD305",
+    Type: "Lead",
+    Concern: "Did Not Schedule",
+    Objective: "Schedule Call",
+    for: "Assessment",
+    Source: "Web",
+    Age: "7 hrs ago",
+    Status: "New",
+    Action: "Assign"
+  },
+  {
+    id: "#LD306",
+    Type: "Lead",
+    Concern: "Lost Interest",
+    Objective: "Follow-up",
+    for: "Discovery Call",
+    Source: "Facebook",
+    Age: "10 hrs ago",
+    Status: "Cold",
+    Action: "Assign"
+  },
+  {
+    id: "#LD307",
+    Type: "Lead",
+    Concern: "Abandoned Cart",
+    Objective: "Upsell",
+    for: "Workshop",
+    Source: "YouTube",
+    Age: "12 hrs ago",
+    Status: "New",
+    Action: "Assign"
+  },
+  {
+    id: "#LD308",
+    Type: "Lead",
+    Concern: "Ghosted",
+    Objective: "Enroll",
+    for: "Training Plan",
+    Source: "Web",
+    Age: "16 hrs ago",
+    Status: "Cold",
+    Action: "Assign"
+  },
+  {
+    id: "#LD309",
+    Type: "Lead",
+    Concern: "Dropped after DM",
+    Objective: "Onboard",
+    for: "Support Program",
+    Source: "Instagram",
+    Age: "1 day ago",
+    Status: "New",
+    Action: "Assign"
+  },
+  {
+    id: "#LD310",
+    Type: "Lead",
+    Concern: "No Confirmation",
+    Objective: "Follow-up",
+    for: "Consultation",
+    Source: "WhatsApp",
+    Age: "1 day ago",
+    Status: "Waiting",
+    Action: "Assign"
+  },
+  {
+    id: "#LD311",
+    Type: "Lead",
+    Concern: "Abandoned Signup",
+    Objective: "Complete Flow",
+    for: "Course Registration",
+    Source: "Web",
+    Age: "2 days ago",
+    Status: "New",
+    Action: "Assign"
+  },
+  {
+    id: "#LD312",
+    Type: "Lead",
+    Concern: "Did Not Respond to Offer",
+    Objective: "Convert",
+    for: "Special Deal",
+    Source: "Email",
+    Age: "2 days ago",
+    Status: "Cold",
+    Action: "Assign"
+  },
+  {
+    id: "#LD313",
+    Type: "Lead",
+    Concern: "Unsubscribed",
+    Objective: "Re-engage",
+    for: "Newsletter",
+    Source: "Web",
+    Age: "3 days ago",
+    Status: "Waiting",
+    Action: "Assign"
+  },
+  {
+    id: "#LD314",
+    Type: "Lead",
+    Concern: "Session Missed",
+    Objective: "Reschedule",
+    for: "Coaching",
+    Source: "Instagram",
+    Age: "3 days ago",
+    Status: "Cold",
+    Action: "Assign"
+  },
+  {
+    id: "#LD315",
+    Type: "Lead",
+    Concern: "Abandoned Cart",
+    Objective: "Upsell",
+    for: "Webinar",
+    Source: "Facebook",
+    Age: "4 days ago",
+    Status: "New",
+    Action: "Assign"
+  }
+];
