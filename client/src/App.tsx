@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Login from "@/pages/Login";
+// import Login from "@/pages/Login";
 import Layout from "./layout/Layout";
 import AppRoutes from "./routes/AppRoutes";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -11,7 +11,7 @@ export default function App() {
     <Provider store={store}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* <Route path="/" element={<Login />} /> */}
           <Route
             path="/desk/*"
             element={
