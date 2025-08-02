@@ -12,6 +12,7 @@ import {
   X,
   FileText,
   BarChart3,
+  Trash2,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -889,6 +890,8 @@ interface CategoryPopupProps {
 function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availableCategories }: CategoryPopupProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAddCategory, setShowAddCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
 
   function handleClickOutside(e: MouseEvent) {
     const path = e.composedPath() as HTMLElement[];
@@ -927,6 +930,21 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
 
   const isAllCategoriesSelected = selectedCategories.length === 0;
 
+  const handleAddCategory = () => {
+    if (newCategoryName.trim() && !availableCategories.includes(newCategoryName.trim())) {
+      // In a real app, you would make an API call here
+      console.log("Adding category:", newCategoryName.trim());
+      setNewCategoryName("");
+      setShowAddCategory(false);
+    }
+  };
+
+  const handleDeleteCategory = (category: string) => {
+    // In a real app, you would make an API call here
+    console.log("Deleting category:", category);
+    // You would typically update the availableCategories list here
+  };
+
   return (
     <div className="fixed inset-0 z-50 bg-black/40  flex justify-end">
       <style dangerouslySetInnerHTML={{ __html: customScrollbarStyles }} />
@@ -936,6 +954,17 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
       >
         <div className="flex items-center justify-between border-b p-6">
           <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Select Categories</CardTitle>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="border"
+              size="sm"
+              onClick={() => setShowAddCategory(true)}
+              className="flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Add Category
+            </Button>
+          </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[var(--text)]">
@@ -951,6 +980,46 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
               />
             </div>
           </div>
+
+          {/* Add Category Modal */}
+          {showAddCategory && (
+            <div className="flex flex-col gap-2">
+              <Label>Add New Category</Label>
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Enter category name..."
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleAddCategory();
+                    }
+                  }}
+                />
+                <Button
+                  variant="brand"
+                  size="sm"
+                  onClick={handleAddCategory}
+                  disabled={!newCategoryName.trim() || availableCategories.includes(newCategoryName.trim())}
+                >
+                  Add
+                </Button>
+                <Button
+                  variant="border"
+                  size="sm"
+                  onClick={() => {
+                    setShowAddCategory(false);
+                    setNewCategoryName("");
+                  }}
+                >
+                  Cancel
+                </Button>
+              </div>
+              {newCategoryName.trim() && availableCategories.includes(newCategoryName.trim()) && (
+                <p className="text-xs text-[var(--red)]">Category already exists</p>
+              )}
+            </div>
+          )}
 
           <div className="flex flex-col gap-2">
             <Label>Quick Selection</Label>
@@ -993,23 +1062,49 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
                         : "bg-[var(--background)] border-[var(--border)] hover:bg-[var(--faded)]"
                     }`}
                   >
-                    <label className="flex items-center space-x-3 cursor-pointer">
-                      <Checkbox
-                        checked={selectedCategories.includes(category)}
-                        onCheckedChange={() => handleCategoryToggle(category)}
-                        className="text-[var(--brand-color)] focus:ring-[var(--brand-color)] border-[var(--border)]"
-                      />
-                      <div className="flex-1">
-                        <div className="font-medium text-[var(--text-head)]">{category}</div>
-
-                      </div>
-                      <Badge 
-                        variant={selectedCategories.includes(category) ? "standard" : "border"}
-                        className="text-xs"
-                      >
-                        {category}
-                      </Badge>
-                    </label>
+                    <div className="flex items-center space-x-3">
+                      <label className="flex items-center space-x-3 cursor-pointer flex-1">
+                        <Checkbox
+                          checked={selectedCategories.includes(category)}
+                          onCheckedChange={() => handleCategoryToggle(category)}
+                          className="text-[var(--brand-color)] focus:ring-[var(--brand-color)] border-[var(--border)]"
+                        />
+                        <div className="flex-1">
+                          <div className="font-medium text-[var(--text-head)]">{category}</div>
+                        </div>
+                        <Badge 
+                          variant={selectedCategories.includes(category) ? "standard" : "border"}
+                          className="text-xs"
+                        >
+                          {category}
+                        </Badge>
+                      </label>
+                      
+                      {/* Delete Icon - Only show when category is selected */}
+                      {selectedCategories.includes(category) && (
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="noborder"
+                                size="sm"
+                                className="hover:bg-[var(--red2)] hover:text-[var(--red)] transition-all duration-200 p-1 rounded-md"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteCategory(category);
+                                }}
+                              >
+                                <Trash2 className="h-3 w-3" />
+                                <span className="sr-only">Delete Category</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="top" className="text-xs">
+                              Delete Category
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      )}
+                    </div>
                   </div>
                 ))
               )}
