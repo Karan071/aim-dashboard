@@ -642,7 +642,7 @@ function ActivityTable() {
                   <TableCell>
                     <Badge variant="standard">{user.entity}</Badge>
                   </TableCell>
-                  <TableCell>{user.description}</TableCell>
+                  <TableCell className="max-w-[3000px] break-words whitespace-normal">{user.description}</TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end pr-4 ">
                       <TooltipProvider>

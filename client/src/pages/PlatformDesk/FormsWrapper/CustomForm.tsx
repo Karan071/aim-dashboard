@@ -471,8 +471,8 @@ export function EXCustomInputTable() {
           </div>
         </div>
 
-        <div className="overflow-x-auto text-[var(--text)] w-full px-0 mx-0 text-low">
-          <Table className="w-full caption-top border-collapse overflow-y-visible">
+        <div className="overflow-x-auto lg:overflow-x-visible text-[var(--text)] w-full px-0 mx-0 text-low">
+<Table className="caption-top border-collapse  overflow-y-visible">
             <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
@@ -570,7 +570,7 @@ export function EXCustomInputTable() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.submittedValue}</div>
+                    <div className="text-low max-w-[170px] break-words whitespace-normal">{user.submittedValue}</div>
                   </TableCell>
                       <TableCell>
                           <div className="text-sm">

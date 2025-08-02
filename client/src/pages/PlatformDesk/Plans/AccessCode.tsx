@@ -802,7 +802,7 @@ function CodeTableSection() {
                     <Badge variant="standard">{user.Discount}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{user.Product}</div>
+                    <div className="text-low max-w-[200px] break-words whitespace-normal">{user.Product}</div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">

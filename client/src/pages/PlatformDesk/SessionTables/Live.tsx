@@ -11,6 +11,9 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils"
 import { useEffect } from "react";
 import asset from "@/assets/asset.jpg";
+import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/ui/tooltip";
 
 
 const tableData = [
@@ -349,7 +352,7 @@ export function LiveTable(){
                             {sortConfig?.key === "status" &&
                             (sortConfig.direction === "ascending" ? "↑" : "↓")}
                         </TableHead>
-                      <TableHead className="text-[var(--text)]">Actions</TableHead>
+                      <TableHead className="text-[var(--text)] w-10 text-center pr-4">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody className="overflow-visible relative z-0">
@@ -448,67 +451,108 @@ export function LiveTable(){
                                 <div className="text-sm">{user.type}</div>
                             </TableCell>
                             <TableCell>
-                                <div className="text-sm">{user.objective}</div>
+                                <div className="text-sm max-w-[100px] break-words whitespace-normal">{user.objective}</div>
                         </TableCell>
                         <TableCell>
                                 <div className="text-sm">{user.amount}</div>
                         </TableCell>
                         <TableCell>
-                                <div className="text-sm">{user.fees}</div>
-                        </TableCell>
-                        <TableCell>
-                                <div className="text-sm">{user.share}</div>
-                        </TableCell>
+                    <div className="text-sm flex flex-col gap-1 items-center">
+                      <p className="text-[var(--text)]">{user.fees.split(" | ")[0]}</p>
+                      <Badge variant="brand" className="text-[var(--text)] text-xs ml-1">{user.fees.split(" | ")[1]}</Badge>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm max-w-[100px] break-words whitespace-normal">
+                      <p className="text-[var(--text)]">{user.objective.split(" | ")[0]}</p>
+                      <div>{user.objective.split(" | ")[1]}</div>
+                    </div>
+                  </TableCell>
                         <TableCell>
                                 <Badge variant="border">
                                   {user.status}
                                 </Badge>
                             </TableCell>
                         <TableCell>
-                          <div className="flex items-center gap-2">
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                            >
-                              <Eye className="h-4 w-4" />
-                              <span className="sr-only">View</span>
-                            </Button>
-      
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                            >
-                              <X className="h-4 w-3 text-[var(--red)]"/>
-                              <span className="sr-only">Cancle</span>
-                            </Button>
-      
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                            >
-                              <Flag className="h-4 w-3" />
-                              <span className="sr-only">Flag</span>
-                            </Button>
-                            <Button
-                              variant="noborder"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                              }}
-                            >
-                              <NotebookIcon className="h-4 w-3" />
-                              <span className="sr-only">Logs</span>
-                            </Button>
-                          </div>
+                        <div className="flex items-center justify-center pr-4">
+                    <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                        
+                      <Button
+                        variant="actionIcon"
+                        size="actionIcon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <Eye className="h-4 w-4" />
+                        <span className="sr-only">View</span>
+                      </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                      <Button
+                        variant="actionIcon"
+                        size="actionIcon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <X className="h-4 w-3 text-[var(--red)]" />
+                        <span className="sr-only">Cancle</span>
+                      </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Cancel
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                      <Button
+                        variant="actionIcon"
+                        size="actionIcon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <Flag className="h-4 w-3" />
+                        <span className="sr-only">Flag</span>
+                      </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Flag
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                      <Button
+                        variant="actionIcon"
+                        size="actionIcon"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <NotebookIcon className="h-4 w-3" />
+                        <span className="sr-only">Logs</span>
+                      </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Logs
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
                         </TableCell>
       
                       </TableRow>

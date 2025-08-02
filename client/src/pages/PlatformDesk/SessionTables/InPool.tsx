@@ -1,4 +1,4 @@
-import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle, Plus, PenBox } from "lucide-react";
+import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle, Plus, PenBox, Calendar1 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils"
 import { useEffect } from "react";
 import { coachesList } from "@/data/Data";
 import asset from "@/assets/asset.jpg";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const tData = [
   {
@@ -530,7 +531,7 @@ export function InPoolTable() {
                   {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] text-center pr-4 w-[10px]">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -539,7 +540,7 @@ export function InPoolTable() {
                   key={user.id}
                   data-id={user.id}
                   className={cn(
-                    "relative z-10 h-[90px] group cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
+                    "relative z-10 h-[90px] cursor-pointer transition-all duration-200 hover:bg-[var(--brand-color2)]",
                     selectedStack.some((c) => c.id === user.id)
                       ? "bg-[var(--brand-color3)]"
                       : ""
@@ -551,7 +552,7 @@ export function InPoolTable() {
                 >
                   <TableCell
                     className={cn(
-                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
+                      "pl-3 transition-all duration-200 border-l-4 hover:border-[var(--brand-color)]",
                       selectedStack.some((c) => c.id === user.id)
                         ? focusedId === user.id
                           ? "border-[var(--brand-color)]"
@@ -567,23 +568,41 @@ export function InPoolTable() {
                   </TableCell>
                   <TableCell
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-full overflow-hidden">
+                    <div className="flex items-center gap-2 group">
+                      <div className="h-10 w-10 rounded-full overflow-hidden">
                         <img
                           src={user.photo}
                           alt={user.fullName}
-                          className="h-14 w-14 object-cover"
+                          className="h-10 w-10 object-cover"
                         />
                       </div>
                       <div>
                         <div className="flex justify-start flex-col">
                           <div className="font-medium">{user.fullName}</div>
                           <div className="text-xs">{user.explorerId}</div>
-                          <div className="text-xs">{user.ug}</div>
+                          <div className="text-[10px]">{user.ug}</div>
                           <div className="flex items-center gap-1">
-                            <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" /></button>
-                            <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                            <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" /></button>
+                          <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button className=" group-hover:text-[var(--brand-color)]  hidden group-hover:inline-flex items-center gap-1 text-[15px]"><Phone className="h-3 w-3 hover:h-4 hover:w-4" /></button>
+                            </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Call
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                            <span className=" group-hover:text-[var(--text)]  hidden group-hover:inline-flex items-center gap-1 text-[15px]">|</span>
+                            <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button className=" group-hover:text-[var(--brand-color)]  hidden group-hover:inline-flex items-center gap-1 text-[20px]"><MessageCircle className="h-3 w-3 hover:h-4 hover:w-4" /></button>
+                            </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Message
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                           </div>
                         </div>
                       </div>
@@ -591,7 +610,7 @@ export function InPoolTable() {
                     </div>
                   </TableCell>
                   <TableCell className="">
-                    <div className="w-full max-w-full text-sm">
+                    <div className="w-full max-w-full text-sm group">
                       {user.assignCoach ? (() => {
                         const coach = coachesList.find(
                           (c) => c.id.toLowerCase() === user.assignCoach.toLowerCase()
@@ -604,7 +623,7 @@ export function InPoolTable() {
                               <img
                                 src={coach.photo || asset}
                                 alt={coach.name}
-                                className="w-14 h-14 rounded-full object-cover"
+                                className="w-6 h-6 rounded-full object-cover"
                               />
                               <div className="flex flex-col justify-center">
                                 <div className="font-semibold text-[var(--text)] flex items-center gap-2">{coach.name}
@@ -649,20 +668,27 @@ export function InPoolTable() {
 
 
                   <TableCell>
-                    <div className="text-sm flex flex-col">
+                    <div className="text-sm flex flex-col gap-1 group">
                       <div>{`${user.date}`}</div>
-                      <div>{`${user.time}`}</div>
-                      <button className="w-fit">
-                        <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">Reschedule</button>
-                      </button>
+                      <div >{`${user.time}`}</div>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                      <Calendar1 className="h-4 w-4 hidden group-hover:inline-flex hover:h-5 hover:w-5 text-[var(--brand-color)] " />
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="text-xs">
+                        Reschedule
+                      </TooltipContent>
+                    </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
 
                   <TableCell>
-                    <div className="text-sm">{user.type}</div>
+                    <div className="text-sm max-w-[100px] break-words whitespace-normal">{user.type}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-sm">{user.objective}</div>
+                    <div className="text-sm max-w-[100px] break-words whitespace-normal">{user.objective}</div>
                   </TableCell>
                   <TableCell>
                     <div className="text-sm">{user.amount}</div>
@@ -682,10 +708,14 @@ export function InPoolTable() {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-center pr-4">
+                    <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                        
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -693,10 +723,18 @@ export function InPoolTable() {
                         <Eye className="h-4 w-4" />
                         <span className="sr-only">View</span>
                       </Button>
-
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -704,10 +742,18 @@ export function InPoolTable() {
                         <X className="h-4 w-3 text-[var(--red)]" />
                         <span className="sr-only">Cancle</span>
                       </Button>
-
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Cancel
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -715,9 +761,18 @@ export function InPoolTable() {
                         <Flag className="h-4 w-3" />
                         <span className="sr-only">Flag</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Flag
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         onClick={(e) => {
                           e.stopPropagation();
                         }}
@@ -725,6 +780,12 @@ export function InPoolTable() {
                         <NotebookIcon className="h-4 w-3" />
                         <span className="sr-only">Logs</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Logs
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
 
