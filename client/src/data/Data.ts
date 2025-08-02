@@ -13650,7 +13650,7 @@ export const MyPipelineTable= [
     Concern: "Guide",
     Source: "Web",
     NextFollowup: "12 July",
-    Stage: "⏳ Open",
+    Stage: "Open",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13661,7 +13661,7 @@ export const MyPipelineTable= [
     Concern: "Counseling",
     Source: "Instagram",
     NextFollowup: "14 July",
-    Stage: "📞 Contacted",
+    Stage: "Contacted",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13672,7 +13672,7 @@ export const MyPipelineTable= [
     Concern: "Anxiety",
     Source: "Referral",
     NextFollowup: "15 July",
-    Stage: "🕒 Pending",
+    Stage: " Pending",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13683,7 +13683,7 @@ export const MyPipelineTable= [
     Concern: "Motivation",
     Source: "LinkedIn",
     NextFollowup: "16 July",
-    Stage: "✅ Engaged",
+    Stage: " Engaged",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13694,7 +13694,7 @@ export const MyPipelineTable= [
     Concern: "Family Issues",
     Source: "Web",
     NextFollowup: "17 July",
-    Stage: "⏳ Open",
+    Stage: " Open",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13705,7 +13705,7 @@ export const MyPipelineTable= [
     Concern: "Career Block",
     Source: "YouTube",
     NextFollowup: "18 July",
-    Stage: "🕒 Pending",
+    Stage: " Pending",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13716,7 +13716,7 @@ export const MyPipelineTable= [
     Concern: "Motivation",
     Source: "WhatsApp",
     NextFollowup: "19 July",
-    Stage: "✅ Engaged",
+    Stage: " Engaged",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13727,7 +13727,7 @@ export const MyPipelineTable= [
     Concern: "Transition",
     Source: "Web",
     NextFollowup: "20 July",
-    Stage: "📞 Contacted",
+    Stage: " Contacted",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13738,7 +13738,7 @@ export const MyPipelineTable= [
     Concern: "Confusion",
     Source: "Instagram",
     NextFollowup: "21 July",
-    Stage: "⏳ Open",
+    Stage: " Open",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13749,7 +13749,7 @@ export const MyPipelineTable= [
     Concern: "Career Shift",
     Source: "Referral",
     NextFollowup: "22 July",
-    Stage: "🕒 Pending",
+    Stage: " Pending",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13760,7 +13760,7 @@ export const MyPipelineTable= [
     Concern: "Job Loss",
     Source: "LinkedIn",
     NextFollowup: "23 July",
-    Stage: "✅ Engaged",
+    Stage: " Engaged",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13771,7 +13771,7 @@ export const MyPipelineTable= [
     Concern: "Uncertainty",
     Source: "Web",
     NextFollowup: "24 July",
-    Stage: "⏳ Open",
+    Stage: " Open",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13782,7 +13782,7 @@ export const MyPipelineTable= [
     Concern: "Low Confidence",
     Source: "WhatsApp",
     NextFollowup: "25 July",
-    Stage: "📞 Contacted",
+    Stage: " Contacted",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13793,7 +13793,7 @@ export const MyPipelineTable= [
     Concern: "Clarity",
     Source: "Instagram",
     NextFollowup: "26 July",
-    Stage: "🕒 Pending",
+    Stage: " Pending",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   },
   {
@@ -13804,7 +13804,7 @@ export const MyPipelineTable= [
     Concern: "Fear of Failure",
     Source: "YouTube",
     NextFollowup: "27 July",
-    Stage: "⏳ Open",
+    Stage: " Open",
     Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
   }
 ];

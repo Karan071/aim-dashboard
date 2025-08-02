@@ -17,6 +17,7 @@ import {
   RotateCcw,
   Ban,
   Eye,
+  RefreshCw,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -734,7 +735,7 @@ function AssessmentTable() {
 
         <div className="overflow-x-auto text-[var(--text)] w-full px-0 mx-0 text-low">
           <Table className="w-full caption-top border-collapse overflow-y-visible">
-            <TableHeader className="bg-[var(--faded)] hover:bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
+            <TableHeader className="bg-[var(--faded)] dark:bg-[var(--faded)] opacity-100">
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 <TableHead
@@ -803,7 +804,7 @@ function AssessmentTable() {
                 </TableHead>
                 <TableHead
                   onClick={() => requestSort("result")}
-                  className="cursor-pointer text-[var(--text)]"
+                  className="cursor-pointer text-[var(--text)] w-[10px] text-center pr-4"
                 >
                   Result{" "}
                   {sortConfig?.key === "result" &&
@@ -965,35 +966,56 @@ function AssessmentTable() {
                       )}
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="text-sm flex justify-center items-center">
-                      {user.result ? (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="noborder"
-                                size="sm"
-                                className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  // navigate(`/result-details/${user.id}`) or your view logic
-                                }}
-                              >
-                                <Eye className="h-4 w-4" />
-                                <span className="sr-only">View Result</span>
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="top" className="text-xs">
-                              View Result
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                      ) : (
-                        <span className="text-center">-</span>
-                      )}
-                    </div>
-                  </TableCell>
+                                     <TableCell>
+                                     <div className="flex items-center justify-end pr-4 "> 
+                       {user.result ? (
+                         <>
+                           <TooltipProvider>
+                             <Tooltip>
+                               <TooltipTrigger asChild>
+                                 <Button
+                                   variant="actionIcon"
+                                   size="actionIcon"
+                                   onClick={(e) => {
+                                     e.stopPropagation();
+                                     // navigate(`/result-details/${user.id}`) or your view logic
+                                   }}
+                                 >
+                                   <Eye className="h-3 w-3" />
+                                   <span className="sr-only">View Result</span>
+                                 </Button>
+                               </TooltipTrigger>
+                               <TooltipContent>
+                                 <p>View Result</p>
+                               </TooltipContent>
+                             </Tooltip>
+                           </TooltipProvider>
+                           <TooltipProvider>
+                             <Tooltip>
+                               <TooltipTrigger asChild>
+                                 <Button
+                                   variant="actionIcon"
+                                   size="actionIcon"
+                                   onClick={(e) => {
+                                     e.stopPropagation();
+                                     // Add reload logic here
+                                   }}
+                                 >
+                                   <RefreshCw className="h-3 w-3" />
+                                   <span className="sr-only">Reload Result</span>
+                                 </Button>
+                               </TooltipTrigger>
+                               <TooltipContent>
+                                 <p>Reload Result</p>
+                               </TooltipContent>
+                             </Tooltip>
+                           </TooltipProvider>
+                         </>
+                       ) : (
+                         <span className="text-center">-</span>
+                       )}
+                     </div>
+                   </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end pr-4 ">
                       <TooltipProvider>

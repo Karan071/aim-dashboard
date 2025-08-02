@@ -593,7 +593,7 @@ function TableSection() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">Status</TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -679,20 +679,20 @@ function TableSection() {
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-end pr-4">
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button
-                              variant="noborder"
-                              size="sm"
+                              variant="actionIcon"
+                              size="actionIcon"
                               className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 // Handle Questions action
                               }}
                             >
-                              <FileText className="h-4 w-4" />
+                              <FileText className="h-3 w-3" />
                               <span className="sr-only">Questions</span>
                             </Button>
                           </TooltipTrigger>
@@ -705,15 +705,15 @@ function TableSection() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button
-                              variant="noborder"
-                              size="sm"
+                              variant="actionIcon"
+                              size="actionIcon"
                               className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 // Handle Results action
                               }}
                             >
-                              <BarChart3 className="h-4 w-4" />
+                              <BarChart3 className="h-3 w-3" />
                               <span className="sr-only">Results</span>
                             </Button>
                           </TooltipTrigger>
@@ -726,15 +726,15 @@ function TableSection() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button
-                              variant="noborder"
-                              size="sm"
+                              variant="actionIcon"
+                              size="actionIcon"
                               className="hover:bg-[var(--blue2)] hover:text-[var(--blue)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 // Handle Logs action
                               }}
                             >
-                              <Pencil className="h-4 w-4" />
+                              <Pencil className="h-3 w-3" />
                               <span className="sr-only">Logs</span>
                             </Button>
                           </TooltipTrigger>
