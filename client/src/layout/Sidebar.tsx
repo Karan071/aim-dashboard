@@ -28,7 +28,7 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip";
 import { SidebarData } from "@/constants/sidebarContents";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function SidebarLayout() {
   return (
@@ -77,6 +77,15 @@ function AppSidebar(props: React.ComponentProps<typeof SidebarRoot>) {
   );
 }
 
+const isRouteActive = (url: string, pathname: string) => {
+  if (url === pathname) return true;
+  if (url !== "/" && pathname.startsWith(url)) {
+    const remainingPath = pathname.slice(url.length);
+    return remainingPath === "" || remainingPath.startsWith("/");
+  }
+  return false;
+};
+
 function NavSection({
   section,
   isOpen,
@@ -105,8 +114,8 @@ function NavSection({
 }) {
   const [openItem, setOpenItem] = React.useState<string | null>(null);
   const { state } = useSidebar();
+  const location = useLocation();
 
-  // Close open item when section closes
   React.useEffect(() => {
     if (!isOpen) {
       setOpenItem(null);
@@ -126,7 +135,11 @@ function NavSection({
                 <span className="group-data-[collapsible=icon]:hidden">
                   {section.title}
                 </span>
-                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 text-[var(--text)] group-data-[collapsible=icon]:hidden" />
+                <ChevronRight
+                  className={`ml-auto chevron-transition ${
+                    isOpen ? "rotate-90" : ""
+                  } group-data-[collapsible=icon]:hidden text-[var(--text)]`}
+                />
               </SidebarGroupLabel>
             </CollapsibleTrigger>
           </TooltipTrigger>
@@ -155,14 +168,42 @@ function NavSection({
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton
                         tooltip={item.title}
-                        className={`text-[var(--text)] transition-all duration-300 ease-in-out ${item.isActive === false ? 'cursor-not-allowed opacity-60' : ''}`}
+                        className={`text-[var(--text)] transition-all duration-300 ease-in-out ${
+                          item.isActive === false
+                            ? "cursor-not-allowed opacity-60"
+                            : isRouteActive(item.url, location.pathname)
+                            ? "bg-[var(--brand-color)] text-white"
+                            : "hover:bg-accent/20"
+                        }`}
                         disabled={item.isActive === false}
                       >
                         {item.icon && (
-                          <item.icon className="size-4 text-[var(--text)]" />
+                          <item.icon
+                            className={`size-4 ${
+                              isRouteActive(item.url, location.pathname)
+                                ? "text-white"
+                                : "text-[var(--text)]"
+                            }`}
+                          />
                         )}
-                        <span className="text-[var(--text)]">{item.title}</span>
-                        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 text-[var(--text)]" />
+                        <span
+                          className={`text-[var(--text)] ${
+                            isRouteActive(item.url, location.pathname)
+                              ? "text-white"
+                              : ""
+                          }`}
+                        >
+                          {item.title}
+                        </span>
+                        <ChevronRight
+                          className={`ml-auto transition-transform duration-200 ${
+                            openItem === item.title ? "rotate-90" : ""
+                          } text-[var(--text)] ${
+                            isRouteActive(item.url, location.pathname)
+                              ? "text-white"
+                              : ""
+                          }`}
+                        />
                       </SidebarMenuButton>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="transition-all duration-300 ease-in-out">
@@ -174,21 +215,52 @@ function NavSection({
                           >
                             <SidebarMenuSubButton
                               asChild
-                              className={subItem.isActive === false ? "cursor-not-allowed opacity-60" : ""}
+                              className={`${
+                                subItem.isActive === false
+                                  ? "cursor-not-allowed opacity-60"
+                                  : isRouteActive(
+                                      subItem.url,
+                                      location.pathname
+                                    )
+                                  ? "bg-[var(--brand-color)] text-white"
+                                  : "hover:bg-accent/20"
+                              }`}
                             >
                               {subItem.isActive === false ? (
                                 <span>
                                   {subItem.icon && (
                                     <subItem.icon className="size-4 text-[var(--text)] transition-all duration-300 ease-in-out" />
                                   )}
-                                  <span className="text-[var(--text)]">{subItem.title}</span>
+                                  <span className="text-[var(--text)]">
+                                    {subItem.title}
+                                  </span>
                                 </span>
                               ) : (
                                 <Link to={subItem.url}>
                                   {subItem.icon && (
-                                    <subItem.icon className="size-4 text-[var(--text)] transition-all duration-300 ease-in-out" />
+                                    <subItem.icon
+                                      className={`size-4 ${
+                                        isRouteActive(
+                                          subItem.url,
+                                          location.pathname
+                                        )
+                                          ? "text-white"
+                                          : "text-[var(--text)]"
+                                      } transition-all duration-300 ease-in-out`}
+                                    />
                                   )}
-                                  <span className="text-[var(--text)]">{subItem.title}</span>
+                                  <span
+                                    className={`text-[var(--text)] ${
+                                      isRouteActive(
+                                        subItem.url,
+                                        location.pathname
+                                      )
+                                        ? "text-white"
+                                        : ""
+                                    }`}
+                                  >
+                                    {subItem.title}
+                                  </span>
                                 </Link>
                               )}
                             </SidebarMenuSubButton>
@@ -203,7 +275,13 @@ function NavSection({
                   <SidebarMenuButton
                     tooltip={item.title}
                     asChild
-                    className={`text-[var(--text)] transition-all duration-300 ease-in-out ${item.isActive === false ? 'cursor-not-allowed opacity-60' : ''}`}
+                    className={`text-[var(--text)] transition-all duration-300 ease-in-out ${
+                      item.isActive === false
+                        ? "cursor-not-allowed opacity-60"
+                        : isRouteActive(item.url, location.pathname)
+                        ? "bg-[var(--brand-color)] text-white"
+                        : "hover:bg-accent/20"
+                    }`}
                     disabled={item.isActive === false}
                   >
                     {item.isActive === false ? (
@@ -216,9 +294,23 @@ function NavSection({
                     ) : (
                       <Link to={item.url}>
                         {item.icon && (
-                          <item.icon className="size-4 text-[var(--text)]" />
+                          <item.icon
+                            className={`size-4 ${
+                              isRouteActive(item.url, location.pathname)
+                                ? "text-white"
+                                : "text-[var(--text)]"
+                            }`}
+                          />
                         )}
-                        <span className="text-[var(--text)]">{item.title}</span>
+                        <span
+                          className={`text-[var(--text)] ${
+                            isRouteActive(item.url, location.pathname)
+                              ? "text-white"
+                              : ""
+                          }`}
+                        >
+                          {item.title}
+                        </span>
                       </Link>
                     )}
                   </SidebarMenuButton>

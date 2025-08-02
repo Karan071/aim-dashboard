@@ -7,6 +7,7 @@ import {
   Check,
   X,
   Bell,
+  Plus,
 } from "lucide-react";
 import {
   Tooltip,
@@ -15,11 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Users,
-  UserCheck,
-  UserPlus,
-} from "lucide-react";
+import { Users, UserCheck, UserPlus } from "lucide-react";
 import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -39,15 +36,48 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { coachTableData } from "@/data/Data";
+import { coachTableData, coachesList } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import DatePicker from '@/components/ui/DatePicker';
+import DatePicker from "@/components/ui/DatePicker";
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import CitySelection from "@/components/ui/CitySelection";
+
+interface AssignedUser {
+  name: string;
+  photo: string;
+}
+
+interface CoachData {
+  id: string;
+  type: string;
+  profile: {
+    name: string;
+    photo: string;
+    gender: string;
+    type: string;
+    userid: string;
+  };
+  specialty: string;
+  contact: {
+    email: string;
+    phone: string;
+  };
+  status: string;
+  orgLinked: string;
+  lastActive: string;
+  joined: string;
+  sessions: {
+    total: number;
+    completed: number;
+  };
+  assessments: number;
+  actions: string[];
+  assignedTo?: AssignedUser[];
+}
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -86,38 +116,36 @@ export function Coaches() {
     <div className="flex flex-col gap-2">
       <h1 className="text-2xl font-bold text-[var(--text-head)]">Coaches</h1>
       <StatsCards />
-        <Buttonbar />
-        <CoachTableSection />
-      </div>
+      <Buttonbar />
+      <CoachTableSection />
+    </div>
   );
 }
 
 function Buttonbar() {
-const [showFilter, setShowFilter] = useState(false);
-return (
-  <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div className="flex gap-4"></div>
       <div className="flex gap-4">
-    </div>
-    <div className="flex gap-4">
-      <Button
-        variant="standard" size="new"
-        onClick={() => setShowFilter(true)}
-      >
-        <Filter className="h-3 w-3" />
-        {showFilter ? "Hide Filters" : "Show Filters"}
-      </Button>
+        <Button
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-3 w-3" />
+          {showFilter ? "Hide Filters" : "Show Filters"}
+        </Button>
 
-      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      </div>
     </div>
-  </div>
-);
+  );
 }
 
 interface FilterProps {
   onClose: () => void;
 }
-
 
 function AdvancedFilters({ onClose }: FilterProps) {
   const modalRef = React.useRef<HTMLDivElement>(null);
@@ -160,13 +188,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
-
       <div
         ref={modalRef}
         className="relative w-full max-w-[700px] h-[500px] rounded-sm bg-[var(--background)] "
       >
         <div className="flex items-center justify-between mb-0 pb-4 p-6 min-w-full border-b-1">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Filters</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Filters
+          </CardTitle>
           <Button
             variant="link"
             className="text-sm text-[var(--brand-color)] p-0 h-auto block hover:no-underline hover:cursor-pointer"
@@ -177,16 +206,16 @@ function AdvancedFilters({ onClose }: FilterProps) {
         {/* Sidebar */}
         <div className="flex ">
           <div className="overflow-y-auto min-w-[180px] border-r-1 h-[360px]">
-
             <div className="flex flex-col ">
               {tabList.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`text-left text-sm px-3 py-3 border-l-3  ${activeTab === tab
-                    ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
-                    : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
-                    }`}
+                  className={`text-left text-sm px-3 py-3 border-l-3  ${
+                    activeTab === tab
+                      ? "bg-[var(--brand-color3)] dark:bg-[var(--brand-color2)] text-[var(--brand-color)] dark:text-[var(--text-head)] font-semibold border-[var(--brand-color)]"
+                      : "text-[var(--text)] hover:bg-[var(--faded)] border-transparent"
+                  }`}
                 >
                   {tab}
                 </button>
@@ -199,9 +228,15 @@ function AdvancedFilters({ onClose }: FilterProps) {
           <div className="p-6 overflow-y-auto relative w-full">
             {activeTab === "General" && (
               <>
-                <label htmlFor="Gen" className="text-[var(--text)]">Enter Name/Email/Phone :</label>
-                <Input id="Gen" placeholder="Enter .." type="text" className="mt-4 w-full " />
-
+                <label htmlFor="Gen" className="text-[var(--text)]">
+                  Enter Name/Email/Phone :
+                </label>
+                <Input
+                  id="Gen"
+                  placeholder="Enter .."
+                  type="text"
+                  className="mt-4 w-full "
+                />
               </>
             )}
 
@@ -211,11 +246,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Select your current Status:
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Approved",
-                    "Pending",
-                    "Blocked",
-                  ].map((option) => (
+                  {["Approved", "Pending", "Blocked"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -234,21 +265,17 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Select Your Specialisation :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Career",
-                    "Psychology",
-                    "STEM",
-                    "Law",
-                    "Design",
-                  ].map((option) => (
-                    <RadioButton
-                      key={option}
-                      label={option}
-                      value={option}
-                      selected={specialisation}
-                      onChange={setSpecialisation}
-                    />
-                  ))}
+                  {["Career", "Psychology", "STEM", "Law", "Design"].map(
+                    (option) => (
+                      <RadioButton
+                        key={option}
+                        label={option}
+                        value={option}
+                        selected={specialisation}
+                        onChange={setSpecialisation}
+                      />
+                    )
+                  )}
                 </div>
               </>
             )}
@@ -265,10 +292,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Are you Linkrd with any Organisation :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)] ">
-                  {[
-                    "Yes",
-                    "No",
-                  ].map((option) => (
+                  {["Yes", "No"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -287,12 +311,7 @@ function AdvancedFilters({ onClose }: FilterProps) {
                   Select Session type :
                 </p>
                 <div className="flex flex-col gap-4 text-[var(--text)]  ">
-                  {[
-                    "1:1",
-                    "Group",
-                    "Instant",
-                    "B2B",
-                  ].map((option) => (
+                  {["1:1", "Group", "Instant", "B2B"].map((option) => (
                     <RadioButton
                       key={option}
                       label={option}
@@ -307,7 +326,9 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
             {activeTab === "Last Activity" && (
               <>
-                <label htmlFor="act" className="text-[var(--text)]">Enter You Last Activity Date:</label>
+                <label htmlFor="act" className="text-[var(--text)]">
+                  Enter You Last Activity Date:
+                </label>
                 <div className="mt-4 min-w-full">
                   <DatePicker />
                 </div>
@@ -332,12 +353,14 @@ function AdvancedFilters({ onClose }: FilterProps) {
   );
 }
 
-
 function StatsCards() {
   return (
     <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
       {stats.map((stat, index) => (
-        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
+        <Card
+          key={index}
+          className="rounded-sm shadow-none bg-[var(--background)]"
+        >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -360,10 +383,174 @@ function StatsCards() {
   );
 }
 
-
-
-
 function CoachTableSection() {
+  const handleAssignUsers = (coachId: string) => {
+    setCurrentCoachForAssignment(coachId);
+    const coach = coachData.find((c: CoachData) => c.id === coachId);
+    if (coach && coach.assignedTo) {
+      setSelectedAssignees(
+        coach.assignedTo.map((assignee: AssignedUser) => assignee.name)
+      );
+    } else {
+      setSelectedAssignees([]);
+    }
+    setShowAssignmentModal(true);
+  };
+
+  const handleSaveAssignment = () => {
+    if (currentCoachForAssignment) {
+      const updatedCoaches = coachData.map((coach: CoachData) => {
+        if (coach.id === currentCoachForAssignment) {
+          const selectedCoaches = coachesList
+            .filter(
+              (c: { name: string; photo: string; specialization: string }) =>
+                selectedAssignees.includes(c.name)
+            )
+            .map((c: { name: string; photo: string }) => ({
+              name: c.name,
+              photo: c.photo,
+            }));
+
+          return {
+            ...coach,
+            assignedTo: selectedCoaches,
+          };
+        }
+        return coach;
+      });
+
+      // Update the data
+      setCoachData(updatedCoaches);
+      setShowAssignmentModal(false);
+      setCurrentCoachForAssignment(null);
+      setSelectedAssignees([]);
+    }
+  };
+
+  const toggleAssignee = (assigneeName: string) => {
+    if (selectedAssignees.includes(assigneeName)) {
+      setSelectedAssignees(
+        selectedAssignees.filter((name) => name !== assigneeName)
+      );
+    } else {
+      setSelectedAssignees([...selectedAssignees, assigneeName]);
+    }
+  };
+
+  const AssignmentModal = () => {
+    if (!showAssignmentModal) return null;
+
+    const currentCoach = coachData.find(
+      (c: CoachData) => c.id === currentCoachForAssignment
+    );
+    const currentCoachAssignedImages = currentCoach?.assignedTo || [];
+
+    const availableAssignees = coachesList.map(
+      (coach: { name: string; photo: string; specialization: string }) => {
+        const currentAssignment = currentCoachAssignedImages.find(
+          (assigned: AssignedUser) => assigned.name === coach.name
+        );
+
+        return {
+          name: coach.name,
+          photo: coach.photo,
+          specialization: coach.specialization,
+          isCurrentlyAssigned: currentAssignment !== undefined,
+        };
+      }
+    );
+
+    return (
+      <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+        <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+          <div className="flex items-center justify-between p-6 border-b">
+            <h2 className="text-xl font-semibold text-[var(--text-head)]">
+              Assign Users
+            </h2>
+            <Button
+              variant="link"
+              onClick={() => setShowAssignmentModal(false)}
+              className="text-sm text-[var(--text)] p-0 h-auto"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
+
+          <div className="p-6">
+            <p className="text-sm text-[var(--text)] mb-4">
+              Select users to assign to this coach:
+            </p>
+
+            {currentCoachAssignedImages.length > 0 && (
+              <div className="mb-4">
+                <p className="text-xs text-[var(--text)] mb-2">
+                  Currently Assigned:
+                </p>
+                <div className="flex -space-x-2">
+                  {currentCoachAssignedImages.map(
+                    (assigned: AssignedUser, index: number) => (
+                      <div
+                        key={index}
+                        className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                        title={assigned.name}
+                      >
+                        <img
+                          src={assigned.photo}
+                          alt={assigned.name}
+                          className="h-8 w-8 object-cover"
+                        />
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-2 max-h-60 overflow-y-auto">
+              {availableAssignees.map((assignee) => (
+                <div
+                  key={assignee.name}
+                  className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                >
+                  <Checkbox
+                    checked={selectedAssignees.includes(assignee.name)}
+                    onCheckedChange={() => toggleAssignee(assignee.name)}
+                  />
+                  <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                    <img
+                      src={assignee.photo}
+                      alt={assignee.name}
+                      className="h-8 w-8 object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-sm text-[var(--text)]">
+                      {assignee.name}
+                    </span>
+                    <span className="text-xs text-[var(--text)] opacity-70">
+                      {assignee.specialization}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-2 p-6 border-t">
+            <Button
+              variant="border"
+              onClick={() => setShowAssignmentModal(false)}
+            >
+              Cancel
+            </Button>
+            <Button variant="brand" onClick={handleSaveAssignment}>
+              Save Assignment
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  };
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -371,10 +558,20 @@ function CoachTableSection() {
     key: string;
     direction: "ascending" | "descending";
   } | null>(null);
-  const [selectedCoachStack, setSelectedCoachStack] = useState<
-    typeof coachTableData
-  >(coachTableData[0] ? [coachTableData[0]] : []);
-  const [focusedCoachId, setFocusedCoachId] = useState<string | null>(coachTableData[0]?.id || null);
+  const [coachData, setCoachData] = useState<CoachData[]>(
+    coachTableData as CoachData[]
+  );
+  const [selectedCoachStack, setSelectedCoachStack] = useState<CoachData[]>(
+    coachTableData[0] ? [coachTableData[0] as CoachData] : []
+  );
+  const [focusedCoachId, setFocusedCoachId] = useState<string | null>(
+    coachTableData[0]?.id || null
+  );
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [currentCoachForAssignment, setCurrentCoachForAssignment] = useState<
+    string | null
+  >(null);
+  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
 
   // Sorting logic
   const sortedData = [...coachTableData];
@@ -416,9 +613,7 @@ function CoachTableSection() {
     if (selectedUsers.length === currentRecords.length) {
       setSelectedUsers([]);
     } else {
-      setSelectedUsers(
-        currentRecords.map((user): string => user.id)
-      );
+      setSelectedUsers(currentRecords.map((user): string => user.id));
     }
   };
 
@@ -457,15 +652,16 @@ function CoachTableSection() {
     });
   }, [selectedCoachStack, focusedCoachId]);
 
-  {/*const removeCoach = (userId: number) => {
+  {
+    /*const removeCoach = (userId: number) => {
     setSelectedCoachStack((prev) => prev.filter((c) => c.id !== userId));
     if (focusedCoachId === userId) {
       setFocusedCoachId(null);
     }
-  };*/}
+  };*/
+  }
 
   const handleRowClick = (user: (typeof coachTableData)[0]) => {
- 
     const exists = selectedCoachStack.find((c) => c.id === user.id);
     if (!exists) {
       setSelectedCoachStack((prev) => {
@@ -489,15 +685,22 @@ function CoachTableSection() {
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
+        <AssignmentModal />
         <div className="flex items-center justify-between border-b  h-20 p-4 mt-auto">
           <div className="flex items-center justify-between pl-0 p-4  gap-2">
             <div className="flex items-center gap-2 border-none shadow-none">
               <Checkbox
                 id="select-all"
-                checked={selectedUsers.length === currentRecords.length && currentRecords.length > 0}
+                checked={
+                  selectedUsers.length === currentRecords.length &&
+                  currentRecords.length > 0
+                }
                 onCheckedChange={toggleSelectAll}
               />
-              <label htmlFor="select-all" className="text-sm font-medium text-[var(--text)]">
+              <label
+                htmlFor="select-all"
+                className="text-sm font-medium text-[var(--text)]"
+              >
                 Select All
               </label>
               {selectedUsers.length > 0 && (
@@ -508,7 +711,9 @@ function CoachTableSection() {
             </div>
 
             {selectedUsers.length > 0 && (
-              <div className="flex gap-2">        {/*wrap */}
+              <div className="flex gap-2">
+                {" "}
+                {/*wrap */}
                 <Button variant="border" size="sm">
                   <Bell className="h-4 w-4" />
                   Send Reminder
@@ -525,7 +730,6 @@ function CoachTableSection() {
             )}
           </div>
           <div className="flex justify-end items-center gap-4 ">
-
             <div className="flex justify-around items-center border-1 rounded-sm overflow-hidden bg-[var(--faded)]">
               <Input
                 placeholder="Search"
@@ -541,7 +745,6 @@ function CoachTableSection() {
                 <Search className="h-5 w-5 text-[var(--text)]" />
               </Button>
             </div>
-
           </div>
         </div>
 
@@ -599,6 +802,14 @@ function CoachTableSection() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
+                  onClick={() => requestSort("assignedTo")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Assigned To{" "}
+                  {sortConfig?.key === "assignedTo" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
                   onClick={() => requestSort("lastActive")}
                   className="cursor-pointer text-[var(--text)]"
                 >
@@ -606,11 +817,13 @@ function CoachTableSection() {
                   {sortConfig?.key === "lastActive" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
-              {currentRecords.map((user) => (
+              {currentRecords.map((user: CoachData) => (
                 <TableRow
                   key={user.id}
                   data-id={user.id}
@@ -641,8 +854,7 @@ function CoachTableSection() {
                       onCheckedChange={() => toggleSelectUser(user.id)}
                     />
                   </TableCell>
-                  <TableCell
-                  >
+                  <TableCell>
                     <div className="flex items-center gap-4">
                       <div className="h-14 w-14 rounded-full overflow-hidden">
                         <img
@@ -682,8 +894,41 @@ function CoachTableSection() {
                   </TableCell>
                   <TableCell>{user.orgLinked}</TableCell>
                   <TableCell>
+                    <div className="flex items-center gap-2">
+                      <div className="flex -space-x-2">
+                        {user.assignedTo?.map(
+                          (assigned: AssignedUser, index: number) => (
+                            <div
+                              key={index}
+                              className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                              title={assigned.name}
+                            >
+                              <img
+                                src={assigned.photo}
+                                alt={assigned.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                          )
+                        )}
+                        <div
+                          className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleAssignUsers(user.id);
+                          }}
+                          title="Assign Users"
+                        >
+                          <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                        </div>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>
                     <div className="text-low">{user.lastActive}</div>
-                    <div className="text-xs text-[var(--text)]">{user.joined}</div>
+                    <div className="text-xs text-[var(--text)]">
+                      {user.joined}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end pr-4">
@@ -780,7 +1025,9 @@ function CoachTableSection() {
                 key={page}
                 variant={page === currentPage ? "brand" : "border"}
                 size="sm"
-                className={`h-8 w-8 p-0 ${page === currentPage ? "text-white" : "text-[var(--text)]"}`}
+                className={`h-8 w-8 p-0 ${
+                  page === currentPage ? "text-white" : "text-[var(--text)]"
+                }`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
@@ -799,8 +1046,6 @@ function CoachTableSection() {
           </div>
         </div>
       </div>
-
-
 
       {/*<div className="xl:block hidden">
     <div className="lg:h-[500px] xl:min-w-90 xxl:min-w-100 sticky xl:top-[10px] shadow-none lg:scale-100 min-w-full h-fit">

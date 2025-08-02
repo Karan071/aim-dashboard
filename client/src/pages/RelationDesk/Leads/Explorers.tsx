@@ -102,7 +102,6 @@ export function Explorers() {
         <h1 className="text-2xl font-bold text-[var(--text-head)]">Leads Explorers</h1>
         <StatsCards />
         <Topbar />
-
         <TableSection />
       </div>
     </div>
