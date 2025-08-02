@@ -703,7 +703,7 @@ export function InPoolTable() {
                     <div className="text-sm">{user.share}</div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="border">
+                    <Badge variant="standard">
                       {user.status}
                     </Badge>
                   </TableCell>

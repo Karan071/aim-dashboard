@@ -1,4 +1,4 @@
-import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle, PenBox } from "lucide-react";
+import { Search, Check, X, FileDown, Newspaper, Flag, NotebookIcon, Phone, MessageCircle, PenBox, Calendar1 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -357,7 +357,7 @@ const tableData = [
                     key={user.id}
                     data-id={user.id}
                     className={cn(
-                      "relative z-10 h-[90px] cursor-pointer transition-all duration-200 group hover:bg-[var(--brand-color2)]",
+                      "relative z-10 h-[90px] cursor-pointer transition-all duration-200 hover:bg-[var(--brand-color2)]",
                       selectedStack.some((c) => c.id === user.id)
                         ? "bg-[var(--brand-color3)]"
                         : ""
@@ -394,15 +394,32 @@ const tableData = [
                     />
                   </div>
                   <div>
-                    <div className="flex justify-start flex-col">
+                    <div className="flex justify-start flex-col group ">
                       <div className="font-medium">{user.explorer.fullName}</div>
                       <div className="text-xs">{user.explorer.explorerId}</div>
                       <div className="text-xs">{user.explorer.UG}</div>
                       <div className="flex items-center gap-1">
-                      <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" /></button>
-                    <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                    <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" /></button>
-                  
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button className=" group-hover:text-[var(--brand-color)]  hidden group-hover:inline-flex items-center gap-1 text-[15px]"><Phone className="h-3 w-3 hover:h-4 hover:w-4" /></button>
+                            </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Call
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                            <span className=" group-hover:text-[var(--text)]  hidden group-hover:inline-flex items-center gap-1 text-[15px]">|</span>
+                            <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button className=" group-hover:text-[var(--brand-color)]  hidden group-hover:inline-flex items-center gap-1 text-[20px]"><MessageCircle className="h-3 w-3 hover:h-4 hover:w-4" /></button>
+                            </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Message
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                       </div>
                     </div>
                   </div>
@@ -418,28 +435,52 @@ const tableData = [
                     />
                   </div>
                   <div>
-                    <div className="flex justify-start flex-col">
+                    <div className="flex justify-start flex-col group">
                       <div className="font-medium flex items-center gap-1">{user.coach.fullName} 
                         <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><PenBox className="h-3 w-3" /></button>
                       </div>
                       <div className="text-xs">{user.coach.coachId}</div>
                       <div className="text-xs">{user.coach.careerType}</div>
                       <div className="flex items-center gap-1">
-                      <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><Phone className="h-2 w-2" /></button>
-                    <span className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">|</span>
-                    <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]"><MessageCircle className="h-2 w-2" /></button>
-                  
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button className=" group-hover:text-[var(--brand-color)]  hidden group-hover:inline-flex items-center gap-1 text-[15px]"><Phone className="h-3 w-3 hover:h-4 hover:w-4" /></button>
+                            </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Call
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                            <span className=" group-hover:text-[var(--text)]  hidden group-hover:inline-flex items-center gap-1 text-[15px]">|</span>
+                            <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button className=" group-hover:text-[var(--brand-color)]  hidden group-hover:inline-flex items-center gap-1 text-[20px]"><MessageCircle className="h-3 w-3 hover:h-4 hover:w-4" /></button>
+                            </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Message
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                       </div> </div>
                   </div>
                 </div>
                     </TableCell>
                         <TableCell>
-                            <div className="text-sm flex flex-col">
+                            <div className="text-sm flex flex-col gap-1 group">
                                 <div>{`${user.date}`}</div>
                                 <div>{`${user.time}`}</div>
-                                <button className="w-fit">
-                                <button className=" group-hover:text-[var(--text)] hidden group-hover:inline-flex items-center gap-1 text-[10px]">Reschedule</button>
-                      </button>
+                                <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                      <Calendar1 className="h-4 w-4 hidden group-hover:inline-flex hover:h-5 hover:w-5 text-[var(--brand-color)] " />
+                      </TooltipTrigger>
+                      <TooltipContent side="top" className="text-xs">
+                        Reschedule
+                      </TooltipContent>
+                    </Tooltip>
+                      </TooltipProvider>
                             </div>
                         </TableCell>
                         
@@ -465,7 +506,7 @@ const tableData = [
                 </div>
               </TableCell>
                     <TableCell>
-                            <Badge variant="border">
+                            <Badge variant="standard">
                               {user.status}
                             </Badge>
                         </TableCell>
