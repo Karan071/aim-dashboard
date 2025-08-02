@@ -16,8 +16,10 @@ import {
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 
+
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,17 +41,37 @@ import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
+
+// Add custom scrollbar styles
+const customScrollbarStyles = `
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--text);
+  }
+`;
 import type { DateRange } from "react-day-picker";
-import React from "react";
+import React, { useRef } from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Label } from "@/components/ui/label";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
+
+
 
 
 const stats = [
@@ -74,13 +96,15 @@ const stats = [
 ];
 
 export function Manage() {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <Topbar />
         <StatsCards />
       
-        <TableSection />
+        <TableSection selectedCategories={selectedCategories} onCategoryChange={setSelectedCategories} />
       </div>
     </div>
   );
@@ -100,11 +124,15 @@ function Topbar() {
           <Plus className="h-3 w-3" />
           
         </Button>
+        
         <div className="flex gap-4 flex-wrap">
           <Button variant="standard" size="new">
             <BadgeQuestionMark className="h-3 w-3" />
             <span className="">Categories</span>
           </Button>
+          {/* <Butto
+
+          
           {/* <Button variant="standard" size="new">
             <Eye className="h-3 w-3" />
             <span className="">Questions</span>
@@ -345,7 +373,13 @@ function StatsCards() {
   );
 }
 
-function TableSection() {
+interface TableSectionProps {
+  selectedCategories: string[];
+  onCategoryChange: (categories: string[]) => void;
+}
+
+function TableSection({ selectedCategories, onCategoryChange }: TableSectionProps) {
+  const navigate = useNavigate();
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -359,11 +393,24 @@ function TableSection() {
   const [focusedId, setFocusedId] = useState<string | null>(
     ManageTable[0]?.id || null
   );
+  const [isCategorySheetOpen, setIsCategorySheetOpen] = useState(false);
 
-  // Sorting logic
-  const sortedData = [...ManageTable];
+  // Available categories from the data
+  const availableCategories = Array.from(
+    new Set(ManageTable.map((item) => item.category))
+  ).sort();
+
+  // Filter and sort data
+  let filteredData = [...ManageTable];
+  
+  // Apply category filter
+  if (selectedCategories.length > 0) {
+    filteredData = filteredData.filter(item => selectedCategories.includes(item.category));
+  }
+  
+  // Apply sorting
   if (sortConfig !== null) {
-    sortedData.sort((a, b) => {
+    filteredData.sort((a, b) => {
       let aValue = a[sortConfig.key as keyof typeof a];
       let bValue = b[sortConfig.key as keyof typeof b];
       // Special handling for 'segments' (array), 'price', 'enrollments' (numbers)
@@ -385,10 +432,10 @@ function TableSection() {
     });
   }
 
-  const totalPages = Math.ceil(sortedData.length / recordsPerPage);
+  const totalPages = Math.ceil(filteredData.length / recordsPerPage);
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = sortedData.slice(
+  const currentRecords = filteredData.slice(
     indexOfFirstRecord,
     indexOfLastRecord
   );
@@ -558,11 +605,19 @@ function TableSection() {
                   {sortConfig?.key === "segments" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead
-                  onClick={() => requestSort("category")}
-                  className="cursor-pointer text-[var(--text)]"
-                >
-                  Category{" "}
+                <TableHead className="text-[var(--text)]">
+                  <div className="flex items-center gap-2 cursor-pointer hover:text-[var(--brand-color)] transition-colors" onClick={() => setIsCategorySheetOpen(true)}>
+                    <span>Category</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
+                  {isCategorySheetOpen && (
+                    <CategoryPopup
+                      onClose={() => setIsCategorySheetOpen(false)}
+                      selectedCategories={selectedCategories}
+                      onCategoryChange={onCategoryChange}
+                      availableCategories={availableCategories}
+                    />
+                  )}
                   {sortConfig?.key === "category" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
@@ -689,7 +744,7 @@ function TableSection() {
                               className="hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // Handle Questions action
+                                navigate("questions");
                               }}
                             >
                               <FileText className="h-3 w-3" />
@@ -710,7 +765,7 @@ function TableSection() {
                               className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // Handle Results action
+                             
                               }}
                             >
                               <BarChart3 className="h-3 w-3" />
@@ -731,7 +786,7 @@ function TableSection() {
                               className="hover:bg-[var(--blue2)] hover:text-[var(--blue)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                // Handle Logs action
+                              
                               }}
                             >
                               <Pencil className="h-3 w-3" />
@@ -781,8 +836,8 @@ function TableSection() {
             </DropdownMenu>
             <span className="text-low text-[var(--text)]">
               Showing {indexOfFirstRecord + 1}-
-              {Math.min(indexOfLastRecord, sortedData.length)} of{" "}
-              {sortedData.length} assessments
+              {Math.min(indexOfLastRecord, filteredData.length)} of{" "}
+              {filteredData.length} assessments
             </span>
           </div>
           <div className="flex items-center gap-2 ">
@@ -818,6 +873,153 @@ function TableSection() {
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface CategoryPopupProps {
+  onClose: () => void;
+  selectedCategories: string[];
+  onCategoryChange: (categories: string[]) => void;
+  availableCategories: string[];
+}
+
+function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availableCategories }: CategoryPopupProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  function handleClickOutside(e: MouseEvent) {
+    const path = e.composedPath() as HTMLElement[];
+
+    const clickedInside = path.some((el) => {
+      return (
+        (modalRef.current && modalRef.current.contains(el)) ||
+        (el instanceof HTMLElement && el.getAttribute("data-radix-popper-content-wrapper") !== null)
+      );
+    });
+
+    if (!clickedInside) {
+      onClose();
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
+
+  const filteredCategories = availableCategories.filter(category =>
+    category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleCategoryToggle = (category: string) => {
+    if (category === "All Categories") {
+      onCategoryChange([]);
+    } else {
+      const newSelectedCategories = selectedCategories.includes(category)
+        ? selectedCategories.filter(c => c !== category)
+        : [...selectedCategories, category];
+      onCategoryChange(newSelectedCategories);
+    }
+  };
+
+  const isAllCategoriesSelected = selectedCategories.length === 0;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40  flex justify-end">
+      <style dangerouslySetInnerHTML={{ __html: customScrollbarStyles }} />
+      <div
+        ref={modalRef}
+        className="animate-slide-in-from-right bg-[var(--background)] shadow-2xl h-full w-full max-w-[700px] flex flex-col border-l border-[var(--border)]"
+      >
+        <div className="flex items-center justify-between border-b p-6">
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Select Categories</CardTitle>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[var(--text)]">
+          <div className="flex flex-col gap-2">
+            <Label>Search Categories</Label>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[var(--text)]" />
+              <Input
+                placeholder="Search categories..."
+                className="pl-10"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Quick Selection</Label>
+            <div className={`p-4 rounded-lg border transition-all duration-200 cursor-pointer ${
+              isAllCategoriesSelected 
+                ? "bg-[var(--brand-color3)] border-[var(--brand-color)]" 
+                : "bg-[var(--background)] border-[var(--border)] hover:bg-[var(--faded)]"
+            }`}>
+              <label className="flex items-center space-x-3 cursor-pointer">
+                <Checkbox
+                  checked={isAllCategoriesSelected}
+                  onCheckedChange={() => handleCategoryToggle("All Categories")}
+                  className="text-[var(--brand-color)] focus:ring-[var(--brand-color)] border-[var(--border)]"
+                />
+                <div className="flex-1">
+                  <div className="font-medium text-[var(--text-head)]">All Categories</div>
+                  <div className="text-xs text-[var(--text)]">Show all assessments</div>
+                </div>
+                <Badge variant="standard" className="text-xs">All</Badge>
+              </label>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Available Categories</Label>
+            <div className="space-y-2  overflow-y-auto pr-2 custom-scrollbar">
+              {filteredCategories.length === 0 ? (
+                <div className="text-center py-8 text-[var(--text)] opacity-60">
+                  <Search className="h-8 w-8 mx-auto mb-2 opacity-40" />
+                  <p>No categories found</p>
+                  <p className="text-xs">Try adjusting your search</p>
+                </div>
+              ) : (
+                filteredCategories.map((category) => (
+                  <div
+                    key={category}
+                    className={`p-4 rounded-lg border transition-all duration-200 cursor-pointer ${
+                      selectedCategories.includes(category)
+                        ? "bg-[var(--brand-color3)] border-[var(--brand-color)]"
+                        : "bg-[var(--background)] border-[var(--border)] hover:bg-[var(--faded)]"
+                    }`}
+                  >
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                      <Checkbox
+                        checked={selectedCategories.includes(category)}
+                        onCheckedChange={() => handleCategoryToggle(category)}
+                        className="text-[var(--brand-color)] focus:ring-[var(--brand-color)] border-[var(--border)]"
+                      />
+                      <div className="flex-1">
+                        <div className="font-medium text-[var(--text-head)]">{category}</div>
+
+                      </div>
+                      <Badge 
+                        variant={selectedCategories.includes(category) ? "standard" : "border"}
+                        className="text-xs"
+                      >
+                        {category}
+                      </Badge>
+                    </label>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="p-6 border-t flex justify-end gap-4">
+          <Button variant="border" onClick={onClose}>Cancel</Button>
+          <Button variant="brand" onClick={onClose}>Apply Filter</Button>
         </div>
       </div>
     </div>

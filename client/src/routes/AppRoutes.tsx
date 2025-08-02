@@ -7,6 +7,8 @@ import { Desk as PlatformDesk } from "@/pages/PlatformDesk/Desk";
 import { RecentActivities as PlatformRecentActivities } from "@/pages/PlatformDesk/RecentActivities";
 import { Assessments as PlatformAssessment } from "@/pages/PlatformDesk/Assessment/Assessments";
 import { Manage as PlatformAssessmentManage } from "@/pages/PlatformDesk/Assessment/Manage";
+import { Question as PlatformQuestions } from "@/pages/PlatformDesk/Assessment/Question";
+
 import { Sessions as PlatformSessions } from "@/pages/PlatformDesk/Sessions/Sessions";
 import { SessionPool as PlatformSessionPool } from "@/pages/PlatformDesk/Sessions/SessionPool";
 import { Masterclass as PlatformMasterclass } from "@/pages/PlatformDesk/Sessions/Masterclass";
@@ -121,6 +123,11 @@ export default function AppRoutes() {
           path="platform/assessment/manage"
           element={<PlatformAssessmentManage />}
         />
+        <Route
+          path="platform/assessment/manage/questions"
+          element={<PlatformQuestions />}
+        />
+       
         <Route
           path="platform/products/sessions"
           element={<PlatformSessions />}
