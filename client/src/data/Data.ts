@@ -751,6 +751,129 @@ export const CoachProfileData = [
   },
 ];
 
+export const QuestionsTable = [
+  {
+    id: "Q001",
+    assessment: "Career Preferences Survey",
+    qCategory: "Career Planning",
+    question: "What is your primary career goal for the next 5 years?",
+    option1: "Get a high-paying job",
+    option2: "Start my own business",
+    option3: "Pursue higher education",
+    option4: "Work in a creative field",
+    option5: "Contribute to social causes",
+    status: "Active"
+  },
+  {
+    id: "Q002",
+    assessment: "Online Learning Feedback",
+    qCategory: "Learning Preferences",
+    question: "Which learning method do you prefer?",
+    option1: "Video lectures",
+    option2: "Reading materials",
+    option3: "Interactive quizzes",
+    option4: "Group discussions",
+    option5: "Hands-on projects",
+    status: "Active"
+  },
+  {
+    id: "Q003",
+    assessment: "Skill Awareness Check",
+    qCategory: "Technical Skills",
+    question: "How would you rate your programming skills?",
+    option1: "Beginner",
+    option2: "Intermediate",
+    option3: "Advanced",
+    option4: "Expert",
+    option5: "No experience",
+    status: "Draft"
+  },
+  {
+    id: "Q004",
+    assessment: "Internship Readiness Survey",
+    qCategory: "Professional Development",
+    question: "What is your biggest concern about internships?",
+    option1: "Finding the right opportunity",
+    option2: "Balancing work and studies",
+    option3: "Getting paid fairly",
+    option4: "Learning relevant skills",
+    option5: "Building professional network",
+    status: "Active"
+  },
+  {
+    id: "Q005",
+    assessment: "Exam Preparation Patterns",
+    qCategory: "Study Habits",
+    question: "How do you typically prepare for exams?",
+    option1: "Last-minute cramming",
+    option2: "Regular study schedule",
+    option3: "Group study sessions",
+    option4: "Practice tests",
+    option5: "Tutoring sessions",
+    status: "Draft"
+  },
+  {
+    id: "Q006",
+    assessment: "Study Abroad Interest Form",
+    qCategory: "International Education",
+    question: "What attracts you most about studying abroad?",
+    option1: "Better education quality",
+    option2: "Cultural experience",
+    option3: "Career opportunities",
+    option4: "Language learning",
+    option5: "Personal growth",
+    status: "Active"
+  },
+  {
+    id: "Q007",
+    assessment: "Technology Usage in Study",
+    qCategory: "Digital Learning",
+    question: "Which technology do you use most for studying?",
+    option1: "Laptop/Computer",
+    option2: "Smartphone",
+    option3: "Tablet",
+    option4: "Traditional books",
+    option5: "Library resources",
+    status: "Active"
+  },
+  {
+    id: "Q008",
+    assessment: "Campus Experience Survey",
+    qCategory: "Student Life",
+    question: "What aspect of campus life is most important to you?",
+    option1: "Academic facilities",
+    option2: "Social activities",
+    option3: "Sports and recreation",
+    option4: "Career services",
+    option5: "Student support",
+    status: "Active"
+  },
+  {
+    id: "Q009",
+    assessment: "Career Awareness Tracker",
+    qCategory: "Career Development",
+    question: "How often do you research career opportunities?",
+    option1: "Daily",
+    option2: "Weekly",
+    option3: "Monthly",
+    option4: "Occasionally",
+    option5: "Never",
+    status: "Draft"
+  },
+  {
+    id: "Q010",
+    assessment: "Career Preferences Survey",
+    qCategory: "Work Environment",
+    question: "What type of work environment do you prefer?",
+    option1: "Remote work",
+    option2: "Office environment",
+    option3: "Hybrid model",
+    option4: "Field work",
+    option5: "Travel-based",
+    status: "Active"
+  }
+];
+
 export const OrganisationProfiles = [
   {
     id: 1,
