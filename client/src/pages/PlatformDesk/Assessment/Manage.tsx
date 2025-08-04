@@ -68,6 +68,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import RadioButton from "@/components/ui/Radiobutton";
+import { Textarea } from "@/components/ui/textarea";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -113,6 +116,7 @@ export function Manage() {
 
 function Topbar() {
   const [showFilter, setShowFilter] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div>
@@ -121,10 +125,14 @@ function Topbar() {
         </h1>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="brand" size="new">
+        <Button 
+          variant="brand" 
+          size="new"
+          onClick={() => setShowForm(true)}
+        >
           <Plus className="h-3 w-3" />
-          
         </Button>
+        {showForm && <AssessmentForm onClose={() => setShowForm(false)} />}
         
         <div className="flex gap-4 flex-wrap">
           <Button variant="standard" size="new">
@@ -395,6 +403,17 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
     ManageTable[0]?.id || null
   );
   const [isCategorySheetOpen, setIsCategorySheetOpen] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [editData, setEditData] = useState<{
+    id: string;
+    assessmentName: string;
+    segments: string[];
+    category: string;
+    price: number;
+    partnerShare: string;
+    enrollments: number;
+    status: string;
+  } | null>(null);
 
   // Available categories from the data
   const availableCategories = Array.from(
@@ -519,8 +538,14 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
     }
   };
 
+  const handleFormClose = () => {
+    setShowForm(false);
+    setEditData(null);
+  };
+
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
+      {showForm && <AssessmentForm onClose={handleFormClose} editData={editData || undefined} />}
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
         {/* Select All and badge UI */}
         <div className="flex h-20 items-center justify-between border-b p-4 mt-auto">
@@ -787,15 +812,52 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
                               className="hover:bg-[var(--blue2)] hover:text-[var(--blue)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
-                              
+                                // Handle Edit action
+                                const assessmentData = {
+                                  id: user.id,
+                                  assessmentName: user.assessmentName,
+                                  segments: user.segments,
+                                  category: user.category,
+                                  price: user.price,
+                                  partnerShare: user.partnerShare,
+                                  enrollments: user.enrollments,
+                                  status: user.status,
+                                };
+                                setShowForm(true);
+                                setEditData(assessmentData);
                               }}
                             >
                               <Pencil className="h-3 w-3" />
-                              <span className="sr-only">Logs</span>
+                              <span className="sr-only">Edit</span>
                             </Button>
                           </TooltipTrigger>
                           <TooltipContent side="top" className="text-xs">
-                            Logs
+                            Edit
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              variant="actionIcon"
+                              size="actionIcon"
+                              className="hover:bg-[var(--red2)] hover:text-[var(--red)] transition-all duration-200 p-2 rounded-md"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Handle Delete action
+                                if (confirm(`Are you sure you want to delete "${user.assessmentName}"?`)) {
+                                  console.log("Deleting assessment:", user.id);
+                                  // In a real app, you would make an API call here
+                                }
+                              }}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                              <span className="sr-only">Delete</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Delete
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
@@ -1115,6 +1177,197 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
         <div className="p-6 border-t flex justify-end gap-4">
           <Button variant="border" onClick={onClose}>Cancel</Button>
           <Button variant="brand" onClick={onClose}>Apply Filter</Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface AssessmentFormProps {
+  onClose: () => void;
+  editData?: {
+    id: string;
+    assessmentName: string;
+    segments: string[];
+    category: string;
+    price: number;
+    partnerShare: string;
+    enrollments: number;
+    status: string;
+  };
+}
+
+function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const [assessmentName, setAssessmentName] = useState(editData?.assessmentName || "");
+  const [selectedSegments, setSelectedSegments] = useState<string[]>(editData?.segments || []);
+  const [category, setCategory] = useState(editData?.category || "");
+  const [price, setPrice] = useState(editData?.price?.toString() || "");
+  const [partnerShare, setPartnerShare] = useState(editData?.partnerShare || "");
+  const [enrollments, setEnrollments] = useState(editData?.enrollments?.toString() || "");
+  const [status, setStatus] = useState(editData?.status || "Draft");
+
+
+  const availableSegments = ["9-10", "11-12", "UG", "PG", "Professionals"];
+  const availableCategories = ["Engineering", "Medical", "Management", "Civil Services", "Banking", "Government", "General", "Language", "Mathematics"];
+  const availableStatuses = ["Draft", "Active", "Inactive"];
+
+  function handleClickOutside(e: MouseEvent) {
+    const path = e.composedPath() as HTMLElement[];
+
+    const clickedInside = path.some((el) => {
+      return (
+        (modalRef.current && modalRef.current.contains(el)) ||
+        (el instanceof HTMLElement && el.getAttribute("data-radix-popper-content-wrapper") !== null)
+      );
+    });
+
+    if (!clickedInside) {
+      onClose();
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onClose]);
+
+  const handleSegmentToggle = (segment: string) => {
+    setSelectedSegments(prev => 
+      prev.includes(segment) 
+        ? prev.filter(s => s !== segment)
+        : [...prev, segment]
+    );
+  };
+
+  const handleSubmit = () => {
+    // In a real app, you would make an API call here
+    const assessmentData = {
+      id: editData?.id || `ASS${Date.now()}`,
+      assessmentName,
+      segments: selectedSegments,
+      category,
+      price: Number(price),
+      partnerShare,
+      enrollments: Number(enrollments) || 0,
+      status,
+      actions: ["Questions", "Results", "Logs"],
+    };
+    
+    console.log(editData ? "Updated assessment data:" : "New assessment data:", assessmentData);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/40 flex justify-end">
+      <div
+        ref={modalRef}
+        className="animate-slide-in-from-right bg-[var(--background)] shadow-xl h-full w-full max-w-[700px] flex flex-col"
+      >
+        <div className="flex items-center justify-between border-b p-6">
+          <CardTitle className="text-xl font-semibold text-[var(--text-head)]">
+            {editData ? "Edit Assessment" : "Create Assessment"}
+          </CardTitle>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[var(--text)]">
+          <div className="flex flex-col gap-2">
+            <Label>Assessment Name</Label>
+            <Input 
+              placeholder="e.g., JEE Main Mock Test 1" 
+              value={assessmentName} 
+              onChange={(e) => setAssessmentName(e.target.value)} 
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Segments</Label>
+            <div className="grid grid-cols-2 gap-2">
+              {availableSegments.map((segment) => (
+                <label key={segment} className="flex items-center space-x-2">
+                  <Checkbox
+                    checked={selectedSegments.includes(segment)}
+                    onCheckedChange={() => handleSegmentToggle(segment)}
+                  />
+                  <span className="text-sm">{segment}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Category</Label>
+            <Select value={category} onValueChange={setCategory}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select category" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableCategories.map((cat) => (
+                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Price (₹)</Label>
+            <Input
+              type="number"
+              min={0}
+              placeholder="299"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Partner Share</Label>
+            <Input
+              placeholder="[S] 25% | [P] 50%"
+              value={partnerShare}
+              onChange={(e) => setPartnerShare(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Initial Enrollments</Label>
+            <Input
+              type="number"
+              min={0}
+              placeholder="0"
+              value={enrollments}
+              onChange={(e) => setEnrollments(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Status</Label>
+            <div className="flex gap-4 mt-2">
+              {availableStatuses.map((option) => (
+                <RadioButton
+                  key={option}
+                  label={option}
+                  value={option}
+                  selected={status}
+                  onChange={setStatus}
+                />
+              ))}
+            </div>
+          </div>
+
+         
+        </div>
+
+        <div className="p-6 border-t flex justify-end gap-4">
+          <Button variant="border" onClick={onClose}>Cancel</Button>
+          <Button 
+            variant="brand" 
+            onClick={handleSubmit}
+            disabled={!assessmentName || selectedSegments.length === 0 || !category || !price}
+          >
+            {editData ? "Update Assessment" : "Create Assessment"}
+          </Button>
         </div>
       </div>
     </div>

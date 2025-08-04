@@ -18,6 +18,7 @@ import {
   Ban,
   Eye,
   RefreshCw,
+  PenBox,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -41,6 +42,7 @@ import {
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { assessmentsTable, coachesList } from "@/data/Data";
+import asset from "@/assets/asset.jpg";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 
 // Define the assessment type to match the data structure
@@ -433,6 +435,7 @@ interface CoachAssignmentModalProps {
   isOpen: boolean;
   onClose: () => void;
   assessmentId: string;
+  currentCoach: string;
   onAssignCoach: (assessmentId: string, coachId: string) => void;
 }
 
@@ -440,40 +443,44 @@ function CoachAssignmentModal({
   isOpen,
   onClose,
   assessmentId,
-  onAssignCoach,
+  currentCoach,
+  onAssignCoach
 }: CoachAssignmentModalProps) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedCoach, setSelectedCoach] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredCoaches, setFilteredCoaches] = useState(coachesList);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // Filter coaches based on search query
+  // 🔁 Reset inputs on modal open
   useEffect(() => {
-    const filtered = coachesList.filter(
-      (coach) =>
-        coach.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        coach.specialization.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredCoaches(filtered);
-  }, [searchQuery]);
-
-  // Reset state when modal opens/closes
-  useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
+      setSearchTerm("");
       setSelectedCoach("");
-      setSearchQuery("");
-      setFilteredCoaches(coachesList);
-    } else {
-      // Reset state when modal opens to ensure fresh state
-      setSelectedCoach("");
-      setSearchQuery("");
-      setFilteredCoaches(coachesList);
+      setShowSuggestions(false);
     }
   }, [isOpen]);
+
+  const filteredCoaches = coachesList.filter(
+    (coach) =>
+      coach.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      coach.id.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSelect = (coach: any) => {
+    setSearchTerm(`${coach.name} - ${coach.id}`);
+    setSelectedCoach(coach.id);
+    setShowSuggestions(false);
+  };
 
   const handleAssignCoach = () => {
     if (selectedCoach) {
       onAssignCoach(assessmentId, selectedCoach);
+      onClose(); // ✅ close modal after assigning
     }
+  };
+
+  const handleRemoveCoach = () => {
+    onAssignCoach(assessmentId, ""); // ✅ set to empty string
+    onClose(); // ✅ close modal right away
   };
 
   if (!isOpen) return null;
@@ -485,67 +492,51 @@ function CoachAssignmentModal({
           <h2 className="text-xl font-semibold text-[var(--text-head)]">
             Assign Coach
           </h2>
-          <Button
-            variant="link"
-            className="text-sm text-[var(--brand-color)] p-0 h-auto"
+          <button
+            className="text-sm text-[var(--brand-color)] p-0 h-auto hover:text-[var(--brand-color2)]"
             onClick={onClose}
           >
             ✕
-          </Button>
+          </button>
         </div>
 
-        <div className="mb-4">
-          <label className="text-base text-[var(--text)] mb-2 block">
-            Search Coach:
-          </label>
-          <div className="relative">
-            <Input
-              placeholder="Search coaches by name or specialization..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)] text-sm"
-            />
-            <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[var(--text)] opacity-50" />
-          </div>
-
-          {searchQuery && (
-            <div className="mt-2 max-h-40 overflow-y-auto border rounded-md">
+        <div className="mb-4 relative">
+          <label className="text-base text-[var(--text)] mb-2 block">Select Coach:</label>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setShowSuggestions(true);
+            }}
+            className="w-full p-2 border rounded-md bg-[var(--background)] text-[var(--text)] text-sm"
+            placeholder="Type coach name or ID..."
+          />
+          {showSuggestions && searchTerm && (
+            <ul className="absolute z-10 w-full bg-[var(--background)] border rounded-md mt-1 max-h-48 overflow-auto">
               {filteredCoaches.length > 0 ? (
                 filteredCoaches.map((coach) => (
-                  <div
+                  <li
                     key={coach.id}
-                    className={`p-2 cursor-pointer hover:bg-[var(--faded)] text-sm ${selectedCoach === coach.id
-                      ? "bg-[var(--brand-color2)] text-[var(--brand-color)]"
-                      : "text-[var(--text)]"
-                      }`}
-                    onClick={() => setSelectedCoach(coach.id)}
+                    className="px-4 py-2 cursor-pointer hover:bg-[var(--faded)] text-sm text-[var(--text)]"
+                    onClick={() => handleSelect(coach)}
                   >
-                    {coach.name} - {coach.specialization}
-                  </div>
+                    {coach.name} - {coach.id} ({coach.specialization})
+                  </li>
                 ))
               ) : (
-                <div className="p-2 text-sm text-[var(--text)] opacity-70">
-                  No coaches found
-                </div>
+                <li className="px-4 py-2 text-[var(--text)] text-sm">No matches found</li>
               )}
-            </div>
-          )}
-
-          {selectedCoach && (
-            <div className="mt-2 p-2 bg-[var(--faded)] rounded-md">
-              <span className="text-sm text-[var(--text)]">
-                Selected:{" "}
-                {coachesList.find((c) => c.id === selectedCoach)?.name} -{" "}
-                {
-                  coachesList.find((c) => c.id === selectedCoach)
-                    ?.specialization
-                }
-              </span>
-            </div>
+            </ul>
           )}
         </div>
 
         <div className="flex gap-2 justify-end">
+          {currentCoach && (
+            <Button variant="delete" size="sm" onClick={handleRemoveCoach}>
+              Remove Coach
+            </Button>
+          )}
           <Button variant="border" size="sm" onClick={onClose}>
             Cancel
           </Button>
@@ -573,6 +564,7 @@ function AssessmentTable() {
   } | null>(null);
   const [isCoachAssignmentOpen, setIsCoachAssignmentOpen] = useState(false);
   const [selectedAssessmentId, setSelectedAssessmentId] = useState("");
+  const [selectedCurrentCoach, setSelectedCurrentCoach] = useState("");
 
   const [assessmentsData, setAssessmentsData] = useState<AssessmentItem[]>(assessmentsTable as AssessmentItem[]);
 
@@ -634,31 +626,40 @@ function AssessmentTable() {
     }
   };
 
-  const handleOpenCoachAssignment = (assessmentId: string) => {
+  const handleOpenCoachAssignment = (assessmentId: string, currentCoach: string) => {
     setSelectedAssessmentId(assessmentId);
+    setSelectedCurrentCoach(currentCoach);
     setIsCoachAssignmentOpen(true);
   };
 
   const handleCloseCoachAssignment = () => {
     setIsCoachAssignmentOpen(false);
     setSelectedAssessmentId("");
+    setSelectedCurrentCoach("");
   };
 
   const handleAssignCoach = (assessmentId: string, coachId: string) => {
-    // Find the coach name from the coach ID
-    const coach = coachesList.find((c) => c.id === coachId);
-    if (coach) {
-      // Update the assessment data with the assigned coach
+    // Handle REMOVE separately
+    if (!coachId) {
       setAssessmentsData((prevData) =>
         prevData.map((assessment) =>
-          assessment.id === assessmentId
-            ? { ...assessment, assignCoach: coach.name }
-            : assessment
+          assessment.id === assessmentId ? { ...assessment, assignCoach: "" } : assessment
         )
       );
-
-      console.log(`Assigned coach ${coach.name} to assessment ${assessmentId}`);
+      handleCloseCoachAssignment();
+      return;
     }
+
+    // Normal coach assignment
+    const coach = coachesList.find((c) => c.id === coachId);
+    if (!coach) return;
+
+    setAssessmentsData((prevData) =>
+      prevData.map((assessment) =>
+        assessment.id === assessmentId ? { ...assessment, assignCoach: coach.id } : assessment
+      )
+    );
+
     handleCloseCoachAssignment();
   };
 
@@ -909,60 +910,57 @@ function AssessmentTable() {
                   <TableCell>
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
-                  <TableCell>
-                    <div className="text-sm">
-                      {user.assignCoach ? (
-                        <div className="flex items-center gap-2">
-                          <div className="flex-1">
-                            <div className="font-medium text-[var(--text)]">
-                              {user.assignCoach}
+                  <TableCell className="">
+                    <div className="w-full max-w-full text-sm group">
+                      {user.assignCoach ? (() => {
+                        const coach = coachesList.find(
+                          (c) => c.id.toLowerCase() === (user.assignCoach || "").toLowerCase()
+                        );
+
+                        return coach ? (
+                          <div className="flex items-start justify-between gap-4 min-w-[250px]">
+                            {/* Coach Display */}
+                            <div className="flex items-center gap-3">
+                              <img
+                                src={coach.photo || asset}
+                                alt={coach.name}
+                                className="w-6 h-6 rounded-full object-cover"
+                              />
+                              <div className="flex flex-col justify-center">
+                                <div className="font-semibold text-[var(--text)] flex items-center gap-2">{coach.name}
+                                  <button
+                                    className="text-xs hidden group-hover:inline-flex"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleOpenCoachAssignment(user.id, user.assignCoach || "");
+                                    }}
+                                  >
+                                    <PenBox className="text-xs h-3 w-3" />
+                                  </button>
+                                </div>
+                                <div className="text-xs text-[var(--text)]">{coach.id}</div>
+                                <div className="text-xs text-[var(--text)]">{coach.specialization}</div>
+                              </div>
                             </div>
-                            {/* <div className="text-xs text-[var(--text)] opacity-70">
-                              Assigned
-                            </div> */}
+
                           </div>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <Button
-                                  variant="icon-only"
-                                  size="sm"
-                                  className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleOpenCoachAssignment(user.id);
-                                  }}
-                                >
-                                  <Plus className="h-3 w-3" />
-                                </Button>
-                              </TooltipTrigger>
-                              <TooltipContent side="top" className="text-xs">
-                                Change coach assignment
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                        </div>
-                      ) : (
-                        <TooltipProvider>
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <Button
-                                variant="icon-only"
-                                size="sm"
-                                className="cursor-pointer hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)] transition-all duration-200"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleOpenCoachAssignment(user.id);
-                                }}
-                              >
-                                <Plus className="h-3 w-3" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent side="top" className="text-xs">
-                              Assign coach
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
+                        ) : (
+                          <div className="text-[var(--red)] text-xs">Coach not found</div>
+                        );
+                      })() : (
+                        <Button
+                          variant="noborder"
+                          size="sm"
+                          className="text-[var(--text)] hover:bg-[var(--brand-color2)] hover:text-[var(--brand-color)]"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenCoachAssignment(user.id, "");
+                          }}
+                        >
+                          <span className="flex items-center gap-1">
+                            <Plus className="h-3 w-3" />
+                          </span>
+                        </Button>
                       )}
                     </div>
                   </TableCell>
@@ -1034,7 +1032,7 @@ function AssessmentTable() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Button variant="actionIcon" size="actionIcon">
-                              <Ban className="h-3 w-3 text-[var(--red)]" />
+                              <Ban className="h-3 w-3 " />
                               <span className="sr-only">Revoke</span>
                             </Button>
                           </TooltipTrigger>
@@ -1136,6 +1134,7 @@ function AssessmentTable() {
         isOpen={isCoachAssignmentOpen}
         onClose={handleCloseCoachAssignment}
         assessmentId={selectedAssessmentId}
+        currentCoach={selectedCurrentCoach}
         onAssignCoach={handleAssignCoach}
       />
     </div>

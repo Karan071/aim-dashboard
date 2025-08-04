@@ -309,7 +309,7 @@ function Form({ onClose }: FormProps) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-end">
+    <div className="fixed inset-0 z-50 bg-black/40  flex justify-end">
       <div
         ref={modalRef}
         className="animate-slide-in-from-right bg-[var(--background)] shadow-xl h-full w-full max-w-[700px] flex flex-col"

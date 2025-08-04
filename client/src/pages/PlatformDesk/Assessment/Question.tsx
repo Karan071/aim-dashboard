@@ -306,7 +306,7 @@ function QuestionForm({ onClose }: QuestionFormProps) {
   const [option3, setOption3] = useState("");
   const [option4, setOption4] = useState("");
   const [option5, setOption5] = useState("");
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState<string>("Active");
 
   function handleClickOutside(e: MouseEvent) {
     const path = e.composedPath() as HTMLElement[];
@@ -428,13 +428,13 @@ function QuestionForm({ onClose }: QuestionFormProps) {
             <div className="flex gap-4 mt-2">
               {["Active", "Draft", "Inactive"].map((option) => (
                 <label key={option} className="flex items-center space-x-2">
-                  <input
-                    type="radio"
-                    name="status"
-                    value={option}
-                    checked={status && option === "Active"}
-                    onChange={(e) => setStatus(e.target.value === "Active")}
-                    className="text-[var(--brand-color)] focus:ring-[var(--brand-color)]"
+                  <Checkbox
+                    checked={status === option}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setStatus(option);
+                      }
+                    }}
                   />
                   <span className="text-sm">{option}</span>
                 </label>
@@ -942,16 +942,21 @@ function EditQuestionButton({ question }: { question: typeof QuestionsTable[0] }
 
           <div className="space-y-2">
             <Label htmlFor="status">Status</Label>
-            <Select value={formData.status} onValueChange={(value) => setFormData({...formData, status: value})}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Active">Active</SelectItem>
-                <SelectItem value="Draft">Draft</SelectItem>
-                <SelectItem value="Inactive">Inactive</SelectItem>
-              </SelectContent>
-            </Select>
+            <div className="flex gap-4 mt-2">
+              {["Active", "Draft", "Inactive"].map((option) => (
+                <label key={option} className="flex items-center space-x-2">
+                  <Checkbox
+                    checked={formData.status === option}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setFormData({...formData, status: option});
+                      }
+                    }}
+                  />
+                  <span className="text-sm">{option}</span>
+                </label>
+              ))}
+            </div>
           </div>
 
           <DialogFooter>
