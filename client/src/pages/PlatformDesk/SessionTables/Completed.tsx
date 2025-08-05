@@ -500,7 +500,7 @@ const tableData =[
                 </div>
               </TableCell>
                     <TableCell>
-                            <Badge variant="border">
+                              <Badge variant="standard">
                               {user.status}
                             </Badge>
                         </TableCell>

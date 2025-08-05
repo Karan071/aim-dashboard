@@ -497,11 +497,11 @@ const tableData =[
                   <div>{user.objective.split(" | ")[1]}</div>
                 </div>
               </TableCell>
-                    <TableCell>
-                            <Badge variant="border">
-                              {user.status}
-                            </Badge>
-                        </TableCell>
+              <TableCell>
+                    <Badge variant="standard">
+                      {user.status}
+                    </Badge>
+                  </TableCell>
                     <TableCell>
                     <div className="flex items-center justify-center pr-4">
                 <TooltipProvider>
