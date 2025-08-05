@@ -58,6 +58,13 @@ import * as React from "react";
 
 import { useEffect } from "react";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -358,39 +365,39 @@ function StatCard() {
 }
 
 const actionIconMap: Record<string, React.ReactNode> = {
-  Edit: <Edit className="h-4 w-4 mr-1" />,
-  Archive: <Archive className="h-4 w-4 mr-1" />,
-  Publish: <Check className="h-4 w-4 mr-1" />,
-  Approve: <Check className="h-4 w-4 mr-1" />,
-  Reject: <X className="h-4 w-4 mr-1" />,
-  View: <Eye className="h-4 w-4 mr-1" />,
-  Invoice: <FileText className="h-4 w-4 mr-1" />,
-  Activate: <Check className="h-4 w-4 mr-1" />,
-  Delete: <Trash2 className="h-4 w-4 mr-1" />,
-  Review: <FileCheck2 className="h-4 w-4 mr-1" />,
-  Flag: <Flag className="h-4 w-4 mr-1" />,
-  Assign: <Users className="h-4 w-4 mr-1" />,
-  Resolve: <Check className="h-4 w-4 mr-1" />,
-  Close: <X className="h-4 w-4 mr-1" />,
-  Restore: <Check className="h-4 w-4 mr-1" />,
-  Respond: <MessageCircle className="h-4 w-4 mr-1" />,
-  Remove: <Trash2 className="h-4 w-4 mr-1" />,
-  Reply: <MessageCircle className="h-4 w-4 mr-1" />,
-  Note: <FileText className="h-4 w-4 mr-1" />,
-  Done: <Check className="h-4 w-4 mr-1" />,
-  Questions: <BadgeQuestionMark className="h-4 w-4 mr-1" />,
-  Results: <FileDown className="h-4 w-4 mr-1" />,
-  Details: <Eye className="h-4 w-4 mr-1" />,
-  Debug: <FileCheck2 className="h-4 w-4 mr-1" />,
-  Fix: <Check className="h-4 w-4 mr-1" />,
-  Verify: <Check className="h-4 w-4 mr-1" />,
-  Comment: <MessageCircle className="h-4 w-4 mr-1" />,
-  Download: <Download className="h-4 w-4 mr-1" />,
-  Cancel: <X className="h-4 w-4 mr-1" />,
-  Suspend: <Flag className="h-4 w-4 mr-1" />,
-  Deactivate: <X className="h-4 w-4 mr-1" />,
-  Investigate: <Search className="h-4 w-4 mr-1" />,
-  Refund: <FileDown className="h-4 w-4 mr-1" />,
+  Edit: <Edit className="h-3 w-3" />,
+  Archive: <Archive className="h-3 w-3" />,
+  Publish: <Check className="h-3 w-3" />,
+  Approve: <Check className="h-3 w-3" />,
+  Reject: <X className="h-3 w-3" />,
+  View: <Eye className="h-3 w-3" />,
+  Invoice: <FileText className="h-3 w-3" />,
+  Activate: <Check className="h-3 w-3" />,
+  Delete: <Trash2 className="h-3 w-3" />,
+  Review: <FileCheck2 className="h-3 w-3" />,
+  Flag: <Flag className="h-3 w-3" />,
+  Assign: <Users className="h-3 w-3" />,
+  Resolve: <Check className="h-3 w-3" />,
+  Close: <X className="h-3 w-3" />,
+  Restore: <Check className="h-3 w-3" />,
+  Respond: <MessageCircle className="h-3 w-3" />,
+  Remove: <Trash2 className="h-3 w-3" />,
+  Reply: <MessageCircle className="h-3 w-3" />,
+  Note: <FileText className="h-3 w-3" />,
+  Done: <Check className="h-3 w-3" />,
+  Questions: <BadgeQuestionMark className="h-3 w-3" />,
+  Results: <FileDown className="h-3 w-3" />,
+  Details: <Eye className="h-3 w-3" />,
+  Debug: <FileCheck2 className="h-3 w-3" />,
+  Fix: <Check className="h-3 w-3" />,
+  Verify: <Check className="h-3 w-3" />,
+  Comment: <MessageCircle className="h-3 w-3" />,
+  Download: <Download className="h-3 w-3" />,
+  Cancel: <X className="h-3 w-3" />,
+  Suspend: <Flag className="h-3 w-3" />,
+  Deactivate: <X className="h-3 w-3" />,
+  Investigate: <Search className="h-3 w-3" />,
+  Refund: <FileDown className="h-3 w-3" />,
 };
 
 function SessionTabs() {
@@ -681,7 +688,7 @@ function SessionTabs() {
               <TableRow>
                 <TableHead className="min-w-[40px]"></TableHead>
                 {getTableHeaders()}
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -703,12 +710,22 @@ function SessionTabs() {
                   </TableCell>
                   {renderTableCells(row)}
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      {row.actions && row.actions.map((action: string, idx: number) => (
-                        <Button key={idx} variant="noborder" size="sm" aria-label={action}>
-                          {actionIconMap[action] || null}
-                        </Button>
-                      ))}
+                    <div className="flex items-center justify-end pr-4">
+                      <TooltipProvider>
+                        {row.actions && row.actions.map((action: string, idx: number) => (
+                          <Tooltip key={idx}>
+                            <TooltipTrigger asChild>
+                              <Button variant="actionIcon" size="actionIcon" aria-label={action}>
+                                {actionIconMap[action]}
+                                <span className="sr-only">{action}</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{action}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>

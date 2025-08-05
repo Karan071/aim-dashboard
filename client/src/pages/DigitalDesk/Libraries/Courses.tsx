@@ -649,7 +649,7 @@ function TableSection() {
                 <TableHead className="text-[var(--text)]">Status</TableHead>
                
               
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">

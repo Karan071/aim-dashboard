@@ -482,7 +482,7 @@ function FaqsTable({ selectedRows, setSelectedRows, setCurrentRecords }: FaqsTab
                 >
                   Status {sortConfig?.key === "Status" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">

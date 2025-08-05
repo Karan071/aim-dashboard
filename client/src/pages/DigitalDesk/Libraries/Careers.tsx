@@ -606,7 +606,7 @@ function TableSection() {
                 <TableHead className="text-[var(--text)]">Status</TableHead>
                 
               
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -664,16 +664,16 @@ function TableSection() {
                   <TableCell>
                     <div className="flex items-center gap-2">
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         className="bg-white border-0 shadow-none"
                       >
                         <Eye className="h-4 w-3" />
                         <span className="sr-only">View</span>
                       </Button>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         className="bg-white border-0 shadow-none"
                       >
                         <Pen className="h-4 w-3" />

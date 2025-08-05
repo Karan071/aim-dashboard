@@ -20,6 +20,12 @@ import RadioButton from "@/components/ui/Radiobutton";
 import DatePick from "@/components/ui/DatePicker"
 import avatar from "@/assets/avatar.png";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 
 const color = "text-[var(--text)]";
@@ -425,11 +431,11 @@ function NewsData() {
 
   const renderActionIcon = (action: string) => {
     switch (action) {
-      case 'Edit': return <Edit className="h-4 w-4" />;
-      case 'Archive': return <Trash className="h-4 w-4" />;
-      case 'Review': return <BadgeQuestionMark className="h-4 w-4" />;
-      case 'Publish': return <Check className="h-4 w-4" />;
-      default: return <Edit className="h-4 w-4" />;
+      case 'Edit': return <Edit className="h-3 w-3" />;
+      case 'Archive': return <Trash className="h-3 w-3" />;
+      case 'Review': return <BadgeQuestionMark className="h-3 w-3" />;
+      case 'Publish': return <Check className="h-3 w-3" />;
+      default: return <Edit className="h-3 w-3" />;
     }
   };
 
@@ -519,7 +525,7 @@ function NewsData() {
                 </TableHead>
               
               
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -587,18 +593,26 @@ function NewsData() {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      {news.actions.map((action, actionIdx) => (
-                        <Button
-                          key={actionIdx}
-                          variant="noborder"
-                          size="icon"
-                          className="bg-[var(--background)] border-0 shadow-none"
-                          title={action}
-                        >
-                          {renderActionIcon(action)}
-                        </Button>
-                      ))}
+                    <div className="flex items-center justify-end pr-4">
+                      <TooltipProvider>
+                        {news.actions.map((action, actionIdx) => (
+                          <Tooltip key={actionIdx}>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="actionIcon"
+                                size="actionIcon"
+                                title={action}
+                              >
+                                {renderActionIcon(action)}
+                                <span className="sr-only">{action}</span>
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{action}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        ))}
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>

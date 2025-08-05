@@ -17,8 +17,12 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { useEffect } from "react";
 
-
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 
 const color = "text-[var(--text)]";
@@ -398,7 +402,7 @@ function HelpTabledata() {
                 <TableHead className="text-[var(--text)]">Author</TableHead>
                 <TableHead className="text-[var(--text)]">Last Updated</TableHead>
                 <TableHead className="text-[var(--text)]">Status</TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -447,16 +451,25 @@ function HelpTabledata() {
                       <Badge variant={row.Status === "Published" ? "standard" : "border"}>{row.Status}</Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2">
-                        {row.Actions && row.Actions.map((action, i) => (
-                          <Button key={i} variant="noborder" size="sm" className="bg-[var(--background)] border-0 shadow-none">
-                            {action === 'View' && <Eye className="h-4 w-4" />}
-                            {action === 'Edit' && <Pencil className="h-4 w-4" />}
-                            {action === 'Delete' && <X className="h-4 w-4 text-[var(--red)]" />}
-                            {action === 'Archive' && <Archive className="h-4 w-4" />}
-                            {action !== 'View' && action !== 'Edit' && action !== 'Delete' && action !== 'Archive' && action}
-                          </Button>
-                        ))}
+                      <div className="flex items-center justify-end pr-4">
+                        <TooltipProvider>
+                          {row.Actions && row.Actions.map((action, i) => (
+                            <Tooltip key={i}>
+                              <TooltipTrigger asChild>
+                                <Button variant="actionIcon" size="actionIcon">
+                                  {action === 'View' && <Eye className="h-3 w-3" />}
+                                  {action === 'Edit' && <Pencil className="h-3 w-3" />}
+                                  {action === 'Delete' && <X className="h-3 w-3 text-[var(--red)]" />}
+                                  {action === 'Archive' && <Archive className="h-3 w-3" />}
+                                  <span className="sr-only">{action}</span>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>{action}</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          ))}
+                        </TooltipProvider>
                       </div>
                     </TableCell>
                   </TableRow>
