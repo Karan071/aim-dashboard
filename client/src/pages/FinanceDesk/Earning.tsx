@@ -14,7 +14,6 @@ import {
   X,
 } from "lucide-react";
 import { Card, CardHeader,  } from "@/components/ui/card";
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -38,43 +37,38 @@ import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Revenue",
     value: "₹4,52,000",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Platform Earnings",
     value: "₹1,78,500",
     icon: BadgeDollarSign,
-    performance: Up,
   },
   {
     title: "Total Payouts",
     value: "₹2,78,000",
     icon: Package,
-    performance: Down,
   },
   {
     title: "GST Collected",
     value: "₹32,130",
     icon: Newspaper,
-    performance: Up,
   },
 ];
 
 export function Earning() {
   return (
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Earning</h1>
+        <Topbar />
         <StatsCards />
         <Buttonbar/>
         <TableSection/>
@@ -82,24 +76,45 @@ export function Earning() {
   );
 }
 
+function Topbar() {
+  
+  // const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Earning
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        // onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {/* {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />} */}
+      <Button variant="standard" size="new">
+        <FileDown className="h-3 w-3" />
+      </Button>
+      </div>
+    </div>
+  );
+}
+
 function Buttonbar() {
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div className="flex gap-4">
-      <Button variant="standard" size="new">
-        <FileDown className="h-3 w-3" />
-        <span className="">Export</span>
-      </Button>
       <Button variant="brand" size="new">
           <Download className="h-3 w-3" />
           <span className="">Download</span>
         </Button>
         </div>
       <div className="flex gap-4">
-        <Button variant="standard" size="new">
-          <Filter className="h-3 w-3" />
-          <span className="">Filter</span>
-        </Button>
         <Button variant="standard" size="new">
           <Eye className="h-3 w-3" />
           <span className="">View Breakdown</span>
@@ -127,7 +142,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

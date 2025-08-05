@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -42,42 +41,74 @@ import { Checkbox } from "@/components/ui/checkbox";
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import { DateRangePicker } from "@/components/ui/RangeCalender";
+import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
+import { Tooltip } from "@/components/ui/tooltip";
+import { TooltipContent } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { TooltipTrigger } from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Commissions Paid",
     value: "₹1,12,900",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Pending Commissions",
     value: " ₹8,750",
     icon: BadgeDollarSign,
-    performance: Down,
   },
 ];
 
 export function Commission() {
   return (
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Commission</h1>
+        <Bar/>
         <StatsCards />
         <Topbar />
-        
         <TableSection/>
       </div>
   );
 }
 
+function Bar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Commission
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button
+          variant="standard"
+          size="new"
+        >
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 
 function Topbar() {
-  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div>
@@ -97,23 +128,6 @@ function Topbar() {
         >
           <GitGraph className="h-3 w-3" />
           <span>Track by Source</span>
-        </Button>
-        <Button
-          variant="standard" size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-        
-        <Button
-          variant="standard"
-          size="new"
-        >
-          <FileDown className="h-3 w-3" />
-          <span>Export Commission Report</span>
         </Button>
       </div>
     </div>
@@ -294,7 +308,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -556,7 +569,7 @@ function TableSection() {
                   {sortConfig?.key === "status" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] pr-4 text-center w-10">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -622,36 +635,72 @@ function TableSection() {
                     <Badge variant="standard">{user.status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      
+                    <div className="flex items-center gap-2 justify-end pr-4">
+                    
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                       >
                         <Eye className="h-4 w-3" />
                         <span className="sr-only">View</span>
                       </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            View
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                         <Button
+                        variant="actionIcon"
+                        size="actionIcon"
                       >
                         <Newspaper className="h-4 w-3" />
                         <span className="sr-only">Invoice</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Invoice
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                       >
                         <Check className="h-4 w-3" />
                         <span className="sr-only">Approve</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Approve
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                       >
                         <X className="h-4 w-3" />
                         <span className="sr-only">Cancle</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent side="top" className="text-xs">
+                            Cancel
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
