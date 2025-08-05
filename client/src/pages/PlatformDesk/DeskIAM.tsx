@@ -10,33 +10,28 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { DeskIAMtable } from "@/data/Data";
 import { cn } from "@/lib/utils";
-import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, CircleArrowDown, CircleArrowUp,  FileDown, Filter,Pen, Plus, Search, UserCheck, Users, UserX, X } from "lucide-react";
+import { Bell, BookAIcon, Check, ChevronDown, ChevronLeft, ChevronRight, FileDown, Filter,Pen, Plus, Search, UserCheck, Users, UserX, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Users",
     value: "1,234",
     icon: Users,
-    performance: Up,
   },
   {
     title: "Active Users",
     value: "34",
     icon: UserCheck,
-    performance: Up,
   },
   {
     title: "Inactive Users",
     value: "27",
     icon: UserX,
-    performance: Down,
   },
 ];
 
@@ -93,7 +88,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

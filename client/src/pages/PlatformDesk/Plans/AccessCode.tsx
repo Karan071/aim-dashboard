@@ -289,28 +289,8 @@ function Form({ onClose }: FormProps) {
     University: ["Uni Alpha", "Uni Beta"],
   };
 
-  function handleClickOutside(e: MouseEvent) {
-    const path = e.composedPath() as HTMLElement[];
-
-    const clickedInside = path.some((el) => {
-      return (
-        (modalRef.current && modalRef.current.contains(el)) ||
-        (el instanceof HTMLElement && el.getAttribute("data-radix-popper-content-wrapper") !== null)
-      );
-    });
-
-    if (!clickedInside) {
-      onClose();
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose]);
-
   return (
-    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-end">
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-500  flex justify-end">
       <div
         ref={modalRef}
         className="animate-slide-in-from-right bg-[var(--background)] shadow-xl h-full w-full max-w-[700px] flex flex-col"
@@ -457,6 +437,7 @@ function Form({ onClose }: FormProps) {
 
 function CodeTableSection() {
   const navigate = useNavigate();
+  const [showForm, setShowForm] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -792,19 +773,21 @@ function CodeTableSection() {
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                      <Button
-                        variant="actionIcon"
-                        size="actionIcon"
-                      >
-                        <SquarePen className="h-4 w-3" />
-                        <span className="sr-only">Edit</span>
-                      </Button>
+                          <Button
+          variant="actionIcon"
+          size="actionIcon"
+          onClick={() => setShowForm(true)}
+        >
+          <SquarePen className="h-4 w-3" />
+        </Button>
+        
                       </TooltipTrigger>
                           <TooltipContent side="top" className="text-xs">
                             Edit
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
+                      {showForm && <Form onClose={() => setShowForm(false)} />}
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>

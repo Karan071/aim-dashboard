@@ -1,4 +1,4 @@
-import { Building2, UserCheck, Globe, Clock, Link, CircleArrowUp, CircleArrowDown, Search, X, FileDown, MessageCircle, Pen } from "lucide-react";
+import { Building2, UserCheck, Globe, Clock, Link, Search, X, FileDown, MessageCircle, Pen } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -24,44 +24,36 @@ import { TooltipContent } from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const orgStats = [
   {
     title: "Total Forms Created",
     value: "24",
     icon: Building2,
-    performance: Up,
   },
   {
     title: "Active Forms",
     value: "18",
     icon: UserCheck,
-    performance: Down,
   },
   {
     title: "Inactive Forms",
     value: "4",
     icon: Globe,
-    performance: Down,
   },
   {
     title: "Pending Approvals",
     value: "3",
     icon: Clock,
-    performance: Up,
   },
   {
     title: "Total Submissions",
     value: "3,920",
     icon: Link,
-    performance: Up,
   },
   {
     title: "New Submissions Today",
     value: "74",
     icon: Link,
-    performance: Up,
   },
 ];
 
@@ -316,7 +308,6 @@ export function FormStats() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
