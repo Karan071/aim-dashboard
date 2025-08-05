@@ -19,10 +19,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { DateRangePicker } from "@/components/ui/RangeCalender";
 import { MultiSelect } from "@/components/ui/multi-select";
+import { useNavigate } from "react-router-dom";
 
 
 export function AccessCode() {
-  return (
+    return (
       <div className="flex flex-col gap-2">
         <Topbar />
         <CodeTableSection/>
@@ -309,7 +310,7 @@ function Form({ onClose }: FormProps) {
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/40  flex justify-end">
+    <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-end">
       <div
         ref={modalRef}
         className="animate-slide-in-from-right bg-[var(--background)] shadow-xl h-full w-full max-w-[700px] flex flex-col"
@@ -455,6 +456,7 @@ function Form({ onClose }: FormProps) {
 
 
 function CodeTableSection() {
+  const navigate = useNavigate();
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
@@ -809,13 +811,14 @@ function CodeTableSection() {
                       <Button
                         variant="actionIcon"
                         size="actionIcon"
+                        onClick={() => navigate(`pay/${user.CodeName}`)}
                       >
                         <Eye className="h-4 w-3" />
                         <span className="sr-only">View</span>
                       </Button>
                       </TooltipTrigger>
                           <TooltipContent side="top" className="text-xs">
-                            Delete
+                            View
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>

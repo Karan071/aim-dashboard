@@ -496,6 +496,14 @@ function TableSection() {
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead
+                  onClick={() => requestSort("Code")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Code{" "}
+                  {sortConfig?.key === "Code" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
+                <TableHead
                   onClick={() => requestSort("Type")}
                   className="cursor-pointer text-[var(--text)]"
                 >
@@ -584,6 +592,9 @@ function TableSection() {
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.User}</div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-low">{user.Code}</div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.Type}</div>

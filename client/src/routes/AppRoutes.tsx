@@ -22,6 +22,9 @@ import { DeskIAM as PlatformDeskIAM } from "@/pages/PlatformDesk/DeskIAM";
 import { EditRoleWrapper as PlatformEditRoleWrapper } from "@/pages/PlatformDesk/underDeskIAM/EditRoleWrapper";
 import { AddTeamMember as PlatformAddTeamMember } from "@/pages/PlatformDesk/underDeskIAM/AddTeamMember";
 import { ManageRoles as PlatformManageRoles } from "@/pages/PlatformDesk/underDeskIAM/ManageRoles";
+import { AddNewRole as PlatformAddNewRole } from "@/pages/PlatformDesk/underDeskIAM/AddNewRole";
+import { Pay as PlatformPay } from "@/pages/PlatformDesk/Plans/Pay";
+import { PayWrapper as PlatformPayWrapper } from "@/pages/PlatformDesk/Plans/PayWrapper";
 
 // Review Desk
 import { Desk as ReviewDesk } from "@/pages/ReviewDesk/Desk";
@@ -165,7 +168,14 @@ export default function AppRoutes() {
           path="platform/desk-iam/manageRole/editRole"
           element={<PlatformEditRoleWrapper />}
         />
-
+        
+        <Route
+          path="platform/desk-iam/manageRole/addRole"
+          element={<PlatformAddNewRole />}  
+        />
+        <Route path="platform/plans/access-code/pay/:code" element={<PlatformPayWrapper />} />
+        <Route path="platform/plans/access-code/pay" element={<PlatformPay code="all" />} />
+        
         {/* Review Desk Routes */}
         <Route path="review/desk" element={<ReviewDesk />} />
         {/* <Route path="review/coaches" element={<ReviewCoaches />} /> */}
