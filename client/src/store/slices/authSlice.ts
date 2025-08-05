@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-// Define async thunk for login
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (
