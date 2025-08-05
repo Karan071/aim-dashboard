@@ -71,7 +71,7 @@ export function ManageRoles() {
 
   return (
     
-    <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
+    <div className="flex flex-col gap-4 w-1/2 h-max xl:flex-nowrap flex-wrap">
       <div>
         <Button variant="brand" size="new" className="text-white"
         onClick={() => navigate("addRole")}>

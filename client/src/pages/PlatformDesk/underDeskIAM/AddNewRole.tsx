@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 
 export function AddNewRole() {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-1/2 h-max xl:flex-nowrap flex-wrap">
         <h1 className="text-xl font-semibold text-[var(--text-head)]">
             Add New Role
           </h1>
