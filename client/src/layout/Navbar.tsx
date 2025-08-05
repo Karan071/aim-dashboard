@@ -118,7 +118,7 @@ export default function Navbar({}: NavbarProps) {
             >
               <Avatar className="md:h-10 md:w-10">
                 <AvatarImage
-                  src={`https://a.aimshala.com/${user?.image}`}
+                  src={`https://a.aimshala.com/${user?.image}` || "https://github.com/shadcn.png"}
                   alt={user?.name || "name"}
                 />
               </Avatar>
