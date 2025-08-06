@@ -624,7 +624,7 @@ export const SidebarData = {
           title: "My Cases",
           url: "/desk/devops/my-cases",
           icon: getNextIcon(),
-          isActive: false,
+          isActive: true,
         },
         {
           title: "Cases",

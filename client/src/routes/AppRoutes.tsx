@@ -97,7 +97,7 @@ import { Withdrawal as FinanceWithdrawal } from "@/pages/FinanceDesk/Withdrawal"
 
 // DevOps Desk
 import { DevopsDesk as DevopsDesk } from "@/pages/DevopsDesk/DevopsDesk";
-import { Mycases as DevopsMycases } from "@/pages/DevopsDesk/Mycases";
+import { MyCase as DevopsMycases } from "@/pages/DevopsDesk/Mycases";
 import { Cases as DevopsCases } from "@/pages/DevopsDesk/Cases";
 import { Leaderboard as DevopsLeaderboard } from "@/pages/DevopsDesk/Leaderboard";
 
