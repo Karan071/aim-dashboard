@@ -17,6 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DatePickerWithRange } from "@/components/date-picker";
 import { CurrenOpeningsTable } from "@/data/Data";
 import { cn } from "@/lib/utils";
 import {
@@ -25,8 +26,6 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  CircleArrowDown,
-  CircleArrowUp,
   Eye,
   FileDown,
   Filter,
@@ -41,42 +40,64 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Users",
     value: "1,234",
     icon: Users,
-    performance: Up,
   },
   {
     title: "Active Users",
     value: "34",
     icon: UserCheck,
-    performance: Up,
   },
   {
     title: "Inactive Users",
     value: "27",
     icon: UserX,
-    performance: Down,
   },
 ];
 
 export function CurrenOpenings() {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Current Openings
-      </h1>
+      <Bar />
       <StatsCards />
       <Buttonbar />
       <TableSection />
+    </div>
+  );
+}
+
+function Bar() {
+  
+  const [, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Current Openings
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+          className="flex items-center gap-2 self-end"
+        >
+          <Filter className="h-3 w-3" />
+        </Button>
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
     </div>
   );
 }
@@ -96,7 +117,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -112,7 +132,7 @@ function StatsCards() {
 }
 
 function Buttonbar() {
-  const [showFilter, setShowFilter] = useState(false);
+  
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div className="flex gap-4">
@@ -126,15 +146,7 @@ function Buttonbar() {
           <Calendar className="h-3 w-3" />
           <span className="">Posted Within</span>
         </Button>
-        <Button
-          variant="standard"
-          size="new"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end"
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
+        
       </div>
     </div>
   );
@@ -326,7 +338,7 @@ function TableSection() {
                   {sortConfig?.key === "posted" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] text-center pr-4 w-1">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -375,31 +387,55 @@ function TableSection() {
                     <div className="text-low">{user.posted}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-end pr-4">
+                    
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         className="border-0 shadow-none"
                       >
                         <Eye className="h-4 w-3" />
                         <span className="sr-only">View</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         className="border-0 shadow-none"
                       >
                         <Pen className="h-4 w-3" />
                         <span className="sr-only">Edit</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent>
+                              <p>Edit</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <Button
-                        variant="noborder"
-                        size="sm"
+                        variant="actionIcon"
+                        size="actionIcon"
                         className="border-0 shadow-none"
                       >
                         <X className="h-4 w-3" />
                         <span className="sr-only">Close</span>
                       </Button>
+                      </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Close</p>
+                          </TooltipContent>
+                        </Tooltip>
                     </div>
                   </TableCell>
                 </TableRow>

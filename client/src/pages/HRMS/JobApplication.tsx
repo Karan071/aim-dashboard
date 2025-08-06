@@ -33,6 +33,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import React from "react";
+import { DatePickerWithRange } from "@/components/date-picker";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 // Types
 type ApplicationStatus =
@@ -78,10 +80,8 @@ interface Coach extends AssignedUser {
 
 export function JobApplication() {
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Job Applications
-      </h1>
+    <div className="flex flex-col gap-2">
+      <Topbar />
       <StatCard />
       <Buttonbar />
       <TableSection />
@@ -89,8 +89,33 @@ export function JobApplication() {
   );
 }
 
-function Buttonbar() {
+function Topbar() {
+  
   const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Job Applications
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+      </div>
+    </div>
+  );
+}
+
+function Buttonbar() {
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -98,18 +123,7 @@ function Buttonbar() {
         <span className="">Add Application</span>
       </Button>
       <div className="flex gap-4">
-        <Button
-          variant="standard"
-          size="new"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end"
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
-
+        
         <Button variant="delete" size="new">
           <PenSquare className="h-4 w-4" />
         </Button>
@@ -749,7 +763,7 @@ export function TableSection() {
                     {sortConfig?.key === "status" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
-                  <TableHead className="text-[var(--text)]">Actions</TableHead>
+                  <TableHead className="text-[var(--text)] text-center pr-4 w-1">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -842,16 +856,40 @@ export function TableSection() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="flex gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <div className="flex justify-end pr-4">
+                        
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                        <Button variant="actionIcon" size="actionIcon">
                           <Eye className="h-4 w-4" />
                         </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                        </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View Details</p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                        <Button variant="actionIcon" size="actionIcon">
                           <Pen className="h-4 w-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                          </Button>
+                        </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Edit Details</p>
+                          </TooltipContent>
+                        </Tooltip>
+
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                        <Button variant="actionIcon" size="actionIcon">
                           <FileDown className="h-4 w-4" />
                         </Button>
+                        </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Download</p>
+                          </TooltipContent>
+                        </Tooltip>
                       </div>
                     </TableCell>
                   </TableRow>
