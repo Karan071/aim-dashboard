@@ -222,7 +222,7 @@ function NavSection({
                                       subItem.url,
                                       location.pathname
                                     )
-                                  ? "bg-[var(--brand-color)] text-white"
+                                  ? "bg-[var(--brand-color)] text-black"
                                   : ""
                               }`}
                             >

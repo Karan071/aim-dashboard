@@ -33,9 +33,44 @@ export default function Login() {
     dispatch(loginUser({ email, password }));
   };
 
+  // Development mode bypass function
+  const handleDevBypass = () => {
+    if (import.meta.env.DEV) {
+      // Create a mock auth state that mimics a successful login
+      const mockAuthState = {
+        user: {
+          id: "dev-user",
+          email: "dev@example.com",
+          role: "admin"
+        },
+        token: "dev-token",
+        loading: false,
+        error: null,
+        expiresAt: Date.now() + 60 * 60 * 1000 // 1 hour from now
+      };
+      
+      // Save to localStorage to persist the dev session
+      localStorage.setItem("authState", JSON.stringify(mockAuthState));
+      
+      // Reload the page to apply the auth state
+      window.location.reload();
+    }
+  };
+
   return (
     <div className="h-screen flex justify-center items-center">
       <LoginForm onSubmit={handleLogin} loading={authState.loading} />
+      {/* Development mode bypass button */}
+      {import.meta.env.DEV && (
+        <Button
+          type="button"
+          variant="outline"
+          className="absolute bottom-4 right-4 opacity-50 hover:opacity-100"
+          onClick={handleDevBypass}
+        >
+          Dev Mode Login
+        </Button>
+      )}
     </div>
   );
 }
