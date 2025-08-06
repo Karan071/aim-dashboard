@@ -38,7 +38,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { ChannelPartnersTable } from "@/data/Data";
+import { ChannelPartnersTable, coachesList } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -406,29 +406,24 @@ function TableSection() {
   const [focusedId, setFocusedId] = useState<string | null>(
     ChannelPartnersTable[0]?.id || null
   );
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [currentUserForAssignment, setCurrentUserForAssignment] = useState<string | null>(null);
+  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
+  const [partnersData, setPartnersData] = useState(ChannelPartnersTable);
 
   // Sorting logic
-  const sortedData = [...ChannelPartnersTable];
+  const sortedData = [...partnersData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
-      let aValue: string | number = a[sortConfig.key as keyof typeof a] as string;
-      let bValue: string | number = b[sortConfig.key as keyof typeof b] as string;
-      // Special handling for 'for' (array), 'questions', 'responses', and 'lastUpdated' (date)
-      if (sortConfig.key === "for") {
-        aValue = Array.isArray(aValue) ? aValue.join(", ") : aValue;
-        bValue = Array.isArray(bValue) ? bValue.join(", ") : bValue;
+      let aValue: any = a[sortConfig.key as keyof typeof a];
+      let bValue: any = b[sortConfig.key as keyof typeof b];
+      
+      // Handle assignedTo array sorting
+      if (sortConfig.key === "assignedTo") {
+        aValue = aValue && Array.isArray(aValue) ? aValue.length : 0;
+        bValue = bValue && Array.isArray(bValue) ? bValue.length : 0;
       }
-      if (sortConfig.key === "questions" || sortConfig.key === "responses") {
-        aValue = Number(aValue);
-        bValue = Number(bValue);
-      }
-      if (sortConfig.key === "lastUpdated") {
-        aValue = Date.parse(aValue as string);
-        bValue = Date.parse(bValue as string);
-      }
-      if (typeof aValue === "number" && typeof bValue === "number") {
-        return sortConfig.direction === "ascending" ? aValue - bValue : bValue - aValue;
-      }
+      
       if (aValue < bValue) {
         return sortConfig.direction === "ascending" ? -1 : 1;
       }
@@ -525,8 +520,152 @@ function TableSection() {
     }
   };
 
+  const handleAssignUsers = (userId: string) => {
+    setCurrentUserForAssignment(userId);
+    const user = partnersData.find(u => u.id === userId);
+    if (user && user.assignedTo) {
+      setSelectedAssignees(user.assignedTo.map(assignee => assignee.name));
+    } else {
+      setSelectedAssignees([]);
+    }
+    setShowAssignmentModal(true);
+  };
+
+  const handleSaveAssignment = () => {
+    if (currentUserForAssignment) {
+      const updatedUsers = partnersData.map(user => {
+        if (user.id === currentUserForAssignment) {
+          const selectedCoaches = coachesList.filter(coach => 
+            selectedAssignees.includes(coach.name)
+          ).map(coach => ({
+            name: coach.name,
+            photo: coach.photo
+          }));
+          
+          return {
+            ...user,
+            assignedTo: selectedCoaches
+          };
+        }
+        return user;
+      });
+      
+      setPartnersData(updatedUsers);
+      setShowAssignmentModal(false);
+      setCurrentUserForAssignment(null);
+      setSelectedAssignees([]);
+    }
+  };
+
+  const toggleAssignee = (assigneeName: string) => {
+    if (selectedAssignees.includes(assigneeName)) {
+      setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+    } else {
+      setSelectedAssignees([...selectedAssignees, assigneeName]);
+    }
+  };
+
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
+      {/* Assignment Modal */}
+      {showAssignmentModal && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+          <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-xl font-semibold text-[var(--text-head)]">
+                Assign Users
+              </h2>
+              <Button
+                variant="link"
+                onClick={() => setShowAssignmentModal(false)}
+                className="text-sm text-[var(--text)] p-0 h-auto"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <div className="p-6">
+              <p className="text-sm text-[var(--text)] mb-4">
+                Select users to assign to this partner:
+              </p>
+              
+              {(() => {
+                const currentUser = partnersData.find(u => u.id === currentUserForAssignment);
+                const currentUserAssignedImages = currentUser?.assignedTo || [];
+                
+                return (
+                  <>
+                    {currentUserAssignedImages.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                        <div className="flex -space-x-2">
+                          {currentUserAssignedImages.map((assigned, index) => (
+                            <div
+                              key={index}
+                              className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                              title={assigned.name}
+                            >
+                              <img
+                                src={assigned.photo}
+                                alt={assigned.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="space-y-2 max-h-60 overflow-y-auto">
+                      {coachesList.map((coach) => {
+                        const currentAssignment = currentUserAssignedImages.find(assigned => assigned.name === coach.name);
+                        
+                        return (
+                          <div
+                            key={coach.name}
+                            className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                          >
+                            <Checkbox
+                              checked={selectedAssignees.includes(coach.name)}
+                              onCheckedChange={() => toggleAssignee(coach.name)}
+                            />
+                            <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                              <img
+                                src={currentAssignment ? currentAssignment.photo : coach.photo}
+                                alt={coach.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-sm text-[var(--text)]">{coach.name}</span>
+                              <span className="text-xs text-[var(--text)] opacity-70">{coach.specialization}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
+            
+            <div className="flex justify-end gap-2 p-6 border-t">
+              <Button
+                variant="border"
+                onClick={() => setShowAssignmentModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="brand"
+                onClick={handleSaveAssignment}
+              >
+                Save Assignment
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
         {/* Select All and badge UI */}
         <div className="flex h-20 items-center justify-between border-b p-4 mt-auto">
@@ -712,7 +851,32 @@ function TableSection() {
                     <div className="text-low">{user.Status}</div>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="standard">{user.AssignedTo}</Badge>
+                    <div className="flex items-center gap-2">
+                      <div className="flex -space-x-2">
+                        {user.assignedTo?.map((assigned, index) => (
+                          <div
+                            key={index}
+                            className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                            title={assigned.name}
+                          >
+                            <img
+                              src={assigned.photo}
+                              alt={assigned.name}
+                              className="h-8 w-8 object-cover"
+                            />
+                          </div>
+                        ))}
+                        {/* Plus icon in circle */}
+                        <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                             onClick={(e) => {
+                               e.stopPropagation();
+                               handleAssignUsers(user.id);
+                             }}
+                             title="Assign Users">
+                          <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                        </div>
+                      </div>
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.CreatedOn}</div>

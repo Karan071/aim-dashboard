@@ -11,6 +11,7 @@ import {
   Clock,
   Notebook,
   ArrowBigLeft,
+  X,
 } from "lucide-react";
 
 import { useState } from "react";
@@ -31,7 +32,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { MyPipelineTable as PipelineTable } from "@/data/Data";
+import { MyPipelineTable as PipelineTable, coachesList } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -350,13 +351,24 @@ function MyPipelineTable() {
     typeof PipelineTable
   >(PipelineTable[0] ? [PipelineTable[0]] : []);
   const [focusedId, setFocusedId] = useState<string | null>(PipelineTable[0]?.id || null);
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [currentUserForAssignment, setCurrentUserForAssignment] = useState<string | null>(null);
+  const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
+  const [pipelineData, setPipelineData] = useState(PipelineTable);
 
   // Sorting logic
-  const sortedData = [...PipelineTable];
+  const sortedData = [...pipelineData];
   if (sortConfig !== null) {
     sortedData.sort((a, b) => {
-      const aValue = a[sortConfig.key as keyof typeof a];
-      const bValue = b[sortConfig.key as keyof typeof b];
+      let aValue: any = a[sortConfig.key as keyof typeof a];
+      let bValue: any = b[sortConfig.key as keyof typeof b];
+      
+      // Handle assignedTo array sorting
+      if (sortConfig.key === "assignedTo") {
+        aValue = aValue && Array.isArray(aValue) ? aValue.length : 0;
+        bValue = bValue && Array.isArray(bValue) ? bValue.length : 0;
+      }
+      
       if (aValue < bValue) {
         return sortConfig.direction === "ascending" ? -1 : 1;
       }
@@ -455,8 +467,154 @@ function MyPipelineTable() {
     }
   };
 
+  const handleAssignUsers = (userId: string) => {
+    setCurrentUserForAssignment(userId);
+    const user = pipelineData.find(u => u.id === userId);
+    if (user && user.assignedTo) {
+      setSelectedAssignees(user.assignedTo.map(assignee => assignee.name));
+    } else {
+      setSelectedAssignees([]);
+    }
+    setShowAssignmentModal(true);
+  };
+
+  const handleSaveAssignment = () => {
+    if (currentUserForAssignment) {
+      const updatedUsers = pipelineData.map(user => {
+        if (user.id === currentUserForAssignment) {
+          const selectedCoaches = coachesList.filter(coach => 
+            selectedAssignees.includes(coach.name)
+          ).map(coach => ({
+            name: coach.name,
+            photo: coach.photo
+          }));
+          
+          return {
+            ...user,
+            assignedTo: selectedCoaches
+          };
+        }
+        return user;
+      });
+      
+      setPipelineData(updatedUsers);
+      setShowAssignmentModal(false);
+      setCurrentUserForAssignment(null);
+      setSelectedAssignees([]);
+    }
+  };
+
+  const toggleAssignee = (assigneeName: string) => {
+    if (selectedAssignees.includes(assigneeName)) {
+      setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+    } else {
+      setSelectedAssignees([...selectedAssignees, assigneeName]);
+    }
+  };
+
+
+
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
+      {/* Assignment Modal */}
+      {showAssignmentModal && (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+          <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-xl font-semibold text-[var(--text-head)]">
+                Assign Users
+              </h2>
+              <Button
+                variant="link"
+                onClick={() => setShowAssignmentModal(false)}
+                className="text-sm text-[var(--text)] p-0 h-auto"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <div className="p-6">
+              <p className="text-sm text-[var(--text)] mb-4">
+                Select users to assign to this pipeline:
+              </p>
+              
+              {(() => {
+                const currentUser = pipelineData.find(u => u.id === currentUserForAssignment);
+                const currentUserAssignedImages = currentUser?.assignedTo || [];
+                
+                return (
+                  <>
+                    {currentUserAssignedImages.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                        <div className="flex -space-x-2">
+                          {currentUserAssignedImages.map((assigned, index) => (
+                            <div
+                              key={index}
+                              className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                              title={assigned.name}
+                            >
+                              <img
+                                src={assigned.photo}
+                                alt={assigned.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="space-y-2 max-h-60 overflow-y-auto">
+                      {coachesList.map((coach) => {
+                        const currentAssignment = currentUserAssignedImages.find(assigned => assigned.name === coach.name);
+                        
+                        return (
+                          <div
+                            key={coach.name}
+                            className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                          >
+                            <Checkbox
+                              checked={selectedAssignees.includes(coach.name)}
+                              onCheckedChange={() => toggleAssignee(coach.name)}
+                            />
+                            <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                              <img
+                                src={currentAssignment ? currentAssignment.photo : coach.photo}
+                                alt={coach.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-sm text-[var(--text)]">{coach.name}</span>
+                              <span className="text-xs text-[var(--text)] opacity-70">{coach.specialization}</span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
+            
+            <div className="flex justify-end gap-2 p-6 border-t">
+              <Button
+                variant="border"
+                onClick={() => setShowAssignmentModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="brand"
+                onClick={handleSaveAssignment}
+              >
+                Save Assignment
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex-1 rounded-md rounded-tl-none border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
         <div className="flex items-center justify-between border-b h-20 p-4 mt-auto">
           <div className="flex items-center justify-between pl-0 p-4">
@@ -581,6 +739,14 @@ function MyPipelineTable() {
                   {sortConfig?.key === "Stage" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")} 
                 </TableHead>
+                <TableHead
+                  onClick={() => requestSort("assignedTo")}
+                  className="cursor-pointer text-[var(--text)]"
+                >
+                  Assigned To{" "}
+                  {sortConfig?.key === "assignedTo" &&
+                    (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                </TableHead>
                 <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
               </TableRow>
             </TableHeader>
@@ -646,6 +812,34 @@ function MyPipelineTable() {
                       </TableCell>
                       <TableCell>
                           <div className="text-sm"><Badge variant="border" className="text-sm">{user.Stage}</Badge></div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <div className="flex -space-x-2">
+                            {user.assignedTo?.map((assigned, index) => (
+                              <div
+                                key={index}
+                                className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                                title={assigned.name}
+                              >
+                                <img
+                                  src={assigned.photo}
+                                  alt={assigned.name}
+                                  className="h-8 w-8 object-cover"
+                                />
+                              </div>
+                            ))}
+                            {/* Plus icon in circle */}
+                            <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                                 onClick={(e) => {
+                                   e.stopPropagation();
+                                   handleAssignUsers(user.id);
+                                 }}
+                                 title="Assign Users">
+                              <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                            </div>
+                          </div>
+                        </div>
                       </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end pr-4 ">
