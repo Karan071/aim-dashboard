@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import {
-
   Filter,
   BadgeQuestionMark,
   Bell,
@@ -15,9 +14,6 @@ import {
   Trash2,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-
-
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
@@ -68,47 +64,48 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import RadioButton from "@/components/ui/Radiobutton";
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-
-
-
 
 const stats = [
   {
     title: "Total Assessments",
     value: "10",
     icon: Notebook,
- 
   },
   {
     title: "Published",
     value: "17",
     icon: Notebook,
-   
   },
   {
     title: "Drafts",
     value: "13",
     icon: Notebook,
-   
   },
 ];
 
 export function Manage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
         <Topbar />
         <StatsCards />
-      
-        <TableSection selectedCategories={selectedCategories} onCategoryChange={setSelectedCategories} />
+        <TableSection
+          selectedCategories={selectedCategories}
+          onCategoryChange={setSelectedCategories}
+        />
       </div>
     </div>
   );
@@ -125,31 +122,18 @@ function Topbar() {
         </h1>
       </div>
       <div className="flex items-center gap-2">
-        <Button 
-          variant="brand" 
-          size="new"
-          onClick={() => setShowForm(true)}
-        >
+        <Button variant="brand" size="new" onClick={() => setShowForm(true)}>
           <Plus className="h-3 w-3" />
         </Button>
         {showForm && <AssessmentForm onClose={() => setShowForm(false)} />}
-        
+
         <div className="flex gap-4 flex-wrap">
           <Button variant="standard" size="new">
             <BadgeQuestionMark className="h-3 w-3" />
             <span className="">Categories</span>
           </Button>
-          {/* <Butto
-
-          
-          {/* <Button variant="standard" size="new">
-            <Eye className="h-3 w-3" />
-            <span className="">Questions</span>
-          </Button> */}
-          
           <Button variant="standard" size="new">
             <FileDown className="h-3 w-3" />
-            
           </Button>
           <Button
             variant="standard"
@@ -157,16 +141,15 @@ function Topbar() {
             className="flex items-center gap-2 self-end min-h-[40px]"
           >
             <Filter className="h-4 w-4" />
-           
           </Button>
-          {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+          {showFilter && (
+            <AdvancedFilters onClose={() => setShowFilter(false)} />
+          )}
         </div>
       </div>
     </div>
   );
 }
-
-
 
 interface FilterProps {
   onClose: () => void;
@@ -367,7 +350,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-             
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -387,7 +369,10 @@ interface TableSectionProps {
   onCategoryChange: (categories: string[]) => void;
 }
 
-function TableSection({ selectedCategories, onCategoryChange }: TableSectionProps) {
+function TableSection({
+  selectedCategories,
+  onCategoryChange,
+}: TableSectionProps) {
   const navigate = useNavigate();
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -422,12 +407,14 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
 
   // Filter and sort data
   let filteredData = [...ManageTable];
-  
+
   // Apply category filter
   if (selectedCategories.length > 0) {
-    filteredData = filteredData.filter(item => selectedCategories.includes(item.category));
+    filteredData = filteredData.filter((item) =>
+      selectedCategories.includes(item.category)
+    );
   }
-  
+
   // Apply sorting
   if (sortConfig !== null) {
     filteredData.sort((a, b) => {
@@ -545,7 +532,12 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
 
   return (
     <div className="flex flex-row gap-4 w-full h-max xl:flex-nowrap flex-wrap">
-      {showForm && <AssessmentForm onClose={handleFormClose} editData={editData || undefined} />}
+      {showForm && (
+        <AssessmentForm
+          onClose={handleFormClose}
+          editData={editData || undefined}
+        />
+      )}
       <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto xl:min-w-auto min-w-full">
         {/* Select All and badge UI */}
         <div className="flex h-20 items-center justify-between border-b p-4 mt-auto">
@@ -632,7 +624,10 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">
-                  <div className="flex items-center gap-2 cursor-pointer hover:text-[var(--brand-color)] transition-colors" onClick={() => setIsCategorySheetOpen(true)}>
+                  <div
+                    className="flex items-center gap-2 cursor-pointer hover:text-[var(--brand-color)] transition-colors"
+                    onClick={() => setIsCategorySheetOpen(true)}
+                  >
                     <span>Category</span>
                     <ChevronDown className="h-4 w-4" />
                   </div>
@@ -667,14 +662,14 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
                   onClick={() => requestSort("enrollments")}
                   className="cursor-pointer text-[var(--text)]"
                 >
-                  <div className="flex items-center gap-2">
-                    Enrollments
-                  </div>
+                  <div className="flex items-center gap-2">Enrollments</div>
                   {sortConfig?.key === "enrollments" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
                 <TableHead className="text-[var(--text)]">Status</TableHead>
-                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead>
+                <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">
+                  Actions
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -713,13 +708,19 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
                     <div className="flex items-center gap-4">
                       <div>
                         <div className="flex justify-start items-center">
-                          <div className="font-medium">{user.assessmentName}</div>
+                          <div className="font-medium">
+                            {user.assessmentName}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <div className="text-low">{Array.isArray(user.segments) ? user.segments.join(", ") : user.segments}</div>
+                    <div className="text-low">
+                      {Array.isArray(user.segments)
+                        ? user.segments.join(", ")
+                        : user.segments}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <div className="text-low">{user.category}</div>
@@ -791,7 +792,6 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
                               className="hover:bg-[var(--green2)] hover:text-[var(--green)] transition-all duration-200 p-2 rounded-md"
                               onClick={(e) => {
                                 e.stopPropagation();
-                             
                               }}
                             >
                               <BarChart3 className="h-3 w-3" />
@@ -846,7 +846,11 @@ function TableSection({ selectedCategories, onCategoryChange }: TableSectionProp
                               onClick={(e) => {
                                 e.stopPropagation();
                                 // Handle Delete action
-                                if (confirm(`Are you sure you want to delete "${user.assessmentName}"?`)) {
+                                if (
+                                  confirm(
+                                    `Are you sure you want to delete "${user.assessmentName}"?`
+                                  )
+                                ) {
                                   console.log("Deleting assessment:", user.id);
                                   // In a real app, you would make an API call here
                                 }
@@ -949,7 +953,12 @@ interface CategoryPopupProps {
   availableCategories: string[];
 }
 
-function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availableCategories }: CategoryPopupProps) {
+function CategoryPopup({
+  onClose,
+  selectedCategories,
+  onCategoryChange,
+  availableCategories,
+}: CategoryPopupProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [showAddCategory, setShowAddCategory] = useState(false);
@@ -961,7 +970,8 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
     const clickedInside = path.some((el) => {
       return (
         (modalRef.current && modalRef.current.contains(el)) ||
-        (el instanceof HTMLElement && el.getAttribute("data-radix-popper-content-wrapper") !== null)
+        (el instanceof HTMLElement &&
+          el.getAttribute("data-radix-popper-content-wrapper") !== null)
       );
     });
 
@@ -975,7 +985,7 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
-  const filteredCategories = availableCategories.filter(category =>
+  const filteredCategories = availableCategories.filter((category) =>
     category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -984,7 +994,7 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
       onCategoryChange([]);
     } else {
       const newSelectedCategories = selectedCategories.includes(category)
-        ? selectedCategories.filter(c => c !== category)
+        ? selectedCategories.filter((c) => c !== category)
         : [...selectedCategories, category];
       onCategoryChange(newSelectedCategories);
     }
@@ -993,7 +1003,10 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
   const isAllCategoriesSelected = selectedCategories.length === 0;
 
   const handleAddCategory = () => {
-    if (newCategoryName.trim() && !availableCategories.includes(newCategoryName.trim())) {
+    if (
+      newCategoryName.trim() &&
+      !availableCategories.includes(newCategoryName.trim())
+    ) {
       // In a real app, you would make an API call here
       console.log("Adding category:", newCategoryName.trim());
       setNewCategoryName("");
@@ -1015,7 +1028,9 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
         className="animate-slide-in-from-right bg-[var(--background)] shadow-2xl h-full w-full max-w-[700px] flex flex-col border-l border-[var(--border)]"
       >
         <div className="flex items-center justify-between border-b p-6">
-          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Select Categories</CardTitle>
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">
+            Select Categories
+          </CardTitle>
           <div className="flex items-center gap-2">
             <Button
               variant="border"
@@ -1053,7 +1068,7 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
                   value={newCategoryName}
                   onChange={(e) => setNewCategoryName(e.target.value)}
                   onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === "Enter") {
                       handleAddCategory();
                     }
                   }}
@@ -1062,7 +1077,10 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
                   variant="brand"
                   size="sm"
                   onClick={handleAddCategory}
-                  disabled={!newCategoryName.trim() || availableCategories.includes(newCategoryName.trim())}
+                  disabled={
+                    !newCategoryName.trim() ||
+                    availableCategories.includes(newCategoryName.trim())
+                  }
                 >
                   Add
                 </Button>
@@ -1077,19 +1095,24 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
                   Cancel
                 </Button>
               </div>
-              {newCategoryName.trim() && availableCategories.includes(newCategoryName.trim()) && (
-                <p className="text-xs text-[var(--red)]">Category already exists</p>
-              )}
+              {newCategoryName.trim() &&
+                availableCategories.includes(newCategoryName.trim()) && (
+                  <p className="text-xs text-[var(--red)]">
+                    Category already exists
+                  </p>
+                )}
             </div>
           )}
 
           <div className="flex flex-col gap-2">
             <Label>Quick Selection</Label>
-            <div className={`p-4 rounded-lg border transition-all duration-200 cursor-pointer ${
-              isAllCategoriesSelected 
-                ? "bg-[var(--brand-color3)] border-[var(--brand-color)]" 
-                : "bg-[var(--background)] border-[var(--border)] hover:bg-[var(--faded)]"
-            }`}>
+            <div
+              className={`p-4 rounded-lg border transition-all duration-200 cursor-pointer ${
+                isAllCategoriesSelected
+                  ? "bg-[var(--brand-color3)] border-[var(--brand-color)]"
+                  : "bg-[var(--background)] border-[var(--border)] hover:bg-[var(--faded)]"
+              }`}
+            >
               <label className="flex items-center space-x-3 cursor-pointer">
                 <Checkbox
                   checked={isAllCategoriesSelected}
@@ -1097,10 +1120,16 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
                   className="text-[var(--brand-color)] focus:ring-[var(--brand-color)] border-[var(--border)]"
                 />
                 <div className="flex-1">
-                  <div className="font-medium text-[var(--text-head)]">All Categories</div>
-                  <div className="text-xs text-[var(--text)]">Show all assessments</div>
+                  <div className="font-medium text-[var(--text-head)]">
+                    All Categories
+                  </div>
+                  <div className="text-xs text-[var(--text)]">
+                    Show all assessments
+                  </div>
                 </div>
-                <Badge variant="standard" className="text-xs">All</Badge>
+                <Badge variant="standard" className="text-xs">
+                  All
+                </Badge>
               </label>
             </div>
           </div>
@@ -1132,16 +1161,22 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
                           className="text-[var(--brand-color)] focus:ring-[var(--brand-color)] border-[var(--border)]"
                         />
                         <div className="flex-1">
-                          <div className="font-medium text-[var(--text-head)]">{category}</div>
+                          <div className="font-medium text-[var(--text-head)]">
+                            {category}
+                          </div>
                         </div>
-                        <Badge 
-                          variant={selectedCategories.includes(category) ? "standard" : "border"}
+                        <Badge
+                          variant={
+                            selectedCategories.includes(category)
+                              ? "standard"
+                              : "border"
+                          }
                           className="text-xs"
                         >
                           {category}
                         </Badge>
                       </label>
-                      
+
                       {/* Delete Icon - Only show when category is selected */}
                       {selectedCategories.includes(category) && (
                         <TooltipProvider>
@@ -1175,8 +1210,12 @@ function CategoryPopup({ onClose, selectedCategories, onCategoryChange, availabl
         </div>
 
         <div className="p-6 border-t flex justify-end gap-4">
-          <Button variant="border" onClick={onClose}>Cancel</Button>
-          <Button variant="brand" onClick={onClose}>Apply Filter</Button>
+          <Button variant="border" onClick={onClose}>
+            Cancel
+          </Button>
+          <Button variant="brand" onClick={onClose}>
+            Apply Filter
+          </Button>
         </div>
       </div>
     </div>
@@ -1200,18 +1239,43 @@ interface AssessmentFormProps {
 function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const [assessmentName, setAssessmentName] = useState(editData?.assessmentName || "");
-  const [selectedSegments, setSelectedSegments] = useState<string[]>(editData?.segments || []);
+  const [assessmentName, setAssessmentName] = useState(
+    editData?.assessmentName || ""
+  );
+  const [selectedSegments, setSelectedSegments] = useState<string[]>(
+    editData?.segments || []
+  );
   const [category, setCategory] = useState(editData?.category || "");
   const [price, setPrice] = useState(editData?.price?.toString() || "");
-  const [partnerShare, setPartnerShare] = useState(editData?.partnerShare || "");
-  const [enrollments, setEnrollments] = useState(editData?.enrollments?.toString() || "");
-  const [status, setStatus] = useState(editData?.status || "Draft");
-
+  const [sShare, setSShare] = useState(
+    editData?.partnerShare
+      ?.split("|")[0]
+      ?.trim()
+      ?.replace("[S]", "")
+      ?.replace("%", "") || ""
+  );
+  const [pShare, setPShare] = useState(
+    editData?.partnerShare
+      ?.split("|")[1]
+      ?.trim()
+      ?.replace("[P]", "")
+      ?.replace("%", "") || ""
+  );
+  const [isDraft, setIsDraft] = useState(editData?.status === "Draft");
+  const [isActive, setIsActive] = useState(editData?.status === "Active");
 
   const availableSegments = ["9-10", "11-12", "UG", "PG", "Professionals"];
-  const availableCategories = ["Engineering", "Medical", "Management", "Civil Services", "Banking", "Government", "General", "Language", "Mathematics"];
-  const availableStatuses = ["Draft", "Active", "Inactive"];
+  const availableCategories = [
+    "Engineering",
+    "Medical",
+    "Management",
+    "Civil Services",
+    "Banking",
+    "Government",
+    "General",
+    "Language",
+    "Mathematics",
+  ];
 
   function handleClickOutside(e: MouseEvent) {
     const path = e.composedPath() as HTMLElement[];
@@ -1219,7 +1283,8 @@ function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
     const clickedInside = path.some((el) => {
       return (
         (modalRef.current && modalRef.current.contains(el)) ||
-        (el instanceof HTMLElement && el.getAttribute("data-radix-popper-content-wrapper") !== null)
+        (el instanceof HTMLElement &&
+          el.getAttribute("data-radix-popper-content-wrapper") !== null)
       );
     });
 
@@ -1234,9 +1299,9 @@ function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
   }, [onClose]);
 
   const handleSegmentToggle = (segment: string) => {
-    setSelectedSegments(prev => 
-      prev.includes(segment) 
-        ? prev.filter(s => s !== segment)
+    setSelectedSegments((prev) =>
+      prev.includes(segment)
+        ? prev.filter((s) => s !== segment)
         : [...prev, segment]
     );
   };
@@ -1249,13 +1314,15 @@ function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
       segments: selectedSegments,
       category,
       price: Number(price),
-      partnerShare,
-      enrollments: Number(enrollments) || 0,
-      status,
+      partnerShare: `[S] ${sShare}% | [P] ${pShare}%`,
+      status: isDraft ? "Draft" : isActive ? "Active" : "Inactive",
       actions: ["Questions", "Results", "Logs"],
     };
-    
-    console.log(editData ? "Updated assessment data:" : "New assessment data:", assessmentData);
+
+    console.log(
+      editData ? "Updated assessment data:" : "New assessment data:",
+      assessmentData
+    );
     onClose();
   };
 
@@ -1273,16 +1340,16 @@ function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
 
         <div className="flex-1 overflow-y-auto p-6 space-y-6 text-[var(--text)]">
           <div className="flex flex-col gap-2">
-            <Label>Assessment Name</Label>
-            <Input 
-              placeholder="e.g., JEE Main Mock Test 1" 
-              value={assessmentName} 
-              onChange={(e) => setAssessmentName(e.target.value)} 
+            <Label className="font-semibold">Assessment Name</Label>
+            <Input
+              placeholder="e.g., JEE Main Mock Test 1"
+              value={assessmentName}
+              onChange={(e) => setAssessmentName(e.target.value)}
             />
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Segments</Label>
+            <Label className="font-semibold">Segments</Label>
             <div className="grid grid-cols-2 gap-2">
               {availableSegments.map((segment) => (
                 <label key={segment} className="flex items-center space-x-2">
@@ -1297,21 +1364,23 @@ function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Category</Label>
+            <Label className="font-semibold">Category</Label>
             <Select value={category} onValueChange={setCategory}>
               <SelectTrigger>
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
                 {availableCategories.map((cat) => (
-                  <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                  <SelectItem key={cat} value={cat}>
+                    {cat}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Price (₹)</Label>
+            <Label className="font-semibold">Price (₹)</Label>
             <Input
               type="number"
               min={0}
@@ -1322,56 +1391,100 @@ function AssessmentForm({ onClose, editData }: AssessmentFormProps) {
           </div>
 
           <div className="flex flex-col gap-2">
-            <Label>Partner Share</Label>
-            <Input
-              placeholder="[S] 25% | [P] 50%"
-              value={partnerShare}
-              onChange={(e) => setPartnerShare(e.target.value)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label>Initial Enrollments</Label>
-            <Input
-              type="number"
-              min={0}
-              placeholder="0"
-              value={enrollments}
-              onChange={(e) => setEnrollments(e.target.value)}
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label>Status</Label>
-            <div className="flex gap-4 mt-2">
-              {availableStatuses.map((option) => (
-                <RadioButton
-                  key={option}
-                  label={option}
-                  value={option}
-                  selected={status}
-                  onChange={setStatus}
+            <Label className="font-semibold">Partner Share</Label>
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <Label className="text-sm  text-muted-foreground mb-2 font-normal">
+                  Standard Share
+                </Label>
+                <Input
+                  type="number"
+                  placeholder="25"
+                  value={sShare}
+                  onChange={(e) => setSShare(e.target.value)}
                 />
-              ))}
+              </div>
+              <div className="flex-1">
+                <Label className="text-sm text-muted-foreground mb-2 font-normal">
+                  Premium Share
+                </Label>
+                <Input
+                  type="number"
+                  placeholder="50"
+                  value={pShare}
+                  onChange={(e) => setPShare(e.target.value)}
+                />
+              </div>
             </div>
           </div>
 
-         
+          <div className="flex flex-col gap-2">
+            <Label className="font-semibold">Status</Label>
+            <div className="flex flex-col gap-4 mt-2">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="font-normal">Draft/Published</Label>
+                  <div className="text-sm text-muted-foreground">
+                    {isDraft
+                      ? "Assessment is in draft mode"
+                      : "Assessment is published"}
+                  </div>
+                </div>
+                <Switch
+                  checked={!isDraft}
+                  onCheckedChange={(checked: boolean) => setIsDraft(!checked)}
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="font-normal">Active Status</Label>
+                  <div className="text-sm text-muted-foreground">
+                    {isActive
+                      ? "Assessment is active"
+                      : "Assessment is inactive"}
+                  </div>
+                </div>
+                <Switch
+                  checked={isActive}
+                  onCheckedChange={(checked: boolean) => setIsActive(checked)}
+                  disabled={isDraft}
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="p-6 border-t flex justify-end gap-4">
-          <Button variant="border" onClick={onClose}>Cancel</Button>
-          <Button 
-            variant="brand" 
-            onClick={handleSubmit}
-            disabled={!assessmentName || selectedSegments.length === 0 || !category || !price}
-          >
-            {editData ? "Update Assessment" : "Create Assessment"}
+        <div className="p-6 border-t flex justify-between gap-4">
+          <Button variant="border" onClick={onClose}>
+            Cancel
           </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="brand"
+              disabled={
+                !assessmentName ||
+                selectedSegments.length === 0 ||
+                !category ||
+                !price
+              }
+            >
+              Draft
+            </Button>
+            <Button
+              variant="brand"
+              onClick={handleSubmit}
+              disabled={
+                !assessmentName ||
+                selectedSegments.length === 0 ||
+                !category ||
+                !price
+              }
+            >
+              {editData ? "Update Assessment" : "Publish"}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-
