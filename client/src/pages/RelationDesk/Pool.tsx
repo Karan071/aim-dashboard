@@ -36,6 +36,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DatePickerWithRange } from "@/components/application-component/date-range-picker";
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
@@ -737,10 +738,12 @@ function TableSection() {
                             <div className="text-sm">{user.Status}</div>
                     </TableCell>
                     <TableCell> 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-end pr-4">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                         <Button
-                          variant="noborder"
-                          size="sm"
+                          variant="actionIcon"
+                          size="actionIcon"
                           onClick={(e) => {
                             e.stopPropagation();
                           }}
@@ -748,6 +751,13 @@ function TableSection() {
                           <PenBox className="h-4 w-4" />
                           <span className="sr-only">Assign</span>
                         </Button>
+                        
+                      </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Assign</p>
+                          </TooltipContent>
+                        </Tooltip>
+
                       </div>
                     </TableCell>
   
