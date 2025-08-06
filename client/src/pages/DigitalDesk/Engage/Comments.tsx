@@ -37,7 +37,6 @@ import {
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import {  CommentTable } from "@/data/Data";
 import {  BookPlus, Clock, MessageSquare } from "lucide-react";
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -52,42 +51,35 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const trend = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Comments",
     value: CommentTable.length.toString(),
     icon: MessageSquare,
-    performance: trend,
   },
   {
     title: "Approved Comments",
     value: CommentTable.filter(c => c.status === "Approved").length.toString(),
     icon: BookPlus,
-    performance: Up,
   },
   {
     title: "Pending Comments",
     value: CommentTable.filter(c => c.status === "Pending").length.toString(),
     icon: Clock,
-    performance: Down,
   },
   {
     title: "Flagged Comments",
     value: CommentTable.filter(c => c.status === "Flagged").length.toString(),
     icon: MessageSquare,
-    performance: Up,
   },
   {
     title: "Unique Commenters",
     value: Array.from(new Set(CommentTable.map(c => c.by))).length.toString(),
     icon: Eye,
-    performance: Down,
   },
 ];
 
@@ -104,24 +96,54 @@ export function Comments() {
 
 
   return (
-    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Comments</h1>
+        <Bar />
         <StatsCards />
         <Topbar  />
      
         <TableSection/>
       </div>
+    
+  );
+}
+
+function Bar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Comments
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
     </div>
   );
 }
+
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -130,7 +152,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -145,7 +166,7 @@ function StatsCards() {
   );
 }
 function Topbar() {
-     const [showFilter, setShowFilter] = useState(false);
+    
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div>
@@ -159,17 +180,7 @@ function Topbar() {
         </Button>
          </div>
       <div className="flex gap-4 align-middle">
-    <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      </div>
+     </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { Clock, CircleArrowUp, CircleArrowDown, Search,  Users, FileCheck2, FileText, FileDown, BadgeQuestionMark,  Plus, Bell, X } from "lucide-react";
+import { Clock, Search,  Users, FileCheck2, FileText, FileDown, BadgeQuestionMark,  Plus, Bell, X } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -19,32 +19,26 @@ import type { DateRange } from 'react-day-picker';
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const Stats = [
   {
     title: "Total FAQ Pages",
     value: "18",
     icon: Users,
-    performance: Up,
   },
   {
     title: "Total Questions",
     value: "246",
     icon: FileCheck2,
-    performance: Down,
   },
   {
     title: "Recently Updated Pages",
     value: "5",
     icon: FileText,
-    performance: Up,
   },
   {
     title: "Last Update",
     value: " 18 May 2025",
     icon: Clock,
-    performance: Up,
   },
 
 ];
@@ -52,30 +46,25 @@ const Stats = [
 
 
 export function Faq() {
-  const [showFilter, setShowFilter] = useState(false);
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
-  const [currentRecords, setCurrentRecords] = useState<any[]>([]);
+  const [, setCurrentRecords] = useState<any[]>([]);
 
-  // Handler for select all toggle
-  const toggleSelectAll = () => {
-    if (selectedRows.length === currentRecords.length) {
-      setSelectedRows([]);
-    } else {
-      setSelectedRows(currentRecords.map((_, idx) => idx));
-    }
-  };
+  // // Handler for select all toggle
+  // const toggleSelectAll = () => {
+  //   if (selectedRows.length === currentRecords.length) {
+  //     setSelectedRows([]);
+  //   } else {
+  //     setSelectedRows(currentRecords.map((_, idx) => idx));
+  //   }
+  // };
+
+  
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">FAQs Desk</h1>
+      <Bar />
       <StatCard />
-      <Buttonbar
-        showFilter={showFilter}
-        setShowFilter={setShowFilter}
-        selectedRows={selectedRows}
-        toggleSelectAll={toggleSelectAll}
-        currentRecords={currentRecords}
-      />
+      <Buttonbar/>
 
       <FaqsTable
         selectedRows={selectedRows}
@@ -86,15 +75,39 @@ export function Faq() {
   );
 }
 
-interface ButtonbarProps {
-  showFilter: boolean;
-  setShowFilter: (show: boolean) => void;
-  selectedRows: number[];
-  toggleSelectAll: () => void;
-  currentRecords: any[];
+
+function Bar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Surveys
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
 }
 
-function Buttonbar({ showFilter, setShowFilter }: ButtonbarProps) {
+
+function Buttonbar(){
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -110,20 +123,7 @@ function Buttonbar({ showFilter, setShowFilter }: ButtonbarProps) {
           <Eye className="h-3 w-3" />
           <span className=""> Edit Page Details</span>
         </Button>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export FAQs</span>
-        </Button>
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      </div>
+        </div>
     </div>
   );
 }
@@ -272,9 +272,9 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
 function StatCard() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
       {Stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -282,7 +282,6 @@ function StatCard() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

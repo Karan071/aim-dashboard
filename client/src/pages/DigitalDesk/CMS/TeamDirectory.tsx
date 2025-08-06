@@ -1,7 +1,7 @@
 // export function TeamDirectory() {
 //   return <div>TeamDirectory</div>;
 // }
-import {  CircleArrowUp, CircleArrowDown, Search, Check, Users, FileCheck2,   Trash, FileDown, Edit, BadgeQuestionMark, Plus } from "lucide-react";
+import {  Search, Check, Users, FileCheck2,   Trash, FileDown, Edit, BadgeQuestionMark, Plus } from "lucide-react";
 import { Card, CardHeader, CardTitle, } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -26,24 +26,24 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
+
 const Stats = [
   {
     title: "Total Members Listed",
     value: "36",
     icon: Users,
-    performance: Up,
+
   },
   {
     title: "Last Update",
     value: " 18 May 2025",
     icon: FileCheck2,
-    performance: Down,
+
   },
 
  
@@ -55,8 +55,8 @@ export function TeamDirectory() {
 
 
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Team Directory</h1>
+      <div className="flex flex-col gap-2">
+      <Bar />
       <StatCard />
       <Buttonbar />
    
@@ -67,8 +67,38 @@ export function TeamDirectory() {
   );
 }
 
-function Buttonbar() {
+function Bar() {
+  
   const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Team Directory
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function Buttonbar() {
+  
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -84,20 +114,6 @@ function Buttonbar() {
           <Eye className="h-3 w-3" />
           <span className="">Add LinkedIn / Profile Link</span>
         </Button>
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export Team Directory</span>
-        </Button>
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      
       </div>
     </div>
   );
@@ -302,9 +318,9 @@ function AdvancedFilters ({ onClose }: FilterProps) {
 
 function StatCard() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-2">
       {Stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -312,7 +328,7 @@ function StatCard() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
+
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

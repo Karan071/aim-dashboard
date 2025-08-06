@@ -5,7 +5,6 @@ import {
 
   Search,
   ExternalLink,
-  Upload,
   Download,
   Eye,
   Bell,
@@ -14,7 +13,6 @@ import {
 } from "lucide-react";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Video, BookPlus, Clock, MessageSquare } from "lucide-react";
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -51,9 +49,7 @@ import {
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const trend = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
+
 
 const stats = [
   {
@@ -61,44 +57,70 @@ const stats = [
     value: "236",
 
     icon: Video,
-    performance: trend,
+
   },
   {
     title: "Published Videos",
     value: "192",
     icon: BookPlus,
-    performance: Up,
+
   },
   {
     title: "Pending Review",
     value: "22",
     icon: Clock,
-    performance: Down,
+
   },
   {
     title: "Video Formats",
     value: "642",
     icon: MessageSquare,
-    performance: Up,
+
   },
   {
     title: "Total Plays (30d)",
     value: "42,310",
     icon: Eye,
-    performance: Down,
+
   },
 ];
 
 export  function VideoLibraries() {
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">
-          Video Library 
-        </h1>
+    <div className="flex flex-col gap-2">
+      <Bar />
         <StatsCards />
         <Buttonbar />
         <CoachTableSection />
+    </div>
+  );
+}
+
+function Bar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Video Library
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
       </div>
     </div>
   );
@@ -106,11 +128,11 @@ export  function VideoLibraries() {
 
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -119,7 +141,7 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
+
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -135,7 +157,6 @@ function StatsCards() {
 }
 
 function Buttonbar() {
-  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <div className="flex gap-4 flex-wrap">
@@ -149,20 +170,7 @@ function Buttonbar() {
           <Download className="h-3 w-3" />
           <span className="">Import Bulk Videos</span>
         </Button>
-        <Button variant="standard" size="new">
-          <Upload className="h-3 w-3" />
-          <span className=""> Export Video Analytics</span>
-        </Button>
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      </div>
+        </div>
     </div>
   );
 }

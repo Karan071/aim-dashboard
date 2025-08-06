@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -69,37 +68,32 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Delivered",
     value: "342",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Open Rate (Email/Web)",
     value: "38%",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Click Rate (WhatsApp/Web)",
     value: "17%",
     icon: Notebook,
-    performance: Down,
   },
 
   {
     title: "Failed Sends",
     value: "19 (with reason)",
     icon: BadgeDollarSign,
-    performance: Up,
   },
 ];
 
@@ -491,9 +485,7 @@ export function Campaigns() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">
-        Campaign Manager
-        </h1>
+        <Bar />
         <StatsCards />
         <Topbar setCreateOpen={setCreateOpen} />
         <CreateCampaignModal open={createOpen} onOpenChange={setCreateOpen} />
@@ -503,8 +495,34 @@ export function Campaigns() {
   );
 }
 
-function Topbar({ setCreateOpen }: { setCreateOpen: (open: boolean) => void }) {
+function Bar() {
+  
   const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Campaign Manager
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      </div>
+    </div>
+  );
+}
+
+function Topbar({ setCreateOpen }: { setCreateOpen: (open: boolean) => void }) {
+
   const [showStats, setShowStats] = useState(false);
 
   // Calculate campaign statistics based on table data
@@ -518,16 +536,17 @@ function Topbar({ setCreateOpen }: { setCreateOpen: (open: boolean) => void }) {
 
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3">
         <Button variant="brand" size="new" onClick={() => setCreateOpen(true)}>
           <Plus className="h-3 w-3" />
           <span> Create New Campaign</span>
         </Button>
+        </div>
         {/* Campaign Statistics Dropdown Toggle */}
-        <div className="relative">
+        <div className="flex justify-end relative">
           <Button
-            variant="border"
-            size="sm"
+            variant="standard"
+            size="new"
             className="flex items-center gap-2"
             onClick={() => setShowStats((prev) => !prev)}
           >
@@ -535,7 +554,7 @@ function Topbar({ setCreateOpen }: { setCreateOpen: (open: boolean) => void }) {
             <ChevronDown className="h-4 w-4" />
           </Button>
           {showStats && (
-            <div className="absolute left-0 mt-2 z-50 min-w-[220px] bg-white dark:bg-[var(--background)] border rounded-lg shadow-lg p-4 flex flex-col gap-2">
+            <div className="absolute left-0 top-7 mt-2 z-50 min-w-[220px] bg-white dark:bg-[var(--background)] border rounded-lg shadow-lg p-4 flex flex-col gap-2">
               <div className="flex items-center gap-2">
                 <span className="text-[var(--text)]">Total:</span>
                 <Badge variant="secondary" className="font-medium">{campaignStats.total}</Badge>
@@ -560,18 +579,6 @@ function Topbar({ setCreateOpen }: { setCreateOpen: (open: boolean) => void }) {
           )}
         </div>
       </div>
-      <div className="flex gap-4 align-middle">
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      </div>
-    </div>
   );
 }
 
@@ -751,11 +758,11 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
       {stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -764,7 +771,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

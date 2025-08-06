@@ -1,10 +1,8 @@
 
 import {
   Clock,
-  CircleArrowUp,
   MessageCircle,
   Flag,
-  CircleArrowDown,
   Search,
   X,
   Check,
@@ -64,44 +62,44 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
+
 const Stats = [
   {
     title: "Total Published",
     value: "468",
     icon: Users,
-    performance: Up,
+    
   },
   {
     title: "Pending Approval",
     value: "23",
     icon: FileCheck2,
-    performance: Down,
+    
   },
   {
     title: "Total Views Last",
     value: "19,320",
     icon: FileText,
-    performance: Up,
+    
   },
   {
     title: "Total Comments",
     value: "412",
     icon: Clock,
-    performance: Up,
+    
   },
  
 ];
 
 export function Insights() {
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Insights</h1>
+    <div className="flex flex-col gap-2">
+      <Bar />
       <StatCard />
       <Buttonbar />
 
@@ -110,8 +108,37 @@ export function Insights() {
   );
 }
 
-function Buttonbar() {
+function Bar() {
+  
   const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Insights
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function Buttonbar() {
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -131,23 +158,7 @@ function Buttonbar() {
           <Eye className="h-3 w-3" />
           <span className=""> Import Bulk Content (Excel/CSV)</span>
         </Button>
-        <Button variant="standard" size="new">
-          <BadgeQuestionMark className="h-3 w-3" />
-          <span className="">Export Insights Data</span>
-        </Button>
-       
-        <Button
-          variant="border"
-        
-          onClick={() => setShowFilter(true)}
-               className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AssessFilter onClose={() => setShowFilter(false)} />}
-      </div>
+        </div>
     </div>
   );
 }
@@ -336,11 +347,11 @@ function AssessFilter({ onClose }: FilterProps) {
 
 function StatCard() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
       {Stats.map((stat, index) => (
         <Card
           key={index}
-          className="xl:rounded-sm shadow-none bg-[var(--background)]"
+          className="rounded-sm shadow-none bg-[var(--background)]"
         >
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
@@ -348,8 +359,7 @@ function StatCard() {
                 className={`${color} text-xs uppercase text-light line-clamp-1`}
               >
                 {stat.title}
-              </div>
-              {stat.performance}
+                </div>
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -585,7 +595,7 @@ function SessionTabs() {
       <div className="flex border-b">
         <Button
           variant={activeTab === "published" ? "brand" : "border"}
-          className="rounded-b-none rounded-r-lg"
+          className="rounded-b-none rounded-tr-sm rounded-tl-sm"
           onClick={() => {
             setActiveTab("published");
             setCurrentPage(1);
@@ -596,7 +606,7 @@ function SessionTabs() {
         </Button>
         <Button
           variant={activeTab === "drafts" ? "brand" : "border"}
-          className="rounded-b-none rounded-r-lg"
+          className="rounded-b-none rounded-tr-sm rounded-tl-sm"
           onClick={() => {
             setActiveTab("drafts");
             setCurrentPage(1);
@@ -607,7 +617,7 @@ function SessionTabs() {
         </Button>
         <Button
           variant={activeTab === "pending" ? "brand" : "border"}
-          className="rounded-b-none rounded-r-lg"
+          className="rounded-b-none rounded-tr-sm rounded-tl-sm"
           onClick={() => {
             setActiveTab("pending");
             setCurrentPage(1);
@@ -618,7 +628,7 @@ function SessionTabs() {
         </Button>
         <Button
           variant={activeTab === "archived" ? "brand" : "border"}
-          className="rounded-b-none rounded-r-lg"
+          className="rounded-b-none rounded-tr-sm rounded-tl-sm"
           onClick={() => {
             setActiveTab("archived");
             setCurrentPage(1);
@@ -630,7 +640,7 @@ function SessionTabs() {
       </div>
 
       {/* Table Controls */}
-      <div className="flex-1 rounded-md border bg-[var(--background)] overflow-x-auto">
+      <div className="flex-1 rounded-tl-none rounded-md border bg-[var(--background)] overflow-x-auto">
         <div className="flex items-center justify-between border-b h-20 p-4">
           <div className="flex items-center gap-2">
             <Checkbox
@@ -701,7 +711,7 @@ function SessionTabs() {
                   )}
                   onClick={() => toggleSelectRow(row.id)}
                 >
-                  <TableCell className="pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]">
+                  <TableCell className="pl-3 transition-all border-l-transparent duration-200 border-l-4 group-hover:border-[var(--brand-color)]">
                     <Checkbox
                       checked={selectedRows.includes(row.id)}
                       onClick={(e) => e.stopPropagation()}
