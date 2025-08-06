@@ -8,6 +8,7 @@ import {
   X,
   PenBox,
   MessageCircle,
+  Plus,
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
@@ -28,7 +29,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { PoolTableRelation as PoolTable } from "@/data/Data";
+import { PoolTableRelation as PoolTable, coachesList } from "@/data/Data";
 //import { motion, AnimatePresence } from "motion/react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -436,13 +437,184 @@ function TableSection() {
       typeof PoolTable
     >(PoolTable[0] ? [PoolTable[0]] : []);
     const [focusedId, setFocusedId] = useState<string | null>(PoolTable[0]?.id || null);
+    const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+    const [currentUserForAssignment, setCurrentUserForAssignment] = useState<string | null>(null);
+    const [selectedAssignees, setSelectedAssignees] = useState<string[]>([]);
+    const [poolData, setPoolData] = useState([...PoolTable] as Array<{
+      id: string;
+      Type: string;
+      Concern: string;
+      Objective: string;
+      for: string;
+      Source: string;
+      Age: string;
+      Status: string;
+      assignedTo: Array<{ name: string; photo: string }>;
+      Action: string;
+    }>);
+
+    // Assignment functions
+    const handleAssignUsers = (userId: string) => {
+      setCurrentUserForAssignment(userId);
+      const user = poolData.find(u => u.id === userId);
+      if (user && user.assignedTo) {
+        setSelectedAssignees(user.assignedTo.map(assignee => assignee.name));
+      } else {
+        setSelectedAssignees([]);
+      }
+      setShowAssignmentModal(true);
+    };
+
+    const handleSaveAssignment = () => {
+      if (currentUserForAssignment) {
+        const updatedUsers = poolData.map(user => {
+          if (user.id === currentUserForAssignment) {
+            const selectedCoaches = coachesList.filter(coach => 
+              selectedAssignees.includes(coach.name)
+            ).map(coach => ({
+              name: coach.name,
+              photo: coach.photo
+            }));
+            
+            return {
+              ...user,
+              assignedTo: selectedCoaches
+            };
+          }
+          return user;
+        });
+        
+        setPoolData(updatedUsers);
+        setShowAssignmentModal(false);
+        setCurrentUserForAssignment(null);
+        setSelectedAssignees([]);
+      }
+    };
+
+    const toggleAssignee = (assigneeName: string) => {
+      if (selectedAssignees.includes(assigneeName)) {
+        setSelectedAssignees(selectedAssignees.filter(name => name !== assigneeName));
+      } else {
+        setSelectedAssignees([...selectedAssignees, assigneeName]);
+      }
+    };
+
+    // Assignment Modal Component
+    const AssignmentModal = () => {
+      if (!showAssignmentModal) return null;
+
+      const currentUser = poolData.find(u => u.id === currentUserForAssignment);
+      const currentUserAssignedImages = currentUser?.assignedTo || [];
+
+      const availableAssignees = coachesList.map(coach => {
+        const currentAssignment = currentUserAssignedImages.find(assigned => assigned.name === coach.name);
+        
+        return {
+          name: coach.name,
+          photo: currentAssignment ? currentAssignment.photo : coach.photo,
+          specialization: coach.specialization,
+          isCurrentlyAssigned: currentAssignment !== undefined
+        };
+      });
+
+      return (
+        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+          <div className="relative w-full max-w-[500px] rounded-sm bg-[var(--background)] border">
+            <div className="flex items-center justify-between p-6 border-b">
+              <h2 className="text-xl font-semibold text-[var(--text-head)]">
+                Assign Users
+              </h2>
+              <Button
+                variant="link"
+                onClick={() => setShowAssignmentModal(false)}
+                className="text-sm text-[var(--text)] p-0 h-auto"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <div className="p-6">
+              <p className="text-sm text-[var(--text)] mb-4">
+                Select users to assign to this pool item:
+              </p>
+              
+              {currentUserAssignedImages.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-xs text-[var(--text)] mb-2">Currently Assigned:</p>
+                  <div className="flex -space-x-2">
+                    {currentUserAssignedImages.map((assigned, index) => (
+                      <div
+                        key={index}
+                        className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                        title={assigned.name}
+                      >
+                        <img
+                          src={assigned.photo}
+                          alt={assigned.name}
+                          className="h-8 w-8 object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              <div className="space-y-2 max-h-60 overflow-y-auto">
+                {availableAssignees.map((assignee) => (
+                  <div
+                    key={assignee.name}
+                    className={`flex items-center gap-3 p-3 rounded-md border cursor-pointer hover:bg-[var(--faded)]`}
+                  >
+                    <Checkbox
+                      checked={selectedAssignees.includes(assignee.name)}
+                      onCheckedChange={() => toggleAssignee(assignee.name)}
+                    />
+                    <div className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                      <img
+                        src={assignee.photo}
+                        alt={assignee.name}
+                        className="h-8 w-8 object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm text-[var(--text)]">{assignee.name}</span>
+                      <span className="text-xs text-[var(--text)] opacity-70">{assignee.specialization}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex justify-end gap-2 p-6 border-t">
+              <Button
+                variant="border"
+                onClick={() => setShowAssignmentModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="brand"
+                onClick={handleSaveAssignment}
+              >
+                Save Assignment
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    };
   
     // Sorting logic
-    const sortedData = [...PoolTable];
+    const sortedData = [...poolData];
     if (sortConfig !== null) {
       sortedData.sort((a, b) => {
-        const aValue = a[sortConfig.key as keyof typeof a];
-        const bValue = b[sortConfig.key as keyof typeof b];
+        let aValue: any = a[sortConfig.key as keyof typeof a];
+        let bValue: any = b[sortConfig.key as keyof typeof b];
+        // Special handling for assignedTo array sorting
+        if (sortConfig.key === "assignedTo") {
+          aValue = aValue && Array.isArray(aValue) ? aValue.length : 0;
+          bValue = bValue && Array.isArray(bValue) ? bValue.length : 0;
+        }
         if (aValue < bValue) {
           return sortConfig.direction === "ascending" ? -1 : 1;
         }
@@ -670,6 +842,14 @@ function TableSection() {
                     {sortConfig?.key === "Status" &&
                       (sortConfig.direction === "ascending" ? "↑" : "↓")}
                   </TableHead>
+                  <TableHead
+                    onClick={() => requestSort("assignedTo")}
+                    className="cursor-pointer text-[var(--text)]"
+                  >
+                    Assigned To{" "}
+                    {sortConfig?.key === "assignedTo" &&
+                      (sortConfig.direction === "ascending" ? "↑" : "↓")}
+                  </TableHead>
                   <TableHead className="text-[var(--text)] w-[10px] text-center pr-4">Actions</TableHead> 
                 </TableRow>
               </TableHeader>
@@ -737,6 +917,34 @@ function TableSection() {
                         <TableCell>
                             <div className="text-sm">{user.Status}</div>
                     </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <div className="flex -space-x-2">
+                          {user.assignedTo?.map((assigned, index) => (
+                            <div
+                              key={index}
+                              className="h-8 w-8 rounded-full overflow-hidden border-2 border-white shadow-sm"
+                              title={assigned.name}
+                            >
+                              <img
+                                src={assigned.photo}
+                                alt={assigned.name}
+                                className="h-8 w-8 object-cover"
+                              />
+                            </div>
+                          ))}
+                          {/* Plus icon in circle */}
+                          <div className="h-8 w-8 rounded-full border-2 border-white shadow-sm bg-[var(--brand-color2)] flex items-center justify-center cursor-pointer hover:bg-[var(--brand-color3)] transition-colors"
+                               onClick={(e) => {
+                                 e.stopPropagation();
+                                 handleAssignUsers(user.id);
+                               }}
+                               title="Assign Users">
+                            <Plus className="h-4 w-4 text-[var(--brand-color)]" />
+                          </div>
+                        </div>
+                      </div>
+                    </TableCell>
                     <TableCell> 
                       <div className="flex items-center justify-end pr-4">
                         <Tooltip>
@@ -746,6 +954,7 @@ function TableSection() {
                           size="actionIcon"
                           onClick={(e) => {
                             e.stopPropagation();
+                            handleAssignUsers(user.id);
                           }}
                         >
                           <PenBox className="h-4 w-4" />
@@ -834,6 +1043,7 @@ function TableSection() {
             </div>
           </div>
         </div>
+        {AssignmentModal()}
       </div>
     );
   }
