@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -51,56 +50,48 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Skills Listed",
     value: "132",
     icon: Notebook,
-    performance: Up,
   },
   
    {
     title: "published",
     value: "102",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "Unpublished",
     value: "89",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Pending Review",
     value: "12",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "Trending Skills",
     value: "22",
     icon: Notebook,
-    performance: Down,
   },
   
     {
     title: "Future Skills",
     value: "30",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "New This Month",
     value: "19",
     icon: Notebook,
-    performance: Down,
   },
   
 ];
@@ -115,7 +106,7 @@ export function Skills() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Skills </h1>
+        <Bar />
         <StatsCards />
    <Topbar  />
 
@@ -125,8 +116,38 @@ export function Skills() {
   );
 }
 
+function Bar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Skills
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 function Topbar()  {
-     const [showFilter, setShowFilter] = useState(false);
+
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button
@@ -146,20 +167,6 @@ function Topbar()  {
           <span className="">Import  (Excel/CSV)
           </span>
         </Button>
-     
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export</span>
-        </Button>
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
@@ -350,7 +357,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

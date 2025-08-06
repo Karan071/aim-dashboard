@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -44,56 +43,50 @@ import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import React from "react";
+import { DatePickerWithRange } from "@/components/date-picker";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Degrees Listed",
     value: "148",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Published",
     value: "122",
     icon: Notebook,
-    performance: Up,
   },
    {
     title: "Unpublished",
     value: "18",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "Pending Review",
     value: "8",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "UG Degrees ",
     value: "87",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "PG Degrees",
     value: "44",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "New This Month",
     value: "9",
     icon: Notebook,
-    performance: Down,
   },
  
 ];
@@ -106,20 +99,48 @@ export function Degrees() {
  
 
   return (
-    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Degrees Desk</h1>
+        <Bar />
         <StatsCards />
    <Topbar  />
 
         <TableSection/>
+      </div>
+  );
+}
+
+function Bar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Degrees
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        
+      <Button variant="standard" size="new">
+          <FileDown className="h-3 w-3" />
+        </Button>
       </div>
     </div>
   );
 }
 
 function Topbar()  {
-     const [showFilter, setShowFilter] = useState(false);
+     
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button
@@ -139,21 +160,7 @@ function Topbar()  {
           <span className="">Import  (Excel/CSV)
           </span>
         </Button>
-     
-        <Button variant="standard" size="new">
-          <FileDown className="h-3 w-3" />
-          <span className="">Export</span>
-        </Button>
-        <Button
-          variant="border"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end min-h-[40px]"
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-      </div>
+     </div>
     </div>
   );
 }
@@ -355,9 +362,9 @@ function AdvancedFilters({ onClose }: FilterProps) {
 
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
       {stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -365,7 +372,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -691,23 +697,33 @@ function TableSection() {
                     <Badge variant="standard">{user.created_on}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant="actionIcon"
-                        size="actionIcon"
-                        className="bg-white border-0 shadow-none"
-                      >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button
-                        variant="actionIcon"
-                        size="actionIcon"
-                        className="bg-white border-0 shadow-none"
-                      >
-                        <Pen className="h-4 w-3" />
-                        <span className="sr-only">Edit</span>
-                      </Button>
+                  <div className="flex items-center justify-end pr-4">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Eye className="h-3 w-3" />
+                              <span className="sr-only">View</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button variant="actionIcon" size="actionIcon">
+                              <Pen className="h-3 w-3" />
+                              <span className="sr-only">Edit</span>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Edit</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
