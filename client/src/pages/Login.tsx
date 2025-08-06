@@ -41,17 +41,17 @@ export default function Login() {
         user: {
           id: "dev-user",
           email: "dev@example.com",
-          role: "admin"
+          role: "admin",
         },
         token: "dev-token",
         loading: false,
         error: null,
-        expiresAt: Date.now() + 60 * 60 * 1000 // 1 hour from now
+        expiresAt: Date.now() + 60 * 60 * 1000, // 1 hour from now
       };
-      
+
       // Save to localStorage to persist the dev session
       localStorage.setItem("authState", JSON.stringify(mockAuthState));
-      
+
       // Reload the page to apply the auth state
       window.location.reload();
     }
