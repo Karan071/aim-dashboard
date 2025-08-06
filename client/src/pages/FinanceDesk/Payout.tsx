@@ -677,7 +677,7 @@ function TableSection() {
                     <div className="text-low">{user.PayoutDate}</div>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2 justify-end pr-4">
+                    <div className="flex items-center justify-end pr-4">
                    
                       <TooltipProvider>
                         <Tooltip>

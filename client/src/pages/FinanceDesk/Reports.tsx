@@ -710,7 +710,7 @@ function TableSection() {
                     <Badge variant="standard">{user.Status}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2 justify-end pr-4">
+                    <div className="flex items-center justify-end pr-4">
                     
                       <TooltipProvider>
                         <Tooltip>

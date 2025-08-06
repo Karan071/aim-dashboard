@@ -28,6 +28,7 @@ import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { paymentsTable } from "@/data/Data";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
+import { TooltipContent, Tooltip, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // const color = "text-[var(--text)]";
 // const color2 = "text-[var(--text-head)]";
@@ -307,7 +308,7 @@ function TableSection({ code }: { code: string }) {
                   {sortConfig?.key === "GSTStatus" &&
                     (sortConfig.direction === "ascending" ? "↑" : "↓")}
                 </TableHead>
-                <TableHead className="text-[var(--text)]">Actions</TableHead>
+                <TableHead className="text-[var(--text)] text-center pr-4 w-1 ">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className="overflow-visible relative z-0">
@@ -324,7 +325,7 @@ function TableSection({ code }: { code: string }) {
                 >
                   <TableCell
                     className={cn(
-                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
+                      "pl-3 transition-all duration-200 border-l-4 border-l-transparent group-hover:border-[var(--brand-color)]",
                     )}
                   >
                     <Checkbox
@@ -371,23 +372,41 @@ function TableSection({ code }: { code: string }) {
                     <Badge variant="standard">{user.GSTStatus}</Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex items-center gap-2">
-
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                      >
-                        <Eye className="h-4 w-3" />
-                        <span className="sr-only">View</span>
-                      </Button>
-                      <Button
-                        variant="noborder"
-                        size="sm"
-                      >
-                        <RotateCcw className="h-4 w-3" />
-                        <span className="sr-only">Retry</span>
-                      </Button>
-                    </div>
+                  <div className="flex items-center justify-end pr-4">
+                    
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                    <Button
+                      variant="actionIcon"
+                      size="actionIcon"
+                    >
+                      <Eye className="h-4 w-3" />
+                      <span className="sr-only">View</span>
+                    </Button>
+                    </TooltipTrigger>
+                        <TooltipContent side="top" className="text-xs">
+                          View
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                    <Button
+                      variant="actionIcon"
+                      size="actionIcon"
+                    >
+                      <RotateCcw className="h-4 w-3" />
+                      <span className="sr-only">Retry</span>
+                    </Button>
+                    </TooltipTrigger>
+                        <TooltipContent side="top" className="text-xs">
+                          Retry
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
                   </TableCell>
                 </TableRow>
               ))}
