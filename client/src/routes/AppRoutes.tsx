@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "@/auth/ProtectedRoute";
-import Login from "@/pages/Login";
+// import ProtectedRoute from "@/auth/ProtectedRoute";
+// import Login from "@/pages/Login";
 
 // Platform Desk Components
 import { Desk as PlatformDesk } from "@/pages/PlatformDesk/Desk";
@@ -111,10 +111,10 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/login" element={<Login />} />
+      {/* <Route path="/login" element={<Login />} /> */}
 
       {/* Protected Routes */}
-      <Route element={<ProtectedRoute />}>
+      {/* <Route element={<ProtectedRoute />}> */}
         {/* Platform Desk Routes */}
         <Route path="platform/desk" element={<PlatformDesk />} />
 
@@ -306,7 +306,7 @@ export default function AppRoutes() {
         <Route path="hr/follow-ups" element={<HRMSFollowUp />} />
         <Route path="hr/job-application" element={<HRMSJobApplication />} />
         <Route path="hr/current-opening" element={<HRMSCurrentOpening />} />
-      </Route>
+      {/* </Route> */}
     </Routes>
   );
 }
