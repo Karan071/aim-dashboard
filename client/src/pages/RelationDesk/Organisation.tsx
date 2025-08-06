@@ -1,4 +1,4 @@
-import { Building2, UserCheck, Globe, Clock, Link, CircleArrowUp, CircleArrowDown, Search, Bell, Check, X, Flag } from "lucide-react";
+import { Building2, UserCheck, Globe, Clock, Link, Search, Bell, Check, X, Flag } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -24,44 +24,38 @@ import photo from "@/assets/asset.jpg"
 import RadioButton from "@/components/ui/Radiobutton";
 import DatePick from "@/components/ui/DatePicker"
 import CitySelection from "@/components/ui/CitySelection";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 
 
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 const orgStats = [
     {
         title: "Total Organisations",
         value: "1438",
         icon: Building2,
-        performance: Up,
     },
     {
         title: "Claimed Profiles",
         value: "456",
         icon: UserCheck,
-        performance: Down,
     },
     {
         title: "Public (Unclaimed)",
         value: "982",
         icon: Globe,
-        performance: Up,
     },
     {
         title: "Pending Approvals",
         value: "12",
         icon: Clock,
-        performance: Up,
     },
     {
         title: "Representative Assigned",
         value: "182",
         icon: Link,
-        performance: Up,
     },
 ];
 
@@ -71,39 +65,42 @@ export function Organisation() {
 
     return (
         <div className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold text-[var(--text-head)]">Organisation</h1>
+            <Topbar />
             <OrgCard />
-
-            <Buttonbar />
             <OrganisationTable />
         </div>
     )
 }
 
-interface OrgFilterProps {
-    onClose: () => void;
-}
-
-function Buttonbar() {
+function Topbar() {
+  
     const [showFilter, setShowFilter] = useState(false);
     return (
-        <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-            <div className="flex gap-4">
-            </div>
-            <div className="flex gap-4">
-                <Button
-                    variant="standard" size="new"
-                    onClick={() => setShowFilter(true)}
-                >
-                    <Filter className="h-3 w-3" />
-                    {showFilter ? "Hide Filters" : "Show Filters"}
-                </Button>
-
-                {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
-
-            </div>
+      <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+        <div>
+          <h1 className="text-2xl font-bold text-[var(--text-head)]">
+            Organisation
+          </h1>
         </div>
+        <div className="flex gap-4">
+          <DatePickerWithRange />
+          <Button
+          variant="standard"
+          size="new"
+          onClick={() => setShowFilter(true)}
+        >
+          <Filter className="h-3 w-3" />
+        </Button>
+  
+        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        </div>
+      </div>
     );
+  }
+  
+
+interface OrgFilterProps {
+    onClose: () => void;
 }
 
 
@@ -332,7 +329,6 @@ function OrgCard() {
                             >
                                 {stat.title}
                             </div>
-                            {stat.performance}
                         </div>
                         <div className="flex  items-center gap-4">
                             <div className={`rounded-full `}>

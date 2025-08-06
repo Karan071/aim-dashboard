@@ -20,9 +20,7 @@ import {
   User2,
   PenSquare,
 } from "lucide-react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card"; 
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -55,42 +53,37 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
+
 
 const stats = [
   {
     title: "Total Coach Leads",
     value: "87",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "High Scoring Leads",
     value: "24",
     icon: Notebook,
-    performance: Up,
   },
   {
     title: "Assigned Leads",
     value: "63",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "New / Unassigned Leads",
     value: "11",
     icon: Notebook,
-    performance: Down,
   },
   {
     title: "Converted Coaches",
     value: "19",
     icon: Notebook,
-    performance: Down,
   },
  
   
@@ -102,10 +95,8 @@ export function Coaches() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold text-[var(--text-head)]">Coaches</h1>
-        <StatsCards />
         <Topbar />
-
+        <StatsCards />
         <TableSection />
       </div>
     </div>
@@ -113,24 +104,31 @@ export function Coaches() {
 }
 
 function Topbar() {
+  
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      
-      <div className="flex gap-4 justify-end">
-        
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Coaches
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
         <Button
-          variant="standard" size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-4 w-4" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
 }
+
 
 interface FilterProps {
   onClose: () => void;
@@ -408,7 +406,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -722,7 +719,7 @@ function TableSection() {
                 >
                   <TableCell
                     className={cn(
-                      "pl-3 transition-all duration-200 border-l-4 group-hover:border-[var(--brand-color)]",
+                      "pl-3 transition-all duration-200 border-l-4 border-l-transparent group-hover:border-[var(--brand-color)]",
                       selectedStack.some((c) => c.id === user.id)
                         ? focusedId === user.id
                           ? "border-[var(--brand-color)]"

@@ -17,8 +17,6 @@ import {
   Check,
   FileCheck2,
   FileDown,
-  CircleArrowUp,
-  CircleArrowDown,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -53,38 +51,34 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Abuse Reports",
     value: "12,457",
     icon: Users,
-    performance: Up,
   },
   {
     title: "Under Investigation",
     value: "6",
     icon: UserCheck,
-    performance: Down,
   },
 
   {
     title: "Last Updated",
     value: "18 May 2025",
     icon: UserPlus,
-    performance: Up,
   },
 ];
 
 export function Abuses() {
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Abuses</h1>
+    <div className="flex flex-col gap-2">
+      <Topbar />
       <StatsCards />
       <Buttonbar />
       <AbuseTable />
@@ -92,11 +86,38 @@ export function Abuses() {
   );
 }
 
+function Topbar() {
+  
+  const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Abuses
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      </div>
+    </div>
+  );
+}
+
+
 function StatsCards() {
   return (
-    <div className="grid gap-4 xl:gap-1 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
       {stats.map((stat, index) => (
-        <Card key={index} className="xl:rounded-sm shadow-none bg-[var(--background)]">
+        <Card key={index} className="rounded-sm shadow-none bg-[var(--background)]">
           <CardHeader className="flex-col items-center px-4 gap-4 py-0 h-full">
             <div className="flex justify-between h-full items-center">
               <div
@@ -104,7 +125,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
@@ -120,7 +140,6 @@ function StatsCards() {
 }
 
 function Buttonbar() {
-  const [showFilter, setShowFilter] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
       <Button variant="brand" size="new">
@@ -128,16 +147,6 @@ function Buttonbar() {
         <span className="">Add Contacts</span>
       </Button>
       <div className="flex gap-4">
-        <Button
-          variant="standard" size="new"
-          onClick={() => setShowFilter(true)}
-          className="flex items-center gap-2 self-end"
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
 
         <Button variant="delete" size="new">
           <Trash2 className="h-4 w-4" />

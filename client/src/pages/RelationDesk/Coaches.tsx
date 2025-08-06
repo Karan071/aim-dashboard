@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/tooltip";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, UserCheck, UserPlus } from "lucide-react";
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -45,6 +44,7 @@ import DatePicker from "@/components/ui/DatePicker";
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import CitySelection from "@/components/ui/CitySelection";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 interface AssignedUser {
   name: string;
@@ -81,67 +81,66 @@ interface CoachData {
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Coaches",
     value: "1,234",
     icon: Users,
-    performance: Up,
   },
   {
     title: "New This Week",
     value: "27",
     icon: UserPlus,
-    performance: Down,
   },
   {
     title: "Pending Approvals",
     value: "34",
     icon: UserCheck,
-    performance: Up,
   },
   {
     title: "Coaches with Orgs",
     value: "182",
     icon: Building2,
-    performance: Up,
   },
 ];
 
 export function Coaches() {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold text-[var(--text-head)]">Coaches</h1>
+      <Topbar />
       <StatsCards />
-      <Buttonbar />
       <CoachTableSection />
     </div>
   );
 }
 
-function Buttonbar() {
+function Topbar() {
+  
   const [showFilter, setShowFilter] = useState(false);
   return (
-    <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <div className="flex gap-4"></div>
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Coaches
+        </h1>
+      </div>
       <div className="flex gap-4">
+        <DatePickerWithRange />
         <Button
-          variant="standard"
-          size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
 
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
       </div>
     </div>
   );
 }
+
 
 interface FilterProps {
   onClose: () => void;
@@ -368,7 +367,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>

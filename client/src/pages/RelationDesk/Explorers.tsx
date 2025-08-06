@@ -9,14 +9,13 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Calendar1, ChevronDown, Filter, NotebookText, Plus } from "lucide-react";
+import { ChevronDown, Filter, NotebookText, Plus } from "lucide-react";
 import {
   Users,
   UserCheck,
   UserPlus,
   MessageSquare,
 } from "lucide-react";
-import { CircleArrowDown, CircleArrowUp } from "lucide-react";
 import React from "react";
 import RadioButton from "@/components/ui/Radiobutton";
 import CitySelection from "@/components/ui/CitySelection";
@@ -51,42 +50,36 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { DatePickerWithRange } from "@/components/date-picker";
 
 const color = "text-[var(--text)]";
 const color2 = "text-[var(--text-head)]";
-const Up = <CircleArrowUp className="text-[var(--green)] h-4" />;
-const Down = <CircleArrowDown className="text-[var(--red)] h-4" />;
 
 const stats = [
   {
     title: "Total Explorers",
     value: 12457,
     icon: Users,
-    performance: Up,
   },
   {
     title: "Active Explorers (30 Days)",
     value: 4385,
     icon: UserCheck,
-    performance: Up,
   },
   {
     title: "New Signups (This Week)",
     value: 312,
     icon: UserPlus,
-    performance: Down,
   },
   {
     title: "New Signups (This Month)",
     value: 1038,
     icon: MessageSquare,
-    performance: Up,
   },
   {
     title: "Total Enquiries",
     value: 642,
     icon: NotebookText,
-    performance: Down,
   },
 ];
 
@@ -95,12 +88,7 @@ export function Explorers() {
   return (
     <div className="flex flex-col">
       <main className="flex flex-col gap-2">
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
-          <h1 className="text-2xl font-bold text-[var(--text-head)]">
-            Explorers Dashboard
-          </h1>
-        </div>
-
+        <Topbar />
         <StatsCards />
         <Buttonbar/>
        
@@ -112,8 +100,34 @@ export function Explorers() {
   );
 }
 
-function Buttonbar() {
+function Topbar() {
+  
   const [showFilter, setShowFilter] = useState(false);
+  return (
+    <div className="flex justify-between items-center px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
+      <div>
+        <h1 className="text-2xl font-bold text-[var(--text-head)]">
+          Explorers
+        </h1>
+      </div>
+      <div className="flex gap-4">
+        <DatePickerWithRange />
+        <Button
+        variant="standard"
+        size="new"
+        onClick={() => setShowFilter(true)}
+      >
+        <Filter className="h-3 w-3" />
+      </Button>
+
+      {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
+      </div>
+    </div>
+  );
+}
+
+
+function Buttonbar() {
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
         <div className="flex gap-4">
@@ -121,21 +135,6 @@ function Buttonbar() {
         <Plus className="h-3 w-3" />
         <span className="">Add Explorer</span>
       </Button>
-        </div>
-      <div className="flex gap-4">
-        <Button variant="standard" size="new">
-          <Calendar1 className="h-3 w-3" />
-          <span className="">Select Date Range</span>
-        </Button>
-        <Button
-          variant="standard" size="new"
-          onClick={() => setShowFilter(true)}
-        >
-          <Filter className="h-3 w-3" />
-          {showFilter ? "Hide Filters" : "Show Filters"}
-        </Button>
-
-        {showFilter && <AdvancedFilters onClose={() => setShowFilter(false)} />}
 
       </div>
     </div>
@@ -158,7 +157,6 @@ function StatsCards() {
               >
                 {stat.title}
               </div>
-              {stat.performance}
             </div>
             <div className="flex  items-center gap-4">
               <div className={`rounded-full `}>
