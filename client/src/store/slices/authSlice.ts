@@ -31,6 +31,7 @@ interface AuthState {
   token: string | null;
   loading: boolean;
   error: string | null;
+  expiresAt: number | null;
 }
 
 // Load initial state from localStorage
@@ -43,15 +44,31 @@ const loadState = () => {
         token: null,
         loading: false,
         error: null,
+        expiresAt: null,
       };
     }
-    return JSON.parse(serializedState);
+    const state = JSON.parse(serializedState);
+
+    // Check if token has expired
+    if (state.expiresAt && Date.now() > state.expiresAt) {
+      localStorage.removeItem("authState");
+      return {
+        user: null,
+        token: null,
+        loading: false,
+        error: null,
+        expiresAt: null,
+      };
+    }
+
+    return state;
   } catch (err) {
     return {
       user: null,
       token: null,
       loading: false,
       error: null,
+      expiresAt: null,
     };
   }
 };
@@ -79,6 +96,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.expiresAt = Date.now() + 60 * 60 * 1000; // 1 hour from now
+
         // Save to localStorage
         localStorage.setItem(
           "authState",
@@ -87,6 +106,7 @@ const authSlice = createSlice({
             token: action.payload.token,
             loading: false,
             error: null,
+            expiresAt: state.expiresAt,
           })
         );
       })
@@ -94,7 +114,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = null;
         state.token = null;
-        state.error = action.payload?.message || action.error?.message || "Login failed";
+        state.error =
+          action.payload?.message || action.error?.message || "Login failed";
       });
   },
 });
