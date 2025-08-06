@@ -12260,10 +12260,20 @@ export const LeadOrganisationTable = [
     objective: "Career Counseling",
     status: "Contacted",
     lead_score: "High",
-    assigned_to: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Web Form",
     created_on: "18 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
+   
   },
   {
     id: "LOR0002",
@@ -12272,10 +12282,20 @@ export const LeadOrganisationTable = [
     objective: "Internship Program",
     status: "Contacted",
     lead_score: "Medium",
-    assigned_to: "Riya Sharma",
+    assignedTo: [
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+      {
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
+    ],
     source: "LinkedIn",
     created_on: "17 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
+   
   },
   {
     id: "LOR0003",
@@ -12284,10 +12304,20 @@ export const LeadOrganisationTable = [
     objective: "Skill Development",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Karan Verma",
+    assignedTo: [
+      {
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
+      {
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
+    ],
     source: "Referral",
     created_on: "16 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
+  
   },
   {
     id: "LOR0004",
@@ -12296,10 +12326,20 @@ export const LeadOrganisationTable = [
     objective: "Student Orientation",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Neha Dutt",
+    assignedTo: [
+      {
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+    ],
     source: "Email Campaign",
     created_on: "15 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
+    
   },
   {
     id: "LOR0005",
@@ -12308,10 +12348,20 @@ export const LeadOrganisationTable = [
     objective: "Workshop Collaboration",
     status: "Contacted",
     lead_score: "High",
-    assigned_to: "Sanjay Patel",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Instagram",
     created_on: "14 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
+   
   },
   {
     id: "LOR0006",
@@ -12320,7 +12370,17 @@ export const LeadOrganisationTable = [
     objective: "Career Fair",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Ajay Mehta",
+   
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Web Form",
     created_on: "13 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12332,7 +12392,16 @@ export const LeadOrganisationTable = [
     objective: "Career Counseling",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Riya Sharma",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "LinkedIn",
     created_on: "12 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12344,7 +12413,16 @@ export const LeadOrganisationTable = [
     objective: "Career Roadmap",
     status: "Contacted",
     lead_score: "Low",
-    assigned_to: "Neha Dutt",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Cold Call",
     created_on: "11 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12356,7 +12434,16 @@ export const LeadOrganisationTable = [
     objective: "Teacher Training",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Sanjay Patel",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "WhatsApp",
     created_on: "10 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12368,7 +12455,16 @@ export const LeadOrganisationTable = [
     objective: "Career Guidance",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Karan Verma",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Facebook",
     created_on: "09 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12380,7 +12476,16 @@ export const LeadOrganisationTable = [
     objective: "Placement Partnership",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Riya Sharma",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Email Campaign",
     created_on: "08 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12392,7 +12497,16 @@ export const LeadOrganisationTable = [
     objective: "Counseling Collaboration",
     status: "Contacted",
     lead_score: "Medium",
-    assigned_to: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Web Form",
     created_on: "07 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12404,7 +12518,16 @@ export const LeadOrganisationTable = [
     objective: "Skill Development",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Karan Verma",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "YouTube",
     created_on: "06 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12416,7 +12539,16 @@ export const LeadOrganisationTable = [
     objective: "Career Roadmap",
     status: "Contacted",
     lead_score: "High",
-    assigned_to: "Neha Dutt",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Referral",
     created_on: "05 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12428,7 +12560,16 @@ export const LeadOrganisationTable = [
     objective: "Internship Program",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Riya Sharma",
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "LinkedIn",
     created_on: "04 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12442,7 +12583,17 @@ export const LeadExplorersTable = [
     objective: "Investment Banking",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Riya Sinha",
+    assignedTo:  [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+  
     source: "Website",
     created_on: "10 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12454,7 +12605,16 @@ export const LeadExplorersTable = [
     objective: "Data Science",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Aditya Mehra",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "LinkedIn",
     created_on: "11 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12466,7 +12626,16 @@ export const LeadExplorersTable = [
     objective: "Project Management",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Referral",
     created_on: "09 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12478,7 +12647,16 @@ export const LeadExplorersTable = [
     objective: "Marketing",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Karan Yadav",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Instagram",
     created_on: "12 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12490,7 +12668,16 @@ export const LeadExplorersTable = [
     objective: "Finance",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Sanya Singh",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Email Campaign",
     created_on: "08 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12502,7 +12689,16 @@ export const LeadExplorersTable = [
     objective: "Consulting",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Website",
     created_on: "10 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12514,7 +12710,16 @@ export const LeadExplorersTable = [
     objective: "Software Development",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Aditya Mehra",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Webinar",
     created_on: "07 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12526,7 +12731,17 @@ export const LeadExplorersTable = [
     objective: "HR Management",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Karan Yadav",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
+   
     source: "YouTube",
     created_on: "06 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12538,7 +12753,16 @@ export const LeadExplorersTable = [
     objective: "Analytics",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Sanya Singh",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "WhatsApp",
     created_on: "10 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12550,7 +12774,16 @@ export const LeadExplorersTable = [
     objective: "Entrepreneurship",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Aditya Mehra",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Offline Event",
     created_on: "05 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12562,7 +12795,16 @@ export const LeadExplorersTable = [
     objective: "Cybersecurity",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Karan Yadav",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "LinkedIn",
     created_on: "04 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12574,7 +12816,16 @@ export const LeadExplorersTable = [
     objective: "Design",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Sanya Singh",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Instagram",
     created_on: "03 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12586,7 +12837,16 @@ export const LeadExplorersTable = [
     objective: "Law",
     status: "Follow-up",
     lead_score: "Low",
-    assigned_to: "Aditya Mehra",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Website",
     created_on: "02 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12598,7 +12858,16 @@ export const LeadExplorersTable = [
     objective: "Teaching",
     status: "Engaged",
     lead_score: "High",
-    assigned_to: "Karan Yadav",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Referral",
     created_on: "01 Jul 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12610,7 +12879,16 @@ export const LeadExplorersTable = [
     objective: "Hospitality",
     status: "New",
     lead_score: "Medium",
-    assigned_to: "Sanya Singh",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     source: "Website",
     created_on: "30 Jun 2025",
     actions: ["📞 Call", "💬 Message"],
@@ -12943,7 +13221,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Aayush Kapoor",
     Status: "Converted",
     Commission: "₹300 – Paid",
-    AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "10 Jul 2025",
     Actions: "Call, Message",
   },
@@ -12954,7 +13241,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Ankit Sharma",
     Status: "Contacted",
     Commission: "₹0 – Pending",
-    AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "14 Jul 2025",
     Actions: "Call, Message",
   },
@@ -12965,7 +13261,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Green Valley School",
     Status: "Follow-Up",
     Commission: "₹450 – Approved",
-    AssignedTo: "N/A",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "18 Jul 2025",
     Actions: "Call, Message",
   },
@@ -12976,7 +13281,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "StartSmart NGO",
     Status: "New",
     Commission: "₹0 – Pending",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "20 Jul 2025",
     Actions: "Call, Assign",
   },
@@ -12987,7 +13301,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Ishita Malhotra",
     Status: "Converted",
     Commission: "₹500 – Paid",
-    AssignedTo: "Neha Verma",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "21 Jul 2025",
     Actions: "Call, Message",
   },
@@ -12998,7 +13321,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Rahul Jain",
     Status: "Follow-Up",
     Commission: "₹200 – Approved",
-    AssignedTo: "Nikhil Rao",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "22 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13009,7 +13341,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Delhi Public School",
     Status: "Contacted",
     Commission: "₹100 – Pending",
-    AssignedTo: "Sakshi Sharma",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "23 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13020,7 +13361,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "BrightMind Foundation",
     Status: "Converted",
     Commission: "₹600 – Paid",
-    AssignedTo: "Varun Batra",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "24 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13031,7 +13381,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Sneha Gupta",
     Status: "New",
     Commission: "₹0 – Pending",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "24 Jul 2025",
     Actions: "Call, Assign",
   },
@@ -13042,7 +13401,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Vikram Ahuja",
     Status: "Follow-Up",
     Commission: "₹350 – Approved",
-    AssignedTo: "Anjali Nair",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13053,7 +13421,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Modern School Noida",
     Status: "Contacted",
     Commission: "₹100 – Pending",
-    AssignedTo: "Raghav Khanna",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13064,7 +13441,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "ChangeMakers Trust",
     Status: "New",
     Commission: "₹0 – Pending",
-    AssignedTo: "Unassigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Assign",
   },
@@ -13075,7 +13461,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Karan Malhotra",
     Status: "Converted",
     Commission: "₹400 – Paid",
-    AssignedTo: "Priya Singh",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13086,7 +13481,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Tanya Bajaj",
     Status: "Follow-Up",
     Commission: "₹150 – Approved",
-    AssignedTo: "Deepak Chauhan",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13097,7 +13501,16 @@ export const ChannelPartnersTable = [
     "LeadName/Org": "Sunrise Public School",
     Status: "New",
     Commission: "₹0 – Pending",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Assign",
   },
@@ -13110,6 +13523,16 @@ export const PartnershipsTable = [
     InterestArea: "Listing + Sessions",
     Status: "Follow-Up",
     AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "18 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13120,6 +13543,16 @@ export const PartnershipsTable = [
     InterestArea: "Career Events",
     Status: "Contacted",
     AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "17 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13130,6 +13563,16 @@ export const PartnershipsTable = [
     InterestArea: "B2B + Internship Access",
     Status: "New",
     AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "20 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13140,6 +13583,16 @@ export const PartnershipsTable = [
     InterestArea: "Content Partnership",
     Status: "Converted",
     AssignedTo: "N/A",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "10 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13150,6 +13603,16 @@ export const PartnershipsTable = [
     InterestArea: "Internship Drive",
     Status: "New",
     AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "22 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13160,6 +13623,16 @@ export const PartnershipsTable = [
     InterestArea: "Skill Development",
     Status: "Contacted",
     AssignedTo: "Ankit Sharma",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "19 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13170,6 +13643,16 @@ export const PartnershipsTable = [
     InterestArea: "B2B Collaboration",
     Status: "Follow-Up",
     AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "21 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13180,6 +13663,16 @@ export const PartnershipsTable = [
     InterestArea: "Mentor Sessions",
     Status: "Converted",
     AssignedTo: "N/A",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "15 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13190,6 +13683,16 @@ export const PartnershipsTable = [
     InterestArea: "Career Counseling",
     Status: "Contacted",
     AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "16 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13200,6 +13703,16 @@ export const PartnershipsTable = [
     InterestArea: "Workshops + Outreach",
     Status: "New",
     AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "23 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13210,6 +13723,16 @@ export const PartnershipsTable = [
     InterestArea: "Hiring + Internships",
     Status: "Follow-Up",
     AssignedTo: "Neha Verma",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "24 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13220,6 +13743,16 @@ export const PartnershipsTable = [
     InterestArea: "Online Courses",
     Status: "Converted",
     AssignedTo: "N/A",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "11 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13230,6 +13763,16 @@ export const PartnershipsTable = [
     InterestArea: "Career Talks + Internships",
     Status: "Contacted",
     AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "18 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13240,6 +13783,16 @@ export const PartnershipsTable = [
     InterestArea: "Placement Drives",
     Status: "Follow-Up",
     AssignedTo: "Anjali Nair",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "19 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13250,6 +13803,16 @@ export const PartnershipsTable = [
     InterestArea: "Hiring, Mentorship",
     Status: "New",
     AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
   },
@@ -13262,7 +13825,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Career Transitions",
     Status: "Engaged",
     LeadScore: "High",
-    AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Website",
     CreatedOn: "18 Jul 2025",
     Actions: "Call, Message",
@@ -13274,7 +13846,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Interview Prep",
     Status: "Contacted",
     LeadScore: "Medium",
-    AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Channel Partner",
     CreatedOn: "19 Jul 2025",
     Actions: "Call, Message",
@@ -13286,7 +13867,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "English & Communication",
     Status: "New",
     LeadScore: "Low",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Referral",
     CreatedOn: "20 Jul 2025",
     Actions: "Call, Message",
@@ -13298,7 +13888,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Corporate Soft Skills",
     Status: "In Follow-Up",
     LeadScore: "High",
-    AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "WhatsApp",
     CreatedOn: "17 Jul 2025",
     Actions: "Call, Message",
@@ -13310,7 +13909,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Resume Building",
     Status: "Contacted",
     LeadScore: "Medium",
-    AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "LinkedIn",
     CreatedOn: "15 Jul 2025",
     Actions: "Call, Message",
@@ -13322,7 +13930,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Aptitude Training",
     Status: "New",
     LeadScore: "Low",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Referral",
     CreatedOn: "22 Jul 2025",
     Actions: "Call, Message",
@@ -13334,7 +13951,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Behavioral Interviews",
     Status: "Engaged",
     LeadScore: "High",
-    AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Website",
     CreatedOn: "23 Jul 2025",
     Actions: "Call, Message",
@@ -13346,7 +13972,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Group Discussions",
     Status: "In Follow-Up",
     LeadScore: "Medium",
-    AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Email Campaign",
     CreatedOn: "21 Jul 2025",
     Actions: "Call, Message",
@@ -13358,7 +13993,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Communication Skills",
     Status: "New",
     LeadScore: "Low",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "WhatsApp",
     CreatedOn: "19 Jul 2025",
     Actions: "Call, Message",
@@ -13370,7 +14014,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Sales Training",
     Status: "Contacted",
     LeadScore: "Medium",
-    AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Channel Partner",
     CreatedOn: "18 Jul 2025",
     Actions: "Call, Message",
@@ -13382,7 +14035,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "LinkedIn Optimization",
     Status: "Engaged",
     LeadScore: "High",
-    AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Website",
     CreatedOn: "17 Jul 2025",
     Actions: "Call, Message",
@@ -13394,7 +14056,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Public Speaking",
     Status: "In Follow-Up",
     LeadScore: "Medium",
-    AssignedTo: "Anjali Nair",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Email Campaign",
     CreatedOn: "20 Jul 2025",
     Actions: "Call, Message",
@@ -13406,7 +14077,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Leadership Development",
     Status: "New",
     LeadScore: "Low",
-    AssignedTo: "Not Assigned",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Referral",
     CreatedOn: "24 Jul 2025",
     Actions: "Call, Message",
@@ -13418,7 +14098,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Mock Interviews",
     Status: "Contacted",
     LeadScore: "Medium",
-    AssignedTo: "Ajay Mehta",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Channel Partner",
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
@@ -13430,7 +14119,16 @@ export const CoachLeadsTable = [
     AreaOfExpertise: "Voice & Accent",
     Status: "Engaged",
     LeadScore: "High",
-    AssignedTo: "Riya Sinha",
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
     Source: "Website",
     CreatedOn: "25 Jul 2025",
     Actions: "Call, Message",
@@ -13798,7 +14496,17 @@ export const MyPipelineTable= [
     Source: "Web",
     NextFollowup: "12 July",
     Stage: "Open",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0002",
@@ -13809,7 +14517,17 @@ export const MyPipelineTable= [
     Source: "Instagram",
     NextFollowup: "14 July",
     Stage: "Contacted",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+      {
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
+    ],
   },
   {
     id: "PIP0003",
@@ -13820,7 +14538,17 @@ export const MyPipelineTable= [
     Source: "Referral",
     NextFollowup: "15 July",
     Stage: " Pending",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
+      {
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
+    ],
   },
   {
     id: "PIP0004",
@@ -13831,7 +14559,17 @@ export const MyPipelineTable= [
     Source: "LinkedIn",
     NextFollowup: "16 July",
     Stage: " Engaged",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Adv. Sanjay Verma",
+        photo: assignuser4,
+      },
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+    ],
   },
   {
     id: "PIP0005",
@@ -13842,7 +14580,17 @@ export const MyPipelineTable= [
     Source: "Web",
     NextFollowup: "17 July",
     Stage: " Open",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Prof. Anita Desai",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0006",
@@ -13853,7 +14601,17 @@ export const MyPipelineTable= [
     Source: "YouTube",
     NextFollowup: "18 July",
     Stage: " Pending",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Ms. Ritu Gupta",
+        photo: assignuser2,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0007",
@@ -13864,7 +14622,17 @@ export const MyPipelineTable= [
     Source: "WhatsApp",
     NextFollowup: "19 July",
     Stage: " Engaged",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Prof. Sunil Kumar",
+        photo: assignuser3,
+      },
+      {
+        name: "Dr. Kavita Rao",
+        photo: assignuser4,
+      },
+    ],
   },
   {
     id: "PIP0008",
@@ -13875,7 +14643,17 @@ export const MyPipelineTable= [
     Source: "Web",
     NextFollowup: "20 July",
     Stage: " Contacted",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Prof. Rajiv Malhotra",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0009",
@@ -13886,7 +14664,17 @@ export const MyPipelineTable= [
     Source: "Instagram",
     NextFollowup: "21 July",
     Stage: " Open",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Manoj Sharma",
+        photo: assignuser2,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0010",
@@ -13897,7 +14685,17 @@ export const MyPipelineTable= [
     Source: "Referral",
     NextFollowup: "22 July",
     Stage: " Pending",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Ms. Neha Joshi",
+        photo: assignuser3,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0011",
@@ -13908,7 +14706,17 @@ export const MyPipelineTable= [
     Source: "LinkedIn",
     NextFollowup: "23 July",
     Stage: " Engaged",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Amit Patel",
+        photo: assignuser4,
+      },
+      {
+        name: "Prof. Sneha Verma",
+        photo: assignuser1,
+      },
+    ],
   },
   {
     id: "PIP0012",
@@ -13919,7 +14727,17 @@ export const MyPipelineTable= [
     Source: "Web",
     NextFollowup: "24 July",
     Stage: " Open",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Rahul Sen",
+        photo: assignuser2,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0013",
@@ -13930,7 +14748,17 @@ export const MyPipelineTable= [
     Source: "WhatsApp",
     NextFollowup: "25 July",
     Stage: " Contacted",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Ms. Kavita Sharma",
+        photo: assignuser3,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0014",
@@ -13941,7 +14769,17 @@ export const MyPipelineTable= [
     Source: "Instagram",
     NextFollowup: "26 July",
     Stage: " Pending",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Priya Singh",
+        photo: assignuser1,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   },
   {
     id: "PIP0015",
@@ -13952,7 +14790,17 @@ export const MyPipelineTable= [
     Source: "YouTube",
     NextFollowup: "27 July",
     Stage: " Open",
-    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"]
+    Action: ["View", "Call", "Message", "Followup", "Pass", "Add Member"],
+    assignedTo: [
+      {
+        name: "Dr. Meera Iyer",
+        photo: assignuser3,
+      },
+      {
+        name: "Prof. Rajesh Kumar",
+        photo: assignuser2,
+      },
+    ],
   }
 ];
 
