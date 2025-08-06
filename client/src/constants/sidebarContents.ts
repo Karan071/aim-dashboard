@@ -190,6 +190,12 @@ export const SidebarData = {
           title: "Review Desk",
           url: "/desk/review/desk",
           icon: getNextIcon(),
+          isActive: false,
+        },
+        {
+          title: "Review Pool",
+          url: "/desk/review/pool",
+          icon: getNextIcon(),
           isActive: true,
         },
         // {
@@ -379,7 +385,7 @@ export const SidebarData = {
           title: "Leaderboard",
           url: "/desk/relation/leaderboard",
           icon: getNextIcon(),
-          isActive: true,
+          isActive: false,
         },
       ],
     },

@@ -173,7 +173,7 @@ function NavSection({
                             ? "cursor-not-allowed opacity-60"
                             : isRouteActive(item.url, location.pathname)
                             ? "bg-[var(--brand-color)] text-white"
-                            : "hover:bg-accent/20"
+                            : ""
                         }`}
                         disabled={item.isActive === false}
                       >
@@ -223,7 +223,7 @@ function NavSection({
                                       location.pathname
                                     )
                                   ? "bg-[var(--brand-color)] text-white"
-                                  : "hover:bg-accent/20"
+                                  : ""
                               }`}
                             >
                               {subItem.isActive === false ? (
@@ -280,7 +280,7 @@ function NavSection({
                         ? "cursor-not-allowed opacity-60"
                         : isRouteActive(item.url, location.pathname)
                         ? "bg-[var(--brand-color)] text-white"
-                        : "hover:bg-accent/20"
+                        : ""
                     }`}
                     disabled={item.isActive === false}
                   >

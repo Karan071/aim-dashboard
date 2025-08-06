@@ -28,12 +28,13 @@ import { PayWrapper as PlatformPayWrapper } from "@/pages/PlatformDesk/Plans/Pay
 
 // Review Desk
 import { Desk as ReviewDesk } from "@/pages/ReviewDesk/Desk";
+import { Pool as ReviewPool } from "@/pages/ReviewDesk/Pool";
 // import { Coaches as ReviewCoaches } from "@/pages/ReviewDesk/Coaches";
 // import { Organization as ReviewOrganization } from "@/pages/ReviewDesk/Organization";
-import { ChannelPartners as ReviewChannelPartner } from "@/pages/ReviewDesk/ChannelPartners";
-import { Libraries as ReviewLibraries } from "@/pages/ReviewDesk/Libraries";
+// import { ChannelPartners as ReviewChannelPartner } from "@/pages/ReviewDesk/ChannelPartners";
+// import { Libraries as ReviewLibraries } from "@/pages/ReviewDesk/Libraries";
 // import { MapListing as ReviewMapListing } from "@/pages/ReviewDesk/MapListing";
-import { CustomInput as ReviewCustomInput } from "@/pages/ReviewDesk/CustomInput";
+// import { CustomInput as ReviewCustomInput } from "@/pages/ReviewDesk/CustomInput";
 import { ReviewFollowUps } from "@/pages/ReviewDesk/ReviewFollowUps";
 
 // Relations Desk
@@ -178,15 +179,17 @@ export default function AppRoutes() {
         
         {/* Review Desk Routes */}
         <Route path="review/desk" element={<ReviewDesk />} />
+        <Route path="review/pool" element={<ReviewPool/>} />
         {/* <Route path="review/coaches" element={<ReviewCoaches />} /> */}
         {/* <Route path="review/organisations" element={<ReviewOrganization />} /> */}
-        <Route
+        {/* <Route
           path="review/channel-partners"
-          element={<ReviewChannelPartner />}
+          element={<ReviewChannelPartner />} 
         />
-        <Route path="review/libraries" element={<ReviewLibraries />} />
+          */}
+        {/* <Route path="review/libraries" element={<ReviewLibraries />} /> */}
         {/* <Route path="review/map-listing" element={<ReviewMapListing />} /> */}
-        <Route path="review/custom-inputs" element={<ReviewCustomInput />} />
+        {/* <Route path="review/custom-inputs" element={<ReviewCustomInput />} /> */}
         <Route path="review/follow-ups" element={<ReviewFollowUps />} />
 
         {/* Relations Desk Routes */}
