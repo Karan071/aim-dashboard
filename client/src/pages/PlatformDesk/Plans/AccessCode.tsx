@@ -290,7 +290,7 @@ function Form({ onClose }: FormProps) {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-500  flex justify-end">
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex justify-end">
       <div
         ref={modalRef}
         className="animate-slide-in-from-right bg-[var(--background)] shadow-xl h-full w-full max-w-[700px] flex flex-col"
@@ -425,7 +425,7 @@ function Form({ onClose }: FormProps) {
           </div>
         </div>
 
-        <div className="p-6 border-t flex justify-end gap-4">
+        <div className="p-6 border-t flex justify-between gap-4">
           <Button variant="border" onClick={onClose}>Cancel</Button>
           <Button variant="brand" onClick={onClose}>Confirm</Button>
         </div>

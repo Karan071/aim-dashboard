@@ -222,7 +222,7 @@ function NavSection({
                                       subItem.url,
                                       location.pathname
                                     )
-                                  ? "bg-[var(--brand-color)] text-black"
+                                  ? "bg-[var(--brand-color)] hover:bg-[var(--brand-color)] text-black"
                                   : ""
                               }`}
                             >
@@ -279,7 +279,7 @@ function NavSection({
                       item.isActive === false
                         ? "cursor-not-allowed opacity-60"
                         : isRouteActive(item.url, location.pathname)
-                        ? "bg-[var(--brand-color)] text-white"
+                        ? "bg-[var(--brand-color)] hover:bg-[var(--brand-color)] text-white"
                         : ""
                     }`}
                     disabled={item.isActive === false}
