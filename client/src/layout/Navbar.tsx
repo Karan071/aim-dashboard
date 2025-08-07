@@ -13,24 +13,24 @@ import AimshalaLogoDark from "@/assets/logos/aimshala_dark.png";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { useTheme } from "@/components/theme-provider";
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/store/slices/authSlice";
-import { useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// // import { logout } from "@/store/slices/authSlice";
+// import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {}
 
 export default function Navbar({}: NavbarProps) {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const { theme } = useTheme();
   const dark = theme === "dark";
-  const { user } = useSelector((state: any) => state.auth);
+  // const { user } = useSelector((state: any) => state.auth);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  };
+  // const handleLogout = () => {
+  //   dispatch(logout());
+  //   navigate("/login");
+  // };
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -118,16 +118,20 @@ export default function Navbar({}: NavbarProps) {
             >
               <Avatar className="md:h-10 md:w-10">
                 <AvatarImage
-                  src={`https://a.aimshala.com/${user?.image}` || "https://github.com/shadcn.png"}
-                  alt={user?.name || "name"}
+                  // src={`https://a.aimshala.com/${user?.image}` || "https://github.com/shadcn.png"}
+                  src={"https://github.com/shadcn.png"}
+
+                  // alt={user?.name || "name"}
                 />
               </Avatar>
               <div>
                 <span className="hidden md:block text-[var(--text-head)]">
-                  {user?.name || "User"}
+                  {/* {user?.name || "User"} */}
+                  {"user"}
                 </span>
                 <span className="text-xs font-light">
-                  @{user?.username || "username"}
+                  {/* @{user?.username || "username"} */}
+                  {"username"}
                 </span>
               </div>
             </Button>
@@ -135,7 +139,7 @@ export default function Navbar({}: NavbarProps) {
           <DropdownMenuContent className="p-2" align="end">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+            {/* <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem> */}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
