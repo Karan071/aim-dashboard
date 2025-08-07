@@ -25,6 +25,9 @@ import { RefundsTable } from "../SessionTables/Refunds";
 import { CancelledTable } from "../SessionTables/Cancelled";
 import { CompletedTable } from "../SessionTables/Completed";
 import { DatePickerWithRange } from "@/components/date-picker";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectItem, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Stats = [
   {
@@ -100,12 +103,17 @@ function Topbar() {
 }
 
 function Buttonbar() {
+  const [showForm, setShowForm] = useState(false);
   return (
     <div className="flex justify-between px-4 py-3 bg-[var(--background)] rounded-sm gap-4 border flex-wrap shadow-none">
-      <Button variant="brand" size="new">
-        <Plus className="h-3 w-3" />
-        <span className=""> Create Session</span>
-      </Button>
+      <Button
+          variant="brand"
+          size="new"
+          onClick={() => setShowForm(true)}
+        >
+          <Plus className="h-4 w-4" />Add Session
+        </Button>
+        {showForm && <Form onClose={() => setShowForm(false)} />}
       <div className="flex gap-4 flex-wrap">
         <Button variant="standard" size="new">
           <FileDown className="h-3 w-3" />
@@ -119,6 +127,136 @@ function Buttonbar() {
     </div>
   );
 }
+
+interface FormProps {
+  onClose: () => void;
+}
+
+
+function Form({ onClose }: FormProps) {
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  const [explorerName, setExplorerName] = useState("");
+  const [discount, setDiscount] = useState("");
+  const [sessionTypes, setSessionTypes] = useState<string>("Instant-phone");
+  const [amount, setAmount] = useState("");
+  const [objective, setObjective] = useState("Career Consulting");
+  const [notes, setNotes] = useState("");
+  const [fees, setFees] = useState("");
+
+    const sessionTypesList = ["Instant-phone  ", "Instant-video", "Introductory-phone", "Introductory-video", "Phone", "B2B-Phone", "B2B-Video","Ask Question","In-Person"];
+
+  return (
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-[50] bg-black/40 backdrop-blur-sm flex justify-end">
+      <div
+        ref={modalRef}
+        className="animate-slide-in-from-right bg-[var(--background)] shadow-xl h-full w-full max-w-[700px] flex flex-col"
+      >
+        <div className="flex items-center justify-between border-b p-6">
+          <CardTitle className="text-2xl font-semibold text-[var(--text-head)]">Add Session</CardTitle>
+        </div>
+
+        <div className="flex-1 p-6 space-y-6 text-[var(--text)] overflow-y-auto relative">
+          <div className="flex flex-col gap-2">
+            <Label>Explorer Name/Id</Label>
+            <Input placeholder="Enter Explorer Name/Id" value={explorerName} onChange={(e) => setExplorerName(e.target.value)} />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Enter Date</Label>
+            <DateRangePicker />
+          </div>
+
+      
+          <div className="flex flex-col gap-2">
+            <Label>Session Type</Label>
+            <Select value={sessionTypes} onValueChange={setSessionTypes}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select Session Type" />
+              </SelectTrigger>
+              <SelectContent side="bottom" className="z-[9999]">
+  {sessionTypesList.map((pt) => (
+    <SelectItem key={pt} value={pt}>{pt}</SelectItem>
+  ))}
+</SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label>Objective</Label>
+            <div className="flex gap-4 mt-2">
+              {["Career Consulting", "Career Transition"].map((option) => (
+                <RadioButton
+                  key={option}
+                  label={option}
+                  value={option}
+                  selected={objective}
+                  onChange={setObjective}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Amount</Label>
+            <Input
+              type="number"
+              min={1}
+              placeholder="200"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Fees</Label>
+            <Input
+              type="number"
+              min={1}
+              placeholder="100"
+              value={fees}
+              onChange={(e) => setFees(e.target.value)}
+            />
+          </div>
+
+          
+          <div className="flex flex-col gap-2">
+            <Label>Discount</Label>
+            <div className="flex items-center gap-4">
+              <div className="relative w-full">
+                <Input
+                  type="number"
+                  min={1}
+                  max={100}
+                  step={1}
+                  value={discount || 10}
+                  onChange={(e) => {
+                    const val = Number(e.target.value);
+                    if (val >= 1 && val <= 100) setDiscount(e.target.value);
+                  }}
+                  className="pr-6"
+                />
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">%</span>
+              </div>
+              
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label>Notes (optional)</Label>
+            <Textarea placeholder="Summer campaign for school students." value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </div>
+        </div>
+
+        <div className="p-6 border-t flex justify-between gap-4">
+          <Button variant="border" onClick={onClose}>Cancel</Button>
+          <Button variant="brand" onClick={onClose}>Confirm</Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 interface FilterProps {
   onClose: () => void;
 }
